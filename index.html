@@ -162,7 +162,8 @@
       transition: all 0.25s ease;
       cursor: pointer;
       border: none;
-      white-space: nowrap;
+      white-space: normal;
+      text-align: center;
     }
 
     .primary__button:hover {
@@ -187,7 +188,8 @@
       font-weight: 500;
       transition: all 0.25s ease;
       cursor: pointer;
-      white-space: nowrap;
+      white-space: normal;
+      text-align: center;
     }
 
     .outline__button__light:hover {
@@ -682,7 +684,8 @@
 
     .hero-glow {
       position: absolute;
-      width: 420px;
+      width: 100%;
+      max-width: 420px;
       height: 420px;
       border-radius: 50%;
       background: radial-gradient(circle, rgba(218, 56, 5, 0.3) 0%, rgba(218, 56, 5, 0) 70%);
@@ -1538,7 +1541,8 @@
       color: #71717a;
       text-decoration: none;
       transition: color 0.2s ease;
-      white-space: nowrap;
+      white-space: normal;
+      word-break: break-word;
     }
 
     .footer__bottom a:hover {
@@ -2058,7 +2062,8 @@
         height: 320px;
       }
       .hero-glow {
-        width: 260px;
+        width: 100%;
+        max-width: 260px;
         height: 260px;
         filter: blur(32px);
       }
@@ -2292,11 +2297,11 @@
         border-radius: 12px;
       }
       .hero-badge-top {
-        left: -4px;
+        left: 0;
         top: -8px;
       }
       .hero-badge-bottom {
-        right: -4px;
+        right: 0;
         bottom: -8px;
       }
       .badge-icon-box {
