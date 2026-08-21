@@ -604,29 +604,67 @@
       font-weight: 600;
     }
 
-    .hero-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+    /* Hero Tools Infinite Scrolling Marquee (Official Vector Logos) */
+    .hero-ticker-wrap {
+      width: 100%;
+      max-width: 580px;
+      overflow: hidden;
       margin-bottom: 30px;
+      position: relative;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+      padding: 6px 0;
     }
 
-    .hero-pill {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      font-weight: 500;
-      padding: 5px 12px;
-      background: rgba(255, 255, 255, 0.05);
+    .hero-ticker-track {
+      display: flex;
+      width: max-content;
+      gap: 12px;
+      animation: heroTickerLoop 28s linear infinite;
+    }
+
+    .hero-ticker-wrap:hover .hero-ticker-track {
+      animation-play-state: paused;
+    }
+
+    @keyframes heroTickerLoop {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .hero-tool-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 16px;
+      background: rgba(24, 24, 27, 0.85);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
-      color: #cbd5e1;
-      transition: all 0.2s ease;
+      border-radius: 99px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: #e4e4e7;
+      white-space: nowrap;
+      transition: all 0.25s ease;
+      user-select: none;
+      flex-shrink: 0;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
-    .hero-pill:hover {
+    .hero-tool-badge:hover {
       border-color: var(--accent);
+      background: rgba(218, 56, 5, 0.12);
       color: #ffffff;
-      background: rgba(218, 56, 5, 0.1);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(218, 56, 5, 0.25);
+    }
+
+    .hero-tool-badge svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      display: block;
     }
 
     .hero-actions {
@@ -841,15 +879,22 @@
         margin-bottom: 20px;
       }
 
-      .hero-pills {
-        justify-content: center;
-        gap: 8px;
+      .hero-ticker-wrap {
+        margin-left: auto;
+        margin-right: auto;
         margin-bottom: 24px;
+        max-width: 100%;
       }
 
-      .hero-pill {
+      .hero-tool-badge {
         font-size: 0.72rem;
-        padding: 5px 10px;
+        padding: 6px 12px;
+        gap: 7px;
+      }
+
+      .hero-tool-badge svg {
+        width: 15px;
+        height: 15px;
       }
 
       .hero-actions {
@@ -2035,13 +2080,103 @@
             Bonjour ! Je suis <strong>Falikou FOFANA</strong>, étudiant en <strong>3<sup>e</sup> année de Licence Génie Informatique (IUA)</strong> à Abidjan. Je conçois des tableaux de bord décisionnels interactifs et des solutions logicielles performantes pour guider la prise de décision.
           </p>
 
-          <div class="hero-pills">
-            <span class="hero-pill">📊 Power BI</span>
-            <span class="hero-pill">📗 Excel Avancé & TCD</span>
-            <span class="hero-pill">🗄️ SQL</span>
-            <span class="hero-pill">🐍 Python (Data)</span>
-            <span class="hero-pill">⚡ DAX & Power Query</span>
-            <span class="hero-pill">📈 Dashboards Décisionnels</span>
+          <!-- Continuous Infinite Logo Ticker with Official Vector Logos -->
+          <div class="hero-ticker-wrap" aria-label="Compétences & Outils">
+            <div class="hero-ticker-track">
+              
+              <!-- Set 1 -->
+              <div class="hero-tool-badge">
+                <svg viewBox="0 0 32 32" fill="none"><rect x="4" y="14" width="6" height="14" rx="2" fill="#F2C811"/><rect x="13" y="8" width="6" height="20" rx="2" fill="#E6AD10"/><rect x="22" y="2" width="6" height="26" rx="2" fill="#CC8A00"/></svg>
+                <span>Power BI</span>
+              </div>
+
+              <div class="hero-tool-badge">
+                <svg viewBox="0 0 32 32" fill="none"><path d="M20 4H8a3 3 0 00-3 3v18a3 3 0 003 3h16a3 3 0 003-3V11l-7-7z" fill="#107C41"/><path d="M20 4v7h7l-7-7z" fill="#33C481"/><path d="M11 14l3 4.5-3 4.5h2.2l1.9-3 1.9 3h2.2l-3-4.5 3-4.5H17l-1.9 3-1.9-3H11z" fill="#FFFFFF"/></svg>
+                <span>Excel Avancé & TCD</span>
+              </div>
+
+              <div class="hero-tool-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#4B90E2" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3" fill="rgba(75,144,226,0.2)"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                <span>SQL</span>
+              </div>
+
+              <div class="hero-tool-badge">
+                <svg viewBox="0 0 24 24"><path fill="#3776AB" d="M11.9 2c-5.4 0-5.1 2.3-5.1 2.3l.01 2.4h5.2v.7H4.4S2 7.1 2 12.5s2.1 5.3 2.1 5.3h1.2v-1.7s-.1-2.1 2.1-2.1h5.1s2 0 2-2V4.3S15 2 11.9 2zm-1.4 1.4c.4 0 .7.3.7.7s-.3.7-.7.7-.7-.3-.7-.7.3-.7.7-.7z"/><path fill="#FFD43B" d="M12.1 22c5.4 0 5.1-2.3 5.1-2.3l-.01-2.4h-5.2v-.7h7.6s2.4.3 2.4-5.1-2.1-5.3-2.1-5.3h-1.2v1.7s.1 2.1-2.1 2.1H11.5s-2 0-2 2v9.7s-.5 2.3 2.6 2.3zm1.4-1.4c-.4 0-.7-.3-.7-.7s.3-.7.7-.7.7.3.7.7-.3.7-.7.7z"/></svg>
+                <span>Python (Data)</span>
+              </div>
+
+              <div class="hero-tool-badge">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="#0078D4" stroke="#50E6FF" stroke-width="1.3" stroke-linejoin="round"/></svg>
+                <span>DAX & Power Query</span>
+              </div>
+
+              <div class="hero-tool-badge">
+                <svg viewBox="0 0 24 24"><rect x="3" y="4" width="3.2" height="16" rx="1.6" fill="#130754"/><rect x="8.2" y="10" width="3.2" height="10" rx="1.6" fill="#FFD43B"/><rect x="13.4" y="7" width="3.2" height="13" rx="1.6" fill="#E70488"/><rect x="18.6" y="4" width="3.2" height="16" rx="1.6" fill="#130754"/></svg>
+                <span>Pandas & NumPy</span>
+              </div>
+
+              <div class="hero-tool-badge">
+                <svg viewBox="0 0 24 24"><path fill="#E97627" d="M11 2h2v4h-2zm-6 6h2v4H5zm12 0h2v4h-2zm-6 6h2v4h-2zm-6 6h2v4H5zm12 0h2v4h-2z"/><path fill="#1F5B8B" d="M8 5h2v4H8zm8 0h2v4h-2zm-4 6h2v4h-2zm-4 6h2v4H8zm8 0h2v4h-2z"/><path fill="#5B93C4" d="M11 8h2v2h-2zm-3 3h2v2H8zm6 0h2v2h-2zm-3 3h2v2h-2z"/></svg>
+                <span>Tableau</span>
+              </div>
+
+              <div class="hero-tool-badge">
+                <svg viewBox="0 0 24 24" fill="#049FD9"><rect x="2" y="11" width="2.2" height="5" rx="1"/><rect x="6" y="7" width="2.2" height="13" rx="1"/><rect x="10" y="4" width="2.2" height="19" rx="1"/><rect x="14" y="4" width="2.2" height="19" rx="1"/><rect x="18" y="7" width="2.2" height="13" rx="1"/><rect x="22" y="11" width="2.2" height="5" rx="1"/></svg>
+                <span>Cisco Tech</span>
+              </div>
+
+              <div class="hero-tool-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 9l-5 5-3-3-4 4"/></svg>
+                <span>Dashboards Décisionnels</span>
+              </div>
+
+              <!-- Set 2 (Duplicate for seamless infinite marquee loop) -->
+              <div class="hero-tool-badge" aria-hidden="true">
+                <svg viewBox="0 0 32 32" fill="none"><rect x="4" y="14" width="6" height="14" rx="2" fill="#F2C811"/><rect x="13" y="8" width="6" height="20" rx="2" fill="#E6AD10"/><rect x="22" y="2" width="6" height="26" rx="2" fill="#CC8A00"/></svg>
+                <span>Power BI</span>
+              </div>
+
+              <div class="hero-tool-badge" aria-hidden="true">
+                <svg viewBox="0 0 32 32" fill="none"><path d="M20 4H8a3 3 0 00-3 3v18a3 3 0 003 3h16a3 3 0 003-3V11l-7-7z" fill="#107C41"/><path d="M20 4v7h7l-7-7z" fill="#33C481"/><path d="M11 14l3 4.5-3 4.5h2.2l1.9-3 1.9 3h2.2l-3-4.5 3-4.5H17l-1.9 3-1.9-3H11z" fill="#FFFFFF"/></svg>
+                <span>Excel Avancé & TCD</span>
+              </div>
+
+              <div class="hero-tool-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#4B90E2" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3" fill="rgba(75,144,226,0.2)"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                <span>SQL</span>
+              </div>
+
+              <div class="hero-tool-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path fill="#3776AB" d="M11.9 2c-5.4 0-5.1 2.3-5.1 2.3l.01 2.4h5.2v.7H4.4S2 7.1 2 12.5s2.1 5.3 2.1 5.3h1.2v-1.7s-.1-2.1 2.1-2.1h5.1s2 0 2-2V4.3S15 2 11.9 2zm-1.4 1.4c.4 0 .7.3.7.7s-.3.7-.7.7-.7-.3-.7-.7.3-.7.7-.7z"/><path fill="#FFD43B" d="M12.1 22c5.4 0 5.1-2.3 5.1-2.3l-.01-2.4h-5.2v-.7h7.6s2.4.3 2.4-5.1-2.1-5.3-2.1-5.3h-1.2v1.7s.1 2.1-2.1 2.1H11.5s-2 0-2 2v9.7s-.5 2.3 2.6 2.3zm1.4-1.4c-.4 0-.7-.3-.7-.7s.3-.7.7-.7.7.3.7.7-.3.7-.7.7z"/></svg>
+                <span>Python (Data)</span>
+              </div>
+
+              <div class="hero-tool-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="#0078D4" stroke="#50E6FF" stroke-width="1.3" stroke-linejoin="round"/></svg>
+                <span>DAX & Power Query</span>
+              </div>
+
+              <div class="hero-tool-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><rect x="3" y="4" width="3.2" height="16" rx="1.6" fill="#130754"/><rect x="8.2" y="10" width="3.2" height="10" rx="1.6" fill="#FFD43B"/><rect x="13.4" y="7" width="3.2" height="13" rx="1.6" fill="#E70488"/><rect x="18.6" y="4" width="3.2" height="16" rx="1.6" fill="#130754"/></svg>
+                <span>Pandas & NumPy</span>
+              </div>
+
+              <div class="hero-tool-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path fill="#E97627" d="M11 2h2v4h-2zm-6 6h2v4H5zm12 0h2v4h-2zm-6 6h2v4h-2zm-6 6h2v4H5zm12 0h2v4h-2z"/><path fill="#1F5B8B" d="M8 5h2v4H8zm8 0h2v4h-2zm-4 6h2v4h-2zm-4 6h2v4H8zm8 0h2v4h-2z"/><path fill="#5B93C4" d="M11 8h2v2h-2zm-3 3h2v2H8zm6 0h2v2h-2zm-3 3h2v2h-2z"/></svg>
+                <span>Tableau</span>
+              </div>
+
+              <div class="hero-tool-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="#049FD9"><rect x="2" y="11" width="2.2" height="5" rx="1"/><rect x="6" y="7" width="2.2" height="13" rx="1"/><rect x="10" y="4" width="2.2" height="19" rx="1"/><rect x="14" y="4" width="2.2" height="19" rx="1"/><rect x="18" y="7" width="2.2" height="13" rx="1"/><rect x="22" y="11" width="2.2" height="5" rx="1"/></svg>
+                <span>Cisco Tech</span>
+              </div>
+
+              <div class="hero-tool-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 9l-5 5-3-3-4 4"/></svg>
+                <span>Dashboards Décisionnels</span>
+              </div>
+
+            </div>
           </div>
 
           <div class="hero-actions">
@@ -2062,7 +2197,9 @@
 
           <!-- Floating Badge Top Left: Experience / Certifications -->
           <div class="hero-badge-float hero-badge-top">
-            <div class="badge-icon-box">📊</div>
+            <div class="badge-icon-box">
+              <svg width="20" height="20" viewBox="0 0 32 32" fill="none"><rect x="4" y="14" width="6" height="14" rx="2" fill="#F2C811"/><rect x="13" y="8" width="6" height="20" rx="2" fill="#E6AD10"/><rect x="22" y="2" width="6" height="26" rx="2" fill="#CC8A00"/></svg>
+            </div>
             <div>
               <div class="badge-text-title">10+ Tableaux de Bord</div>
               <div class="badge-text-sub">Power BI, Excel & SQL</div>
@@ -2086,7 +2223,9 @@
 
           <!-- Floating Badge Bottom Right: Academic / Degree -->
           <div class="hero-badge-float hero-badge-bottom">
-            <div class="badge-icon-box">🎓</div>
+            <div class="badge-icon-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </div>
             <div>
               <div class="badge-text-title">Licence 3 Génie Info</div>
               <div class="badge-text-sub">IUA Abidjan</div>
