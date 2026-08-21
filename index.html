@@ -310,11 +310,12 @@
       transition: all 0.2s ease;
       flex-shrink: 0;
       outline: none;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .mobile-menu-btn:hover,
     .mobile-menu-btn:active {
-      background: rgba(218, 56, 5, 0.15);
+      background: rgba(218, 56, 5, 0.18);
       border-color: var(--accent);
       color: var(--accent);
     }
@@ -323,16 +324,188 @@
       pointer-events: none;
     }
 
-    /* Mobile Drawer Menu */
-    .mobile-drawer-header,
-    .mobile-drawer-action,
-    .mobile-drawer-footer {
+    /* Standalone Mobile Drawer (Outside Header) */
+    .mobile-drawer {
       display: none;
+      position: fixed;
+      top: 0;
+      right: -105%;
+      width: 86%;
+      max-width: 330px;
+      height: 100vh;
+      height: 100dvh;
+      background: #0d0d10;
+      border-left: 1px solid rgba(255, 255, 255, 0.12);
+      flex-direction: column;
+      align-items: stretch;
+      padding: 24px 20px;
+      gap: 6px;
+      box-shadow: -15px 0 50px rgba(0, 0, 0, 0.95);
+      transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 99999;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .mobile-drawer.open {
+      right: 0 !important;
+    }
+
+    .mobile-drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 18px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .mobile-drawer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .mobile-drawer-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: contain;
+      background: #fff;
+      border: 1.5px solid var(--accent);
+    }
+
+    .mobile-drawer-title {
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .mobile-close-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #a1a1aa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .mobile-close-btn:hover,
+    .mobile-close-btn:active {
+      color: #ffffff;
+      background: rgba(239, 68, 68, 0.2);
+      border-color: rgba(239, 68, 68, 0.5);
+    }
+
+    .mobile-drawer-link {
+      font-family: var(--font-sans);
+      font-size: 1.05rem;
+      font-weight: 500;
+      width: 100%;
+      padding: 13px 16px;
+      border-radius: 12px;
+      color: #e4e4e7;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.2s ease;
+    }
+
+    .mobile-drawer-link:hover,
+    .mobile-drawer-link:active {
+      background: rgba(218, 56, 5, 0.14);
+      color: #ffffff;
+      transform: translateX(4px);
+    }
+
+    .mobile-drawer-action {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .mobile-drawer-cv-btn {
+      width: 100%;
+      padding: 13px 18px;
+      background: var(--accent);
+      color: #ffffff;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 4px 18px var(--accent-glow);
+      transition: background 0.2s ease;
+    }
+
+    .mobile-drawer-cv-btn:active {
+      background: var(--accent-hover);
+    }
+
+    .mobile-drawer-footer {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: auto;
+      padding-top: 24px;
+    }
+
+    .mobile-drawer-social {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #a1a1aa;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .mobile-drawer-social:hover,
+    .mobile-drawer-social:active {
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .menu-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 99998;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .menu-backdrop.open {
+      opacity: 1 !important;
+      pointer-events: auto !important;
     }
 
     @media (max-width: 960px) {
       .navbar {
         height: 72px;
+      }
+
+      .navbar__menu {
+        display: none !important;
       }
 
       .desktop-cv-btn {
@@ -343,176 +516,9 @@
         display: flex !important;
       }
 
-      .navbar__menu {
-        position: fixed;
-        top: 0;
-        right: -105%;
-        width: 86%;
-        max-width: 330px;
-        height: 100vh;
-        height: 100dvh;
-        background: #0f0f12;
-        border-left: 1px solid rgba(255, 255, 255, 0.1);
-        flex-direction: column;
-        align-items: stretch;
-        padding: 24px 20px;
-        gap: 6px;
-        box-shadow: -15px 0 45px rgba(0, 0, 0, 0.95);
-        transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-        z-index: 10002;
-        overflow-y: auto;
+      .mobile-drawer {
+        display: flex !important;
       }
-
-      .navbar__menu.open {
-        right: 0 !important;
-      }
-
-      /* Mobile Drawer Header */
-      .mobile-drawer-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding-bottom: 18px;
-        margin-bottom: 12px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      }
-
-      .mobile-drawer-brand {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-
-      .mobile-drawer-avatar {
-        width: 34px;
-        height: 34px;
-        border-radius: 50%;
-        object-fit: contain;
-        background: #fff;
-        border: 1.5px solid var(--accent);
-      }
-
-      .mobile-drawer-title {
-        font-family: var(--font-sans);
-        font-size: 0.92rem;
-        font-weight: 700;
-        color: #ffffff;
-      }
-
-      .mobile-close-btn {
-        width: 36px;
-        height: 36px;
-        border-radius: 10px;
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        color: #a1a1aa;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: all 0.2s ease;
-      }
-
-      .mobile-close-btn:hover,
-      .mobile-close-btn:active {
-        color: #ffffff;
-        background: rgba(239, 68, 68, 0.15);
-        border-color: rgba(239, 68, 68, 0.4);
-      }
-
-      .nav__link {
-        font-size: 1rem;
-        font-weight: 500;
-        width: 100%;
-        padding: 12px 16px;
-        border-radius: 12px;
-        color: #d4d4d8;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-      }
-
-      .nav__link:hover,
-      .nav__link:active {
-        background: rgba(218, 56, 5, 0.12);
-        color: #ffffff;
-      }
-
-      /* Mobile Drawer Action */
-      .mobile-drawer-action {
-        display: block;
-        margin-top: 14px;
-        padding-top: 14px;
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
-      }
-
-      .mobile-drawer-cv-btn {
-        width: 100%;
-        padding: 12px 18px;
-        background: var(--accent);
-        color: #ffffff;
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        font-family: var(--font-mono);
-        font-size: 0.85rem;
-        font-weight: 600;
-        text-decoration: none;
-        box-shadow: 0 4px 18px var(--accent-glow);
-        transition: background 0.2s ease;
-      }
-
-      .mobile-drawer-cv-btn:active {
-        background: var(--accent-hover);
-      }
-
-      /* Mobile Drawer Footer */
-      .mobile-drawer-footer {
-        display: flex;
-        justify-content: center;
-        gap: 12px;
-        margin-top: auto;
-        padding-top: 20px;
-      }
-
-      .mobile-drawer-social {
-        width: 38px;
-        height: 38px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #a1a1aa;
-        text-decoration: none;
-        transition: all 0.2s;
-      }
-
-      .mobile-drawer-social:hover,
-      .mobile-drawer-social:active {
-        color: #fff;
-        border-color: rgba(255, 255, 255, 0.3);
-      }
-    }
-
-    .menu-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.78);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      z-index: 10001;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-
-    .menu-backdrop.open {
-      opacity: 1;
-      pointer-events: auto;
     }
 
     /* ==========================================================================
@@ -1903,60 +1909,14 @@
           </div>
         </a>
 
-        <!-- Navigation Menu Links (Desktop & Mobile Drawer) -->
-        <nav class="navbar__menu" id="navMenu" aria-label="Navigation principale">
-          
-          <!-- Mobile Drawer Header (Mobile Only) -->
-          <div class="mobile-drawer-header">
-            <div class="mobile-drawer-brand">
-              <img src="assets/images/falikou_photo_clean.png" alt="Falikou FOFANA" class="mobile-drawer-avatar">
-              <span class="mobile-drawer-title">Menu</span>
-            </div>
-            <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Fermer le menu">
-              <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-            </button>
-          </div>
-
-          <a href="#hero" class="nav__link">
-            <span>Accueil</span>
-          </a>
-          <a href="#projects" class="nav__link">
-            <span>Projets</span>
-          </a>
-          <a href="#experience" class="nav__link">
-            <span>Expériences</span>
-          </a>
-          <a href="#skills" class="nav__link">
-            <span>Soft Skills</span>
-          </a>
-          <a href="#education" class="nav__link">
-            <span>Formations</span>
-          </a>
-          <a href="#contact" class="nav__link">
-            <span>Contact</span>
-          </a>
-
-          <!-- Mobile Drawer Action: Download CV (Mobile Only) -->
-          <div class="mobile-drawer-action">
-            <a href="CV_Falikou_FOFANA_Data_Analyst_Final.pdf" download="CV_Falikou_FOFANA_Data_Analyst_Final.pdf" class="mobile-drawer-cv-btn" title="Télécharger mon CV au format PDF">
-              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-              <span>Télécharger mon CV (PDF)</span>
-            </a>
-          </div>
-
-          <!-- Mobile Drawer Footer: Quick Social Links (Mobile Only) -->
-          <div class="mobile-drawer-footer">
-            <a href="https://www.linkedin.com/in/falikou-fofana" target="_blank" rel="noopener" class="mobile-drawer-social" title="LinkedIn">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-            </a>
-            <a href="https://wa.me/2250705322498" target="_blank" rel="noopener" class="mobile-drawer-social" title="WhatsApp" style="color:#25d366;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-            </a>
-            <a href="mailto:fofanafalikou068@gmail.com" class="mobile-drawer-social" title="Email">
-              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-            </a>
-          </div>
-
+        <!-- Desktop Navigation Menu (Hidden on Mobile) -->
+        <nav class="navbar__menu" aria-label="Navigation principale">
+          <a href="#hero" class="nav__link">Accueil</a>
+          <a href="#projects" class="nav__link">Projets</a>
+          <a href="#experience" class="nav__link">Expériences</a>
+          <a href="#skills" class="nav__link">Soft Skills</a>
+          <a href="#education" class="nav__link">Formations</a>
+          <a href="#contact" class="nav__link">Contact</a>
         </nav>
 
         <!-- Right Action: Desktop Download CV + Mobile Hamburger Toggle -->
@@ -1967,7 +1927,7 @@
           </a>
 
           <!-- Mobile Hamburger Toggle Button -->
-          <button class="mobile-menu-btn" id="mobileToggle" aria-label="Ouvrir le menu">
+          <button class="mobile-menu-btn" id="mobileToggle" onclick="openMobileMenu()" aria-label="Ouvrir le menu" type="button">
             <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 6h16M4 12h16M4 18h16"/></svg>
           </button>
         </div>
@@ -1976,8 +1936,67 @@
     </div>
   </header>
 
+  <!-- =========================================================================
+       STANDALONE MOBILE DRAWER MENU & BACKDROP (OUTSIDE HEADER)
+       ========================================================================= -->
+  <div class="mobile-drawer" id="mobileDrawer" role="dialog" aria-modal="true" aria-label="Menu Mobile">
+    
+    <!-- Mobile Drawer Header -->
+    <div class="mobile-drawer-header">
+      <div class="mobile-drawer-brand">
+        <img src="assets/images/falikou_photo_clean.png" alt="Falikou FOFANA" class="mobile-drawer-avatar">
+        <span class="mobile-drawer-title">Navigation</span>
+      </div>
+      <button class="mobile-close-btn" id="mobileCloseBtn" onclick="closeMobileMenu()" aria-label="Fermer le menu" type="button">
+        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation Links -->
+    <a href="#hero" class="mobile-drawer-link" onclick="closeMobileMenu()">
+      <span>🏠 Accueil</span>
+    </a>
+    <a href="#projects" class="mobile-drawer-link" onclick="closeMobileMenu()">
+      <span>💼 Projets</span>
+    </a>
+    <a href="#experience" class="mobile-drawer-link" onclick="closeMobileMenu()">
+      <span>⚡ Expériences</span>
+    </a>
+    <a href="#skills" class="mobile-drawer-link" onclick="closeMobileMenu()">
+      <span>🎯 Soft Skills</span>
+    </a>
+    <a href="#education" class="mobile-drawer-link" onclick="closeMobileMenu()">
+      <span>🎓 Formations</span>
+    </a>
+    <a href="#contact" class="mobile-drawer-link" onclick="closeMobileMenu()">
+      <span>✉️ Contact</span>
+    </a>
+
+    <!-- Mobile Drawer Action: Download CV -->
+    <div class="mobile-drawer-action">
+      <a href="CV_Falikou_FOFANA_Data_Analyst_Final.pdf" download="CV_Falikou_FOFANA_Data_Analyst_Final.pdf" class="mobile-drawer-cv-btn" onclick="closeMobileMenu()" title="Télécharger mon CV au format PDF">
+        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+        <span>Télécharger mon CV (PDF)</span>
+      </a>
+    </div>
+
+    <!-- Mobile Drawer Footer: Social Links -->
+    <div class="mobile-drawer-footer">
+      <a href="https://www.linkedin.com/in/falikou-fofana" target="_blank" rel="noopener" class="mobile-drawer-social" title="LinkedIn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+      </a>
+      <a href="https://wa.me/2250705322498" target="_blank" rel="noopener" class="mobile-drawer-social" title="WhatsApp" style="color:#25d366;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      </a>
+      <a href="mailto:fofanafalikou068@gmail.com" class="mobile-drawer-social" title="Email">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+      </a>
+    </div>
+
+  </div>
+
   <!-- Mobile Backdrop Overlay -->
-  <div class="menu-backdrop" id="menuBackdrop"></div>
+  <div class="menu-backdrop" id="menuBackdrop" onclick="closeMobileMenu()"></div>
 
   <!-- =========================================================================
        SECTION 1: HERO (PREMIUM MODERN SPLIT SHOWCASE)
@@ -2534,31 +2553,35 @@
        DYNAMIC JAVASCRIPT ANIMATION CONTROLLER
        ========================================================================= -->
   <script>
+    // Global Mobile Menu Handlers (Bulletproof for all browsers)
+    window.openMobileMenu = function() {
+      const drawer = document.getElementById('mobileDrawer');
+      const backdrop = document.getElementById('menuBackdrop');
+      if (drawer) drawer.classList.add('open');
+      if (backdrop) backdrop.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    };
+
+    window.closeMobileMenu = function() {
+      const drawer = document.getElementById('mobileDrawer');
+      const backdrop = document.getElementById('menuBackdrop');
+      if (drawer) drawer.classList.remove('open');
+      if (backdrop) backdrop.classList.remove('open');
+      document.body.style.overflow = '';
+    };
+
     document.addEventListener('DOMContentLoaded', () => {
-      // 1. Mobile Menu Toggle Controller
+      // Mobile Menu Toggle Event Listeners
       const mobileToggle = document.getElementById('mobileToggle');
       const mobileCloseBtn = document.getElementById('mobileCloseBtn');
-      const navMenu = document.getElementById('navMenu');
       const menuBackdrop = document.getElementById('menuBackdrop');
-      const navLinks = document.querySelectorAll('.nav__link, .mobile-drawer-cv-btn, .mobile-drawer-social');
-
-      function openMobileMenu() {
-        if (navMenu) navMenu.classList.add('open');
-        if (menuBackdrop) menuBackdrop.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      }
-
-      function closeMobileMenu() {
-        if (navMenu) navMenu.classList.remove('open');
-        if (menuBackdrop) menuBackdrop.classList.remove('open');
-        document.body.style.overflow = '';
-      }
+      const drawerLinks = document.querySelectorAll('.mobile-drawer-link, .mobile-drawer-cv-btn, .mobile-drawer-social');
 
       if (mobileToggle) {
         mobileToggle.addEventListener('click', (e) => {
           e.preventDefault();
           e.stopPropagation();
-          openMobileMenu();
+          window.openMobileMenu();
         });
       }
 
@@ -2566,24 +2589,20 @@
         mobileCloseBtn.addEventListener('click', (e) => {
           e.preventDefault();
           e.stopPropagation();
-          closeMobileMenu();
+          window.closeMobileMenu();
         });
       }
 
       if (menuBackdrop) {
-        menuBackdrop.addEventListener('click', closeMobileMenu);
+        menuBackdrop.addEventListener('click', window.closeMobileMenu);
       }
 
-      navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-          closeMobileMenu();
-        });
+      drawerLinks.forEach(link => {
+        link.addEventListener('click', window.closeMobileMenu);
       });
 
       document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && navMenu && navMenu.classList.contains('open')) {
-          closeMobileMenu();
-        }
+        if (e.key === 'Escape') window.closeMobileMenu();
       });
 
       // 2. Scroll Progress Bar & Back To Top Button
