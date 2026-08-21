@@ -1816,17 +1816,12 @@
        Breakpoints: 960px (tablet) | 768px (phablet) | 600px (large mobile) | 480px (small mobile)
        ========================================================================== */
 
-    /* === GLOBAL OVERFLOW GUARD === */
+    /* === GLOBAL OVERFLOW & CONTAINER INTEGRITY === */
     html, body {
       overflow-x: hidden;
-      max-width: 100%;
     }
 
-    section, header, footer, .container {
-      max-width: 100%;
-    }
-
-    /* === TABLET & SMALL DESKTOP (≤ 960px) === */
+    /* === TABLET & MOBILE (≤ 960px) === */
     @media (max-width: 960px) {
 
       /* Container */
@@ -1858,7 +1853,7 @@
         display: flex !important;
       }
 
-      /* HERO: Single column, centered */
+      /* HERO: Single column, centered and neatly contained */
       .header__section__one {
         padding-top: 100px;
         padding-bottom: 60px;
@@ -1867,7 +1862,7 @@
       }
       .hero-grid {
         grid-template-columns: 1fr;
-        gap: 48px;
+        gap: 40px;
       }
       .header__title__one {
         align-items: center;
@@ -1875,8 +1870,8 @@
         width: 100%;
       }
       .hero-h1 {
-        font-size: clamp(1.75rem, 5.5vw, 2.4rem);
-        line-height: 1.22;
+        font-size: clamp(1.85rem, 5.5vw, 2.5rem);
+        line-height: 1.2;
         margin-bottom: 16px;
       }
       .hero-bio {
@@ -1884,7 +1879,7 @@
         margin-left: auto;
         margin-right: auto;
         margin-bottom: 20px;
-        font-size: 0.95rem;
+        font-size: 0.98rem;
       }
       .hero-tag {
         align-self: center;
@@ -1893,15 +1888,15 @@
       /* Hero Ticker */
       .hero-ticker-wrap {
         width: 100%;
-        max-width: 100%;
+        max-width: 480px;
         margin-left: auto;
         margin-right: auto;
-        margin-bottom: 28px;
+        margin-bottom: 24px;
       }
       .hero-tool-badge {
         width: 40px;
         height: 40px;
-        padding: 9px;
+        padding: 8px;
         border-radius: 11px;
       }
       .hero-tool-badge svg {
@@ -1909,19 +1904,19 @@
         height: 22px;
       }
 
-      /* Hero Actions */
+      /* Hero Actions: compact, natural size */
       .hero-actions {
-        flex-direction: column;
-        width: 100%;
-        max-width: 320px;
-        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
         gap: 12px;
+        width: 100%;
+        margin: 0 auto;
       }
       .hero-actions .primary__button,
       .hero-actions .outline__button__light {
-        width: 100%;
-        justify-content: center;
-        padding: 13px 20px;
+        width: auto;
+        padding: 12px 22px;
       }
 
       /* Hero Photo */
