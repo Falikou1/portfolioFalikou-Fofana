@@ -1100,8 +1100,17 @@
     }
 
     /* ==========================================================================
-       SECTION 5: SOFT SKILLS (CLEAN MODERN CARDS)
+       SECTION 5: SOFT SKILLS (VIBRANT COLORFUL MODERN CARDS)
        ========================================================================== */
+    .skills-section-colorful {
+      background: radial-gradient(circle at 10% 20%, rgba(218, 56, 5, 0.14) 0%, transparent 45%),
+                  radial-gradient(circle at 90% 30%, rgba(56, 189, 248, 0.12) 0%, transparent 45%),
+                  radial-gradient(circle at 50% 85%, rgba(16, 185, 129, 0.10) 0%, transparent 45%),
+                  #0c0d12 !important;
+      position: relative;
+      overflow: hidden;
+    }
+
     .soft-skills-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -1121,43 +1130,159 @@
     }
 
     .soft-skill-card {
-      background: #18181b;
-      border: 1px solid #27272a;
-      border-radius: 16px;
-      padding: 28px;
-      transition: all 0.3s ease;
+      background: linear-gradient(165deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.015) 100%), #14151c;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 20px;
+      padding: 28px 24px;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
       display: flex;
       flex-direction: column;
       gap: 12px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .soft-skill-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--card-color-gradient, linear-gradient(90deg, var(--accent), transparent));
+      opacity: 0.9;
     }
 
     .soft-skill-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-4px);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+      transform: translateY(-6px) scale(1.015);
+      border-color: var(--card-accent-border, var(--accent));
+      box-shadow: 0 20px 40px -10px var(--card-accent-glow, rgba(218, 56, 5, 0.25)), 0 0 25px rgba(0, 0, 0, 0.85);
+    }
+
+    .soft-skill-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
     }
 
     .soft-skill-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: rgba(218, 56, 5, 0.15);
-      color: var(--accent);
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      background: var(--icon-bg, rgba(218, 56, 5, 0.15));
+      color: var(--icon-color, var(--accent));
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 14px var(--icon-shadow, rgba(218, 56, 5, 0.2));
+      transition: transform 0.3s ease;
+    }
+
+    .soft-skill-card:hover .soft-skill-icon {
+      transform: scale(1.1) rotate(4deg);
+    }
+
+    .soft-skill-badge {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 99px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: var(--badge-bg, rgba(218, 56, 5, 0.12));
+      color: var(--badge-color, #ff6b4a);
+      border: 1px solid var(--badge-border, rgba(218, 56, 5, 0.3));
     }
 
     .soft-skill-title {
-      font-size: 1.15rem;
+      font-size: 1.18rem;
       font-weight: 700;
       color: #ffffff;
+      margin-top: 4px;
+      line-height: 1.3;
     }
 
     .soft-skill-desc {
-      font-size: 0.9rem;
-      color: #a1a1aa;
-      line-height: 1.6;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.65;
+    }
+
+    /* Vibrant Color Themes per card */
+    .card-theme-orange {
+      --card-color-gradient: linear-gradient(90deg, #ff7828, #f59e0b);
+      --card-accent-border: rgba(255, 120, 40, 0.55);
+      --card-accent-glow: rgba(255, 120, 40, 0.28);
+      --icon-bg: linear-gradient(135deg, rgba(255, 120, 40, 0.25), rgba(245, 158, 11, 0.12));
+      --icon-color: #ff7828;
+      --icon-shadow: rgba(255, 120, 40, 0.25);
+      --badge-bg: rgba(255, 120, 40, 0.12);
+      --badge-color: #ff8c42;
+      --badge-border: rgba(255, 120, 40, 0.35);
+    }
+
+    .card-theme-blue {
+      --card-color-gradient: linear-gradient(90deg, #38bdf8, #2563eb);
+      --card-accent-border: rgba(56, 189, 248, 0.55);
+      --card-accent-glow: rgba(56, 189, 248, 0.28);
+      --icon-bg: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(37, 99, 235, 0.12));
+      --icon-color: #38bdf8;
+      --icon-shadow: rgba(56, 189, 248, 0.25);
+      --badge-bg: rgba(56, 189, 248, 0.12);
+      --badge-color: #38bdf8;
+      --badge-border: rgba(56, 189, 248, 0.35);
+    }
+
+    .card-theme-emerald {
+      --card-color-gradient: linear-gradient(90deg, #34d399, #059669);
+      --card-accent-border: rgba(52, 211, 153, 0.55);
+      --card-accent-glow: rgba(52, 211, 153, 0.28);
+      --icon-bg: linear-gradient(135deg, rgba(52, 211, 153, 0.25), rgba(16, 185, 129, 0.12));
+      --icon-color: #34d399;
+      --icon-shadow: rgba(52, 211, 153, 0.25);
+      --badge-bg: rgba(52, 211, 153, 0.12);
+      --badge-color: #34d399;
+      --badge-border: rgba(52, 211, 153, 0.35);
+    }
+
+    .card-theme-purple {
+      --card-color-gradient: linear-gradient(90deg, #c084fc, #9333ea);
+      --card-accent-border: rgba(192, 132, 252, 0.55);
+      --card-accent-glow: rgba(192, 132, 252, 0.28);
+      --icon-bg: linear-gradient(135deg, rgba(192, 132, 252, 0.25), rgba(147, 51, 234, 0.12));
+      --icon-color: #c084fc;
+      --icon-shadow: rgba(192, 132, 252, 0.25);
+      --badge-bg: rgba(192, 132, 252, 0.12);
+      --badge-color: #c084fc;
+      --badge-border: rgba(192, 132, 252, 0.35);
+    }
+
+    .card-theme-rose {
+      --card-color-gradient: linear-gradient(90deg, #fb7185, #e11d48);
+      --card-accent-border: rgba(251, 113, 133, 0.55);
+      --card-accent-glow: rgba(251, 113, 133, 0.28);
+      --icon-bg: linear-gradient(135deg, rgba(251, 113, 133, 0.25), rgba(225, 29, 72, 0.12));
+      --icon-color: #fb7185;
+      --icon-shadow: rgba(251, 113, 133, 0.25);
+      --badge-bg: rgba(251, 113, 133, 0.12);
+      --badge-color: #fb7185;
+      --badge-border: rgba(251, 113, 133, 0.35);
+    }
+
+    .card-theme-gold {
+      --card-color-gradient: linear-gradient(90deg, #facc15, #d97706);
+      --card-accent-border: rgba(250, 204, 21, 0.55);
+      --card-accent-glow: rgba(250, 204, 21, 0.28);
+      --icon-bg: linear-gradient(135deg, rgba(250, 204, 21, 0.25), rgba(217, 119, 6, 0.12));
+      --icon-color: #facc15;
+      --icon-shadow: rgba(250, 204, 21, 0.25);
+      --badge-bg: rgba(250, 204, 21, 0.12);
+      --badge-color: #facc15;
+      --badge-border: rgba(250, 204, 21, 0.35);
     }
 
     /* ==========================================================================
@@ -2788,9 +2913,9 @@
   </section>
 
   <!-- =========================================================================
-       SECTION 5: SOFT SKILLS & LEADERSHIP (BLACK SECTION)
+       SECTION 5: SOFT SKILLS & LEADERSHIP (VIBRANT MODERN CARDS)
        ========================================================================= -->
-  <section id="skills" class="section-padding black__bg">
+  <section id="skills" class="section-padding skills-section-colorful">
     <div class="container">
       <div class="section__title__wrap reveal">
         <div>
@@ -2804,55 +2929,73 @@
 
       <div class="soft-skills-grid">
         
-        <!-- Skill 1 -->
-        <div class="soft-skill-card reveal delay-1 tilt-card">
-          <div class="soft-skill-icon">
-            <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+        <!-- Skill 1: Leadership (Orange / Amber) -->
+        <div class="soft-skill-card card-theme-orange reveal delay-1 tilt-card">
+          <div class="soft-skill-top">
+            <div class="soft-skill-icon">
+              <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            </div>
+            <span class="soft-skill-badge">Management</span>
           </div>
           <h3 class="soft-skill-title">Leadership & Pilotage</h3>
           <p class="soft-skill-desc">Délégué de promotion et pilotage d'équipe au Technovore Hackathon ESATIC 2026. Capacité démontrée à fédérer, coordonner et mener les projets à terme.</p>
         </div>
 
-        <!-- Skill 2 -->
-        <div class="soft-skill-card reveal delay-2 tilt-card">
-          <div class="soft-skill-icon">
-            <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+        <!-- Skill 2: Esprit d'équipe (Cyan / Blue) -->
+        <div class="soft-skill-card card-theme-blue reveal delay-2 tilt-card">
+          <div class="soft-skill-top">
+            <div class="soft-skill-icon">
+              <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+            </div>
+            <span class="soft-skill-badge">REDIS–IUA</span>
           </div>
           <h3 class="soft-skill-title">Esprit d'équipe & Collaboration</h3>
           <p class="soft-skill-desc">Travail actif et continu au sein de REDIS–IUA et du Bureau de Coordination. Sens élevé du partage et de l'écoute active.</p>
         </div>
 
-        <!-- Skill 3 -->
-        <div class="soft-skill-card reveal delay-3 tilt-card">
-          <div class="soft-skill-icon">
-            <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        <!-- Skill 3: Organisation (Emerald / Green) -->
+        <div class="soft-skill-card card-theme-emerald reveal delay-3 tilt-card">
+          <div class="soft-skill-top">
+            <div class="soft-skill-icon">
+              <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            </div>
+            <span class="soft-skill-badge">IUA Abidjan</span>
           </div>
           <h3 class="soft-skill-title">Organisation & Événementiel</h3>
           <p class="soft-skill-desc">Planification et pilotage d'initiatives estudiantines et de projets jeunesse à l'Institut Universitaire d'Abidjan.</p>
         </div>
 
-        <!-- Skill 4 -->
-        <div class="soft-skill-card reveal delay-1 tilt-card">
-          <div class="soft-skill-icon">
-            <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>
+        <!-- Skill 4: Communication (Purple / Violet) -->
+        <div class="soft-skill-card card-theme-purple reveal delay-1 tilt-card">
+          <div class="soft-skill-top">
+            <div class="soft-skill-icon">
+              <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>
+            </div>
+            <span class="soft-skill-badge">Événements</span>
           </div>
           <h3 class="soft-skill-title">Communication & Mobilisation</h3>
           <p class="soft-skill-desc">Transmission claire des informations et mobilisation des étudiants pour des conférences et séminaires technologiques.</p>
         </div>
 
-        <!-- Skill 5 -->
-        <div class="soft-skill-card reveal delay-2 tilt-card">
-          <div class="soft-skill-icon">
-            <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        <!-- Skill 5: Responsabilité (Rose / Coral) -->
+        <div class="soft-skill-card card-theme-rose reveal delay-2 tilt-card">
+          <div class="soft-skill-top">
+            <div class="soft-skill-icon">
+              <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            </div>
+            <span class="soft-skill-badge">Rigueur</span>
           </div>
           <h3 class="soft-skill-title">Sens des Responsabilités</h3>
           <p class="soft-skill-desc">Suivi et gestion proactive des communications étudiantes, rigueur dans le respect des délais et des engagements pris.</p>
         </div>
 
-        <!-- Skill 6 (Languages & Mobility) -->
-        <div class="soft-skill-card reveal delay-3 tilt-card">
-          <div class="soft-skill-icon">
-            <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/></svg>
+        <!-- Skill 6: Langues & Mobilité (Gold / Yellow) -->
+        <div class="soft-skill-card card-theme-gold reveal delay-3 tilt-card">
+          <div class="soft-skill-top">
+            <div class="soft-skill-icon">
+              <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/></svg>
+            </div>
+            <span class="soft-skill-badge">Permis B</span>
           </div>
           <h3 class="soft-skill-title">Langues & Mobilité</h3>
           <p class="soft-skill-desc">Français (opérationnel), Anglais (intermédiaire avancé), Espagnol (scolaire). Permis B de conduire valide.</p>
