@@ -726,13 +726,15 @@
       position: relative;
       z-index: 2;
       width: 100%;
-      max-width: 400px;
+      max-width: 410px;
       background: #18181b;
       border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 28px;
       padding: 14px;
       box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.9), 0 0 35px rgba(218, 56, 5, 0.15);
       transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
     }
 
     .hero-photo-card:hover {
@@ -744,7 +746,7 @@
     .hero-img-container {
       position: relative;
       width: 100%;
-      height: 420px;
+      height: 380px;
       border-radius: 20px;
       overflow: hidden;
       background: linear-gradient(160deg, #1a1a2e 0%, #16213e 50%, #0f172a 100%);
@@ -754,8 +756,8 @@
     }
 
     .hero-img-container img {
-      width: 92%;
-      height: 96%;
+      width: 94%;
+      height: 98%;
       object-fit: contain;
       object-position: center top;
       display: block;
@@ -770,20 +772,18 @@
     .hero-img-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, transparent 70%, rgba(8, 8, 8, 0.75) 100%);
+      background: linear-gradient(180deg, transparent 75%, rgba(8, 8, 8, 0.6) 100%);
       pointer-events: none;
     }
 
     .hero-photo-caption {
-      position: absolute;
-      bottom: 14px;
-      left: 14px;
-      right: 14px;
-      background: rgba(18, 18, 20, 0.88);
+      position: relative;
+      margin-top: 12px;
+      background: rgba(24, 24, 27, 0.96);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       padding: 12px 18px;
-      border-radius: 14px;
+      border-radius: 18px;
       border: 1px solid rgba(255, 255, 255, 0.12);
       display: flex;
       justify-content: space-between;
@@ -794,36 +794,38 @@
     .hero-photo-name {
       font-family: var(--font-sans);
       font-weight: 700;
-      font-size: 1rem;
+      font-size: 1.05rem;
       color: #ffffff;
-      line-height: 1.2;
+      line-height: 1.25;
     }
 
     .hero-photo-sub {
       font-family: var(--font-mono);
-      font-size: 0.72rem;
+      font-size: 0.76rem;
       color: var(--accent);
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.04em;
+      margin-top: 2px;
     }
 
     /* Floating Badges */
     .hero-badge-float {
       position: absolute;
       z-index: 4;
-      background: rgba(18, 18, 20, 0.92);
+      background: rgba(18, 18, 20, 0.94);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       padding: 10px 16px;
       border-radius: 16px;
       display: flex;
       align-items: center;
       gap: 12px;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.65);
       transition: transform 0.3s ease;
       animation: float-slow 4s ease-in-out infinite;
+      white-space: nowrap;
     }
 
     .hero-badge-float:hover {
@@ -832,14 +834,14 @@
     }
 
     .hero-badge-top {
-      top: -15px;
-      left: -20px;
+      top: -16px;
+      left: -22px;
       animation-delay: 0s;
     }
 
     .hero-badge-bottom {
-      bottom: -18px;
-      right: -15px;
+      bottom: -22px;
+      right: -24px;
       animation-delay: 2s;
     }
 

@@ -298,6 +298,16 @@
         if (badgeBottomSub && (heroConfig.badgeBottomSub || profile?.university)) {
           badgeBottomSub.textContent = heroConfig.badgeBottomSub || profile.university;
         }
+
+        const heroPhotoName = document.querySelector('.hero-photo-name');
+        if (heroPhotoName && profile?.fullName) {
+          heroPhotoName.textContent = profile.fullName;
+        }
+
+        const heroPhotoSub = document.querySelector('.hero-photo-sub');
+        if (heroPhotoSub && profile?.title) {
+          heroPhotoSub.textContent = profile.title;
+        }
       }
     },
 
