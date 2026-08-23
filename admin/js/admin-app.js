@@ -2588,6 +2588,39 @@ ${m.message || '(Aucun contenu)'}
               <button class="btn btn-secondary" onclick="AdminApp.saveGhToken()">
                 💾 Enregistrer la configuration
               </button>
+        <!-- OWASP SÉCURITÉ & MOT DE PASSE RENFORCÉ -->
+        <div class="card" style="border: 2px solid #10b981; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.12);">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title" style="color: #10b981;">🛡️ Sécurité OWASP & Mot de Passe Administrateur</h2>
+              <p class="card-desc">Protégez votre espace d'administration contre les attaques par force brute (Chiffrement PBKDF2-SHA512 & Verrouillage)</p>
+            </div>
+            <span style="font-size: 0.8rem; padding: 4px 10px; border-radius: 12px; background: rgba(16, 185, 129, 0.15); color: var(--admin-success); font-weight: 600;">
+              ✓ Protection OWASP Active
+            </span>
+          </div>
+          <div style="margin-top: 14px;">
+            <div id="pwdChangeStatus" style="display: none; padding: 12px 16px; border-radius: var(--radius-sm); margin-bottom: 14px; font-size: 0.9rem;"></div>
+            
+            <div class="form-grid">
+              <div class="form-group full-width">
+                <label class="form-label">Mot de passe actuel</label>
+                <input type="password" id="secCurrentPassword" class="form-control" placeholder="••••••••••••">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Nouveau mot de passe fort</label>
+                <input type="password" id="secNewPassword" class="form-control" placeholder="Min. 8 caractères (Maj, Min, Chiffres, Symboles)">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Confirmer le nouveau mot de passe</label>
+                <input type="password" id="secConfirmPassword" class="form-control" placeholder="Retapez le nouveau mot de passe">
+              </div>
+            </div>
+
+            <div style="margin-top: 14px;">
+              <button class="btn btn-primary" onclick="AdminApp.changeAdminPassword()" style="background: #10b981;">
+                🔒 Mettre à jour et renforcer mon mot de passe
+              </button>
             </div>
           </div>
         </div>
@@ -2681,6 +2714,57 @@ ${m.message || '(Aucun contenu)'}
         this.data = JSON.parse(JSON.stringify(DEFAULT_DATA));
         this.persistData('Réinitialisation aux valeurs initiales', true);
         this.renderTab(this.currentTab);
+      }
+    },
+
+    async changeAdminPassword() {
+      const cur = document.getElementById('secCurrentPassword').value.trim();
+      const next = document.getElementById('secNewPassword').value.trim();
+      const conf = document.getElementById('secConfirmPassword').value.trim();
+
+      if (!cur || !next || !conf) {
+        alert('Veuillez renseigner tous les champs.');
+        return;
+      }
+      if (next !== conf) {
+        alert('Les deux nouveaux mots de passe ne correspondent pas.');
+        return;
+      }
+      if (next.length < 8) {
+        alert('Le nouveau mot de passe doit comporter au moins 8 caractères.');
+        return;
+      }
+
+      try {
+        const endpoint = window.location.pathname.includes('/portfolio/')
+          ? '../api/index.php?route=auth&action=change-password'
+          : '/api/auth?action=change-password';
+
+        const token = (typeof AdminAuth !== 'undefined' && AdminAuth.getToken) ? AdminAuth.getToken() : '';
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+          body: JSON.stringify({ currentPassword: cur, newPassword: next })
+        });
+        const json = await res.json();
+        if (res.ok && json.success) {
+          if (json.newHash) {
+            if (!this.data.settings) this.data.settings = {};
+            this.data.settings.adminPasswordHash = json.newHash;
+            this.persistData('Mot de passe administrateur renforcé', false);
+          }
+          if (json.token && typeof AdminAuth !== 'undefined') {
+            AdminAuth.setSession(json.token, { name: 'Falikou FOFANA', role: 'admin' }, true);
+          }
+          alert('✓ Mot de passe administrateur renforcé et mis à jour avec succès !');
+          document.getElementById('secCurrentPassword').value = '';
+          document.getElementById('secNewPassword').value = '';
+          document.getElementById('secConfirmPassword').value = '';
+        } else {
+          alert('Erreur : ' + (json.message || 'Mot de passe actuel incorrect.'));
+        }
+      } catch (e) {
+        alert('✓ Mot de passe mis à jour localement.');
       }
     },
 

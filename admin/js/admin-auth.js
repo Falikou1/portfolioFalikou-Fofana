@@ -98,12 +98,11 @@
         } else {
           return { success: false, message: data.message || 'Mot de passe incorrect.' };
         }
-      } catch (err) {
-        // Fallback for local static testing with master password
-        if (password === 'admin123' || password === 'Falikou@2026!' || password === 'admin') {
+        // Fallback only for strong master password
+        if (password === 'Falikou@2026!') {
           const mockToken = btoa(JSON.stringify({ user: 'Falikou', role: 'admin', exp: Date.now() + 86400000 })) + '.mock_sig';
           this.setSession(mockToken, { name: 'Falikou FOFANA', role: 'admin' }, remember);
-          return { success: true, message: 'Connexion réussie.' };
+          return { success: true, message: 'Connexion sécurisée réussie.' };
         }
         return { success: false, message: 'Erreur réseau ou mot de passe invalide.' };
       }

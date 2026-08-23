@@ -60,7 +60,7 @@ if ($route === 'auth' || strpos($route, 'auth') !== false) {
 
     if ($method === 'POST' && $action === 'login') {
         $pwd = isset($body['password']) ? $body['password'] : '';
-        if ($pwd === 'admin123' || $pwd === 'Falikou@2026!' || $pwd === 'admin') {
+        if ($pwd === 'Falikou@2026!') {
             $payload = [
                 'user' => 'Falikou',
                 'role' => 'admin',

@@ -11,8 +11,16 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Falikou CMS">
-  <link rel="apple-touch-icon" href="../assets/images/falikou_photo.png">
-  <link rel="icon" href="../assets/images/falikou_photo.png" type="image/png">
+  <script>
+    // OWASP Access Control: Immediate 0ms synchronous security gate
+    (function() {
+      const t = localStorage.getItem('falikou_admin_token') || sessionStorage.getItem('falikou_admin_token');
+      if (!t || !t.includes('.')) {
+        const loginUrl = window.location.pathname.includes('/portfolio/') ? 'login.html' : '/admin/login.html';
+        window.location.replace(loginUrl);
+      }
+    })();
+  </script>
   <link rel="stylesheet" href="css/admin.css">
   <link rel="stylesheet" href="./css/admin.css">
   <style>

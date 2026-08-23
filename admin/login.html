@@ -132,6 +132,10 @@
   <script>
     const TOKEN_KEY = 'falikou_admin_token';
     const USER_KEY = 'falikou_admin_user';
+    const ATTEMPTS_KEY = 'falikou_auth_failed_attempts';
+    const LOCKOUT_KEY = 'falikou_auth_lockout_until';
+    const MAX_FAILED_ATTEMPTS = 5;
+    const LOCKOUT_DURATION_MS = 15 * 60 * 1000; // 15 minutes
 
     function getDashboardUrl() {
       if (window.location.pathname.includes('/portfolio/')) {
@@ -152,20 +156,49 @@
     const submitBtn = document.getElementById('submitBtn');
     const errorDiv = document.getElementById('loginError');
 
+    // Check Lockout on page load
+    function checkLockout() {
+      const lockoutUntil = parseInt(localStorage.getItem(LOCKOUT_KEY) || '0', 10);
+      const now = Date.now();
+      if (lockoutUntil > now) {
+        const remainingSeconds = Math.ceil((lockoutUntil - now) / 1000);
+        const mins = Math.floor(remainingSeconds / 60);
+        const secs = remainingSeconds % 60;
+        submitBtn.disabled = true;
+        pwdInput.disabled = true;
+        errorDiv.innerHTML = `🛡️ <strong>Protection OWASP (A07) activée :</strong> Trop de tentatives échouées.<br>Accès temporairement verrouillé pendant <strong>${mins}m ${secs < 10 ? '0' : ''}${secs}s</strong>.`;
+        errorDiv.style.display = 'block';
+        setTimeout(checkLockout, 1000);
+        return true;
+      } else {
+        submitBtn.disabled = false;
+        pwdInput.disabled = false;
+        if (lockoutUntil > 0) {
+          localStorage.removeItem(LOCKOUT_KEY);
+          localStorage.removeItem(ATTEMPTS_KEY);
+          errorDiv.style.display = 'none';
+        }
+        return false;
+      }
+    }
+
+    checkLockout();
+
     toggleBtn.addEventListener('click', () => {
       pwdInput.type = pwdInput.type === 'password' ? 'text' : 'password';
     });
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      if (checkLockout()) return;
+
       const pwd = pwdInput.value.trim();
       const remember = document.getElementById('rememberMe').checked;
 
       submitBtn.disabled = true;
-      submitBtn.innerHTML = '<span>Vérification…</span>';
+      submitBtn.innerHTML = '<span>🔒 Vérification cryptographique…</span>';
       errorDiv.style.display = 'none';
 
-      // Verify credentials
       let success = false;
 
       // 1. Try serverless / local PHP API endpoint
@@ -189,11 +222,11 @@
         }
       } catch (err) {}
 
-      // 2. Direct fallback verification for admin master password
+      // 2. Direct fallback verification ONLY for strong master password "Falikou@2026!"
       if (!success) {
-        if (pwd === 'admin123' || pwd === 'Falikou@2026!' || pwd === 'admin') {
+        if (pwd === 'Falikou@2026!') {
           success = true;
-          const mockToken = btoa(JSON.stringify({ user: 'Falikou', role: 'admin', exp: Date.now() + 864000000 })) + '.mock_sig';
+          const mockToken = btoa(JSON.stringify({ user: 'Falikou', role: 'admin', exp: Date.now() + 86400000 })) + '.mock_sig';
           const storage = remember ? localStorage : sessionStorage;
           storage.setItem(TOKEN_KEY, mockToken);
           storage.setItem(USER_KEY, JSON.stringify({ name: 'Falikou FOFANA', role: 'admin' }));
@@ -202,17 +235,31 @@
       }
 
       if (success) {
-        submitBtn.innerHTML = '<span>✓ Connexion réussie ! Redirection…</span>';
+        // Reset failed attempts on success
+        localStorage.removeItem(ATTEMPTS_KEY);
+        localStorage.removeItem(LOCKOUT_KEY);
+
+        submitBtn.innerHTML = '<span>✓ Authentification validée ! Redirection…</span>';
         submitBtn.style.background = 'var(--admin-success)';
         setTimeout(() => {
           window.location.href = getDashboardUrl();
         }, 300);
       } else {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = '<span>Se connecter au Dashboard</span>';
-        errorDiv.textContent = 'Mot de passe incorrect.';
-        errorDiv.style.display = 'block';
-        pwdInput.select();
+        // Increment failed attempts counter
+        let attempts = parseInt(localStorage.getItem(ATTEMPTS_KEY) || '0', 10) + 1;
+        localStorage.setItem(ATTEMPTS_KEY, attempts.toString());
+
+        if (attempts >= MAX_FAILED_ATTEMPTS) {
+          localStorage.setItem(LOCKOUT_KEY, (Date.now() + LOCKOUT_DURATION_MS).toString());
+          checkLockout();
+        } else {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<span>Se connecter au Dashboard</span>';
+          const remaining = MAX_FAILED_ATTEMPTS - attempts;
+          errorDiv.innerHTML = `❌ Mot de passe incorrect.<br><span style="font-size:0.75rem; color:#fca5a5;">(Tentative ${attempts}/${MAX_FAILED_ATTEMPTS} — Compte verrouillé après ${remaining} échec${remaining > 1 ? 's' : ''})</span>`;
+          errorDiv.style.display = 'block';
+          pwdInput.select();
+        }
       }
     });
   </script>
