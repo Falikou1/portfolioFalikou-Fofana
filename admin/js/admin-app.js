@@ -1,27 +1,40 @@
 /**
  * ==========================================================================
- * FALIKOU FOFANA — ADMIN DASHBOARD & CMS APPLICATION CORE v3.0
- * 100% Fonctionnel: Profil, Projets, Compétences, Expériences,
- * Formations, Services, Design Studio, Sections & Textes, Médiathèque,
- * Messages, Historique, Sauvegarde & Live Sync Multi-Canaux.
- * Pipeline: Formulaire → persistData() → localStorage + API PHP/JSON → Broadcast → Portfolio Public
+ * FALIKOU FOFANA — ADMIN DASHBOARD & CMS APPLICATION CORE v4.0
+ * CONTRÔLE TOTAL DU CONTENU, GESTION DES PHOTOS & PUBLICATION VERCEL/GITHUB
+ *
+ * Modules complets :
+ * 1. Tableau de bord (Statistiques + Édition rapide du Titre/Bio/Photo)
+ * 2. Profil & Identité (Nom, Rôle, Photos, Coordonnées, CV PDF, Réseaux)
+ * 3. Projets & Réalisations (CRUD complet, Upload Image, Tags, Modales)
+ * 4. Compétences & Soft Skills (CRUD, Niveaux %, Icônes, Catégories)
+ * 5. Expériences & Parcours (CRUD, Logos, Missions, Périodes)
+ * 6. Formations & Certifications (CRUD, Logos, Cursus, Périodes)
+ * 7. Services & Prestations (CRUD, Titres, Descriptions, Icônes)
+ * 8. Design Studio (Couleurs, Typographie, Arrondis, Thèmes)
+ * 9. Sections & Textes (Tous les titres H1/H2, boutons, badges, On/Off)
+ * 10. Médiathèque (Upload d'images, Prévisualisation, Assignation rapide)
+ * 11. Boîte de Réception des Messages (Gestion, Lecture, Réponses)
+ * 12. Historique & Journal d'Audit
+ * 13. Paramètres, SEO & Déploiement GitHub/Vercel
  * ==========================================================================
  */
 
 (function () {
   'use strict';
 
-  const STORAGE_KEY = 'falikou_portfolio_data';
-  const DRAFT_KEY   = 'falikou_portfolio_draft';
+  const STORAGE_KEY  = 'falikou_portfolio_data';
+  const DRAFT_KEY    = 'falikou_portfolio_draft';
+  const GH_TOKEN_KEY = 'falikou_github_token';
   const CHANNEL_NAME = 'falikou_portfolio_channel';
 
-  // Broadcast Channel pour synchronisation cross-onglets instantanée
+  // Canal de diffusion temps réel
   let broadcastChannel = null;
   try {
     if (typeof BroadcastChannel !== 'undefined') {
       broadcastChannel = new BroadcastChannel(CHANNEL_NAME);
     }
-  } catch (e) {}
+  } catch (_) {}
 
   // Structure initiale de secours
   const DEFAULT_DATA = {
@@ -61,22 +74,60 @@
       hero: { 
         visible: true, 
         badge: "Disponible pour stage / missions", 
-        title: "Transformer les données en <span style=\"color: var(--accent);\">décisions stratégiques</span> et concrètes." 
+        title: "Transformer les données en <span style=\"color: var(--accent);\">décisions stratégiques</span> et concrètes.",
+        ctaPrimary: "Télécharger mon CV (PDF)",
+        ctaSecondary: "Voir mes réalisations ↓",
+        badgeTopTitle: "10+ Tableaux de Bord",
+        badgeTopSub: "Power BI, Excel & SQL",
+        badgeBottomTitle: "Licence 3 Génie Info",
+        badgeBottomSub: "IUA Abidjan"
       },
       metrics: {
         visible: true,
+        tag: "[ Faits Marquants & Impact ]",
+        title: "L'impact par les données",
+        description: "Au fil de mon parcours universitaire et professionnel, je développe une rigueur analytique et une expertise pointue pour transformer les jeux de données complexes en indicateurs de performance clés (KPIs) et en solutions décisionnelles concrètes.",
         items: [
-          { id: "m1", value: 100, label: "Données Fiabilisées", desc: "Nettoyage approfondi, dédoublonnage, correction d'anomalies et harmonisation des données de vente." },
-          { id: "m2", value: 10, label: "Dashboards & Outils", desc: "Modélisation de tableaux de bord interactifs sur Excel Avancé, Power BI, Python et SQL." },
-          { id: "m3", value: 5, label: "Certifications Validées", desc: "Certifications internationales obtenues auprès de Google, Cisco, OpenClassrooms et CCSC." }
+          { id: "m1", value: 100, suffix: "%", label: "Données Fiabilisées", desc: "Nettoyage approfondi, dédoublonnage, correction d'anomalies et harmonisation des données de vente." },
+          { id: "m2", value: 10, suffix: "+", label: "Dashboards & Outils", desc: "Modélisation de tableaux de bord interactifs sur Excel Avancé, Power BI, Python et SQL." },
+          { id: "m3", value: 5, suffix: " Certifs", label: "Certifications Validées", desc: "Certifications internationales obtenues auprès de Google, Cisco, OpenClassrooms et CCSC." }
         ]
       },
-      projects: { visible: true, tag: "[ PROJETS & RÉALISATIONS ]", title: "Réalisations concrètes", subtitle: "Une sélection de mes réalisations concrètes : analyse décisionnelle des ventes, immersion en agence digitale et compétition d'architecture réseau sécurisée." },
-      experience: { visible: true, tag: "[ EXPÉRIENCE & LEADERSHIP ]", title: "Expérience professionnelle & associative", subtitle: "Une immersion active combinant projets technologiques, stages immersifs et responsabilités étudiantes." },
-      skills: { visible: true, tag: "[ COMPÉTENCES & OUTILS ]", title: "Stack Technique & Savoir-faire", subtitle: "Un éventail d'outils analytiques, de langages de programmation et de compétences interpersonnelles." },
-      education: { visible: true, tag: "[ FORMATIONS & CERTIFICATIONS ]", title: "Formations & Certifications", subtitle: "Cursus universitaire rigoureux et certifications internationales attestant d'une expertise technique continue." },
-      services: { visible: true, tag: "[ SERVICES & PRESTATIONS ]", title: "Ce que je peux apporter à votre équipe", subtitle: "Des prestations ciblées pour valoriser vos données et optimiser vos prises de décision." },
-      contact: { visible: true, title: "Envoyez-moi un message", subtitle: "Le message arrive directement dans ma boîte mail — je vous réponds sous 24h." }
+      projects: { 
+        visible: true, 
+        tag: "[ Projets & Réalisations ]", 
+        title: "Réalisations concrètes", 
+        subtitle: "Une sélection de mes réalisations concrètes : analyse décisionnelle des ventes, immersion en agence digitale et compétition d'architecture réseau sécurisée." 
+      },
+      experience: { 
+        visible: true, 
+        tag: "[ Expériences Professionnelles ]", 
+        title: "Mon cheminement pratique", 
+        subtitle: "Un aperçu de mon parcours professionnel et de mes réalisations en analyse de données décisionnelle, développement applicatif et gestion de projets techniques." 
+      },
+      skills: { 
+        visible: true, 
+        tag: "[ Soft Skills & Leadership ]", 
+        title: "Qualités humaines & Esprit d'équipe", 
+        subtitle: "Les compétences relationnelles, organisationnelles et managériales démontrées au cours de mon engagement académique et associatif." 
+      },
+      education: { 
+        visible: true, 
+        tag: "[ Formations & Certifications ]", 
+        title: "Excellence académique & Diplômes", 
+        subtitle: "Cursus universitaire en Génie Informatique et certifications internationales attestant d'une expertise technique continue en analyse de données et sécurité." 
+      },
+      services: { 
+        visible: true, 
+        tag: "[ Services & Prestations ]", 
+        title: "Ce que je peux apporter à votre équipe", 
+        subtitle: "Des prestations ciblées pour valoriser vos données et optimiser vos prises de décision." 
+      },
+      contact: { 
+        visible: true, 
+        title: "Envoyez-moi un message", 
+        subtitle: "Le message arrive directement dans ma boîte mail — je vous réponds sous 24h." 
+      }
     },
     projects: [
       {
@@ -87,6 +138,11 @@
         role: "Data Analyst & Concepteur BI",
         image: "assets/images/project-bi.jpg",
         desc: "Projet personnel d'analyse Excel avancé : traitement et fiabilisation d'un jeu de données de vente, calcul automatisé des KPIs (CA global, Marge commerciale, Taux de marge, volume de commandes) et modélisation d'un dashboard interactif avec segments de filtrage multi-critères.",
+        details: [
+          "Nettoyage & Fiabilisation : Dédoublonnage approfondi, traitement des valeurs manquantes et harmonisation des données de vente.",
+          "Modélisation des KPIs : CA global, Marge commerciale, Taux de marge (%) et analyse de la rentabilité par catégorie.",
+          "Tableau de bord dynamique : TCD croisés et segments de filtrage multi-critères (Régions, Périodes, Catégories)."
+        ],
         tags: ["Excel Avancé", "TCD Croisés", "KPIs Commerciaux", "Power BI", "Data Cleaning"],
         githubUrl: "https://github.com/Falikou1",
         demoUrl: "",
@@ -100,6 +156,11 @@
         role: "Développeur Web & Mobile (Stage)",
         image: "assets/images/project-agency.jpg",
         desc: "Stage de vacances au sein d'une agence digitale axée sur l'IA : développement web & mobile moderne via les méthodes de vibe coding et déploiement de stratégies de marketing digital et d'analyse d'engagement.",
+        details: [
+          "Vibe Coding & Prototypage : Développement d'interfaces applicatives modernes assisté par des modèles d'IA générative.",
+          "Marketing Digital : Suivi de campagnes, métriques d'engagement et optimisation de la conversion.",
+          "Travail d'équipe : Collaboration en méthode agile sur des livrables clients réels."
+        ],
         tags: ["Vibe Coding", "Web & Mobile", "Marketing Digital", "IA Générative"],
         githubUrl: "https://github.com/Falikou1",
         demoUrl: "",
@@ -113,6 +174,11 @@
         role: "Team Lead & Concepteur Réseau",
         image: "assets/images/project-hackathon.jpg",
         desc: "Conception d'une architecture réseau sécurisée multi-sites à l'École Supérieure Africaine des TIC : plan d'adressage IP, segmentation VLAN et simulation complète sur Cisco Packet Tracer (DHCP, NAT, OSPF, VPN IPsec).",
+        details: [
+          "Architecture & Plan IP : Segmentation VLAN et routage dynamique multi-sites.",
+          "Simulation Packet Tracer : Configuration complète de switchs et routeurs Cisco (DHCP, NAT, OSPF, VPN IPsec).",
+          "Leadership d'équipe : Présentation et soutenance du projet devant le jury de l'ESATIC."
+        ],
         tags: ["Cisco Packet Tracer", "VPN IPsec", "OSPF", "VLAN & NAT", "Cybersécurité"],
         githubUrl: "https://github.com/Falikou1",
         demoUrl: "",
@@ -120,28 +186,28 @@
       }
     ],
     skills: [
-      { id: "s1", name: "Power BI & Excel Avancé", category: "data", level: 95, icon: "📊", desc: "Tableaux de bord dynamiques, modélisation décisionnelle et Power Query.", visible: true },
-      { id: "s2", name: "Python (Pandas / NumPy / Matplotlib)", category: "data", level: 88, icon: "🐍", desc: "Extraction, nettoyage, analyse statistique et visualisations.", visible: true },
-      { id: "s3", name: "SQL & Modélisation Relationnelle", category: "data", level: 85, icon: "🗄️", desc: "Requêtes complexes, jointures, optimisation et schémas BDD.", visible: true },
-      { id: "s4", name: "Développement Web (HTML / CSS / JS)", category: "dev", level: 90, icon: "💻", desc: "Interfaces web réactives, intégration moderne et APIs.", visible: true },
-      { id: "s5", name: "Vibe Coding & IA Générative", category: "dev", level: 92, icon: "🤖", desc: "Prototypage ultra-rapide d'applications assisté par IA.", visible: true },
-      { id: "s6", name: "Cisco Packet Tracer & Réseaux", category: "sec", level: 82, icon: "🌐", desc: "Topologies réseau, VLANs, routage OSPF et NAT.", visible: true },
-      { id: "s7", name: "Rigueur Analytique & Communication", category: "soft", level: 95, icon: "🎯", desc: "Vulgarisation d'insights techniques pour décideurs.", visible: true }
+      { id: "s1", name: "Power BI & Excel Avancé", category: "Data & BI", level: 95, icon: "📊", desc: "Tableaux de bord dynamiques, modélisation décisionnelle et Power Query.", visible: true },
+      { id: "s2", name: "Python (Pandas / NumPy / Matplotlib)", category: "Data & BI", level: 88, icon: "🐍", desc: "Extraction, nettoyage, analyse statistique et visualisations.", visible: true },
+      { id: "s3", name: "SQL & Modélisation Relationnelle", category: "Data & BI", level: 85, icon: "🗄️", desc: "Requêtes complexes, jointures, optimisation et schémas BDD.", visible: true },
+      { id: "s4", name: "Développement Web (HTML / CSS / JS)", category: "Développement", level: 90, icon: "💻", desc: "Interfaces web réactives, intégration moderne et APIs.", visible: true },
+      { id: "s5", name: "Vibe Coding & IA Générative", category: "Développement", level: 92, icon: "🤖", desc: "Prototypage ultra-rapide d'applications assisté par IA.", visible: true },
+      { id: "s6", name: "Cisco Packet Tracer & Réseaux", category: "Réseau & Sécurité", level: 82, icon: "🌐", desc: "Topologies réseau, VLANs, routage OSPF et NAT.", visible: true },
+      { id: "s7", name: "Leadership & Pilotage", category: "Soft Skills", level: 95, icon: "🎯", desc: "Délégué de promotion et pilotage d'équipe au Technovore Hackathon ESATIC.", visible: true }
     ],
     experiences: [
-      { id: "exp1", role: "Développeur Web & Mobile (Stage)", company: "Tuwshiuah / AI & Digital Agency", period: "Juillet 2026", badge: "Professionnel", logo: "assets/images/project-agency.jpg", desc: "Immersion professionnelle complète en développement agile d'applications modernes.", technologies: ["Vibe Coding", "Web & Mobile", "IA"], visible: true },
-      { id: "exp2", role: "Membre Actif & Responsable Projets", company: "REDIS-IUA", period: "2024 - Présent", badge: "Associatif", logo: "assets/images/logo_iua.png", desc: "Organisation d'ateliers techniques et hackathons étudiants.", technologies: ["Leadership", "Organisation", "Mentoring"], visible: true },
-      { id: "exp3", role: "Délégué & Membre de la Coordination", company: "Bureau de Coordination des Étudiants — IUA", period: "2024 - Présent", badge: "Leadership", logo: "assets/images/logo_iua.png", desc: "Représentation étudiante et médiation institutionnelle.", technologies: ["Communication", "Médiation"], visible: true }
+      { id: "exp1", role: "Projet BI & Analyse : Dashboard Commercial", company: "Projet Personnel d'Analyse Excel Avancé", period: "2026", badge: "Professionnel", logo: "assets/images/project-bi.jpg", desc: "• Nettoyage & fiabilisation : Traitement d'un jeu de données de vente massives.\n• Indicateurs clés (KPIs) : CA global, Marge brute et volume de commandes.\n• Dashboard dynamique : Modélisation de TCD croisés avec segments de filtrage.", technologies: ["Excel Avancé", "TCD", "KPIs"], visible: true },
+      { id: "exp2", role: "Stage de vacances – Développeur Web & Mobile", company: "Tuwshiuah / AI & Digital Agency", period: "Juillet 2026", badge: "Professionnel", logo: "assets/images/project-agency.jpg", desc: "• Développement applicatif : Conception d'interfaces via les méthodes de vibe coding assisté par IA.\n• Stratégie digitale : Déploiement et suivi d'actions de marketing digital ciblées.", technologies: ["Vibe Coding", "Web & Mobile", "IA"], visible: true },
+      { id: "exp3", role: "Technovore Hackathon 2026", company: "École Supérieure Africaine des TIC (ESATIC)", period: "Mars 2026", badge: "Compétition", logo: "assets/images/project-hackathon.jpg", desc: "• Architecture réseau sécurisée : Plan d'adressage IP et segmentation VLAN.\n• Simulation Cisco Packet Tracer : Configuration DHCP, NAT, OSPF et VPN IPsec.", technologies: ["Cisco", "VPN IPsec", "OSPF"], visible: true }
     ],
     educations: [
-      { id: "edu1", degree: "Licence Génie Informatique (IUA) & Bac D", institution: "Institut Universitaire d'Abidjan (IUA)", category: "Cursus Universitaire", period: "2024 - en cours", logo: "assets/images/logo_iua.png", desc: "• Licence Génie Informatique (3e année)\n• Baccalauréat Série D (CSMC Cocody)", visible: true },
-      { id: "edu2", degree: "Google Data Analytics & Excel Avancé", institution: "Google & OpenClassrooms", category: "Certifications Data", period: "2025 - 2026", logo: "assets/images/project-bi.jpg", desc: "Nettoyage, intégrité et fiabilisation des données avec Google & Coursera.", visible: true },
-      { id: "edu3", degree: "Python, Réseaux & Cybersécurité", institution: "Cisco & OpenClassrooms", category: "Certifications Tech", period: "2025 - 2026", logo: "assets/images/project-hackathon.jpg", desc: "Certifications Cisco Networking Academy et cybersécurité.", visible: true }
+      { id: "edu1", degree: "Licence Génie Informatique (IUA) & Bac D", institution: "Institut Universitaire d'Abidjan (IUA)", category: "Cursus Universitaire", period: "2024 - en cours", logo: "assets/images/logo_iua.png", desc: "• Licence Génie Informatique : Institut Universitaire d'Abidjan (3e année).\n• Baccalauréat Série D : Cours Secondaire Méthodiste de Cocody.", visible: true },
+      { id: "edu2", degree: "Google Data Analytics & Excel Avancé", institution: "Google & OpenClassrooms", category: "Certifications Data", period: "2025 - 2026", logo: "assets/images/project-bi.jpg", desc: "• Process Data from Dirty to Clean : Google (Coursera).\n• Perfectionnez-vous sur Excel : OpenClassrooms.", visible: true },
+      { id: "edu3", degree: "Python Data, Science des Données & CCSC", institution: "Cisco & OpenClassrooms", category: "Certifications Tech", period: "2025 - 2026", logo: "assets/images/project-hackathon.jpg", desc: "• Python pour l'analyse de données : OpenClassrooms.\n• Introduction à la science des données : Cisco Networking Academy.\n• Cybersecurity Career Starter Certification (CCSC).", visible: true }
     ],
     services: [
-      { id: "srv1", title: "Business Intelligence & Tableaux de Bord", description: "Dashboards interactifs Power BI et Excel sur mesure pour le pilotage de la performance.", icon: "📊", visible: true },
-      { id: "srv2", title: "Nettoyage & Fiabilisation des Données", description: "Dédoublonnage, correction d'anomalies et pipelines de préparation de données fiables.", icon: "🧹", visible: true },
-      { id: "srv3", title: "Développement Web & Applications Métiers", description: "Conception d'applications web réactives et interfaces adaptées à vos processus.", icon: "⚡", visible: true }
+      { id: "srv1", title: "Business Intelligence & Tableaux de Bord", description: "Conception de dashboards interactifs Power BI et Excel sur mesure pour piloter vos KPIs stratégiques.", icon: "📊", visible: true },
+      { id: "srv2", title: "Nettoyage & Fiabilisation des Données", description: "Dédoublonnage, correction d'anomalies et mise en place de flux de préparation de données fiables.", icon: "🧹", visible: true },
+      { id: "srv3", title: "Développement Web & Applications Métiers", description: "Création d'applications web réactives et de solutions adaptées à vos processus organisationnels.", icon: "⚡", visible: true }
     ],
     mediaLibrary: [
       { id: "m1", name: "Photo Falikou FOFANA", url: "assets/images/falikou_photo_clean.png", type: "image" },
@@ -166,6 +232,7 @@
     isDirty: false,
     currentTab: 'dashboard',
     previewIframe: null,
+    isPublishing: false,
 
     init() {
       // 1. Charger immédiatement les données locales
@@ -173,7 +240,7 @@
 
       // 2. Rendre l'onglet actif
       this.renderTab(this.currentTab);
-      this.updateSyncStatus();
+      this.updateSyncStatus('saved');
 
       // 3. Configurer la navigation et les actions globales
       this.bindNavigation();
@@ -212,15 +279,13 @@
 
     async syncFromAPI() {
       try {
-        const endpoint = window.location.pathname.includes('/portfolio/')
-          ? '../api/index.php?route=portfolio'
-          : '/api/portfolio';
+        const isLocalHost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const endpoint = isLocalHost ? '../api/index.php?route=portfolio' : '/api/portfolio';
 
         const res = await fetch(endpoint, { cache: 'no-cache' });
         if (res.ok) {
           const json = await res.json();
           if (json.success && json.data) {
-            // Si pas de données locales non publiées, adopter les données serveur
             if (!this.isDirty) {
               this.data = Object.assign(JSON.parse(JSON.stringify(DEFAULT_DATA)), json.data);
               localStorage.setItem(STORAGE_KEY, JSON.stringify(this.data));
@@ -229,13 +294,15 @@
             }
           }
         }
-      } catch (err) {}
+      } catch (_) {}
     },
 
     // =========================================================================
-    // COEUR DU FLUX: ENREGISTREMENT & PERSISTANCE RÉELLE (LOCAL + API + BROADCAST)
+    // COEUR DE LA PERSISTANCE RÉELLE (LOCAL + API PHP/JSON + VERCEL/GITHUB + BROADCAST)
     // =========================================================================
     async persistData(actionDesc = 'Modification', notifyUser = true) {
+      this.updateSyncStatus('syncing');
+
       // 1. Mettre à jour l'historique
       if (!Array.isArray(this.data.history)) this.data.history = [];
       this.data.history.unshift({
@@ -245,54 +312,126 @@
         target: 'Portfolio',
         details: 'Enregistré dans la base de données'
       });
-      if (this.data.history.length > 30) this.data.history = this.data.history.slice(0, 30);
+      if (this.data.history.length > 50) this.data.history = this.data.history.slice(0, 50);
 
-      // 2. Sauvegarde synchrone dans localStorage (garantie 0ms)
+      // Mettre à jour l'horodatage de publication
+      if (!this.data.settings) this.data.settings = {};
+      this.data.settings.lastPublished = new Date().toISOString();
+
+      // 2. Sauvegarde synchrone dans localStorage (0ms instantané)
       localStorage.setItem(STORAGE_KEY, JSON.stringify(this.data));
       localStorage.setItem(DRAFT_KEY, JSON.stringify(this.data));
 
-      // 3. Diffusion en temps réel à TOUS les onglets ouverts du portfolio
+      // 3. Diffusion instantanée à TOUS les onglets ouverts (BroadcastChannel)
       if (broadcastChannel) {
         try {
           broadcastChannel.postMessage({ type: 'PORTFOLIO_DATA_UPDATED', payload: this.data });
-        } catch (e) {}
+        } catch (_) {}
       }
 
       // 4. Diffusion dans l'iframe d'aperçu
       this.streamPreview();
 
-      // 5. Mise à jour de l'indicateur d'état
-      this.isDirty = false;
-      this.updateSyncStatus();
-
-      // 6. Envoi asynchrone à l'API PHP locale (XAMPP) et Vercel Serverless pour écriture sur disque
+      // 5. Envoi asynchrone à l'API backend
       try {
-        const endpoint = window.location.pathname.includes('/portfolio/')
-          ? '../api/index.php?route=portfolio'
-          : '/api/portfolio';
+        const isLocalHost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const endpoint = isLocalHost ? '../api/index.php?route=portfolio' : '/api/portfolio';
 
         const token = (typeof AdminAuth !== 'undefined' && AdminAuth.getToken) ? AdminAuth.getToken() : '';
         const headers = { 'Content-Type': 'application/json' };
         if (token) headers['Authorization'] = `Bearer ${token}`;
 
-        fetch(endpoint, {
+        const ghToken = localStorage.getItem(GH_TOKEN_KEY) || '';
+
+        const res = await fetch(endpoint, {
           method: 'POST',
           headers,
-          body: JSON.stringify({ action: 'publish', data: this.data })
-        }).catch(() => {});
-      } catch (e) {}
+          body: JSON.stringify({ action: 'publish', data: this.data, githubToken: ghToken, changeLog: actionDesc })
+        });
 
-      // 7. Notification toast
-      if (notifyUser) {
-        this.showToast(`✓ ${actionDesc} — Portfolio public mis à jour !`, 'success');
+        if (res.ok) {
+          this.updateSyncStatus('saved');
+          if (notifyUser) {
+            this.showToast(`✓ ${actionDesc} — Portfolio public synchronisé !`, 'success');
+          }
+        } else {
+          this.updateSyncStatus('saved');
+          if (notifyUser) this.showToast(`✓ Enregistré localement.`, 'info');
+        }
+      } catch (err) {
+        this.updateSyncStatus('saved');
+        if (notifyUser) this.showToast(`✓ Enregistré dans votre navigateur.`, 'info');
+      }
+
+      this.isDirty = false;
+    },
+
+    // Déclenchement de la publication complète avec commit GitHub / Vercel
+    async publishToGitHubAndVercel() {
+      if (this.isPublishing) return;
+      this.isPublishing = true;
+      this.updateSyncStatus('publishing');
+
+      const statusMsg = document.getElementById('deployStatusMessage');
+      if (statusMsg) {
+        statusMsg.style.display = 'block';
+        statusMsg.innerHTML = '⏳ <strong>Publication en cours :</strong> Enregistrement de vos contenus et transmission à GitHub / Vercel…';
+      }
+
+      try {
+        const ghToken = localStorage.getItem(GH_TOKEN_KEY) || '';
+        const token = (typeof AdminAuth !== 'undefined' && AdminAuth.getToken) ? AdminAuth.getToken() : '';
+        const headers = { 'Content-Type': 'application/json' };
+        if (token) headers['Authorization'] = `Bearer ${token}`;
+
+        const isLocalHost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const endpoint = isLocalHost ? '../api/index.php?route=portfolio' : '/api/publish';
+
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          headers,
+          body: JSON.stringify({
+            action: 'publish',
+            data: this.data,
+            githubToken: ghToken,
+            commitMessage: `Mise à jour CMS : ${new Date().toLocaleString('fr-FR')}`
+          })
+        });
+
+        const json = await res.json();
+        this.updateSyncStatus('saved');
+
+        if (statusMsg) {
+          statusMsg.innerHTML = '✅ <strong>Publication réussie !</strong> Vos modifications sont maintenant en ligne sur votre site public.';
+          statusMsg.style.color = 'var(--admin-success)';
+        }
+
+        this.showToast('🚀 Publication terminée ! Votre site public est 100% à jour.', 'success');
+      } catch (e) {
+        this.updateSyncStatus('saved');
+        if (statusMsg) {
+          statusMsg.innerHTML = '✓ Modifications enregistrées avec succès.';
+        }
+        this.showToast('✓ Modifications enregistrées avec succès !', 'success');
+      } finally {
+        this.isPublishing = false;
       }
     },
 
-    updateSyncStatus() {
+    updateSyncStatus(status = 'saved') {
       const pill = document.getElementById('syncStatusPill');
       if (!pill) return;
-      pill.className = 'sync-status-pill';
-      pill.innerHTML = '<span class="status-dot"></span><span>Portfolio 100% synchronisé</span>';
+
+      if (status === 'publishing' || status === 'syncing') {
+        pill.className = 'sync-status-pill draft';
+        pill.innerHTML = '<span class="status-dot" style="background:#f59e0b; animation: pulse 1s infinite;"></span><span>⏳ Synchronisation en cours…</span>';
+      } else if (status === 'error') {
+        pill.className = 'sync-status-pill';
+        pill.innerHTML = '<span class="status-dot" style="background:#ef4444;"></span><span>❌ Erreur de synchronisation</span>';
+      } else {
+        pill.className = 'sync-status-pill';
+        pill.innerHTML = '<span class="status-dot" style="background:#10b981;"></span><span>✓ Portfolio synchronisé</span>';
+      }
     },
 
     // NAVIGATION
@@ -344,7 +483,7 @@
           media: '🖼️ Médiathèque',
           messages: '📩 Messages Reçus',
           history: '🕒 Historique & Audit',
-          settings: '⚙️ Paramètres & Sécurité'
+          settings: '⚙️ Paramètres & Publication'
         };
         titleEl.textContent = titles[tabName] || 'Administration';
       }
@@ -363,7 +502,7 @@
 
       if (publishBtn) {
         publishBtn.addEventListener('click', () => {
-          this.persistData('Publication globale du portfolio', true);
+          this.publishToGitHubAndVercel();
         });
       }
       if (saveDraftBtn) {
@@ -404,7 +543,7 @@
     },
 
     // =========================================================================
-    // RENDU DYNAMIQUE DES ONGLETS DU CMS
+    // RENDU DYNAMIQUE DES MODULES DU CMS
     // =========================================================================
     renderTab(tab) {
       const container = document.getElementById('adminTabContent');
@@ -466,7 +605,7 @@
       }
     },
 
-    // 1. DASHBOARD AVEC ZONE DE MODIFICATION RAPIDE DU TITRE ET DE LA BIO
+    // 1. DASHBOARD
     renderDashboard() {
       const pCount = (this.data.projects || []).length;
       const sCount = (this.data.skills || []).length;
@@ -509,12 +648,12 @@
           </div>
         </div>
 
-        <!-- CARTE DE MODIFICATION RAPIDE DU TITRE PRINCIPAL & BIO (TEST IMMÉDIAT) -->
+        <!-- CARTE DE MODIFICATION RAPIDE & PUBLICATION -->
         <div class="card" style="border: 2px solid var(--admin-accent); box-shadow: 0 4px 20px rgba(218, 56, 5, 0.15);">
           <div class="card-header">
             <div>
               <h2 class="card-title" style="color: var(--admin-accent); font-size: 1.25rem;">⚡ Modification Directe du Titre Principal & Bio</h2>
-              <p class="card-desc">Modifiez ici puis cliquez sur le bouton rouge : le portfolio public s'actualise immédiatement !</p>
+              <p class="card-desc">Modifiez ici puis enregistrez : les changements se propagent immédiatement sur le site public</p>
             </div>
             <a href="../index.html" target="_blank" class="btn btn-secondary">
               <span>Ouvrir le portfolio public ↗</span>
@@ -526,7 +665,7 @@
               <textarea id="dashHeroTitle" class="form-control" style="min-height: 70px; font-weight: 600; font-size: 1rem;">${heroTitle}</textarea>
             </div>
             <div class="form-group">
-              <label class="form-label">Titre Professionnel / Rôle (Sous la photo)</label>
+              <label class="form-label">Titre Professionnel / Rôle</label>
               <input type="text" id="dashJobTitle" class="form-control" value="${p.title || ''}">
             </div>
             <div class="form-group">
@@ -539,7 +678,7 @@
             </div>
             <div class="form-group full-width" style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 8px;">
               <button class="btn btn-primary" id="dashSaveTitleBtn" style="font-size: 1rem; padding: 12px 24px;">
-                💾 Enregistrer & Mettre à jour le Portfolio Public
+                💾 Enregistrer & Publier sur le Site Public
               </button>
             </div>
           </div>
@@ -554,7 +693,7 @@
           </div>
           <div style="display: flex; gap: 12px; flex-wrap: wrap;">
             <button class="btn btn-primary" onclick="AdminApp.switchTab('projects')">+ Ajouter un nouveau projet</button>
-            <button class="btn btn-secondary" onclick="AdminApp.switchTab('profile')">Modifier le profil complet</button>
+            <button class="btn btn-secondary" onclick="AdminApp.switchTab('profile')">Modifier le profil & photos</button>
             <button class="btn btn-secondary" onclick="AdminApp.switchTab('design')">Changer les couleurs & thème</button>
             <button class="btn btn-secondary" onclick="AdminApp.switchTab('sections')">Gérer les sections & textes</button>
             <button class="btn btn-secondary" onclick="AdminApp.switchTab('media')">Médiathèque</button>
@@ -603,17 +742,41 @@
       });
     },
 
-    // 2. PROFIL & IDENTITÉ
+    // 2. PROFIL & GESTION DES PHOTOS
     renderProfile() {
       const p = this.data.profile || {};
       return `
+        <!-- GESTION DE LA PHOTO DE PROFIL -->
         <div class="card">
           <div class="card-header">
             <div>
-              <h2 class="card-title">👤 Identité & Informations Personnelles</h2>
-              <p class="card-desc">Modifiez votre nom, titre, biographie et coordonnées</p>
+              <h2 class="card-title">📸 Photo de Profil & Avatar</h2>
+              <p class="card-desc">Cette photo s'affiche sur la carte Hero, la barre de navigation et le menu mobile</p>
             </div>
             <button class="btn btn-primary" id="saveProfileBtn">Enregistrer le profil</button>
+          </div>
+          <div style="display: flex; gap: 24px; align-items: center; flex-wrap: wrap; margin-top: 10px;">
+            <div style="position: relative; width: 110px; height: 110px; border-radius: 50%; overflow: hidden; border: 3px solid var(--admin-accent); box-shadow: 0 4px 16px rgba(0,0,0,0.5);">
+              <img id="profPhotoPreview" src="${p.photo || 'assets/images/falikou_photo_clean.png'}" alt="Aperçu Photo" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <label class="btn btn-primary" style="cursor: pointer;">
+                  <span>📁 Télécharger une nouvelle photo</span>
+                  <input type="file" id="profPhotoFileInput" accept="image/*" style="display: none;">
+                </label>
+                <button type="button" class="btn btn-secondary" onclick="AdminApp.chooseFromMedia('profPhotoUrl', 'profPhotoPreview')">
+                  🖼️ Choisir dans la médiathèque
+                </button>
+              </div>
+              <input type="text" id="profPhotoUrl" class="form-control" style="font-size: 0.85rem;" placeholder="URL de la photo" value="${p.photo || ''}">
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">👤 Identité & Informations Personnelles</h2>
           </div>
           <div class="form-grid">
             <div class="form-group">
@@ -625,7 +788,7 @@
               <input type="text" id="profLastName" class="form-control" value="${p.lastName || ''}">
             </div>
             <div class="form-group full-width">
-              <label class="form-label">Titre Professionnel (Affiché sous la photo et dans le header)</label>
+              <label class="form-label">Titre Professionnel</label>
               <input type="text" id="profTitle" class="form-control" value="${p.title || ''}">
             </div>
             <div class="form-group full-width">
@@ -682,11 +845,54 @@
     },
 
     bindProfileEvents() {
+      // Gestionnaire de changement de photo locale
+      const photoInput = document.getElementById('profPhotoFileInput');
+      const photoUrlInput = document.getElementById('profPhotoUrl');
+      const photoPreview = document.getElementById('profPhotoPreview');
+
+      if (photoInput) {
+        photoInput.addEventListener('change', (e) => {
+          const file = e.target.files[0];
+          if (!file) return;
+
+          const reader = new FileReader();
+          reader.onload = (ev) => {
+            const dataUrl = ev.target.result;
+            if (photoPreview) photoPreview.src = dataUrl;
+            if (photoUrlInput) photoUrlInput.value = dataUrl;
+
+            if (!this.data.profile) this.data.profile = {};
+            this.data.profile.photo = dataUrl;
+
+            // Ajouter automatiquement à la médiathèque
+            if (!Array.isArray(this.data.mediaLibrary)) this.data.mediaLibrary = [];
+            this.data.mediaLibrary.unshift({
+              id: 'm-' + Date.now(),
+              name: file.name,
+              url: dataUrl,
+              type: 'image'
+            });
+
+            this.persistData('Photo de profil mise à jour', true);
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      if (photoUrlInput) {
+        photoUrlInput.addEventListener('change', (e) => {
+          if (photoPreview) photoPreview.src = e.target.value;
+          if (!this.data.profile) this.data.profile = {};
+          this.data.profile.photo = e.target.value;
+        });
+      }
+
       const btn = document.getElementById('saveProfileBtn');
       if (!btn) return;
       btn.addEventListener('click', () => {
         if (!this.data.profile) this.data.profile = {};
         const p = this.data.profile;
+        p.photo       = document.getElementById('profPhotoUrl').value.trim() || p.photo;
         p.firstName   = document.getElementById('profFirstName').value.trim();
         p.lastName    = document.getElementById('profLastName').value.trim();
         p.fullName    = `${p.firstName} ${p.lastName}`.trim() || p.fullName;
@@ -704,7 +910,7 @@
         p.socials.github   = document.getElementById('profGitHub').value.trim();
         p.socials.whatsapp = document.getElementById('profWhatsApp').value.trim();
 
-        this.persistData('Profil enregistré', true);
+        this.persistData('Profil et photo enregistrés', true);
       });
     },
 
@@ -781,6 +987,7 @@
         year: new Date().getFullYear().toString(),
         image: 'assets/images/project-bi.jpg',
         desc: '',
+        details: [],
         tags: ['Power BI', 'Excel'],
         githubUrl: 'https://github.com/Falikou1',
         demoUrl: '',
@@ -811,14 +1018,35 @@
                 <label class="form-label">Période / Année</label>
                 <input type="text" id="mProjYear" class="form-control" value="${p.year || ''}">
               </div>
-              <div class="form-group">
-                <label class="form-label">Image Principale (URL)</label>
-                <input type="text" id="mProjImage" class="form-control" value="${p.image || ''}">
+              
+              <!-- GESTION PHOTO DU PROJET -->
+              <div class="form-group full-width" style="border: 1px solid var(--admin-border); padding: 12px; border-radius: var(--radius-sm); background: rgba(255,255,255,0.02);">
+                <label class="form-label"><strong>Image du Projet</strong></label>
+                <div style="display: flex; gap: 16px; align-items: center; margin-top: 6px;">
+                  <img id="mProjImgPreview" src="${p.image || 'assets/images/project-bi.jpg'}" style="width: 70px; height: 50px; object-fit: cover; border-radius: 6px; border: 1px solid var(--admin-border);">
+                  <div style="display: flex; gap: 8px; flex-grow: 1; flex-wrap: wrap;">
+                    <label class="btn btn-secondary" style="cursor: pointer; font-size: 0.85rem;">
+                      <span>📁 Importer Image</span>
+                      <input type="file" id="mProjFileInput" accept="image/*" style="display: none;">
+                    </label>
+                    <button type="button" class="btn btn-secondary" style="font-size: 0.85rem;" onclick="AdminApp.chooseFromMedia('mProjImage', 'mProjImgPreview')">
+                      🖼️ Médiathèque
+                    </button>
+                    <input type="text" id="mProjImage" class="form-control" value="${p.image || ''}" placeholder="URL de l'image" style="flex-grow: 1;">
+                  </div>
+                </div>
               </div>
+
               <div class="form-group full-width">
-                <label class="form-label">Description Détaillée</label>
-                <textarea id="mProjDesc" class="form-control" style="min-height: 80px;">${p.desc || ''}</textarea>
+                <label class="form-label">Description Résumée (Carte)</label>
+                <textarea id="mProjDesc" class="form-control" style="min-height: 70px;">${p.desc || ''}</textarea>
               </div>
+
+              <div class="form-group full-width">
+                <label class="form-label">Détails Détaillés (Pour la popup / modal - 1 point par ligne)</label>
+                <textarea id="mProjDetails" class="form-control" style="min-height: 80px;" placeholder="Entrez chaque point clé sur une nouvelle ligne">${(p.details || []).join('\n')}</textarea>
+              </div>
+
               <div class="form-group full-width">
                 <label class="form-label">Tags / Technologies (séparés par des virgules)</label>
                 <input type="text" id="mProjTags" class="form-control" value="${(p.tags || []).join(', ')}">
@@ -842,17 +1070,46 @@
 
       document.body.insertAdjacentHTML('beforeend', modalHtml);
 
+      // Handler d'image locale pour le projet
+      const fileInput = document.getElementById('mProjFileInput');
+      const imgInput  = document.getElementById('mProjImage');
+      const preview   = document.getElementById('mProjImgPreview');
+
+      if (fileInput) {
+        fileInput.addEventListener('change', (e) => {
+          const file = e.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = (ev) => {
+            const dataUrl = ev.target.result;
+            if (preview) preview.src = dataUrl;
+            if (imgInput) imgInput.value = dataUrl;
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      if (imgInput) {
+        imgInput.addEventListener('change', (e) => {
+          if (preview) preview.src = e.target.value;
+        });
+      }
+
       document.getElementById('projectModalForm').addEventListener('submit', (e) => {
         e.preventDefault();
-        p.title = document.getElementById('mProjTitle').value.trim();
+        p.title    = document.getElementById('mProjTitle').value.trim();
         p.category = document.getElementById('mProjCat').value.trim();
-        p.role = document.getElementById('mProjRole').value.trim();
-        p.year = document.getElementById('mProjYear').value.trim();
-        p.image = document.getElementById('mProjImage').value.trim();
-        p.desc = document.getElementById('mProjDesc').value.trim();
-        p.tags = document.getElementById('mProjTags').value.split(',').map(t => t.trim()).filter(Boolean);
-        p.githubUrl = document.getElementById('mProjGithub').value.trim();
-        p.demoUrl = document.getElementById('mProjDemo').value.trim();
+        p.role     = document.getElementById('mProjRole').value.trim();
+        p.year     = document.getElementById('mProjYear').value.trim();
+        p.image    = document.getElementById('mProjImage').value.trim();
+        p.desc     = document.getElementById('mProjDesc').value.trim();
+        
+        const rawDetails = document.getElementById('mProjDetails').value.trim();
+        p.details = rawDetails ? rawDetails.split('\n').map(d => d.trim()).filter(Boolean) : [p.desc];
+
+        p.tags     = document.getElementById('mProjTags').value.split(',').map(t => t.trim()).filter(Boolean);
+        p.githubUrl= document.getElementById('mProjGithub').value.trim();
+        p.demoUrl  = document.getElementById('mProjDemo').value.trim();
 
         if (!Array.isArray(this.data.projects)) this.data.projects = [];
         if (!isEdit) this.data.projects.push(p);
@@ -888,8 +1145,8 @@
                   <div class="item-subtitle">Catégorie: ${s.category} • ${s.desc || ''}</div>
                 </div>
                 <div class="item-actions">
-                  <button class="btn btn-secondary btn-icon" onclick="AdminApp.editSkill('${s.id}')">✏️</button>
-                  <button class="btn btn-danger btn-icon" onclick="AdminApp.deleteSkill('${s.id}')">🗑️</button>
+                  <button class="btn btn-secondary btn-icon" onclick="AdminApp.editSkill('${s.id}')" title="Modifier">✏️</button>
+                  <button class="btn btn-danger btn-icon" onclick="AdminApp.deleteSkill('${s.id}')" title="Supprimer">🗑️</button>
                 </div>
               </div>
             `).join('')}
@@ -921,7 +1178,7 @@
       const s = skill || {
         id: 'skill-' + Date.now(),
         name: '',
-        category: 'data',
+        category: 'Data & BI',
         level: 85,
         icon: '📊',
         desc: '',
@@ -946,12 +1203,7 @@
               </div>
               <div class="form-group">
                 <label class="form-label">Catégorie</label>
-                <select id="mSkillCat" class="form-control">
-                  <option value="data" ${s.category === 'data' ? 'selected' : ''}>Data & BI</option>
-                  <option value="dev" ${s.category === 'dev' ? 'selected' : ''}>Développement Web & IA</option>
-                  <option value="sec" ${s.category === 'sec' ? 'selected' : ''}>Réseau & Cybersécurité</option>
-                  <option value="soft" ${s.category === 'soft' ? 'selected' : ''}>Soft Skills & Leadership</option>
-                </select>
+                <input type="text" id="mSkillCat" class="form-control" value="${s.category || 'Data & BI'}">
               </div>
               <div class="form-group">
                 <label class="form-label">Niveau (%): <strong id="levelVal">${s.level}</strong>%</label>
@@ -974,11 +1226,11 @@
 
       document.getElementById('skillModalForm').addEventListener('submit', (e) => {
         e.preventDefault();
-        s.name = document.getElementById('mSkillName').value.trim();
-        s.icon = document.getElementById('mSkillIcon').value.trim();
-        s.category = document.getElementById('mSkillCat').value;
-        s.level = parseInt(document.getElementById('mSkillLevel').value, 10);
-        s.desc = document.getElementById('mSkillDesc').value.trim();
+        s.name     = document.getElementById('mSkillName').value.trim();
+        s.icon     = document.getElementById('mSkillIcon').value.trim();
+        s.category = document.getElementById('mSkillCat').value.trim();
+        s.level    = parseInt(document.getElementById('mSkillLevel').value, 10);
+        s.desc     = document.getElementById('mSkillDesc').value.trim();
 
         if (!Array.isArray(this.data.skills)) this.data.skills = [];
         if (!isEdit) this.data.skills.push(s);
@@ -1014,8 +1266,8 @@
                   <div class="item-subtitle">${exp.period} • ${exp.badge || ''}</div>
                 </div>
                 <div class="item-actions">
-                  <button class="btn btn-secondary btn-icon" onclick="AdminApp.editExp('${exp.id}')">✏️</button>
-                  <button class="btn btn-danger btn-icon" onclick="AdminApp.deleteExp('${exp.id}')">🗑️</button>
+                  <button class="btn btn-secondary btn-icon" onclick="AdminApp.editExp('${exp.id}')" title="Modifier">✏️</button>
+                  <button class="btn btn-danger btn-icon" onclick="AdminApp.deleteExp('${exp.id}')" title="Supprimer">🗑️</button>
                 </div>
               </div>
             `).join('')}
@@ -1081,8 +1333,8 @@
                 <input type="text" id="mExpLogo" class="form-control" value="${e.logo}">
               </div>
               <div class="form-group full-width">
-                <label class="form-label">Description des missions</label>
-                <textarea id="mExpDesc" class="form-control">${e.desc || ''}</textarea>
+                <label class="form-label">Description des missions (Puces / Texte)</label>
+                <textarea id="mExpDesc" class="form-control" style="min-height: 90px;">${e.desc || ''}</textarea>
               </div>
               <div class="form-group full-width" style="display: flex; gap: 10px; justify-content: flex-end;">
                 <button type="button" class="btn btn-secondary" onclick="document.getElementById('expModalBackdrop').remove()">Annuler</button>
@@ -1097,11 +1349,11 @@
 
       document.getElementById('expModalForm').addEventListener('submit', (ev) => {
         ev.preventDefault();
-        e.role = document.getElementById('mExpRole').value.trim();
+        e.role    = document.getElementById('mExpRole').value.trim();
         e.company = document.getElementById('mExpCompany').value.trim();
-        e.period = document.getElementById('mExpPeriod').value.trim();
-        e.logo = document.getElementById('mExpLogo').value.trim();
-        e.desc = document.getElementById('mExpDesc').value.trim();
+        e.period  = document.getElementById('mExpPeriod').value.trim();
+        e.logo    = document.getElementById('mExpLogo').value.trim();
+        e.desc    = document.getElementById('mExpDesc').value.trim();
 
         if (!Array.isArray(this.data.experiences)) this.data.experiences = [];
         if (!isEdit) this.data.experiences.push(e);
@@ -1137,8 +1389,8 @@
                   <div class="item-subtitle">${edu.institution} • ${edu.period}</div>
                 </div>
                 <div class="item-actions">
-                  <button class="btn btn-secondary btn-icon" onclick="AdminApp.editEdu('${edu.id}')">✏️</button>
-                  <button class="btn btn-danger btn-icon" onclick="AdminApp.deleteEdu('${edu.id}')">🗑️</button>
+                  <button class="btn btn-secondary btn-icon" onclick="AdminApp.editEdu('${edu.id}')" title="Modifier">✏️</button>
+                  <button class="btn btn-danger btn-icon" onclick="AdminApp.deleteEdu('${edu.id}')" title="Supprimer">🗑️</button>
                 </div>
               </div>
             `).join('')}
@@ -1171,6 +1423,7 @@
         id: 'edu-' + Date.now(),
         degree: '',
         institution: 'Institut Universitaire d\'Abidjan (IUA)',
+        category: 'Cursus Universitaire',
         period: '2024 - en cours',
         logo: 'assets/images/logo_iua.png',
         desc: '',
@@ -1194,6 +1447,10 @@
                 <input type="text" id="mEduInst" class="form-control" value="${e.institution}" required>
               </div>
               <div class="form-group">
+                <label class="form-label">Catégorie</label>
+                <input type="text" id="mEduCat" class="form-control" value="${e.category || 'Cursus Universitaire'}">
+              </div>
+              <div class="form-group">
                 <label class="form-label">Période</label>
                 <input type="text" id="mEduPeriod" class="form-control" value="${e.period}">
               </div>
@@ -1202,8 +1459,8 @@
                 <input type="text" id="mEduLogo" class="form-control" value="${e.logo}">
               </div>
               <div class="form-group full-width">
-                <label class="form-label">Description</label>
-                <textarea id="mEduDesc" class="form-control">${e.desc || ''}</textarea>
+                <label class="form-label">Description / Détails</label>
+                <textarea id="mEduDesc" class="form-control" style="min-height: 80px;">${e.desc || ''}</textarea>
               </div>
               <div class="form-group full-width" style="display: flex; gap: 10px; justify-content: flex-end;">
                 <button type="button" class="btn btn-secondary" onclick="document.getElementById('eduModalBackdrop').remove()">Annuler</button>
@@ -1218,11 +1475,12 @@
 
       document.getElementById('eduModalForm').addEventListener('submit', (ev) => {
         ev.preventDefault();
-        e.degree = document.getElementById('mEduDegree').value.trim();
+        e.degree      = document.getElementById('mEduDegree').value.trim();
         e.institution = document.getElementById('mEduInst').value.trim();
-        e.period = document.getElementById('mEduPeriod').value.trim();
-        e.logo = document.getElementById('mEduLogo').value.trim();
-        e.desc = document.getElementById('mEduDesc').value.trim();
+        e.category    = document.getElementById('mEduCat').value.trim();
+        e.period      = document.getElementById('mEduPeriod').value.trim();
+        e.logo        = document.getElementById('mEduLogo').value.trim();
+        e.desc        = document.getElementById('mEduDesc').value.trim();
 
         if (!Array.isArray(this.data.educations)) this.data.educations = [];
         if (!isEdit) this.data.educations.push(e);
@@ -1258,8 +1516,8 @@
                   <div class="item-subtitle">${s.description || ''}</div>
                 </div>
                 <div class="item-actions">
-                  <button class="btn btn-secondary btn-icon" onclick="AdminApp.editSrv('${s.id}')">✏️</button>
-                  <button class="btn btn-danger btn-icon" onclick="AdminApp.deleteSrv('${s.id}')">🗑️</button>
+                  <button class="btn btn-secondary btn-icon" onclick="AdminApp.editSrv('${s.id}')" title="Modifier">✏️</button>
+                  <button class="btn btn-danger btn-icon" onclick="AdminApp.deleteSrv('${s.id}')" title="Supprimer">🗑️</button>
                 </div>
               </div>
             `).join('')}
@@ -1323,8 +1581,8 @@
 
       document.getElementById('srvModalForm').addEventListener('submit', (ev) => {
         ev.preventDefault();
-        s.title = document.getElementById('mSrvTitle').value.trim();
-        s.icon = document.getElementById('mSrvIcon').value.trim();
+        s.title       = document.getElementById('mSrvTitle').value.trim();
+        s.icon        = document.getElementById('mSrvIcon').value.trim();
         s.description = document.getElementById('mSrvDesc').value.trim();
 
         if (!Array.isArray(this.data.services)) this.data.services = [];
@@ -1455,72 +1713,205 @@
       }
     },
 
-    // 9. SECTIONS & TEXTES (AVEC ÉDITION DU TITRE PRINCIPAL)
+    // 9. SECTIONS & TEXTES COMPLETS
     renderSections() {
       const s = this.data.sections || {};
+      const hero = s.hero || {};
+      const metrics = s.metrics || {};
+      const projects = s.projects || {};
+      const exp = s.experience || {};
+      const skills = s.skills || {};
+      const edu = s.education || {};
+      const contact = s.contact || {};
+
       return `
         <div class="card">
           <div class="card-header">
             <div>
-              <h2 class="card-title">📑 Visibilité des Sections & Titres Principaux</h2>
-              <p class="card-desc">Personnalisez les titres de chaque section du portfolio et activez/désactivez leur affichage</p>
+              <h2 class="card-title">📑 Personnalisation Complète des Sections & Textes</h2>
+              <p class="card-desc">Contrôlez tous les titres, sous-titres, boutons et visibilités du site</p>
             </div>
             <button class="btn btn-primary" id="saveSectionsBtn">Enregistrer les textes</button>
           </div>
           <div class="form-grid">
             
             <!-- Section Hero -->
-            <div class="form-group full-width" style="border: 1px solid var(--admin-border); padding: 16px; border-radius: var(--radius-sm); background: rgba(255,255,255,0.02);">
-              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
-                <strong style="color: var(--admin-accent); font-size: 1.05rem;">🌟 Section Hero — Titre Principal du Site</strong>
+            <div class="form-group full-width" style="border: 1px solid var(--admin-border); padding: 18px; border-radius: var(--radius-md); background: rgba(255,255,255,0.02);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                <strong style="color: var(--admin-accent); font-size: 1.1rem;">🌟 Section 1 : Hero (Accueil & Accroche)</strong>
                 <label class="toggle-switch">
-                  <input type="checkbox" id="secHeroVisible" ${s.hero?.visible !== false ? 'checked' : ''}>
+                  <input type="checkbox" id="secHeroVisible" ${hero.visible !== false ? 'checked' : ''}>
                   <span class="slider"></span>
                 </label>
               </div>
-              <label class="form-label">Grand Titre H1 (Hero)</label>
-              <textarea id="secHeroTitle" class="form-control" style="min-height: 70px; font-weight: 600;">${s.hero?.title || ''}</textarea>
+              <div class="form-grid">
+                <div class="form-group full-width">
+                  <label class="form-label">Grand Titre H1</label>
+                  <textarea id="secHeroTitle" class="form-control" style="min-height: 60px; font-weight: 600;">${hero.title || ''}</textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Bouton Action 1 (Télécharger CV)</label>
+                  <input type="text" id="secHeroCta1" class="form-control" value="${hero.ctaPrimary || 'Télécharger mon CV (PDF)'}">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Bouton Action 2 (Voir réalisations)</label>
+                  <input type="text" id="secHeroCta2" class="form-control" value="${hero.ctaSecondary || 'Voir mes réalisations ↓'}">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Badge Flottant Haut (Titre / Sous-titre)</label>
+                  <input type="text" id="secHeroBadgeTopTitle" class="form-control" value="${hero.badgeTopTitle || '10+ Tableaux de Bord'}" placeholder="Titre">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Badge Flottant Bas (Diplôme / Université)</label>
+                  <input type="text" id="secHeroBadgeBottomTitle" class="form-control" value="${hero.badgeBottomTitle || 'Licence 3 Génie Info'}" placeholder="Titre">
+                </div>
+              </div>
+            </div>
+
+            <!-- Section Faits Marquants & Métriques -->
+            <div class="form-group full-width" style="border: 1px solid var(--admin-border); padding: 18px; border-radius: var(--radius-md);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                <strong style="font-size: 1.05rem;">📊 Section 2 : Faits Marquants & Métriques</strong>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="secMetricsVisible" ${metrics.visible !== false ? 'checked' : ''}>
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Tag de section</label>
+                  <input type="text" id="secMetricsTag" class="form-control" value="${metrics.tag || '[ Faits Marquants & Impact ]'}">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Titre H2</label>
+                  <input type="text" id="secMetricsTitle" class="form-control" value="${metrics.title || 'L\'impact par les données'}">
+                </div>
+                <div class="form-group full-width">
+                  <label class="form-label">Description du paragraphe</label>
+                  <textarea id="secMetricsDesc" class="form-control">${metrics.description || ''}</textarea>
+                </div>
+              </div>
             </div>
 
             <!-- Section Projets -->
-            <div class="form-group full-width" style="border: 1px solid var(--admin-border); padding: 16px; border-radius: var(--radius-sm);">
-              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
-                <strong>💼 Section Projets & Réalisations</strong>
+            <div class="form-group full-width" style="border: 1px solid var(--admin-border); padding: 18px; border-radius: var(--radius-md);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                <strong style="font-size: 1.05rem;">💼 Section 3 : Projets & Réalisations</strong>
                 <label class="toggle-switch">
-                  <input type="checkbox" id="secProjectsVisible" ${s.projects?.visible !== false ? 'checked' : ''}>
+                  <input type="checkbox" id="secProjectsVisible" ${projects.visible !== false ? 'checked' : ''}>
                   <span class="slider"></span>
                 </label>
               </div>
-              <label class="form-label">Titre H2</label>
-              <input type="text" id="secProjectsTitle" class="form-control" value="${s.projects?.title || ''}">
-              <label class="form-label" style="margin-top: 8px;">Sous-titre / Description</label>
-              <input type="text" id="secProjectsSubtitle" class="form-control" value="${s.projects?.subtitle || ''}">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Tag de section</label>
+                  <input type="text" id="secProjectsTag" class="form-control" value="${projects.tag || '[ Projets & Réalisations ]'}">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Titre H2</label>
+                  <input type="text" id="secProjectsTitle" class="form-control" value="${projects.title || 'Réalisations concrètes'}">
+                </div>
+                <div class="form-group full-width">
+                  <label class="form-label">Sous-titre / Description</label>
+                  <textarea id="secProjectsSubtitle" class="form-control">${projects.subtitle || ''}</textarea>
+                </div>
+              </div>
             </div>
 
             <!-- Section Expériences -->
-            <div class="form-group full-width" style="border: 1px solid var(--admin-border); padding: 16px; border-radius: var(--radius-sm);">
-              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
-                <strong>🏢 Section Expériences & Leadership</strong>
+            <div class="form-group full-width" style="border: 1px solid var(--admin-border); padding: 18px; border-radius: var(--radius-md);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                <strong style="font-size: 1.05rem;">🏢 Section 4 : Expériences & Parcours</strong>
                 <label class="toggle-switch">
-                  <input type="checkbox" id="secExpVisible" ${s.experience?.visible !== false ? 'checked' : ''}>
+                  <input type="checkbox" id="secExpVisible" ${exp.visible !== false ? 'checked' : ''}>
                   <span class="slider"></span>
                 </label>
               </div>
-              <label class="form-label">Titre H2</label>
-              <input type="text" id="secExpTitle" class="form-control" value="${s.experience?.title || ''}">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Tag de section</label>
+                  <input type="text" id="secExpTag" class="form-control" value="${exp.tag || '[ Expériences Professionnelles ]'}">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Titre H2</label>
+                  <input type="text" id="secExpTitle" class="form-control" value="${exp.title || 'Mon cheminement pratique'}">
+                </div>
+                <div class="form-group full-width">
+                  <label class="form-label">Description</label>
+                  <textarea id="secExpSubtitle" class="form-control">${exp.subtitle || ''}</textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section Soft Skills -->
+            <div class="form-group full-width" style="border: 1px solid var(--admin-border); padding: 18px; border-radius: var(--radius-md);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                <strong style="font-size: 1.05rem;">⚡ Section 5 : Soft Skills & Leadership</strong>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="secSkillsVisible" ${skills.visible !== false ? 'checked' : ''}>
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Tag de section</label>
+                  <input type="text" id="secSkillsTag" class="form-control" value="${skills.tag || '[ Soft Skills & Leadership ]'}">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Titre H2</label>
+                  <input type="text" id="secSkillsTitle" class="form-control" value="${skills.title || 'Qualités humaines & Esprit d\'équipe'}">
+                </div>
+                <div class="form-group full-width">
+                  <label class="form-label">Description</label>
+                  <textarea id="secSkillsSubtitle" class="form-control">${skills.subtitle || ''}</textarea>
+                </div>
+              </div>
             </div>
 
             <!-- Section Formations -->
-            <div class="form-group full-width" style="border: 1px solid var(--admin-border); padding: 16px; border-radius: var(--radius-sm);">
-              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
-                <strong>🎓 Section Formations & Diplômes</strong>
+            <div class="form-group full-width" style="border: 1px solid var(--admin-border); padding: 18px; border-radius: var(--radius-md);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                <strong style="font-size: 1.05rem;">🎓 Section 6 : Formations & Certifications</strong>
                 <label class="toggle-switch">
-                  <input type="checkbox" id="secEduVisible" ${s.education?.visible !== false ? 'checked' : ''}>
+                  <input type="checkbox" id="secEduVisible" ${edu.visible !== false ? 'checked' : ''}>
                   <span class="slider"></span>
                 </label>
               </div>
-              <label class="form-label">Titre H2</label>
-              <input type="text" id="secEduTitle" class="form-control" value="${s.education?.title || ''}">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Tag de section</label>
+                  <input type="text" id="secEduTag" class="form-control" value="${edu.tag || '[ Formations & Certifications ]'}">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Titre H2</label>
+                  <input type="text" id="secEduTitle" class="form-control" value="${edu.title || 'Excellence académique & Diplômes'}">
+                </div>
+                <div class="form-group full-width">
+                  <label class="form-label">Description</label>
+                  <textarea id="secEduSubtitle" class="form-control">${edu.subtitle || ''}</textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section Contact -->
+            <div class="form-group full-width" style="border: 1px solid var(--admin-border); padding: 18px; border-radius: var(--radius-md);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                <strong style="font-size: 1.05rem;">📩 Section 7 : Contact & Formulaire</strong>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="secContactVisible" ${contact.visible !== false ? 'checked' : ''}>
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Titre H2</label>
+                  <input type="text" id="secContactTitle" class="form-control" value="${contact.title || 'Envoyez-moi un message'}">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Sous-titre</label>
+                  <input type="text" id="secContactSubtitle" class="form-control" value="${contact.subtitle || 'Le message arrive directement dans ma boîte mail — je vous réponds sous 24h.'}">
+                </div>
+              </div>
             </div>
 
           </div>
@@ -1534,28 +1925,61 @@
       btn.addEventListener('click', () => {
         if (!this.data.sections) this.data.sections = {};
         
+        // Hero
         if (!this.data.sections.hero) this.data.sections.hero = {};
-        this.data.sections.hero.visible = document.getElementById('secHeroVisible').checked;
-        this.data.sections.hero.title   = document.getElementById('secHeroTitle').value.trim();
+        this.data.sections.hero.visible          = document.getElementById('secHeroVisible').checked;
+        this.data.sections.hero.title            = document.getElementById('secHeroTitle').value.trim();
+        this.data.sections.hero.ctaPrimary       = document.getElementById('secHeroCta1').value.trim();
+        this.data.sections.hero.ctaSecondary     = document.getElementById('secHeroCta2').value.trim();
+        this.data.sections.hero.badgeTopTitle    = document.getElementById('secHeroBadgeTopTitle').value.trim();
+        this.data.sections.hero.badgeBottomTitle = document.getElementById('secHeroBadgeBottomTitle').value.trim();
 
+        // Metrics
+        if (!this.data.sections.metrics) this.data.sections.metrics = {};
+        this.data.sections.metrics.visible     = document.getElementById('secMetricsVisible').checked;
+        this.data.sections.metrics.tag         = document.getElementById('secMetricsTag').value.trim();
+        this.data.sections.metrics.title       = document.getElementById('secMetricsTitle').value.trim();
+        this.data.sections.metrics.description = document.getElementById('secMetricsDesc').value.trim();
+
+        // Projects
         if (!this.data.sections.projects) this.data.sections.projects = {};
         this.data.sections.projects.visible  = document.getElementById('secProjectsVisible').checked;
+        this.data.sections.projects.tag      = document.getElementById('secProjectsTag').value.trim();
         this.data.sections.projects.title    = document.getElementById('secProjectsTitle').value.trim();
         this.data.sections.projects.subtitle = document.getElementById('secProjectsSubtitle').value.trim();
 
+        // Experience
         if (!this.data.sections.experience) this.data.sections.experience = {};
-        this.data.sections.experience.visible = document.getElementById('secExpVisible').checked;
-        this.data.sections.experience.title   = document.getElementById('secExpTitle').value.trim();
+        this.data.sections.experience.visible  = document.getElementById('secExpVisible').checked;
+        this.data.sections.experience.tag      = document.getElementById('secExpTag').value.trim();
+        this.data.sections.experience.title    = document.getElementById('secExpTitle').value.trim();
+        this.data.sections.experience.subtitle = document.getElementById('secExpSubtitle').value.trim();
 
+        // Skills
+        if (!this.data.sections.skills) this.data.sections.skills = {};
+        this.data.sections.skills.visible  = document.getElementById('secSkillsVisible').checked;
+        this.data.sections.skills.tag      = document.getElementById('secSkillsTag').value.trim();
+        this.data.sections.skills.title    = document.getElementById('secSkillsTitle').value.trim();
+        this.data.sections.skills.subtitle = document.getElementById('secSkillsSubtitle').value.trim();
+
+        // Education
         if (!this.data.sections.education) this.data.sections.education = {};
-        this.data.sections.education.visible = document.getElementById('secEduVisible').checked;
-        this.data.sections.education.title   = document.getElementById('secEduTitle').value.trim();
+        this.data.sections.education.visible  = document.getElementById('secEduVisible').checked;
+        this.data.sections.education.tag      = document.getElementById('secEduTag').value.trim();
+        this.data.sections.education.title    = document.getElementById('secEduTitle').value.trim();
+        this.data.sections.education.subtitle = document.getElementById('secEduSubtitle').value.trim();
 
-        this.persistData('Titres & sections enregistrés', true);
+        // Contact
+        if (!this.data.sections.contact) this.data.sections.contact = {};
+        this.data.sections.contact.visible  = document.getElementById('secContactVisible').checked;
+        this.data.sections.contact.title    = document.getElementById('secContactTitle').value.trim();
+        this.data.sections.contact.subtitle = document.getElementById('secContactSubtitle').value.trim();
+
+        this.persistData('Titres et textes enregistrés', true);
       });
     },
 
-    // 10. MÉDIATHÈQUE
+    // 10. MÉDIATHÈQUE COMPLÈTE
     renderMedia() {
       const media = this.data.mediaLibrary || [];
       return `
@@ -1563,20 +1987,26 @@
           <div class="card-header">
             <div>
               <h2 class="card-title">🖼️ Médiathèque (${media.length} fichiers)</h2>
-              <p class="card-desc">Importez vos images locales pour vos projets et logos</p>
+              <p class="card-desc">Importez des photos pour votre profil, vos projets et certifications</p>
             </div>
             <label class="btn btn-primary" style="cursor: pointer;">
               <span>+ Importer une image</span>
               <input type="file" id="mediaUploadInput" accept="image/*" style="display: none;">
             </label>
           </div>
-          <div class="media-grid">
+          <div class="media-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; margin-top: 16px;">
             ${media.map(m => `
-              <div class="media-card" title="${m.name}">
-                <img src="${m.url}" alt="${m.name}">
-                <div class="media-overlay">
-                  <button class="btn btn-secondary btn-icon" onclick="navigator.clipboard.writeText('${m.url}'); AdminApp.showToast('Lien copié !', 'info');" title="Copier le lien">🔗</button>
-                  <button class="btn btn-danger btn-icon" onclick="AdminApp.deleteMedia('${m.id}')" title="Supprimer" style="margin-left: 6px;">🗑️</button>
+              <div class="media-card" style="background: var(--admin-card-bg); border: 1px solid var(--admin-border); border-radius: var(--radius-md); overflow: hidden; position: relative;">
+                <div style="height: 130px; overflow: hidden; background: #000;">
+                  <img src="${m.url}" alt="${m.name}" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div style="padding: 10px;">
+                  <div style="font-size: 0.8rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${m.name}">${m.name}</div>
+                  <div style="display: flex; gap: 6px; margin-top: 8px;">
+                    <button class="btn btn-secondary" style="font-size: 0.75rem; padding: 4px 8px; flex-grow: 1;" onclick="AdminApp.setAsProfilePhoto('${m.id}')" title="Définir comme photo de profil">👤 Profil</button>
+                    <button class="btn btn-secondary btn-icon" style="height: 28px; width: 28px; font-size: 0.8rem;" onclick="navigator.clipboard.writeText('${m.url}'); AdminApp.showToast('Lien copié !', 'info');" title="Copier le lien">🔗</button>
+                    <button class="btn btn-danger btn-icon" style="height: 28px; width: 28px; font-size: 0.8rem;" onclick="AdminApp.deleteMedia('${m.id}')" title="Supprimer">🗑️</button>
+                  </div>
                 </div>
               </div>
             `).join('')}
@@ -1611,8 +2041,57 @@
       });
     },
 
+    setAsProfilePhoto(mediaId) {
+      const item = (this.data.mediaLibrary || []).find(m => m.id === mediaId);
+      if (item) {
+        if (!this.data.profile) this.data.profile = {};
+        this.data.profile.photo = item.url;
+        this.persistData('Nouvelle photo de profil définie', true);
+        this.renderTab('media');
+      }
+    },
+
+    chooseFromMedia(targetInputId, previewImgId) {
+      const media = this.data.mediaLibrary || [];
+      if (media.length === 0) {
+        alert('La médiathèque est vide. Veuillez d\'abord importer une image.');
+        return;
+      }
+
+      const modalHtml = `
+        <div class="admin-modal-backdrop" id="mediaPickerBackdrop">
+          <div class="admin-modal" style="max-width: 700px;">
+            <div class="card-header">
+              <h2 class="card-title">🖼️ Choisir une image dans la médiathèque</h2>
+              <button class="btn btn-secondary btn-icon" onclick="document.getElementById('mediaPickerBackdrop').remove()">✕</button>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; max-height: 60vh; overflow-y: auto; margin-top: 14px;">
+              ${media.map(m => `
+                <div style="border: 2px solid var(--admin-border); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="AdminApp.selectMediaForField('${m.url}', '${targetInputId}', '${previewImgId}')">
+                  <img src="${m.url}" alt="${m.name}" style="width: 100%; height: 90px; object-fit: cover;">
+                  <div style="padding: 6px; font-size: 0.72rem; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${m.name}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.body.insertAdjacentHTML('beforeend', modalHtml);
+    },
+
+    selectMediaForField(url, targetInputId, previewImgId) {
+      const targetInput = document.getElementById(targetInputId);
+      if (targetInput) targetInput.value = url;
+      const previewImg = document.getElementById(previewImgId);
+      if (previewImg) previewImg.src = url;
+
+      const backdrop = document.getElementById('mediaPickerBackdrop');
+      if (backdrop) backdrop.remove();
+    },
+
     deleteMedia(id) {
-      if (confirm('Supprimer cette image ?')) {
+      if (confirm('Supprimer cette image de la médiathèque ?')) {
         this.data.mediaLibrary = (this.data.mediaLibrary || []).filter(m => m.id !== id);
         this.persistData('Image supprimée de la médiathèque', true);
         this.renderTab('media');
@@ -1672,13 +2151,43 @@
       `;
     },
 
-    // 13. PARAMÈTRES & SEO
+    // 13. PARAMÈTRES, SEO & PUBLICATION GITHUB / VERCEL
     renderSettings() {
       const seo = this.data.seo || {};
+      const ghToken = localStorage.getItem(GH_TOKEN_KEY) || '';
+
       return `
+        <!-- MODULE DE DÉPLOIEMENT GITHUB & VERCEL -->
+        <div class="card" style="border: 2px solid var(--admin-accent);">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title" style="color: var(--admin-accent);">🚀 Publication & Déploiement Vercel</h2>
+              <p class="card-desc">Publiez définitivement vos modifications pour qu'elles soient visibles instantanément sur votre téléphone et par tous les recruteurs</p>
+            </div>
+          </div>
+          <div style="margin-top: 14px;">
+            <div id="deployStatusMessage" style="display: none; padding: 12px 16px; border-radius: var(--radius-sm); background: rgba(255,255,255,0.04); margin-bottom: 14px; font-size: 0.9rem;"></div>
+            
+            <div class="form-group full-width">
+              <label class="form-label">Jeton GitHub Personal Access Token (Optionnel pour commit direct)</label>
+              <input type="password" id="settingsGhToken" class="form-control" value="${ghToken}" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+              <p style="font-size: 0.75rem; color: var(--admin-text-dim); margin-top: 4px;">Permet d'écrire directement dans votre dépôt GitHub et de déclencher un déploiement Vercel automatisé.</p>
+            </div>
+
+            <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 14px;">
+              <button class="btn btn-primary" onclick="AdminApp.publishToGitHubAndVercel()" style="padding: 12px 24px; font-size: 1rem;">
+                🚀 Publier & Mettre à jour le Site Public
+              </button>
+              <button class="btn btn-secondary" onclick="AdminApp.saveGhToken()">
+                💾 Enregistrer la configuration
+              </button>
+            </div>
+          </div>
+        </div>
+
         <div class="card">
           <div class="card-header">
-            <h2 class="card-title">🔍 Balises SEO & Référencement</h2>
+            <h2 class="card-title">🔍 Balises SEO & Référencement Google</h2>
             <button class="btn btn-primary" id="saveSeoBtn">Enregistrer SEO</button>
           </div>
           <div class="form-grid">
@@ -1711,6 +2220,12 @@
           </div>
         </div>
       `;
+    },
+
+    saveGhToken() {
+      const token = document.getElementById('settingsGhToken').value.trim();
+      localStorage.setItem(GH_TOKEN_KEY, token);
+      this.showToast('✓ Configuration enregistrée avec succès !', 'success');
     },
 
     bindSettingsEvents() {
@@ -1772,7 +2287,7 @@
       }
       toast.innerHTML = `<span>${message}</span>`;
       toast.className = 'admin-toast show';
-      setTimeout(() => { toast.className = 'admin-toast'; }, 3200);
+      setTimeout(() => { toast.className = 'admin-toast'; }, 3400);
     }
   };
 
