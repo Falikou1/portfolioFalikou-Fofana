@@ -481,11 +481,25 @@
       "email": "richmondthecarter@gmail.com",
       "subject": "Error while signing in",
       "message": "dfffffotyy",
-      "read": false,
+      "read": true,
       "date": "2026-08-23T22:43:56.639Z"
     }
   ],
   "history": [
+    {
+      "id": "hist-1787525105216",
+      "timestamp": "2026-08-23T22:45:05.216Z",
+      "action": "Publication",
+      "target": "Portfolio",
+      "details": "Message marqué comme lu"
+    },
+    {
+      "id": "h-1787525102878",
+      "timestamp": "2026-08-23T22:45:02.878Z",
+      "action": "Message marqué comme lu",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
     {
       "id": "pub-1787524500726",
       "timestamp": "2026-08-23T22:35:00.726Z",
@@ -821,20 +835,6 @@
       "action": "Couleur modifiée",
       "target": "Portfolio",
       "details": "Enregistré dans la base de données"
-    },
-    {
-      "id": "h-1787511729969",
-      "timestamp": "2026-08-23T19:02:09.969Z",
-      "action": "Couleur modifiée",
-      "target": "Portfolio",
-      "details": "Enregistré dans la base de données"
-    },
-    {
-      "id": "h-1787511729379",
-      "timestamp": "2026-08-23T19:02:09.379Z",
-      "action": "Couleur modifiée",
-      "target": "Portfolio",
-      "details": "Enregistré dans la base de données"
     }
   ],
   "seo": {
@@ -846,7 +846,7 @@
   },
   "settings": {
     "siteName": "Falikou FOFANA — Portfolio",
-    "lastPublished": "2026-08-23T22:43:57.037Z",
+    "lastPublished": "2026-08-23T22:45:05.216Z",
     "version": "1.0.0"
   }
 }
