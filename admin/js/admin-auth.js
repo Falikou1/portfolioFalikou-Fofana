@@ -38,9 +38,11 @@
 
     async checkAuth(redirectToLogin = true) {
       const token = this.getToken();
+      const loginUrl = window.location.pathname.includes('/portfolio/') ? 'login.html' : '/admin/login.html';
+      
       if (!token) {
         if (redirectToLogin && !window.location.pathname.includes('login.html')) {
-          window.location.href = 'login.html';
+          window.location.href = loginUrl;
         }
         return false;
       }
@@ -62,7 +64,7 @@
           // If server rejects token, clear session
           this.clearSession();
           if (redirectToLogin && !window.location.pathname.includes('login.html')) {
-            window.location.href = 'login.html';
+            window.location.href = loginUrl;
           }
           return false;
         }
@@ -107,7 +109,8 @@
 
     logout() {
       this.clearSession();
-      window.location.href = 'login.html';
+      const loginUrl = window.location.pathname.includes('/portfolio/') ? 'login.html' : '/admin/login.html';
+      window.location.href = loginUrl;
     }
   };
 })();

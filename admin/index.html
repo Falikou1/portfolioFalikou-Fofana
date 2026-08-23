@@ -536,7 +536,30 @@
       </div>
     </main>
 
-  <script src="./js/admin-auth.js"></script>
-  <script src="./js/admin-app.js"></script>
+  <script>
+    // Universal script loader for Vercel (/admin) and XAMPP (/portfolio/admin/)
+    (function() {
+      const isLocalXampp = window.location.pathname.includes('/portfolio/');
+      const basePath = isLocalXampp ? './js/' : '/admin/js/';
+      
+      const s1 = document.createElement('script');
+      s1.src = basePath + 'admin-auth.js';
+      s1.onerror = function() {
+        const fallback = document.createElement('script');
+        fallback.src = './js/admin-auth.js';
+        document.body.appendChild(fallback);
+      };
+      document.body.appendChild(s1);
+
+      const s2 = document.createElement('script');
+      s2.src = basePath + 'admin-app.js';
+      s2.onerror = function() {
+        const fallback = document.createElement('script');
+        fallback.src = './js/admin-app.js';
+        document.body.appendChild(fallback);
+      };
+      document.body.appendChild(s2);
+    })();
+  </script>
 </body>
 </html>
