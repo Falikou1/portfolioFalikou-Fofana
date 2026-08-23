@@ -182,6 +182,18 @@
 
       // 4. Synchroniser avec l'API backend en tâche de fond
       this.syncFromAPI();
+
+      // 5. Fermeture fluide des modales au clic externe ou Echap
+      document.addEventListener('click', (e) => {
+        if (e.target && e.target.classList && e.target.classList.contains('admin-modal-backdrop')) {
+          e.target.remove();
+        }
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          document.querySelectorAll('.admin-modal-backdrop').forEach(m => m.remove());
+        }
+      });
     },
 
     loadLocalData() {

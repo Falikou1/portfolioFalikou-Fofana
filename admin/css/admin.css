@@ -816,42 +816,43 @@ input:checked + .slider:before {
   opacity: 1;
 }
 
-/* MODAL */
+/* MODAL DE MODIFICATION */
 .admin-modal-backdrop {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 999;
-  opacity: 0;
-  pointer-events: none;
-  transition: var(--transition);
-}
-
-.admin-modal-backdrop.active {
+  z-index: 99999;
   opacity: 1;
   pointer-events: auto;
+  animation: modalFadeIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .admin-modal {
-  background: var(--admin-card-bg);
-  border: 1px solid var(--admin-border);
-  border-radius: var(--radius-lg);
-  width: 90%;
-  max-width: 650px;
+  background: var(--admin-card-bg, #16161c);
+  border: 1px solid var(--admin-border, rgba(255,255,255,0.12));
+  border-radius: var(--radius-lg, 18px);
+  width: 92%;
+  max-width: 680px;
   max-height: 90vh;
   overflow-y: auto;
   padding: 28px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
-  transform: scale(0.95);
-  transition: var(--transition);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  transform: scale(1);
+  animation: modalScaleUp 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.admin-modal-backdrop.active .admin-modal {
-  transform: scale(1);
+@keyframes modalScaleUp {
+  from { transform: scale(0.94); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
 /* RESPONSIVE */
