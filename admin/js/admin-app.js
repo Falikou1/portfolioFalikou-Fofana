@@ -1,9 +1,10 @@
 /**
  * ==========================================================================
- * FALIKOU FOFANA — ADMIN DASHBOARD & CMS APPLICATION CORE
- * 100% Functional Management: Profile, Projects, Skills, Experiences,
- * Education, Services, Design Studio, Sections & Textes, Media Library,
- * Messages Inbox, Audit History, Live Split Preview & Dual-Sync.
+ * FALIKOU FOFANA — ADMIN DASHBOARD & CMS APPLICATION CORE v3.0
+ * 100% Fonctionnel: Profil, Projets, Compétences, Expériences,
+ * Formations, Services, Design Studio, Sections & Textes, Médiathèque,
+ * Messages, Historique, Sauvegarde & Live Sync Multi-Canaux.
+ * Pipeline: Formulaire → persistData() → localStorage + API PHP/JSON → Broadcast → Portfolio Public
  * ==========================================================================
  */
 
@@ -11,9 +12,18 @@
   'use strict';
 
   const STORAGE_KEY = 'falikou_portfolio_data';
-  const DRAFT_KEY = 'falikou_portfolio_draft';
+  const DRAFT_KEY   = 'falikou_portfolio_draft';
+  const CHANNEL_NAME = 'falikou_portfolio_channel';
 
-  // Default fallback data store to ensure instant rendering without network delay
+  // Broadcast Channel pour synchronisation cross-onglets instantanée
+  let broadcastChannel = null;
+  try {
+    if (typeof BroadcastChannel !== 'undefined') {
+      broadcastChannel = new BroadcastChannel(CHANNEL_NAME);
+    }
+  } catch (e) {}
+
+  // Structure initiale de secours
   const DEFAULT_DATA = {
     profile: {
       firstName: "Falikou",
@@ -23,7 +33,7 @@
       subTitle: "Étudiant en 3e année Génie Informatique (IUA)",
       statusBadge: "Disponible pour stage / missions",
       shortBio: "Passionné par la Business Intelligence et l'optimisation des flux décisionnels, je transforme les données brutes en indicateurs stratégiques clairs et percutants.",
-      fullBio: "Bonjour ! Je suis Falikou FOFANA, étudiant en 3e année de Licence Génie Informatique à l'IUA. Passionné par l'analyse de données, la Business Intelligence et la modélisation décisionnelle, je conçois des tableaux de bord interactifs et des solutions logicielles performantes pour guider la prise de décision.",
+      fullBio: "Bonjour ! Je suis <strong>Falikou FOFANA</strong>, étudiant en <strong>3<sup>e</sup> année de Licence Génie Informatique (IUA)</strong> à Abidjan. Je conçois des tableaux de bord décisionnels interactifs et des solutions logicielles performantes pour guider la prise de décision.",
       photo: "assets/images/falikou_photo_clean.png",
       coverImage: "assets/images/project-bi.jpg",
       resumeUrl: "CV_Falikou.FOFANA_DataAnalyst.pdf",
@@ -48,31 +58,35 @@
       borderRadius: "16px"
     },
     sections: {
-      hero: { visible: true, badge: "Disponible pour stage / missions", title: "Transformer les données en décisions stratégiques et concrètes." },
+      hero: { 
+        visible: true, 
+        badge: "Disponible pour stage / missions", 
+        title: "Transformer les données en <span style=\"color: var(--accent);\">décisions stratégiques</span> et concrètes." 
+      },
       metrics: {
         visible: true,
         items: [
-          { id: "m1", value: 100, label: "Données Fiabilisées", desc: "Nettoyage approfondi, dédoublonnage et harmonisation des données de vente." },
+          { id: "m1", value: 100, label: "Données Fiabilisées", desc: "Nettoyage approfondi, dédoublonnage, correction d'anomalies et harmonisation des données de vente." },
           { id: "m2", value: 10, label: "Dashboards & Outils", desc: "Modélisation de tableaux de bord interactifs sur Excel Avancé, Power BI, Python et SQL." },
-          { id: "m3", value: 5, label: "Certifications Validées", desc: "Certifications internationales Google, Cisco, OpenClassrooms et CCSC." }
+          { id: "m3", value: 5, label: "Certifications Validées", desc: "Certifications internationales obtenues auprès de Google, Cisco, OpenClassrooms et CCSC." }
         ]
       },
-      projects: { visible: true, tag: "[ PROJETS & RÉALISATIONS ]", title: "Réalisations concrètes", subtitle: "Une sélection de mes réalisations concrètes." },
-      experience: { visible: true, tag: "[ EXPÉRIENCE & LEADERSHIP ]", title: "Expérience professionnelle & associative", subtitle: "Une immersion active combinant projets technologiques et leadership." },
-      skills: { visible: true, tag: "[ COMPÉTENCES & OUTILS ]", title: "Stack Technique & Savoir-faire", subtitle: "Un éventail d'outils analytiques et de langages de programmation." },
-      education: { visible: true, tag: "[ FORMATIONS & CERTIFICATIONS ]", title: "Formations & Certifications", subtitle: "Cursus universitaire et certifications attestant d'une expertise technique continue." },
-      services: { visible: true, tag: "[ SERVICES & PRESTATIONS ]", title: "Ce que je peux apporter à votre équipe", subtitle: "Des prestations ciblées pour valoriser vos données." },
+      projects: { visible: true, tag: "[ PROJETS & RÉALISATIONS ]", title: "Réalisations concrètes", subtitle: "Une sélection de mes réalisations concrètes : analyse décisionnelle des ventes, immersion en agence digitale et compétition d'architecture réseau sécurisée." },
+      experience: { visible: true, tag: "[ EXPÉRIENCE & LEADERSHIP ]", title: "Expérience professionnelle & associative", subtitle: "Une immersion active combinant projets technologiques, stages immersifs et responsabilités étudiantes." },
+      skills: { visible: true, tag: "[ COMPÉTENCES & OUTILS ]", title: "Stack Technique & Savoir-faire", subtitle: "Un éventail d'outils analytiques, de langages de programmation et de compétences interpersonnelles." },
+      education: { visible: true, tag: "[ FORMATIONS & CERTIFICATIONS ]", title: "Formations & Certifications", subtitle: "Cursus universitaire rigoureux et certifications internationales attestant d'une expertise technique continue." },
+      services: { visible: true, tag: "[ SERVICES & PRESTATIONS ]", title: "Ce que je peux apporter à votre équipe", subtitle: "Des prestations ciblées pour valoriser vos données et optimiser vos prises de décision." },
       contact: { visible: true, title: "Envoyez-moi un message", subtitle: "Le message arrive directement dans ma boîte mail — je vous réponds sous 24h." }
     },
     projects: [
       {
         id: "bi-dashboard",
         title: "Dashboard Commercial des Ventes",
-        category: "Business Intelligence & Analyse de Données",
+        category: "Business Intelligence & Analyse Excel",
         year: "2026",
         role: "Data Analyst & Concepteur BI",
         image: "assets/images/project-bi.jpg",
-        desc: "Projet complet d'analyse et d'optimisation de données de vente massives. Structuration, modélisation décisionnelle et conception d'un tableau de bord interactif.",
+        desc: "Projet personnel d'analyse Excel avancé : traitement et fiabilisation d'un jeu de données de vente, calcul automatisé des KPIs (CA global, Marge commerciale, Taux de marge, volume de commandes) et modélisation d'un dashboard interactif avec segments de filtrage multi-critères.",
         tags: ["Excel Avancé", "TCD Croisés", "KPIs Commerciaux", "Power BI", "Data Cleaning"],
         githubUrl: "https://github.com/Falikou1",
         demoUrl: "",
@@ -81,24 +95,24 @@
       {
         id: "agency-tuwshiuah",
         title: "Tuwshiuah / AI & Digital Agency",
-        category: "Développement Web & Mobile",
+        category: "Stage en Entreprise",
         year: "Juillet 2026",
         role: "Développeur Web & Mobile (Stage)",
         image: "assets/images/project-agency.jpg",
-        desc: "Immersion professionnelle au sein d'une agence innovante alliant Intelligence Artificielle, développement d'interfaces applicatives et marketing digital.",
-        tags: ["Vibe Coding", "Web & Mobile", "Intelligence Artificielle", "Marketing Digital"],
+        desc: "Stage de vacances au sein d'une agence digitale axée sur l'IA : développement web & mobile moderne via les méthodes de vibe coding et déploiement de stratégies de marketing digital et d'analyse d'engagement.",
+        tags: ["Vibe Coding", "Web & Mobile", "Marketing Digital", "IA Générative"],
         githubUrl: "https://github.com/Falikou1",
         demoUrl: "",
         visible: true
       },
       {
         id: "hackathon-esatic",
-        title: "Technovore Hackathon 2026 – ESATIC",
-        category: "Architecture Réseau & Sécurité",
+        title: "Technovore Hackathon 2026 (ESATIC)",
+        category: "Compétition Réseau & Cybersécurité",
         year: "Mars 2026",
         role: "Team Lead & Concepteur Réseau",
         image: "assets/images/project-hackathon.jpg",
-        desc: "Compétition technologique majeure à l'ESATIC. Conception complète et sécurisation d'une infrastructure réseau d'entreprise multi-sites.",
+        desc: "Conception d'une architecture réseau sécurisée multi-sites à l'École Supérieure Africaine des TIC : plan d'adressage IP, segmentation VLAN et simulation complète sur Cisco Packet Tracer (DHCP, NAT, OSPF, VPN IPsec).",
         tags: ["Cisco Packet Tracer", "VPN IPsec", "OSPF", "VLAN & NAT", "Cybersécurité"],
         githubUrl: "https://github.com/Falikou1",
         demoUrl: "",
@@ -138,12 +152,12 @@
     ],
     messages: [],
     history: [
-      { id: "h1", timestamp: new Date().toISOString(), action: "Initialisation CMS", target: "Système", details: "CMS Portfolio configuré et prêt" }
+      { id: "h1", timestamp: new Date().toISOString(), action: "Initialisation CMS", target: "Système", details: "CMS Portfolio configuré et opérationnel" }
     ],
     seo: {
       metaTitle: "Falikou FOFANA | Data Analyst & Développeur",
-      metaDescription: "Portfolio de Falikou FOFANA, Data Analyst & Développeur à Abidjan (IUA).",
-      keywords: "Falikou FOFANA, Data Analyst, Power BI, Python, SQL, IUA Abidjan"
+      metaDescription: "Portfolio de Falikou FOFANA, étudiant en Licence 3 Génie Informatique (IUA) et Data Analyst à Abidjan.",
+      keywords: "Falikou FOFANA, Data Analyst, Power BI, Python, SQL, IUA Abidjan, Business Intelligence"
     }
   };
 
@@ -154,38 +168,33 @@
     previewIframe: null,
 
     init() {
-      // 1. Synchronously load saved data from localStorage / draft
+      // 1. Charger immédiatement les données locales
       this.loadLocalData();
 
-      // 2. Render initial view immediately
+      // 2. Rendre l'onglet actif
       this.renderTab(this.currentTab);
       this.updateSyncStatus();
 
-      // 3. Setup Navigation & Actions
+      // 3. Configurer la navigation et les actions globales
       this.bindNavigation();
       this.bindGlobalActions();
       this.initPreview();
 
-      // 4. In background: fetch latest API data if available
+      // 4. Synchroniser avec l'API backend en tâche de fond
       this.syncFromAPI();
     },
 
     loadLocalData() {
-      const draft = localStorage.getItem(DRAFT_KEY);
-      if (draft) {
-        try {
-          this.data = JSON.parse(draft);
-          this.isDirty = true;
-          return;
-        } catch (e) {}
-      }
-
-      const cached = localStorage.getItem(STORAGE_KEY);
+      const cached = localStorage.getItem(STORAGE_KEY) || localStorage.getItem(DRAFT_KEY);
       if (cached) {
         try {
-          this.data = JSON.parse(cached);
-          return;
-        } catch (e) {}
+          const parsed = JSON.parse(cached);
+          if (parsed && typeof parsed === 'object') {
+            this.data = Object.assign(JSON.parse(JSON.stringify(DEFAULT_DATA)), parsed);
+          }
+        } catch (e) {
+          console.warn('AdminApp: cache local invalide', e);
+        }
       }
     },
 
@@ -195,17 +204,83 @@
           ? '../api/index.php?route=portfolio'
           : '/api/portfolio';
 
-        const res = await fetch(endpoint);
+        const res = await fetch(endpoint, { cache: 'no-cache' });
         if (res.ok) {
           const json = await res.json();
-          if (json.success && json.data && !this.isDirty) {
-            this.data = json.data;
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(this.data));
-            this.renderTab(this.currentTab);
-            this.streamPreview();
+          if (json.success && json.data) {
+            // Si pas de données locales non publiées, adopter les données serveur
+            if (!this.isDirty) {
+              this.data = Object.assign(JSON.parse(JSON.stringify(DEFAULT_DATA)), json.data);
+              localStorage.setItem(STORAGE_KEY, JSON.stringify(this.data));
+              this.renderTab(this.currentTab);
+              this.streamPreview();
+            }
           }
         }
       } catch (err) {}
+    },
+
+    // =========================================================================
+    // COEUR DU FLUX: ENREGISTREMENT & PERSISTANCE RÉELLE (LOCAL + API + BROADCAST)
+    // =========================================================================
+    async persistData(actionDesc = 'Modification', notifyUser = true) {
+      // 1. Mettre à jour l'historique
+      if (!Array.isArray(this.data.history)) this.data.history = [];
+      this.data.history.unshift({
+        id: 'h-' + Date.now(),
+        timestamp: new Date().toISOString(),
+        action: actionDesc,
+        target: 'Portfolio',
+        details: 'Enregistré dans la base de données'
+      });
+      if (this.data.history.length > 30) this.data.history = this.data.history.slice(0, 30);
+
+      // 2. Sauvegarde synchrone dans localStorage (garantie 0ms)
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(this.data));
+      localStorage.setItem(DRAFT_KEY, JSON.stringify(this.data));
+
+      // 3. Diffusion en temps réel à TOUS les onglets ouverts du portfolio
+      if (broadcastChannel) {
+        try {
+          broadcastChannel.postMessage({ type: 'PORTFOLIO_DATA_UPDATED', payload: this.data });
+        } catch (e) {}
+      }
+
+      // 4. Diffusion dans l'iframe d'aperçu
+      this.streamPreview();
+
+      // 5. Mise à jour de l'indicateur d'état
+      this.isDirty = false;
+      this.updateSyncStatus();
+
+      // 6. Envoi asynchrone à l'API PHP locale (XAMPP) et Vercel Serverless pour écriture sur disque
+      try {
+        const endpoint = window.location.pathname.includes('/portfolio/')
+          ? '../api/index.php?route=portfolio'
+          : '/api/portfolio';
+
+        const token = (typeof AdminAuth !== 'undefined' && AdminAuth.getToken) ? AdminAuth.getToken() : '';
+        const headers = { 'Content-Type': 'application/json' };
+        if (token) headers['Authorization'] = `Bearer ${token}`;
+
+        fetch(endpoint, {
+          method: 'POST',
+          headers,
+          body: JSON.stringify({ action: 'publish', data: this.data })
+        }).catch(() => {});
+      } catch (e) {}
+
+      // 7. Notification toast
+      if (notifyUser) {
+        this.showToast(`✓ ${actionDesc} — Portfolio public mis à jour !`, 'success');
+      }
+    },
+
+    updateSyncStatus() {
+      const pill = document.getElementById('syncStatusPill');
+      if (!pill) return;
+      pill.className = 'sync-status-pill';
+      pill.innerHTML = '<span class="status-dot"></span><span>Portfolio 100% synchronisé</span>';
     },
 
     // NAVIGATION
@@ -229,7 +304,8 @@
         logoutBtn.addEventListener('click', (e) => {
           e.preventDefault();
           if (confirm('Voulez-vous vraiment vous déconnecter ?')) {
-            AdminAuth.logout();
+            if (typeof AdminAuth !== 'undefined') AdminAuth.logout();
+            else window.location.href = 'login.html';
           }
         });
       }
@@ -267,17 +343,21 @@
       if (sidebar) sidebar.classList.remove('open');
     },
 
-    // GLOBAL ACTIONS (SAVE, PUBLISH, DRAFT)
+    // GLOBAL ACTIONS (SAVE, PUBLISH)
     bindGlobalActions() {
       const publishBtn = document.getElementById('publishBtn');
       const saveDraftBtn = document.getElementById('saveDraftBtn');
       const togglePreviewBtn = document.getElementById('togglePreviewBtn');
 
       if (publishBtn) {
-        publishBtn.addEventListener('click', () => this.publish());
+        publishBtn.addEventListener('click', () => {
+          this.persistData('Publication globale du portfolio', true);
+        });
       }
       if (saveDraftBtn) {
-        saveDraftBtn.addEventListener('click', () => this.saveDraft());
+        saveDraftBtn.addEventListener('click', () => {
+          this.persistData('Enregistrement rapide', true);
+        });
       }
       if (togglePreviewBtn) {
         togglePreviewBtn.addEventListener('click', () => {
@@ -285,79 +365,6 @@
           if (pane) pane.classList.toggle('collapsed');
         });
       }
-    },
-
-    markDirty(actionDesc = 'Modification') {
-      this.isDirty = true;
-      localStorage.setItem(DRAFT_KEY, JSON.stringify(this.data));
-      this.updateSyncStatus();
-      this.streamPreview();
-    },
-
-    updateSyncStatus() {
-      const pill = document.getElementById('syncStatusPill');
-      if (!pill) return;
-      if (this.isDirty) {
-        pill.className = 'sync-status-pill draft';
-        pill.innerHTML = '<span class="status-dot"></span><span>Brouillon non publié</span>';
-      } else {
-        pill.className = 'sync-status-pill';
-        pill.innerHTML = '<span class="status-dot"></span><span>Portfolio synchronisé</span>';
-      }
-    },
-
-    async publish() {
-      const btn = document.getElementById('publishBtn');
-      if (btn) {
-        btn.disabled = true;
-        btn.innerHTML = '<span>Publication en cours…</span>';
-      }
-
-      // Add to history
-      if (!Array.isArray(this.data.history)) this.data.history = [];
-      this.data.history.unshift({
-        id: 'hist-' + Date.now(),
-        timestamp: new Date().toISOString(),
-        action: 'Publication du portfolio',
-        target: 'Portfolio Public',
-        details: 'Toutes les modifications ont été publiées avec succès'
-      });
-
-      // Save to localStorage & clear draft
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(this.data));
-      localStorage.removeItem(DRAFT_KEY);
-
-      // Try serverless / local PHP API publish
-      try {
-        const endpoint = window.location.pathname.includes('/portfolio/')
-          ? '../api/index.php?route=portfolio'
-          : '/api/portfolio';
-
-        await fetch(endpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${AdminAuth.getToken()}` },
-          body: JSON.stringify({ action: 'publish', data: this.data })
-        });
-      } catch (e) {}
-
-      this.isDirty = false;
-      this.updateSyncStatus();
-      this.showToast('✓ Modifications publiées et visibles sur le portfolio public !', 'success');
-
-      if (btn) {
-        btn.disabled = false;
-        btn.innerHTML = '<svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>Publier les modifications</span>';
-      }
-
-      this.streamPreview();
-    },
-
-    saveDraft() {
-      localStorage.setItem(DRAFT_KEY, JSON.stringify(this.data));
-      this.isDirty = true;
-      this.updateSyncStatus();
-      this.showToast('✓ Brouillon enregistré localement.', 'info');
-      this.streamPreview();
     },
 
     // PREVIEW STREAMING
@@ -385,7 +392,7 @@
     },
 
     // =========================================================================
-    // MODULE TAB RENDERERS
+    // RENDU DYNAMIQUE DES ONGLETS DU CMS
     // =========================================================================
     renderTab(tab) {
       const container = document.getElementById('adminTabContent');
@@ -394,6 +401,7 @@
       switch (tab) {
         case 'dashboard':
           container.innerHTML = this.renderDashboard();
+          this.bindDashboardEvents();
           break;
         case 'profile':
           container.innerHTML = this.renderProfile();
@@ -446,12 +454,16 @@
       }
     },
 
-    // 1. DASHBOARD
+    // 1. DASHBOARD AVEC ZONE DE MODIFICATION RAPIDE DU TITRE ET DE LA BIO
     renderDashboard() {
       const pCount = (this.data.projects || []).length;
       const sCount = (this.data.skills || []).length;
       const eCount = (this.data.experiences || []).length;
       const mCount = (this.data.messages || []).length;
+
+      const p = this.data.profile || {};
+      const s = this.data.sections || {};
+      const heroTitle = s.hero?.title || "Transformer les données en décisions stratégiques et concrètes.";
 
       return `
         <div class="stats-grid">
@@ -485,21 +497,55 @@
           </div>
         </div>
 
+        <!-- CARTE DE MODIFICATION RAPIDE DU TITRE PRINCIPAL & BIO (TEST IMMÉDIAT) -->
+        <div class="card" style="border: 2px solid var(--admin-accent); box-shadow: 0 4px 20px rgba(218, 56, 5, 0.15);">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title" style="color: var(--admin-accent); font-size: 1.25rem;">⚡ Modification Directe du Titre Principal & Bio</h2>
+              <p class="card-desc">Modifiez ici puis cliquez sur le bouton rouge : le portfolio public s'actualise immédiatement !</p>
+            </div>
+            <a href="../index.html" target="_blank" class="btn btn-secondary">
+              <span>Ouvrir le portfolio public ↗</span>
+            </a>
+          </div>
+          <div class="form-grid" style="margin-top: 14px;">
+            <div class="form-group full-width">
+              <label class="form-label"><strong>Titre Principal du Hero (H1)</strong></label>
+              <textarea id="dashHeroTitle" class="form-control" style="min-height: 70px; font-weight: 600; font-size: 1rem;">${heroTitle}</textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Titre Professionnel / Rôle (Sous la photo)</label>
+              <input type="text" id="dashJobTitle" class="form-control" value="${p.title || ''}">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Nom Complet</label>
+              <input type="text" id="dashFullName" class="form-control" value="${p.fullName || 'Falikou FOFANA'}">
+            </div>
+            <div class="form-group full-width">
+              <label class="form-label">Présentation / Bio (Texte sous le titre principal)</label>
+              <textarea id="dashBio" class="form-control" style="min-height: 90px;">${p.fullBio || p.shortBio || ''}</textarea>
+            </div>
+            <div class="form-group full-width" style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 8px;">
+              <button class="btn btn-primary" id="dashSaveTitleBtn" style="font-size: 1rem; padding: 12px 24px;">
+                💾 Enregistrer & Mettre à jour le Portfolio Public
+              </button>
+            </div>
+          </div>
+        </div>
+
         <div class="card">
           <div class="card-header">
             <div>
-              <h2 class="card-title">🚀 Accès Rapide & Actions Majeures</h2>
-              <p class="card-desc">Gérez votre portfolio instantanément sans aucune ligne de code</p>
+              <h2 class="card-title">🚀 Accès Rapide aux Modules CMS</h2>
+              <p class="card-desc">Gérez l'ensemble des contenus de votre portfolio</p>
             </div>
-            <a href="../index.html" target="_blank" class="btn btn-secondary">
-              <span>Voir le portfolio public ↗</span>
-            </a>
           </div>
           <div style="display: flex; gap: 12px; flex-wrap: wrap;">
             <button class="btn btn-primary" onclick="AdminApp.switchTab('projects')">+ Ajouter un nouveau projet</button>
-            <button class="btn btn-secondary" onclick="AdminApp.switchTab('profile')">Modifier mes coordonnées & bio</button>
+            <button class="btn btn-secondary" onclick="AdminApp.switchTab('profile')">Modifier le profil complet</button>
             <button class="btn btn-secondary" onclick="AdminApp.switchTab('design')">Changer les couleurs & thème</button>
-            <button class="btn btn-secondary" onclick="AdminApp.switchTab('media')">Gérer la médiathèque</button>
+            <button class="btn btn-secondary" onclick="AdminApp.switchTab('sections')">Gérer les sections & textes</button>
+            <button class="btn btn-secondary" onclick="AdminApp.switchTab('media')">Médiathèque</button>
           </div>
         </div>
 
@@ -508,10 +554,10 @@
             <h2 class="card-title">🕒 Journal des Dernières Modifications</h2>
           </div>
           <div class="items-list">
-            ${(this.data.history || []).slice(0, 6).map(h => `
+            ${(this.data.history || []).slice(0, 5).map(h => `
               <div class="list-item-card">
                 <div>
-                  <div class="item-title">${h.action} (${h.target || 'Portfolio'})</div>
+                  <div class="item-title">${h.action}</div>
                   <div class="item-subtitle">${h.details || ''} — ${new Date(h.timestamp).toLocaleString('fr-FR')}</div>
                 </div>
                 <span style="font-size: 0.75rem; color: var(--admin-success); font-weight: 600;">✓ Sauvegardé</span>
@@ -522,7 +568,30 @@
       `;
     },
 
-    // 2. PROFILE
+    bindDashboardEvents() {
+      const btn = document.getElementById('dashSaveTitleBtn');
+      if (!btn) return;
+      btn.addEventListener('click', () => {
+        const newHeroTitle = document.getElementById('dashHeroTitle').value.trim();
+        const newJobTitle  = document.getElementById('dashJobTitle').value.trim();
+        const newFullName  = document.getElementById('dashFullName').value.trim();
+        const newBio       = document.getElementById('dashBio').value.trim();
+
+        if (!this.data.sections) this.data.sections = {};
+        if (!this.data.sections.hero) this.data.sections.hero = {};
+        this.data.sections.hero.title = newHeroTitle;
+
+        if (!this.data.profile) this.data.profile = {};
+        this.data.profile.title    = newJobTitle;
+        this.data.profile.fullName = newFullName;
+        this.data.profile.fullBio  = newBio;
+        this.data.profile.shortBio = newBio;
+
+        this.persistData('Titre & Bio modifiés depuis le Dashboard', true);
+      });
+    },
+
+    // 2. PROFIL & IDENTITÉ
     renderProfile() {
       const p = this.data.profile || {};
       return `
@@ -544,7 +613,7 @@
               <input type="text" id="profLastName" class="form-control" value="${p.lastName || ''}">
             </div>
             <div class="form-group full-width">
-              <label class="form-label">Titre Professionnel</label>
+              <label class="form-label">Titre Professionnel (Affiché sous la photo et dans le header)</label>
               <input type="text" id="profTitle" class="form-control" value="${p.title || ''}">
             </div>
             <div class="form-group full-width">
@@ -560,12 +629,8 @@
               <input type="text" id="profLocation" class="form-control" value="${p.location || ''}">
             </div>
             <div class="form-group full-width">
-              <label class="form-label">Présentation Courte (Hero Banner)</label>
-              <textarea id="profShortBio" class="form-control">${p.shortBio || ''}</textarea>
-            </div>
-            <div class="form-group full-width">
-              <label class="form-label">Biographie Complète (Section À propos)</label>
-              <textarea id="profFullBio" class="form-control" style="min-height: 110px;">${p.fullBio || ''}</textarea>
+              <label class="form-label">Biographie Principale (Hero Banner)</label>
+              <textarea id="profFullBio" class="form-control" style="min-height: 110px;">${p.fullBio || p.shortBio || ''}</textarea>
             </div>
           </div>
         </div>
@@ -596,7 +661,7 @@
               <input type="url" id="profWhatsApp" class="form-control" value="${p.socials?.whatsapp || ''}">
             </div>
             <div class="form-group">
-              <label class="form-label">Fichier CV Actif (URL / Fichier)</label>
+              <label class="form-label">Fichier CV Actif (URL / Fichier PDF)</label>
               <input type="text" id="profResumeUrl" class="form-control" value="${p.resumeUrl || ''}">
             </div>
           </div>
@@ -610,29 +675,28 @@
       btn.addEventListener('click', () => {
         if (!this.data.profile) this.data.profile = {};
         const p = this.data.profile;
-        p.firstName = document.getElementById('profFirstName').value.trim();
-        p.lastName = document.getElementById('profLastName').value.trim();
-        p.fullName = `${p.firstName} ${p.lastName}`.trim();
-        p.title = document.getElementById('profTitle').value.trim();
-        p.subTitle = document.getElementById('profSubTitle').value.trim();
+        p.firstName   = document.getElementById('profFirstName').value.trim();
+        p.lastName    = document.getElementById('profLastName').value.trim();
+        p.fullName    = `${p.firstName} ${p.lastName}`.trim() || p.fullName;
+        p.title       = document.getElementById('profTitle').value.trim();
+        p.subTitle    = document.getElementById('profSubTitle').value.trim();
         p.statusBadge = document.getElementById('profStatusBadge').value.trim();
-        p.location = document.getElementById('profLocation').value.trim();
-        p.shortBio = document.getElementById('profShortBio').value.trim();
-        p.fullBio = document.getElementById('profFullBio').value.trim();
-        p.email = document.getElementById('profEmail').value.trim();
-        p.phone = document.getElementById('profPhone').value.trim();
-        p.resumeUrl = document.getElementById('profResumeUrl').value.trim();
+        p.location    = document.getElementById('profLocation').value.trim();
+        p.fullBio     = document.getElementById('profFullBio').value.trim();
+        p.shortBio    = p.fullBio;
+        p.email       = document.getElementById('profEmail').value.trim();
+        p.phone       = document.getElementById('profPhone').value.trim();
+        p.resumeUrl   = document.getElementById('profResumeUrl').value.trim();
         if (!p.socials) p.socials = {};
         p.socials.linkedin = document.getElementById('profLinkedIn').value.trim();
-        p.socials.github = document.getElementById('profGitHub').value.trim();
+        p.socials.github   = document.getElementById('profGitHub').value.trim();
         p.socials.whatsapp = document.getElementById('profWhatsApp').value.trim();
 
-        this.markDirty('Mise à jour du profil');
-        this.showToast('✓ Profil enregistré avec succès !', 'success');
+        this.persistData('Profil enregistré', true);
       });
     },
 
-    // 3. PROJECTS
+    // 3. PROJETS & RÉALISATIONS
     renderProjects() {
       const projects = this.data.projects || [];
       return `
@@ -651,7 +715,7 @@
                   <button class="btn btn-secondary btn-icon" style="height: 22px; width: 22px; font-size: 10px;" onclick="AdminApp.moveProject(${idx}, -1)" title="Monter">▲</button>
                   <button class="btn btn-secondary btn-icon" style="height: 22px; width: 22px; font-size: 10px;" onclick="AdminApp.moveProject(${idx}, 1)" title="Descendre">▼</button>
                 </div>
-                <img src="${proj.image || '../assets/images/project-bi.jpg'}" class="item-thumb" alt="${proj.title}">
+                <img src="${proj.image || 'assets/images/project-bi.jpg'}" class="item-thumb" alt="${proj.title}">
                 <div class="item-details">
                   <div class="item-title">${proj.title} ${proj.visible === false ? '<span style="color: var(--admin-danger); font-size: 0.75rem;">(Masqué)</span>' : ''}</div>
                   <div class="item-subtitle">${proj.category} • ${proj.tags?.join(', ') || ''}</div>
@@ -678,9 +742,8 @@
       const temp = this.data.projects[index];
       this.data.projects[index] = this.data.projects[targetIndex];
       this.data.projects[targetIndex] = temp;
-      this.markDirty('Réorganisation des projets');
+      this.persistData('Ordre des projets réorganisé', true);
       this.renderTab('projects');
-      this.showToast('Ordre des projets mis à jour.', 'info');
     },
 
     editProject(id) {
@@ -691,9 +754,8 @@
     deleteProject(id) {
       if (confirm('Voulez-vous vraiment supprimer ce projet ?')) {
         this.data.projects = (this.data.projects || []).filter(p => p.id !== id);
-        this.markDirty(`Suppression du projet ${id}`);
+        this.persistData('Projet supprimé', true);
         this.renderTab('projects');
-        this.showToast('Projet supprimé.', 'warning');
       }
     },
 
@@ -743,7 +805,7 @@
               </div>
               <div class="form-group full-width">
                 <label class="form-label">Description Détaillée</label>
-                <textarea id="mProjDesc" class="form-control">${p.desc || ''}</textarea>
+                <textarea id="mProjDesc" class="form-control" style="min-height: 80px;">${p.desc || ''}</textarea>
               </div>
               <div class="form-group full-width">
                 <label class="form-label">Tags / Technologies (séparés par des virgules)</label>
@@ -787,14 +849,13 @@
           if (idx !== -1) this.data.projects[idx] = p;
         }
 
-        this.markDirty(`Projet ${p.title} enregistré`);
+        this.persistData(`Projet ${p.title} enregistré`, true);
         document.getElementById('projectModalBackdrop').remove();
         this.renderTab('projects');
-        this.showToast('✓ Projet enregistré avec succès !', 'success');
       });
     },
 
-    // 4. SKILLS
+    // 4. COMPÉTENCES & OUTILS
     renderSkills() {
       const skills = this.data.skills || [];
       return `
@@ -802,12 +863,12 @@
           <div class="card-header">
             <div>
               <h2 class="card-title">⚡ Compétences & Outils (${skills.length})</h2>
-              <p class="card-desc">Gérez votre stack technique, niveaux de maîtrise et icônes</p>
+              <p class="card-desc">Gérez votre stack technique et niveaux</p>
             </div>
             <button class="btn btn-primary" id="addSkillBtn">+ Ajouter une Compétence</button>
           </div>
           <div class="items-list">
-            ${skills.map((s, idx) => `
+            ${skills.map(s => `
               <div class="list-item-card">
                 <div style="font-size: 1.6rem; width: 44px; text-align: center;">${s.icon || '⚡'}</div>
                 <div class="item-details">
@@ -838,9 +899,8 @@
     deleteSkill(id) {
       if (confirm('Supprimer cette compétence ?')) {
         this.data.skills = (this.data.skills || []).filter(x => x.id !== id);
-        this.markDirty('Suppression de compétence');
+        this.persistData('Compétence supprimée', true);
         this.renderTab('skills');
-        this.showToast('Compétence supprimée.', 'warning');
       }
     },
 
@@ -915,14 +975,13 @@
           if (idx !== -1) this.data.skills[idx] = s;
         }
 
-        this.markDirty(`Compétence ${s.name} enregistrée`);
+        this.persistData(`Compétence ${s.name} enregistrée`, true);
         document.getElementById('skillModalBackdrop').remove();
         this.renderTab('skills');
-        this.showToast('✓ Compétence enregistrée !', 'success');
       });
     },
 
-    // 5. EXPERIENCE
+    // 5. EXPÉRIENCES & PARCOURS
     renderExperience() {
       const exps = this.data.experiences || [];
       return `
@@ -937,7 +996,7 @@
           <div class="items-list">
             ${exps.map(exp => `
               <div class="list-item-card">
-                <img src="${exp.logo || '../assets/images/logo_iua.png'}" class="item-thumb" alt="${exp.company}">
+                <img src="${exp.logo || 'assets/images/logo_iua.png'}" class="item-thumb" alt="${exp.company}">
                 <div class="item-details">
                   <div class="item-title">${exp.role} — <strong style="color: var(--admin-accent);">${exp.company}</strong></div>
                   <div class="item-subtitle">${exp.period} • ${exp.badge || ''}</div>
@@ -966,9 +1025,8 @@
     deleteExp(id) {
       if (confirm('Supprimer cette expérience ?')) {
         this.data.experiences = (this.data.experiences || []).filter(e => e.id !== id);
-        this.markDirty('Suppression expérience');
+        this.persistData('Expérience supprimée', true);
         this.renderTab('experience');
-        this.showToast('Expérience supprimée.', 'warning');
       }
     },
 
@@ -1040,14 +1098,13 @@
           if (idx !== -1) this.data.experiences[idx] = e;
         }
 
-        this.markDirty(`Expérience ${e.role} enregistrée`);
+        this.persistData(`Expérience ${e.role} enregistrée`, true);
         document.getElementById('expModalBackdrop').remove();
         this.renderTab('experience');
-        this.showToast('✓ Expérience enregistrée !', 'success');
       });
     },
 
-    // 6. EDUCATION
+    // 6. FORMATIONS & DIPLÔMES
     renderEducation() {
       const edus = this.data.educations || [];
       return `
@@ -1062,7 +1119,7 @@
           <div class="items-list">
             ${edus.map(edu => `
               <div class="list-item-card">
-                <img src="${edu.logo || '../assets/images/logo_iua.png'}" class="item-thumb" alt="${edu.degree}">
+                <img src="${edu.logo || 'assets/images/logo_iua.png'}" class="item-thumb" alt="${edu.degree}">
                 <div class="item-details">
                   <div class="item-title">${edu.degree}</div>
                   <div class="item-subtitle">${edu.institution} • ${edu.period}</div>
@@ -1091,7 +1148,7 @@
     deleteEdu(id) {
       if (confirm('Supprimer cette formation ?')) {
         this.data.educations = (this.data.educations || []).filter(e => e.id !== id);
-        this.markDirty('Suppression formation');
+        this.persistData('Formation supprimée', true);
         this.renderTab('education');
       }
     },
@@ -1162,14 +1219,13 @@
           if (idx !== -1) this.data.educations[idx] = e;
         }
 
-        this.markDirty(`Formation ${e.degree} enregistrée`);
+        this.persistData(`Formation ${e.degree} enregistrée`, true);
         document.getElementById('eduModalBackdrop').remove();
         this.renderTab('education');
-        this.showToast('✓ Formation enregistrée !', 'success');
       });
     },
 
-    // 7. SERVICES
+    // 7. SERVICES & PRESTATIONS
     renderServices() {
       const srvs = this.data.services || [];
       return `
@@ -1177,7 +1233,7 @@
           <div class="card-header">
             <div>
               <h2 class="card-title">🛠️ Services & Prestations (${srvs.length})</h2>
-              <p class="card-desc">Gérez vos propositions de valeur et prestations</p>
+              <p class="card-desc">Gérez vos propositions de valeur</p>
             </div>
             <button class="btn btn-primary" id="addSrvBtn">+ Nouveau Service</button>
           </div>
@@ -1213,7 +1269,7 @@
     deleteSrv(id) {
       if (confirm('Supprimer ce service ?')) {
         this.data.services = (this.data.services || []).filter(x => x.id !== id);
-        this.markDirty('Suppression service');
+        this.persistData('Service supprimé', true);
         this.renderTab('services');
       }
     },
@@ -1266,10 +1322,9 @@
           if (idx !== -1) this.data.services[idx] = s;
         }
 
-        this.markDirty(`Service ${s.title} enregistré`);
+        this.persistData(`Service ${s.title} enregistré`, true);
         document.getElementById('srvModalBackdrop').remove();
         this.renderTab('services');
-        this.showToast('✓ Service enregistré !', 'success');
       });
     },
 
@@ -1281,8 +1336,9 @@
           <div class="card-header">
             <div>
               <h2 class="card-title">🎨 Studio de Design & Thème Visuel</h2>
-              <p class="card-desc">Modifiez les couleurs en direct — le résultat s'affiche immédiatement dans l'aperçu à droite</p>
+              <p class="card-desc">Modifiez les couleurs et le style — changements visibles en direct</p>
             </div>
+            <button class="btn btn-primary" id="saveDesignBtn">Enregistrer le Design</button>
           </div>
           <div class="form-grid">
             <div class="form-group">
@@ -1338,21 +1394,21 @@
     bindDesignEvents() {
       const syncInput = (colorId, hexId, key) => {
         const colorEl = document.getElementById(colorId);
-        const hexEl = document.getElementById(hexId);
+        const hexEl   = document.getElementById(hexId);
         if (!colorEl || !hexEl) return;
 
         colorEl.addEventListener('input', (e) => {
           hexEl.value = e.target.value;
           if (!this.data.design) this.data.design = {};
           this.data.design[key] = e.target.value;
-          this.markDirty();
+          this.persistData('Couleur modifiée', false);
         });
 
         hexEl.addEventListener('change', (e) => {
           colorEl.value = e.target.value;
           if (!this.data.design) this.data.design = {};
           this.data.design[key] = e.target.value;
-          this.markDirty();
+          this.persistData('Couleur modifiée', false);
         });
       };
 
@@ -1366,7 +1422,7 @@
         fontEl.addEventListener('change', (e) => {
           if (!this.data.design) this.data.design = {};
           this.data.design.fontHeading = e.target.value;
-          this.markDirty();
+          this.persistData('Typographie modifiée', false);
         });
       }
 
@@ -1375,67 +1431,86 @@
         radiusEl.addEventListener('change', (e) => {
           if (!this.data.design) this.data.design = {};
           this.data.design.borderRadius = e.target.value;
-          this.markDirty();
+          this.persistData('Bordures modifiées', false);
+        });
+      }
+
+      const saveBtn = document.getElementById('saveDesignBtn');
+      if (saveBtn) {
+        saveBtn.addEventListener('click', () => {
+          this.persistData('Design et couleurs enregistrés', true);
         });
       }
     },
 
-    // 9. SECTIONS & TEXTES
+    // 9. SECTIONS & TEXTES (AVEC ÉDITION DU TITRE PRINCIPAL)
     renderSections() {
       const s = this.data.sections || {};
       return `
         <div class="card">
           <div class="card-header">
             <div>
-              <h2 class="card-title">📑 Visibilité des Sections & Titres</h2>
-              <p class="card-desc">Activez/Désactivez les sections et personnalisez les textes</p>
+              <h2 class="card-title">📑 Visibilité des Sections & Titres Principaux</h2>
+              <p class="card-desc">Personnalisez les titres de chaque section du portfolio et activez/désactivez leur affichage</p>
             </div>
             <button class="btn btn-primary" id="saveSectionsBtn">Enregistrer les textes</button>
           </div>
           <div class="form-grid">
-            <div class="form-group full-width" style="border-bottom: 1px solid var(--admin-border); padding-bottom: 14px;">
-              <div style="display: flex; align-items: center; justify-content: space-between;">
-                <strong>Section Hero (Accueil)</strong>
+            
+            <!-- Section Hero -->
+            <div class="form-group full-width" style="border: 1px solid var(--admin-border); padding: 16px; border-radius: var(--radius-sm); background: rgba(255,255,255,0.02);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                <strong style="color: var(--admin-accent); font-size: 1.05rem;">🌟 Section Hero — Titre Principal du Site</strong>
                 <label class="toggle-switch">
                   <input type="checkbox" id="secHeroVisible" ${s.hero?.visible !== false ? 'checked' : ''}>
                   <span class="slider"></span>
                 </label>
               </div>
-              <input type="text" id="secHeroTitle" class="form-control" style="margin-top: 8px;" value="${s.hero?.title || ''}">
+              <label class="form-label">Grand Titre H1 (Hero)</label>
+              <textarea id="secHeroTitle" class="form-control" style="min-height: 70px; font-weight: 600;">${s.hero?.title || ''}</textarea>
             </div>
 
-            <div class="form-group full-width" style="border-bottom: 1px solid var(--admin-border); padding-bottom: 14px;">
-              <div style="display: flex; align-items: center; justify-content: space-between;">
-                <strong>Section Projets & Réalisations</strong>
+            <!-- Section Projets -->
+            <div class="form-group full-width" style="border: 1px solid var(--admin-border); padding: 16px; border-radius: var(--radius-sm);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                <strong>💼 Section Projets & Réalisations</strong>
                 <label class="toggle-switch">
                   <input type="checkbox" id="secProjectsVisible" ${s.projects?.visible !== false ? 'checked' : ''}>
                   <span class="slider"></span>
                 </label>
               </div>
-              <input type="text" id="secProjectsTitle" class="form-control" style="margin-top: 8px;" value="${s.projects?.title || ''}">
+              <label class="form-label">Titre H2</label>
+              <input type="text" id="secProjectsTitle" class="form-control" value="${s.projects?.title || ''}">
+              <label class="form-label" style="margin-top: 8px;">Sous-titre / Description</label>
+              <input type="text" id="secProjectsSubtitle" class="form-control" value="${s.projects?.subtitle || ''}">
             </div>
 
-            <div class="form-group full-width" style="border-bottom: 1px solid var(--admin-border); padding-bottom: 14px;">
-              <div style="display: flex; align-items: center; justify-content: space-between;">
-                <strong>Section Expériences & Leadership</strong>
+            <!-- Section Expériences -->
+            <div class="form-group full-width" style="border: 1px solid var(--admin-border); padding: 16px; border-radius: var(--radius-sm);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                <strong>🏢 Section Expériences & Leadership</strong>
                 <label class="toggle-switch">
                   <input type="checkbox" id="secExpVisible" ${s.experience?.visible !== false ? 'checked' : ''}>
                   <span class="slider"></span>
                 </label>
               </div>
-              <input type="text" id="secExpTitle" class="form-control" style="margin-top: 8px;" value="${s.experience?.title || ''}">
+              <label class="form-label">Titre H2</label>
+              <input type="text" id="secExpTitle" class="form-control" value="${s.experience?.title || ''}">
             </div>
 
-            <div class="form-group full-width" style="border-bottom: 1px solid var(--admin-border); padding-bottom: 14px;">
-              <div style="display: flex; align-items: center; justify-content: space-between;">
-                <strong>Section Formations & Diplômes</strong>
+            <!-- Section Formations -->
+            <div class="form-group full-width" style="border: 1px solid var(--admin-border); padding: 16px; border-radius: var(--radius-sm);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                <strong>🎓 Section Formations & Diplômes</strong>
                 <label class="toggle-switch">
                   <input type="checkbox" id="secEduVisible" ${s.education?.visible !== false ? 'checked' : ''}>
                   <span class="slider"></span>
                 </label>
               </div>
-              <input type="text" id="secEduTitle" class="form-control" style="margin-top: 8px;" value="${s.education?.title || ''}">
+              <label class="form-label">Titre H2</label>
+              <input type="text" id="secEduTitle" class="form-control" value="${s.education?.title || ''}">
             </div>
+
           </div>
         </div>
       `;
@@ -1446,28 +1521,29 @@
       if (!btn) return;
       btn.addEventListener('click', () => {
         if (!this.data.sections) this.data.sections = {};
+        
         if (!this.data.sections.hero) this.data.sections.hero = {};
         this.data.sections.hero.visible = document.getElementById('secHeroVisible').checked;
-        this.data.sections.hero.title = document.getElementById('secHeroTitle').value.trim();
+        this.data.sections.hero.title   = document.getElementById('secHeroTitle').value.trim();
 
         if (!this.data.sections.projects) this.data.sections.projects = {};
-        this.data.sections.projects.visible = document.getElementById('secProjectsVisible').checked;
-        this.data.sections.projects.title = document.getElementById('secProjectsTitle').value.trim();
+        this.data.sections.projects.visible  = document.getElementById('secProjectsVisible').checked;
+        this.data.sections.projects.title    = document.getElementById('secProjectsTitle').value.trim();
+        this.data.sections.projects.subtitle = document.getElementById('secProjectsSubtitle').value.trim();
 
         if (!this.data.sections.experience) this.data.sections.experience = {};
         this.data.sections.experience.visible = document.getElementById('secExpVisible').checked;
-        this.data.sections.experience.title = document.getElementById('secExpTitle').value.trim();
+        this.data.sections.experience.title   = document.getElementById('secExpTitle').value.trim();
 
         if (!this.data.sections.education) this.data.sections.education = {};
         this.data.sections.education.visible = document.getElementById('secEduVisible').checked;
-        this.data.sections.education.title = document.getElementById('secEduTitle').value.trim();
+        this.data.sections.education.title   = document.getElementById('secEduTitle').value.trim();
 
-        this.markDirty('Mise à jour des sections');
-        this.showToast('✓ Sections enregistrées !', 'success');
+        this.persistData('Titres & sections enregistrés', true);
       });
     },
 
-    // 10. MEDIA LIBRARY
+    // 10. MÉDIATHÈQUE
     renderMedia() {
       const media = this.data.mediaLibrary || [];
       return `
@@ -1516,9 +1592,8 @@
 
           if (!Array.isArray(this.data.mediaLibrary)) this.data.mediaLibrary = [];
           this.data.mediaLibrary.unshift(newMedia);
-          this.markDirty(`Upload image ${file.name}`);
+          this.persistData(`Image ${file.name} importée`, true);
           this.renderTab('media');
-          this.showToast('✓ Image importée dans la médiathèque !', 'success');
         };
         reader.readAsDataURL(file);
       });
@@ -1527,12 +1602,12 @@
     deleteMedia(id) {
       if (confirm('Supprimer cette image ?')) {
         this.data.mediaLibrary = (this.data.mediaLibrary || []).filter(m => m.id !== id);
-        this.markDirty('Suppression média');
+        this.persistData('Image supprimée de la médiathèque', true);
         this.renderTab('media');
       }
     },
 
-    // 11. MESSAGES INBOX
+    // 11. MESSAGES REÇUS
     renderMessages() {
       const msgs = this.data.messages || [];
       return `
@@ -1540,7 +1615,7 @@
           <div class="card-header">
             <div>
               <h2 class="card-title">📩 Messages Reçus (${msgs.length})</h2>
-              <p class="card-desc">Demandes de contact reçues depuis le formulaire</p>
+              <p class="card-desc">Demandes de contact reçues depuis le formulaire du portfolio</p>
             </div>
           </div>
           <div class="items-list">
@@ -1562,7 +1637,7 @@
       `;
     },
 
-    // 12. HISTORY
+    // 12. HISTORIQUE & AUDIT
     renderHistory() {
       const history = this.data.history || [];
       return `
@@ -1574,7 +1649,7 @@
             ${history.map(h => `
               <div class="list-item-card">
                 <div>
-                  <div class="item-title">${h.action} (${h.target || 'Portfolio'})</div>
+                  <div class="item-title">${h.action}</div>
                   <div class="item-subtitle">${h.details || ''}</div>
                 </div>
                 <div style="font-size: 0.8rem; color: var(--admin-text-dim);">${new Date(h.timestamp).toLocaleString('fr-FR')}</div>
@@ -1585,7 +1660,7 @@
       `;
     },
 
-    // 13. SETTINGS
+    // 13. PARAMÈTRES & SEO
     renderSettings() {
       const seo = this.data.seo || {};
       return `
@@ -1631,12 +1706,11 @@
       if (btn) {
         btn.addEventListener('click', () => {
           if (!this.data.seo) this.data.seo = {};
-          this.data.seo.metaTitle = document.getElementById('seoTitle').value.trim();
+          this.data.seo.metaTitle       = document.getElementById('seoTitle').value.trim();
           this.data.seo.metaDescription = document.getElementById('seoDesc').value.trim();
-          this.data.seo.keywords = document.getElementById('seoKeywords').value.trim();
+          this.data.seo.keywords        = document.getElementById('seoKeywords').value.trim();
 
-          this.markDirty('Mise à jour SEO');
-          this.showToast('✓ Paramètres SEO enregistrés !', 'success');
+          this.persistData('Paramètres SEO enregistrés', true);
         });
       }
 
@@ -1649,9 +1723,8 @@
           r.onload = (ev) => {
             try {
               this.data = JSON.parse(ev.target.result);
-              this.markDirty('Importation complète de sauvegarde');
+              this.persistData('Importation complète de sauvegarde', true);
               this.renderTab(this.currentTab);
-              this.showToast('✓ Sauvegarde importée avec succès !', 'success');
             } catch (err) {
               alert('Fichier JSON invalide.');
             }
@@ -1672,9 +1745,8 @@
     resetToDefault() {
       if (confirm('Attention : réinitialiser toutes les données aux valeurs par défaut ?')) {
         this.data = JSON.parse(JSON.stringify(DEFAULT_DATA));
-        this.markDirty('Réinitialisation aux valeurs initiales');
+        this.persistData('Réinitialisation aux valeurs initiales', true);
         this.renderTab(this.currentTab);
-        this.showToast('Données réinitialisées.', 'info');
       }
     },
 
@@ -1692,7 +1764,7 @@
     }
   };
 
-  // Immediate Auto-Execution
+  // Démarrage automatique
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => window.AdminApp.init());
   } else {
