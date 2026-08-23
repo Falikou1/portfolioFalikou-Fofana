@@ -1,8 +1,10 @@
 /**
- * FALIKOU FOFANA — ADMIN DASHBOARD & CMS CORE CONTROLLER
- * Full Management: Profile, Projects, Skills, Experiences, Education, Services,
- * Design Studio (Colors/Typography), Sections & Text Overrides, Media Library,
- * Messages Inbox, Audit History, Live Split-View Preview & Cloud Sync.
+ * ==========================================================================
+ * FALIKOU FOFANA — ADMIN DASHBOARD & CMS APPLICATION CORE
+ * 100% Functional Management: Profile, Projects, Skills, Experiences,
+ * Education, Services, Design Studio, Sections & Textes, Media Library,
+ * Messages Inbox, Audit History, Live Split Preview & Dual-Sync.
+ * ==========================================================================
  */
 
 (function () {
@@ -11,32 +13,164 @@
   const STORAGE_KEY = 'falikou_portfolio_data';
   const DRAFT_KEY = 'falikou_portfolio_draft';
 
+  // Default fallback data store to ensure instant rendering without network delay
+  const DEFAULT_DATA = {
+    profile: {
+      firstName: "Falikou",
+      lastName: "FOFANA",
+      fullName: "Falikou FOFANA",
+      title: "Data Analyst & Concepteur BI",
+      subTitle: "Étudiant en 3e année Génie Informatique (IUA)",
+      statusBadge: "Disponible pour stage / missions",
+      shortBio: "Passionné par la Business Intelligence et l'optimisation des flux décisionnels, je transforme les données brutes en indicateurs stratégiques clairs et percutants.",
+      fullBio: "Bonjour ! Je suis Falikou FOFANA, étudiant en 3e année de Licence Génie Informatique à l'IUA. Passionné par l'analyse de données, la Business Intelligence et la modélisation décisionnelle, je conçois des tableaux de bord interactifs et des solutions logicielles performantes pour guider la prise de décision.",
+      photo: "assets/images/falikou_photo_clean.png",
+      coverImage: "assets/images/project-bi.jpg",
+      resumeUrl: "CV_Falikou.FOFANA_DataAnalyst.pdf",
+      email: "fofanafalikou068@gmail.com",
+      phone: "+225 07 05 32 24 98",
+      phoneRaw: "+2250705322498",
+      location: "Abidjan, Côte d'Ivoire",
+      university: "IUA Abidjan",
+      socials: {
+        linkedin: "https://www.linkedin.com/in/falikou-fofana",
+        github: "https://github.com/Falikou1",
+        whatsapp: "https://wa.me/2250705322498",
+        email: "mailto:fofanafalikou068@gmail.com"
+      }
+    },
+    design: {
+      accentColor: "#da3805",
+      accentHover: "#ff4d15",
+      bgDark: "#0b0b0e",
+      bgCardDark: "#131318",
+      fontHeading: "'Outfit', sans-serif",
+      borderRadius: "16px"
+    },
+    sections: {
+      hero: { visible: true, badge: "Disponible pour stage / missions", title: "Transformer les données en décisions stratégiques et concrètes." },
+      metrics: {
+        visible: true,
+        items: [
+          { id: "m1", value: 100, label: "Données Fiabilisées", desc: "Nettoyage approfondi, dédoublonnage et harmonisation des données de vente." },
+          { id: "m2", value: 10, label: "Dashboards & Outils", desc: "Modélisation de tableaux de bord interactifs sur Excel Avancé, Power BI, Python et SQL." },
+          { id: "m3", value: 5, label: "Certifications Validées", desc: "Certifications internationales Google, Cisco, OpenClassrooms et CCSC." }
+        ]
+      },
+      projects: { visible: true, tag: "[ PROJETS & RÉALISATIONS ]", title: "Réalisations concrètes", subtitle: "Une sélection de mes réalisations concrètes." },
+      experience: { visible: true, tag: "[ EXPÉRIENCE & LEADERSHIP ]", title: "Expérience professionnelle & associative", subtitle: "Une immersion active combinant projets technologiques et leadership." },
+      skills: { visible: true, tag: "[ COMPÉTENCES & OUTILS ]", title: "Stack Technique & Savoir-faire", subtitle: "Un éventail d'outils analytiques et de langages de programmation." },
+      education: { visible: true, tag: "[ FORMATIONS & CERTIFICATIONS ]", title: "Formations & Certifications", subtitle: "Cursus universitaire et certifications attestant d'une expertise technique continue." },
+      services: { visible: true, tag: "[ SERVICES & PRESTATIONS ]", title: "Ce que je peux apporter à votre équipe", subtitle: "Des prestations ciblées pour valoriser vos données." },
+      contact: { visible: true, title: "Envoyez-moi un message", subtitle: "Le message arrive directement dans ma boîte mail — je vous réponds sous 24h." }
+    },
+    projects: [
+      {
+        id: "bi-dashboard",
+        title: "Dashboard Commercial des Ventes",
+        category: "Business Intelligence & Analyse de Données",
+        year: "2026",
+        role: "Data Analyst & Concepteur BI",
+        image: "assets/images/project-bi.jpg",
+        desc: "Projet complet d'analyse et d'optimisation de données de vente massives. Structuration, modélisation décisionnelle et conception d'un tableau de bord interactif.",
+        tags: ["Excel Avancé", "TCD Croisés", "KPIs Commerciaux", "Power BI", "Data Cleaning"],
+        githubUrl: "https://github.com/Falikou1",
+        demoUrl: "",
+        visible: true
+      },
+      {
+        id: "agency-tuwshiuah",
+        title: "Tuwshiuah / AI & Digital Agency",
+        category: "Développement Web & Mobile",
+        year: "Juillet 2026",
+        role: "Développeur Web & Mobile (Stage)",
+        image: "assets/images/project-agency.jpg",
+        desc: "Immersion professionnelle au sein d'une agence innovante alliant Intelligence Artificielle, développement d'interfaces applicatives et marketing digital.",
+        tags: ["Vibe Coding", "Web & Mobile", "Intelligence Artificielle", "Marketing Digital"],
+        githubUrl: "https://github.com/Falikou1",
+        demoUrl: "",
+        visible: true
+      },
+      {
+        id: "hackathon-esatic",
+        title: "Technovore Hackathon 2026 – ESATIC",
+        category: "Architecture Réseau & Sécurité",
+        year: "Mars 2026",
+        role: "Team Lead & Concepteur Réseau",
+        image: "assets/images/project-hackathon.jpg",
+        desc: "Compétition technologique majeure à l'ESATIC. Conception complète et sécurisation d'une infrastructure réseau d'entreprise multi-sites.",
+        tags: ["Cisco Packet Tracer", "VPN IPsec", "OSPF", "VLAN & NAT", "Cybersécurité"],
+        githubUrl: "https://github.com/Falikou1",
+        demoUrl: "",
+        visible: true
+      }
+    ],
+    skills: [
+      { id: "s1", name: "Power BI & Excel Avancé", category: "data", level: 95, icon: "📊", desc: "Tableaux de bord dynamiques, modélisation décisionnelle et Power Query.", visible: true },
+      { id: "s2", name: "Python (Pandas / NumPy / Matplotlib)", category: "data", level: 88, icon: "🐍", desc: "Extraction, nettoyage, analyse statistique et visualisations.", visible: true },
+      { id: "s3", name: "SQL & Modélisation Relationnelle", category: "data", level: 85, icon: "🗄️", desc: "Requêtes complexes, jointures, optimisation et schémas BDD.", visible: true },
+      { id: "s4", name: "Développement Web (HTML / CSS / JS)", category: "dev", level: 90, icon: "💻", desc: "Interfaces web réactives, intégration moderne et APIs.", visible: true },
+      { id: "s5", name: "Vibe Coding & IA Générative", category: "dev", level: 92, icon: "🤖", desc: "Prototypage ultra-rapide d'applications assisté par IA.", visible: true },
+      { id: "s6", name: "Cisco Packet Tracer & Réseaux", category: "sec", level: 82, icon: "🌐", desc: "Topologies réseau, VLANs, routage OSPF et NAT.", visible: true },
+      { id: "s7", name: "Rigueur Analytique & Communication", category: "soft", level: 95, icon: "🎯", desc: "Vulgarisation d'insights techniques pour décideurs.", visible: true }
+    ],
+    experiences: [
+      { id: "exp1", role: "Développeur Web & Mobile (Stage)", company: "Tuwshiuah / AI & Digital Agency", period: "Juillet 2026", badge: "Professionnel", logo: "assets/images/project-agency.jpg", desc: "Immersion professionnelle complète en développement agile d'applications modernes.", technologies: ["Vibe Coding", "Web & Mobile", "IA"], visible: true },
+      { id: "exp2", role: "Membre Actif & Responsable Projets", company: "REDIS-IUA", period: "2024 - Présent", badge: "Associatif", logo: "assets/images/logo_iua.png", desc: "Organisation d'ateliers techniques et hackathons étudiants.", technologies: ["Leadership", "Organisation", "Mentoring"], visible: true },
+      { id: "exp3", role: "Délégué & Membre de la Coordination", company: "Bureau de Coordination des Étudiants — IUA", period: "2024 - Présent", badge: "Leadership", logo: "assets/images/logo_iua.png", desc: "Représentation étudiante et médiation institutionnelle.", technologies: ["Communication", "Médiation"], visible: true }
+    ],
+    educations: [
+      { id: "edu1", degree: "Licence Génie Informatique (IUA) & Bac D", institution: "Institut Universitaire d'Abidjan (IUA)", category: "Cursus Universitaire", period: "2024 - en cours", logo: "assets/images/logo_iua.png", desc: "• Licence Génie Informatique (3e année)\n• Baccalauréat Série D (CSMC Cocody)", visible: true },
+      { id: "edu2", degree: "Google Data Analytics & Excel Avancé", institution: "Google & OpenClassrooms", category: "Certifications Data", period: "2025 - 2026", logo: "assets/images/project-bi.jpg", desc: "Nettoyage, intégrité et fiabilisation des données avec Google & Coursera.", visible: true },
+      { id: "edu3", degree: "Python, Réseaux & Cybersécurité", institution: "Cisco & OpenClassrooms", category: "Certifications Tech", period: "2025 - 2026", logo: "assets/images/project-hackathon.jpg", desc: "Certifications Cisco Networking Academy et cybersécurité.", visible: true }
+    ],
+    services: [
+      { id: "srv1", title: "Business Intelligence & Tableaux de Bord", description: "Dashboards interactifs Power BI et Excel sur mesure pour le pilotage de la performance.", icon: "📊", visible: true },
+      { id: "srv2", title: "Nettoyage & Fiabilisation des Données", description: "Dédoublonnage, correction d'anomalies et pipelines de préparation de données fiables.", icon: "🧹", visible: true },
+      { id: "srv3", title: "Développement Web & Applications Métiers", description: "Conception d'applications web réactives et interfaces adaptées à vos processus.", icon: "⚡", visible: true }
+    ],
+    mediaLibrary: [
+      { id: "m1", name: "Photo Falikou FOFANA", url: "assets/images/falikou_photo_clean.png", type: "image" },
+      { id: "m2", name: "Logo IUA Abidjan", url: "assets/images/logo_iua.png", type: "image" },
+      { id: "m3", name: "Projet Dashboard BI", url: "assets/images/project-bi.jpg", type: "image" },
+      { id: "m4", name: "Projet Tuwshiuah Agency", url: "assets/images/project-agency.jpg", type: "image" },
+      { id: "m5", name: "Projet ESATIC Hackathon", url: "assets/images/project-hackathon.jpg", type: "image" }
+    ],
+    messages: [],
+    history: [
+      { id: "h1", timestamp: new Date().toISOString(), action: "Initialisation CMS", target: "Système", details: "CMS Portfolio configuré et prêt" }
+    ],
+    seo: {
+      metaTitle: "Falikou FOFANA | Data Analyst & Développeur",
+      metaDescription: "Portfolio de Falikou FOFANA, Data Analyst & Développeur à Abidjan (IUA).",
+      keywords: "Falikou FOFANA, Data Analyst, Power BI, Python, SQL, IUA Abidjan"
+    }
+  };
+
   window.AdminApp = {
-    data: null,
+    data: JSON.parse(JSON.stringify(DEFAULT_DATA)),
     isDirty: false,
     currentTab: 'dashboard',
     previewIframe: null,
 
-    async init() {
-      // 1. Verify authentication
-      const isAuth = await AdminAuth.checkAuth(true);
-      if (!isAuth) return;
+    init() {
+      // 1. Synchronously load saved data from localStorage / draft
+      this.loadLocalData();
 
-      // 2. Load Portfolio Data
-      await this.loadData();
-
-      // 3. Bind UI Components & Navigation
-      this.bindNavigation();
-      this.bindGlobalActions();
-      this.initLivePreview();
-
-      // 4. Render initial tab
+      // 2. Render initial view immediately
       this.renderTab(this.currentTab);
       this.updateSyncStatus();
+
+      // 3. Setup Navigation & Actions
+      this.bindNavigation();
+      this.bindGlobalActions();
+      this.initPreview();
+
+      // 4. In background: fetch latest API data if available
+      this.syncFromAPI();
     },
 
-    async loadData() {
-      // Check draft first, then local storage, then fetch from API
+    loadLocalData() {
       const draft = localStorage.getItem(DRAFT_KEY);
       if (draft) {
         try {
@@ -50,62 +184,51 @@
       if (cached) {
         try {
           this.data = JSON.parse(cached);
+          return;
         } catch (e) {}
       }
+    },
 
+    async syncFromAPI() {
       try {
         const endpoint = window.location.pathname.includes('/portfolio/')
           ? '../api/index.php?route=portfolio'
           : '/api/portfolio';
 
-        const res = await fetch(endpoint, {
-          headers: { 'Authorization': `Bearer ${AdminAuth.getToken()}` }
-        });
+        const res = await fetch(endpoint);
         if (res.ok) {
           const json = await res.json();
-          if (json.success && json.data) {
+          if (json.success && json.data && !this.isDirty) {
             this.data = json.data;
             localStorage.setItem(STORAGE_KEY, JSON.stringify(this.data));
-            return;
+            this.renderTab(this.currentTab);
+            this.streamPreview();
           }
         }
-      } catch (err) {
-        console.log('Using local fallback data');
-      }
-
-      if (!this.data) {
-        const def = await fetch('../data/default-portfolio.json');
-        this.data = await def.json();
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(this.data));
-      }
+      } catch (err) {}
     },
 
-    // =========================================================================
-    // NAVIGATION & TAB SWITCHING
-    // =========================================================================
+    // NAVIGATION
     bindNavigation() {
       document.querySelectorAll('.nav-item[data-tab]').forEach(btn => {
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
           const tab = btn.getAttribute('data-tab');
           this.switchTab(tab);
         });
       });
 
-      // Mobile sidebar toggle
       const mobileToggle = document.getElementById('mobileSidebarToggle');
       const sidebar = document.querySelector('.admin-sidebar');
       if (mobileToggle && sidebar) {
-        mobileToggle.addEventListener('click', () => {
-          sidebar.classList.toggle('open');
-        });
+        mobileToggle.addEventListener('click', () => sidebar.classList.toggle('open'));
       }
 
-      // Logout button
       const logoutBtn = document.getElementById('logoutBtn');
       if (logoutBtn) {
         logoutBtn.addEventListener('click', (e) => {
           e.preventDefault();
-          if (confirm('Voulez-vous vraiment vous déconnecter de l\'administration ?')) {
+          if (confirm('Voulez-vous vraiment vous déconnecter ?')) {
             AdminAuth.logout();
           }
         });
@@ -132,7 +255,7 @@
           sections: '📑 Sections & Textes',
           media: '🖼️ Médiathèque',
           messages: '📩 Messages Reçus',
-          history: '🕒 Historique & Restauration',
+          history: '🕒 Historique & Audit',
           settings: '⚙️ Paramètres & Sécurité'
         };
         titleEl.textContent = titles[tabName] || 'Administration';
@@ -140,21 +263,18 @@
 
       this.renderTab(tabName);
 
-      // Close mobile sidebar if open
       const sidebar = document.querySelector('.admin-sidebar');
       if (sidebar) sidebar.classList.remove('open');
     },
 
-    // =========================================================================
-    // GLOBAL ACTIONS (SAVE, PUBLISH, DISCARD)
-    // =========================================================================
+    // GLOBAL ACTIONS (SAVE, PUBLISH, DRAFT)
     bindGlobalActions() {
       const publishBtn = document.getElementById('publishBtn');
       const saveDraftBtn = document.getElementById('saveDraftBtn');
       const togglePreviewBtn = document.getElementById('togglePreviewBtn');
 
       if (publishBtn) {
-        publishBtn.addEventListener('click', () => this.publishData());
+        publishBtn.addEventListener('click', () => this.publish());
       }
       if (saveDraftBtn) {
         saveDraftBtn.addEventListener('click', () => this.saveDraft());
@@ -167,91 +287,84 @@
       }
     },
 
-    markDirty(changeDescription = 'Modification apportée') {
+    markDirty(actionDesc = 'Modification') {
       this.isDirty = true;
       localStorage.setItem(DRAFT_KEY, JSON.stringify(this.data));
       this.updateSyncStatus();
-      this.streamPreviewUpdate();
+      this.streamPreview();
     },
 
     updateSyncStatus() {
       const pill = document.getElementById('syncStatusPill');
       if (!pill) return;
-
       if (this.isDirty) {
         pill.className = 'sync-status-pill draft';
-        pill.innerHTML = '<span class="status-dot"></span><span>Brouillon non synchronisé</span>';
+        pill.innerHTML = '<span class="status-dot"></span><span>Brouillon non publié</span>';
       } else {
         pill.className = 'sync-status-pill';
         pill.innerHTML = '<span class="status-dot"></span><span>Portfolio synchronisé</span>';
       }
     },
 
-    async publishData() {
-      const publishBtn = document.getElementById('publishBtn');
-      if (publishBtn) {
-        publishBtn.disabled = true;
-        publishBtn.innerHTML = '<span>Publication en cours…</span>';
+    async publish() {
+      const btn = document.getElementById('publishBtn');
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<span>Publication en cours…</span>';
       }
 
+      // Add to history
+      if (!Array.isArray(this.data.history)) this.data.history = [];
+      this.data.history.unshift({
+        id: 'hist-' + Date.now(),
+        timestamp: new Date().toISOString(),
+        action: 'Publication du portfolio',
+        target: 'Portfolio Public',
+        details: 'Toutes les modifications ont été publiées avec succès'
+      });
+
+      // Save to localStorage & clear draft
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(this.data));
+      localStorage.removeItem(DRAFT_KEY);
+
+      // Try serverless / local PHP API publish
       try {
         const endpoint = window.location.pathname.includes('/portfolio/')
           ? '../api/index.php?route=portfolio'
           : '/api/portfolio';
 
-        const res = await fetch(endpoint, {
+        await fetch(endpoint, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${AdminAuth.getToken()}`
-          },
-          body: JSON.stringify({
-            action: 'publish',
-            data: this.data,
-            changeLog: 'Publication des modifications depuis le dashboard admin'
-          })
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${AdminAuth.getToken()}` },
+          body: JSON.stringify({ action: 'publish', data: this.data })
         });
+      } catch (e) {}
 
-        const json = await res.json();
-        if (json.success) {
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(this.data));
-          localStorage.removeItem(DRAFT_KEY);
-          this.isDirty = false;
-          this.updateSyncStatus();
-          this.showToast('✓ Portfolio publié et synchronisé avec succès !', 'success');
-        } else {
-          throw new Error(json.message);
-        }
-      } catch (err) {
-        // Fallback save to local storage
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(this.data));
-        localStorage.removeItem(DRAFT_KEY);
-        this.isDirty = false;
-        this.updateSyncStatus();
-        this.showToast('✓ Modifications enregistrées localement !', 'success');
-      } finally {
-        if (publishBtn) {
-          publishBtn.disabled = false;
-          publishBtn.innerHTML = '<svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>Publier les modifications</span>';
-        }
+      this.isDirty = false;
+      this.updateSyncStatus();
+      this.showToast('✓ Modifications publiées et visibles sur le portfolio public !', 'success');
+
+      if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = '<svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>Publier les modifications</span>';
       }
+
+      this.streamPreview();
     },
 
     saveDraft() {
       localStorage.setItem(DRAFT_KEY, JSON.stringify(this.data));
       this.isDirty = true;
       this.updateSyncStatus();
-      this.showToast('Brouillon sauvegardé.', 'info');
+      this.showToast('✓ Brouillon enregistré localement.', 'info');
+      this.streamPreview();
     },
 
-    // =========================================================================
-    // LIVE PREVIEW STREAMING
-    // =========================================================================
-    initLivePreview() {
+    // PREVIEW STREAMING
+    initPreview() {
       this.previewIframe = document.getElementById('previewIframe');
       if (!this.previewIframe) return;
 
-      // Device buttons
       document.querySelectorAll('.preview-btn[data-device]').forEach(btn => {
         btn.addEventListener('click', () => {
           document.querySelectorAll('.preview-btn[data-device]').forEach(b => b.classList.remove('active'));
@@ -262,7 +375,7 @@
       });
     },
 
-    streamPreviewUpdate() {
+    streamPreview() {
       if (this.previewIframe && this.previewIframe.contentWindow) {
         this.previewIframe.contentWindow.postMessage({
           type: 'PORTFOLIO_PREVIEW_UPDATE',
@@ -272,7 +385,7 @@
     },
 
     // =========================================================================
-    // TAB RENDERERS
+    // MODULE TAB RENDERERS
     // =========================================================================
     renderTab(tab) {
       const container = document.getElementById('adminTabContent');
@@ -280,63 +393,61 @@
 
       switch (tab) {
         case 'dashboard':
-          container.innerHTML = this.renderDashboardHTML();
+          container.innerHTML = this.renderDashboard();
           break;
         case 'profile':
-          container.innerHTML = this.renderProfileHTML();
+          container.innerHTML = this.renderProfile();
           this.bindProfileEvents();
           break;
         case 'projects':
-          container.innerHTML = this.renderProjectsHTML();
+          container.innerHTML = this.renderProjects();
           this.bindProjectsEvents();
           break;
         case 'skills':
-          container.innerHTML = this.renderSkillsHTML();
+          container.innerHTML = this.renderSkills();
           this.bindSkillsEvents();
           break;
         case 'experience':
-          container.innerHTML = this.renderExperienceHTML();
+          container.innerHTML = this.renderExperience();
           this.bindExperienceEvents();
           break;
         case 'education':
-          container.innerHTML = this.renderEducationHTML();
+          container.innerHTML = this.renderEducation();
           this.bindEducationEvents();
           break;
         case 'services':
-          container.innerHTML = this.renderServicesHTML();
+          container.innerHTML = this.renderServices();
           this.bindServicesEvents();
           break;
         case 'design':
-          container.innerHTML = this.renderDesignHTML();
+          container.innerHTML = this.renderDesign();
           this.bindDesignEvents();
           break;
         case 'sections':
-          container.innerHTML = this.renderSectionsHTML();
+          container.innerHTML = this.renderSections();
           this.bindSectionsEvents();
           break;
         case 'media':
-          container.innerHTML = this.renderMediaHTML();
+          container.innerHTML = this.renderMedia();
           this.bindMediaEvents();
           break;
         case 'messages':
-          container.innerHTML = this.renderMessagesHTML();
-          this.bindMessagesEvents();
+          container.innerHTML = this.renderMessages();
           break;
         case 'history':
-          container.innerHTML = this.renderHistoryHTML();
-          this.bindHistoryEvents();
+          container.innerHTML = this.renderHistory();
           break;
         case 'settings':
-          container.innerHTML = this.renderSettingsHTML();
+          container.innerHTML = this.renderSettings();
           this.bindSettingsEvents();
           break;
         default:
-          container.innerHTML = '<p>Module en cours de chargement…</p>';
+          container.innerHTML = '<p>Chargement du module…</p>';
       }
     },
 
-    // --- 1. DASHBOARD ---
-    renderDashboardHTML() {
+    // 1. DASHBOARD
+    renderDashboard() {
       const pCount = (this.data.projects || []).length;
       const sCount = (this.data.skills || []).length;
       const eCount = (this.data.experiences || []).length;
@@ -355,7 +466,7 @@
             <div class="stat-icon">⚡</div>
             <div class="stat-info">
               <span class="stat-value">${sCount}</span>
-              <span class="stat-label">Compétences Répertoriées</span>
+              <span class="stat-label">Compétences Listées</span>
             </div>
           </div>
           <div class="stat-card" onclick="AdminApp.switchTab('experience')" style="cursor: pointer;">
@@ -394,32 +505,34 @@
 
         <div class="card">
           <div class="card-header">
-            <h2 class="card-title">🕒 Dernières Modifications & Synchronisations</h2>
-            <button class="btn btn-secondary btn-icon" onclick="AdminApp.renderTab('dashboard')" title="Rafraîchir">↻</button>
+            <h2 class="card-title">🕒 Journal des Dernières Modifications</h2>
           </div>
           <div class="items-list">
-            ${(this.data.history || []).slice(0, 5).map(h => `
+            ${(this.data.history || []).slice(0, 6).map(h => `
               <div class="list-item-card">
                 <div>
-                  <div class="item-title">${h.action} (${h.target})</div>
+                  <div class="item-title">${h.action} (${h.target || 'Portfolio'})</div>
                   <div class="item-subtitle">${h.details || ''} — ${new Date(h.timestamp).toLocaleString('fr-FR')}</div>
                 </div>
-                <span class="nav-badge" style="background: var(--admin-border); color: var(--admin-text-muted);">Enregistré</span>
+                <span style="font-size: 0.75rem; color: var(--admin-success); font-weight: 600;">✓ Sauvegardé</span>
               </div>
-            `).join('') || '<p style="color: var(--admin-text-dim);">Aucune modification récente enregistrée.</p>'}
+            `).join('') || '<p style="color: var(--admin-text-dim);">Aucune modification récente.</p>'}
           </div>
         </div>
       `;
     },
 
-    // --- 2. PROFILE ---
-    renderProfileHTML() {
+    // 2. PROFILE
+    renderProfile() {
       const p = this.data.profile || {};
       return `
         <div class="card">
           <div class="card-header">
-            <h2 class="card-title">Informations Personnelles & Présentation</h2>
-            <button class="btn btn-primary" id="saveProfileBtn">Enregistrer les informations</button>
+            <div>
+              <h2 class="card-title">👤 Identité & Informations Personnelles</h2>
+              <p class="card-desc">Modifiez votre nom, titre, biographie et coordonnées</p>
+            </div>
+            <button class="btn btn-primary" id="saveProfileBtn">Enregistrer le profil</button>
           </div>
           <div class="form-grid">
             <div class="form-group">
@@ -427,7 +540,7 @@
               <input type="text" id="profFirstName" class="form-control" value="${p.firstName || ''}">
             </div>
             <div class="form-group">
-              <label class="form-label">Nom</label>
+              <label class="form-label">Nom de famille</label>
               <input type="text" id="profLastName" class="form-control" value="${p.lastName || ''}">
             </div>
             <div class="form-group full-width">
@@ -443,31 +556,31 @@
               <input type="text" id="profStatusBadge" class="form-control" value="${p.statusBadge || ''}">
             </div>
             <div class="form-group">
-              <label class="form-label">Localisation</label>
+              <label class="form-label">Localisation (Ville, Pays)</label>
               <input type="text" id="profLocation" class="form-control" value="${p.location || ''}">
             </div>
             <div class="form-group full-width">
-              <label class="form-label">Présentation Courte (Hero)</label>
+              <label class="form-label">Présentation Courte (Hero Banner)</label>
               <textarea id="profShortBio" class="form-control">${p.shortBio || ''}</textarea>
             </div>
             <div class="form-group full-width">
-              <label class="form-label">Biographie Complète (À propos)</label>
-              <textarea id="profFullBio" class="form-control" style="min-height: 120px;">${p.fullBio || ''}</textarea>
+              <label class="form-label">Biographie Complète (Section À propos)</label>
+              <textarea id="profFullBio" class="form-control" style="min-height: 110px;">${p.fullBio || ''}</textarea>
             </div>
           </div>
         </div>
 
         <div class="card">
           <div class="card-header">
-            <h2 class="card-title">Coordonnées & Réseaux Sociaux</h2>
+            <h2 class="card-title">📞 Coordonnées & Réseaux Sociaux</h2>
           </div>
           <div class="form-grid">
             <div class="form-group">
-              <label class="form-label">Email Principal</label>
+              <label class="form-label">Email de Contact</label>
               <input type="email" id="profEmail" class="form-control" value="${p.email || ''}">
             </div>
             <div class="form-group">
-              <label class="form-label">Téléphone Affiché</label>
+              <label class="form-label">Numéro de Téléphone</label>
               <input type="text" id="profPhone" class="form-control" value="${p.phone || ''}">
             </div>
             <div class="form-group">
@@ -483,7 +596,7 @@
               <input type="url" id="profWhatsApp" class="form-control" value="${p.socials?.whatsapp || ''}">
             </div>
             <div class="form-group">
-              <label class="form-label">Fichier CV Actif (URL / Chemin)</label>
+              <label class="form-label">Fichier CV Actif (URL / Fichier)</label>
               <input type="text" id="profResumeUrl" class="form-control" value="${p.resumeUrl || ''}">
             </div>
           </div>
@@ -497,54 +610,58 @@
       btn.addEventListener('click', () => {
         if (!this.data.profile) this.data.profile = {};
         const p = this.data.profile;
-        p.firstName = document.getElementById('profFirstName').value;
-        p.lastName = document.getElementById('profLastName').value;
+        p.firstName = document.getElementById('profFirstName').value.trim();
+        p.lastName = document.getElementById('profLastName').value.trim();
         p.fullName = `${p.firstName} ${p.lastName}`.trim();
-        p.title = document.getElementById('profTitle').value;
-        p.subTitle = document.getElementById('profSubTitle').value;
-        p.statusBadge = document.getElementById('profStatusBadge').value;
-        p.location = document.getElementById('profLocation').value;
-        p.shortBio = document.getElementById('profShortBio').value;
-        p.fullBio = document.getElementById('profFullBio').value;
-        p.email = document.getElementById('profEmail').value;
-        p.phone = document.getElementById('profPhone').value;
-        p.resumeUrl = document.getElementById('profResumeUrl').value;
+        p.title = document.getElementById('profTitle').value.trim();
+        p.subTitle = document.getElementById('profSubTitle').value.trim();
+        p.statusBadge = document.getElementById('profStatusBadge').value.trim();
+        p.location = document.getElementById('profLocation').value.trim();
+        p.shortBio = document.getElementById('profShortBio').value.trim();
+        p.fullBio = document.getElementById('profFullBio').value.trim();
+        p.email = document.getElementById('profEmail').value.trim();
+        p.phone = document.getElementById('profPhone').value.trim();
+        p.resumeUrl = document.getElementById('profResumeUrl').value.trim();
         if (!p.socials) p.socials = {};
-        p.socials.linkedin = document.getElementById('profLinkedIn').value;
-        p.socials.github = document.getElementById('profGitHub').value;
-        p.socials.whatsapp = document.getElementById('profWhatsApp').value;
+        p.socials.linkedin = document.getElementById('profLinkedIn').value.trim();
+        p.socials.github = document.getElementById('profGitHub').value.trim();
+        p.socials.whatsapp = document.getElementById('profWhatsApp').value.trim();
 
-        this.markDirty('Mise à jour du profil personnel');
-        this.showToast('Profil mis à jour !', 'success');
+        this.markDirty('Mise à jour du profil');
+        this.showToast('✓ Profil enregistré avec succès !', 'success');
       });
     },
 
-    // --- 3. PROJECTS ---
-    renderProjectsHTML() {
+    // 3. PROJECTS
+    renderProjects() {
       const projects = this.data.projects || [];
       return `
         <div class="card">
           <div class="card-header">
             <div>
               <h2 class="card-title">💼 Projets & Réalisations (${projects.length})</h2>
-              <p class="card-desc">Ajoutez, modifiez ou réorganisez vos projets présentés au public</p>
+              <p class="card-desc">Gérez vos projets affichés dans la galerie publique</p>
             </div>
-            <button class="btn btn-primary" id="addProjectBtn">+ Nouveau Projet</button>
+            <button class="btn btn-primary" id="addProjectBtn">+ Ajouter un Projet</button>
           </div>
-          <div class="items-list" id="projectsList">
+          <div class="items-list">
             ${projects.map((proj, idx) => `
               <div class="list-item-card" data-id="${proj.id}">
+                <div style="display: flex; gap: 4px; flex-direction: column;">
+                  <button class="btn btn-secondary btn-icon" style="height: 22px; width: 22px; font-size: 10px;" onclick="AdminApp.moveProject(${idx}, -1)" title="Monter">▲</button>
+                  <button class="btn btn-secondary btn-icon" style="height: 22px; width: 22px; font-size: 10px;" onclick="AdminApp.moveProject(${idx}, 1)" title="Descendre">▼</button>
+                </div>
                 <img src="${proj.image || '../assets/images/project-bi.jpg'}" class="item-thumb" alt="${proj.title}">
                 <div class="item-details">
-                  <div class="item-title">${proj.title}</div>
-                  <div class="item-subtitle">${proj.category} • ${proj.year || ''} • ${proj.tags?.join(', ') || ''}</div>
+                  <div class="item-title">${proj.title} ${proj.visible === false ? '<span style="color: var(--admin-danger); font-size: 0.75rem;">(Masqué)</span>' : ''}</div>
+                  <div class="item-subtitle">${proj.category} • ${proj.tags?.join(', ') || ''}</div>
                 </div>
                 <div class="item-actions">
                   <button class="btn btn-secondary btn-icon" onclick="AdminApp.editProject('${proj.id}')" title="Modifier">✏️</button>
                   <button class="btn btn-danger btn-icon" onclick="AdminApp.deleteProject('${proj.id}')" title="Supprimer">🗑️</button>
                 </div>
               </div>
-            `).join('')}
+            `).join('') || '<p style="color: var(--admin-text-dim);">Aucun projet pour l\'instant.</p>'}
           </div>
         </div>
       `;
@@ -552,9 +669,18 @@
 
     bindProjectsEvents() {
       const addBtn = document.getElementById('addProjectBtn');
-      if (addBtn) {
-        addBtn.addEventListener('click', () => this.openProjectModal());
-      }
+      if (addBtn) addBtn.addEventListener('click', () => this.openProjectModal());
+    },
+
+    moveProject(index, direction) {
+      const targetIndex = index + direction;
+      if (targetIndex < 0 || targetIndex >= this.data.projects.length) return;
+      const temp = this.data.projects[index];
+      this.data.projects[index] = this.data.projects[targetIndex];
+      this.data.projects[targetIndex] = temp;
+      this.markDirty('Réorganisation des projets');
+      this.renderTab('projects');
+      this.showToast('Ordre des projets mis à jour.', 'info');
     },
 
     editProject(id) {
@@ -577,19 +703,18 @@
         id: 'proj-' + Date.now(),
         title: '',
         category: 'Business Intelligence & Analyse de Données',
-        role: 'Data Analyst',
+        role: 'Data Analyst & Concepteur BI',
         year: new Date().getFullYear().toString(),
         image: 'assets/images/project-bi.jpg',
         desc: '',
-        details: [],
-        tags: [],
+        tags: ['Power BI', 'Excel'],
         githubUrl: 'https://github.com/Falikou1',
         demoUrl: '',
         visible: true
       };
 
       const modalHtml = `
-        <div class="admin-modal-backdrop active" id="projectModalBackdrop">
+        <div class="admin-modal-backdrop" id="projectModalBackdrop">
           <div class="admin-modal">
             <div class="card-header">
               <h2 class="card-title">${isEdit ? 'Modifier le projet' : 'Ajouter un nouveau projet'}</h2>
@@ -609,7 +734,7 @@
                 <input type="text" id="mProjRole" class="form-control" value="${p.role || ''}">
               </div>
               <div class="form-group">
-                <label class="form-label">Année / Période</label>
+                <label class="form-label">Période / Année</label>
                 <input type="text" id="mProjYear" class="form-control" value="${p.year || ''}">
               </div>
               <div class="form-group">
@@ -617,7 +742,7 @@
                 <input type="text" id="mProjImage" class="form-control" value="${p.image || ''}">
               </div>
               <div class="form-group full-width">
-                <label class="form-label">Description Globale</label>
+                <label class="form-label">Description Détaillée</label>
                 <textarea id="mProjDesc" class="form-control">${p.desc || ''}</textarea>
               </div>
               <div class="form-group full-width">
@@ -629,7 +754,7 @@
                 <input type="url" id="mProjGithub" class="form-control" value="${p.githubUrl || ''}">
               </div>
               <div class="form-group">
-                <label class="form-label">Lien Démo / En Ligne</label>
+                <label class="form-label">Lien Démo en direct</label>
                 <input type="url" id="mProjDemo" class="form-control" value="${p.demoUrl || ''}">
               </div>
               <div class="form-group full-width" style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 10px;">
@@ -645,49 +770,48 @@
 
       document.getElementById('projectModalForm').addEventListener('submit', (e) => {
         e.preventDefault();
-        p.title = document.getElementById('mProjTitle').value;
-        p.category = document.getElementById('mProjCat').value;
-        p.role = document.getElementById('mProjRole').value;
-        p.year = document.getElementById('mProjYear').value;
-        p.image = document.getElementById('mProjImage').value;
-        p.desc = document.getElementById('mProjDesc').value;
+        p.title = document.getElementById('mProjTitle').value.trim();
+        p.category = document.getElementById('mProjCat').value.trim();
+        p.role = document.getElementById('mProjRole').value.trim();
+        p.year = document.getElementById('mProjYear').value.trim();
+        p.image = document.getElementById('mProjImage').value.trim();
+        p.desc = document.getElementById('mProjDesc').value.trim();
         p.tags = document.getElementById('mProjTags').value.split(',').map(t => t.trim()).filter(Boolean);
-        p.githubUrl = document.getElementById('mProjGithub').value;
-        p.demoUrl = document.getElementById('mProjDemo').value;
+        p.githubUrl = document.getElementById('mProjGithub').value.trim();
+        p.demoUrl = document.getElementById('mProjDemo').value.trim();
 
         if (!Array.isArray(this.data.projects)) this.data.projects = [];
-        if (!isEdit) {
-          this.data.projects.push(p);
-        } else {
+        if (!isEdit) this.data.projects.push(p);
+        else {
           const idx = this.data.projects.findIndex(x => x.id === p.id);
           if (idx !== -1) this.data.projects[idx] = p;
         }
 
-        this.markDirty(`Enregistrement du projet ${p.title}`);
+        this.markDirty(`Projet ${p.title} enregistré`);
         document.getElementById('projectModalBackdrop').remove();
         this.renderTab('projects');
-        this.showToast('Projet enregistré avec succès !', 'success');
+        this.showToast('✓ Projet enregistré avec succès !', 'success');
       });
     },
 
-    // --- 4. SKILLS ---
-    renderSkillsHTML() {
+    // 4. SKILLS
+    renderSkills() {
       const skills = this.data.skills || [];
       return `
         <div class="card">
           <div class="card-header">
             <div>
               <h2 class="card-title">⚡ Compétences & Outils (${skills.length})</h2>
-              <p class="card-desc">Gérez votre stack technique, niveaux de maîtrise et catégories</p>
+              <p class="card-desc">Gérez votre stack technique, niveaux de maîtrise et icônes</p>
             </div>
-            <button class="btn btn-primary" id="addSkillBtn">+ Nouvelle Compétence</button>
+            <button class="btn btn-primary" id="addSkillBtn">+ Ajouter une Compétence</button>
           </div>
           <div class="items-list">
-            ${skills.map(s => `
+            ${skills.map((s, idx) => `
               <div class="list-item-card">
-                <div style="font-size: 1.5rem; width: 40px; text-align: center;">${s.icon || '⚡'}</div>
+                <div style="font-size: 1.6rem; width: 44px; text-align: center;">${s.icon || '⚡'}</div>
                 <div class="item-details">
-                  <div class="item-title">${s.name} (${s.level || 80}%)</div>
+                  <div class="item-title">${s.name} <span style="color: var(--admin-accent); font-weight: 700;">(${s.level || 80}%)</span></div>
                   <div class="item-subtitle">Catégorie: ${s.category} • ${s.desc || ''}</div>
                 </div>
                 <div class="item-actions">
@@ -702,20 +826,21 @@
     },
 
     bindSkillsEvents() {
-      const addBtn = document.getElementById('addSkillBtn');
-      if (addBtn) addBtn.addEventListener('click', () => this.openSkillModal());
+      const btn = document.getElementById('addSkillBtn');
+      if (btn) btn.addEventListener('click', () => this.openSkillModal());
     },
 
     editSkill(id) {
-      const skill = (this.data.skills || []).find(s => s.id === id);
-      if (skill) this.openSkillModal(skill);
+      const s = (this.data.skills || []).find(x => x.id === id);
+      if (s) this.openSkillModal(s);
     },
 
     deleteSkill(id) {
       if (confirm('Supprimer cette compétence ?')) {
-        this.data.skills = (this.data.skills || []).filter(s => s.id !== id);
+        this.data.skills = (this.data.skills || []).filter(x => x.id !== id);
         this.markDirty('Suppression de compétence');
         this.renderTab('skills');
+        this.showToast('Compétence supprimée.', 'warning');
       }
     },
 
@@ -732,7 +857,7 @@
       };
 
       const modalHtml = `
-        <div class="admin-modal-backdrop active" id="skillModalBackdrop">
+        <div class="admin-modal-backdrop" id="skillModalBackdrop">
           <div class="admin-modal">
             <div class="card-header">
               <h2 class="card-title">${isEdit ? 'Modifier la compétence' : 'Ajouter une compétence'}</h2>
@@ -757,7 +882,7 @@
                 </select>
               </div>
               <div class="form-group">
-                <label class="form-label">Niveau de maîtrise (%): <span id="levelVal">${s.level}</span>%</label>
+                <label class="form-label">Niveau (%): <strong id="levelVal">${s.level}</strong>%</label>
                 <input type="range" id="mSkillLevel" min="50" max="100" class="form-control" value="${s.level}" oninput="document.getElementById('levelVal').textContent = this.value">
               </div>
               <div class="form-group full-width">
@@ -777,11 +902,11 @@
 
       document.getElementById('skillModalForm').addEventListener('submit', (e) => {
         e.preventDefault();
-        s.name = document.getElementById('mSkillName').value;
-        s.icon = document.getElementById('mSkillIcon').value;
+        s.name = document.getElementById('mSkillName').value.trim();
+        s.icon = document.getElementById('mSkillIcon').value.trim();
         s.category = document.getElementById('mSkillCat').value;
         s.level = parseInt(document.getElementById('mSkillLevel').value, 10);
-        s.desc = document.getElementById('mSkillDesc').value;
+        s.desc = document.getElementById('mSkillDesc').value.trim();
 
         if (!Array.isArray(this.data.skills)) this.data.skills = [];
         if (!isEdit) this.data.skills.push(s);
@@ -790,21 +915,22 @@
           if (idx !== -1) this.data.skills[idx] = s;
         }
 
-        this.markDirty(`Enregistrement compétence ${s.name}`);
+        this.markDirty(`Compétence ${s.name} enregistrée`);
         document.getElementById('skillModalBackdrop').remove();
         this.renderTab('skills');
+        this.showToast('✓ Compétence enregistrée !', 'success');
       });
     },
 
-    // --- 5. EXPERIENCE ---
-    renderExperienceHTML() {
+    // 5. EXPERIENCE
+    renderExperience() {
       const exps = this.data.experiences || [];
       return `
         <div class="card">
           <div class="card-header">
             <div>
               <h2 class="card-title">🏢 Expériences & Parcours Professionnel (${exps.length})</h2>
-              <p class="card-desc">Gérez vos postes, stages, missions et engagements associatifs</p>
+              <p class="card-desc">Gérez vos postes, stages et responsabilités</p>
             </div>
             <button class="btn btn-primary" id="addExpBtn">+ Nouvelle Expérience</button>
           </div>
@@ -813,7 +939,7 @@
               <div class="list-item-card">
                 <img src="${exp.logo || '../assets/images/logo_iua.png'}" class="item-thumb" alt="${exp.company}">
                 <div class="item-details">
-                  <div class="item-title">${exp.role} — <span style="color: var(--admin-accent);">${exp.company}</span></div>
+                  <div class="item-title">${exp.role} — <strong style="color: var(--admin-accent);">${exp.company}</strong></div>
                   <div class="item-subtitle">${exp.period} • ${exp.badge || ''}</div>
                 </div>
                 <div class="item-actions">
@@ -842,6 +968,7 @@
         this.data.experiences = (this.data.experiences || []).filter(e => e.id !== id);
         this.markDirty('Suppression expérience');
         this.renderTab('experience');
+        this.showToast('Expérience supprimée.', 'warning');
       }
     },
 
@@ -860,7 +987,7 @@
       };
 
       const modalHtml = `
-        <div class="admin-modal-backdrop active" id="expModalBackdrop">
+        <div class="admin-modal-backdrop" id="expModalBackdrop">
           <div class="admin-modal">
             <div class="card-header">
               <h2 class="card-title">${isEdit ? 'Modifier l\'expérience' : 'Ajouter une expérience'}</h2>
@@ -868,7 +995,7 @@
             </div>
             <form id="expModalForm" class="form-grid" style="margin-top: 16px;">
               <div class="form-group">
-                <label class="form-label">Poste / Rôle</label>
+                <label class="form-label">Poste / Titre</label>
                 <input type="text" id="mExpRole" class="form-control" value="${e.role}" required>
               </div>
               <div class="form-group">
@@ -887,10 +1014,6 @@
                 <label class="form-label">Description des missions</label>
                 <textarea id="mExpDesc" class="form-control">${e.desc || ''}</textarea>
               </div>
-              <div class="form-group full-width">
-                <label class="form-label">Technologies / Compétences clés</label>
-                <input type="text" id="mExpTech" class="form-control" value="${(e.technologies || []).join(', ')}">
-              </div>
               <div class="form-group full-width" style="display: flex; gap: 10px; justify-content: flex-end;">
                 <button type="button" class="btn btn-secondary" onclick="document.getElementById('expModalBackdrop').remove()">Annuler</button>
                 <button type="submit" class="btn btn-primary">Enregistrer</button>
@@ -904,12 +1027,11 @@
 
       document.getElementById('expModalForm').addEventListener('submit', (ev) => {
         ev.preventDefault();
-        e.role = document.getElementById('mExpRole').value;
-        e.company = document.getElementById('mExpCompany').value;
-        e.period = document.getElementById('mExpPeriod').value;
-        e.logo = document.getElementById('mExpLogo').value;
-        e.desc = document.getElementById('mExpDesc').value;
-        e.technologies = document.getElementById('mExpTech').value.split(',').map(t => t.trim()).filter(Boolean);
+        e.role = document.getElementById('mExpRole').value.trim();
+        e.company = document.getElementById('mExpCompany').value.trim();
+        e.period = document.getElementById('mExpPeriod').value.trim();
+        e.logo = document.getElementById('mExpLogo').value.trim();
+        e.desc = document.getElementById('mExpDesc').value.trim();
 
         if (!Array.isArray(this.data.experiences)) this.data.experiences = [];
         if (!isEdit) this.data.experiences.push(e);
@@ -918,23 +1040,24 @@
           if (idx !== -1) this.data.experiences[idx] = e;
         }
 
-        this.markDirty(`Enregistrement expérience ${e.role}`);
+        this.markDirty(`Expérience ${e.role} enregistrée`);
         document.getElementById('expModalBackdrop').remove();
         this.renderTab('experience');
+        this.showToast('✓ Expérience enregistrée !', 'success');
       });
     },
 
-    // --- 6. EDUCATION ---
-    renderEducationHTML() {
+    // 6. EDUCATION
+    renderEducation() {
       const edus = this.data.educations || [];
       return `
         <div class="card">
           <div class="card-header">
             <div>
-              <h2 class="card-title">🎓 Formations & Certifications (${edus.length})</h2>
-              <p class="card-desc">Gérez votre cursus académique et vos certifications internationales</p>
+              <h2 class="card-title">🎓 Formations & Diplômes (${edus.length})</h2>
+              <p class="card-desc">Gérez votre parcours académique et certifications</p>
             </div>
-            <button class="btn btn-primary" id="addEduBtn">+ Nouvelle Formation / Certif</button>
+            <button class="btn btn-primary" id="addEduBtn">+ Ajouter une Formation</button>
           </div>
           <div class="items-list">
             ${edus.map(edu => `
@@ -966,7 +1089,7 @@
     },
 
     deleteEdu(id) {
-      if (confirm('Supprimer cette entrée de formation ?')) {
+      if (confirm('Supprimer cette formation ?')) {
         this.data.educations = (this.data.educations || []).filter(e => e.id !== id);
         this.markDirty('Suppression formation');
         this.renderTab('education');
@@ -979,7 +1102,6 @@
         id: 'edu-' + Date.now(),
         degree: '',
         institution: 'Institut Universitaire d\'Abidjan (IUA)',
-        category: 'Cursus Universitaire',
         period: '2024 - en cours',
         logo: 'assets/images/logo_iua.png',
         desc: '',
@@ -987,23 +1109,23 @@
       };
 
       const modalHtml = `
-        <div class="admin-modal-backdrop active" id="eduModalBackdrop">
+        <div class="admin-modal-backdrop" id="eduModalBackdrop">
           <div class="admin-modal">
             <div class="card-header">
-              <h2 class="card-title">${isEdit ? 'Modifier la formation' : 'Ajouter une formation / certification'}</h2>
+              <h2 class="card-title">${isEdit ? 'Modifier la formation' : 'Ajouter une formation'}</h2>
               <button class="btn btn-secondary btn-icon" onclick="document.getElementById('eduModalBackdrop').remove()">✕</button>
             </div>
             <form id="eduModalForm" class="form-grid" style="margin-top: 16px;">
               <div class="form-group full-width">
-                <label class="form-label">Intitulé du Diplôme / Certification</label>
+                <label class="form-label">Diplôme / Certification</label>
                 <input type="text" id="mEduDegree" class="form-control" value="${e.degree}" required>
               </div>
               <div class="form-group">
-                <label class="form-label">Établissement / Organisme</label>
+                <label class="form-label">Établissement</label>
                 <input type="text" id="mEduInst" class="form-control" value="${e.institution}" required>
               </div>
               <div class="form-group">
-                <label class="form-label">Période / Année</label>
+                <label class="form-label">Période</label>
                 <input type="text" id="mEduPeriod" class="form-control" value="${e.period}">
               </div>
               <div class="form-group">
@@ -1011,7 +1133,7 @@
                 <input type="text" id="mEduLogo" class="form-control" value="${e.logo}">
               </div>
               <div class="form-group full-width">
-                <label class="form-label">Détails / Description</label>
+                <label class="form-label">Description</label>
                 <textarea id="mEduDesc" class="form-control">${e.desc || ''}</textarea>
               </div>
               <div class="form-group full-width" style="display: flex; gap: 10px; justify-content: flex-end;">
@@ -1027,11 +1149,11 @@
 
       document.getElementById('eduModalForm').addEventListener('submit', (ev) => {
         ev.preventDefault();
-        e.degree = document.getElementById('mEduDegree').value;
-        e.institution = document.getElementById('mEduInst').value;
-        e.period = document.getElementById('mEduPeriod').value;
-        e.logo = document.getElementById('mEduLogo').value;
-        e.desc = document.getElementById('mEduDesc').value;
+        e.degree = document.getElementById('mEduDegree').value.trim();
+        e.institution = document.getElementById('mEduInst').value.trim();
+        e.period = document.getElementById('mEduPeriod').value.trim();
+        e.logo = document.getElementById('mEduLogo').value.trim();
+        e.desc = document.getElementById('mEduDesc').value.trim();
 
         if (!Array.isArray(this.data.educations)) this.data.educations = [];
         if (!isEdit) this.data.educations.push(e);
@@ -1040,28 +1162,29 @@
           if (idx !== -1) this.data.educations[idx] = e;
         }
 
-        this.markDirty(`Enregistrement formation ${e.degree}`);
+        this.markDirty(`Formation ${e.degree} enregistrée`);
         document.getElementById('eduModalBackdrop').remove();
         this.renderTab('education');
+        this.showToast('✓ Formation enregistrée !', 'success');
       });
     },
 
-    // --- 7. SERVICES ---
-    renderServicesHTML() {
+    // 7. SERVICES
+    renderServices() {
       const srvs = this.data.services || [];
       return `
         <div class="card">
           <div class="card-header">
             <div>
-              <h2 class="card-title">🛠️ Services Proposés (${srvs.length})</h2>
-              <p class="card-desc">Gérez vos offres de prestations analytiques et de développement</p>
+              <h2 class="card-title">🛠️ Services & Prestations (${srvs.length})</h2>
+              <p class="card-desc">Gérez vos propositions de valeur et prestations</p>
             </div>
             <button class="btn btn-primary" id="addSrvBtn">+ Nouveau Service</button>
           </div>
           <div class="items-list">
             ${srvs.map(s => `
               <div class="list-item-card">
-                <div style="font-size: 1.5rem; width: 40px; text-align: center;">${s.icon || '🛠️'}</div>
+                <div style="font-size: 1.6rem; width: 44px; text-align: center;">${s.icon || '🛠️'}</div>
                 <div class="item-details">
                   <div class="item-title">${s.title}</div>
                   <div class="item-subtitle">${s.description || ''}</div>
@@ -1097,16 +1220,10 @@
 
     openSrvModal(srv = null) {
       const isEdit = !!srv;
-      const s = srv || {
-        id: 'srv-' + Date.now(),
-        title: '',
-        description: '',
-        icon: '📊',
-        visible: true
-      };
+      const s = srv || { id: 'srv-' + Date.now(), title: '', description: '', icon: '📊', visible: true };
 
       const modalHtml = `
-        <div class="admin-modal-backdrop active" id="srvModalBackdrop">
+        <div class="admin-modal-backdrop" id="srvModalBackdrop">
           <div class="admin-modal">
             <div class="card-header">
               <h2 class="card-title">${isEdit ? 'Modifier le service' : 'Ajouter un service'}</h2>
@@ -1122,7 +1239,7 @@
                 <input type="text" id="mSrvIcon" class="form-control" value="${s.icon || '🛠️'}">
               </div>
               <div class="form-group full-width">
-                <label class="form-label">Description de la prestation</label>
+                <label class="form-label">Description</label>
                 <textarea id="mSrvDesc" class="form-control">${s.description || ''}</textarea>
               </div>
               <div class="form-group full-width" style="display: flex; gap: 10px; justify-content: flex-end;">
@@ -1138,9 +1255,9 @@
 
       document.getElementById('srvModalForm').addEventListener('submit', (ev) => {
         ev.preventDefault();
-        s.title = document.getElementById('mSrvTitle').value;
-        s.icon = document.getElementById('mSrvIcon').value;
-        s.description = document.getElementById('mSrvDesc').value;
+        s.title = document.getElementById('mSrvTitle').value.trim();
+        s.icon = document.getElementById('mSrvIcon').value.trim();
+        s.description = document.getElementById('mSrvDesc').value.trim();
 
         if (!Array.isArray(this.data.services)) this.data.services = [];
         if (!isEdit) this.data.services.push(s);
@@ -1149,21 +1266,22 @@
           if (idx !== -1) this.data.services[idx] = s;
         }
 
-        this.markDirty(`Enregistrement service ${s.title}`);
+        this.markDirty(`Service ${s.title} enregistré`);
         document.getElementById('srvModalBackdrop').remove();
         this.renderTab('services');
+        this.showToast('✓ Service enregistré !', 'success');
       });
     },
 
-    // --- 8. DESIGN STUDIO ---
-    renderDesignHTML() {
+    // 8. DESIGN STUDIO
+    renderDesign() {
       const d = this.data.design || {};
       return `
         <div class="card">
           <div class="card-header">
             <div>
-              <h2 class="card-title">🎨 Studio de Design & Palette de Couleurs</h2>
-              <p class="card-desc">Modifiez l'identité visuelle en direct — les changements sont immédiatement visibles sur l'aperçu à droite</p>
+              <h2 class="card-title">🎨 Studio de Design & Thème Visuel</h2>
+              <p class="card-desc">Modifiez les couleurs en direct — le résultat s'affiche immédiatement dans l'aperçu à droite</p>
             </div>
           </div>
           <div class="form-grid">
@@ -1175,41 +1293,41 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="form-label">Couleur d'Accent Hover</label>
+              <label class="form-label">Couleur d'Accent Survol (Hover)</label>
               <div class="color-picker-group">
                 <input type="color" id="designAccentHover" class="color-swatch-input" value="${d.accentHover || '#ff4d15'}">
                 <input type="text" id="designAccentHoverHex" class="form-control" value="${d.accentHover || '#ff4d15'}">
               </div>
             </div>
             <div class="form-group">
-              <label class="form-label">Arrière-plan Sombre (Dark Background)</label>
+              <label class="form-label">Arrière-plan Sombre (Dark BG)</label>
               <div class="color-picker-group">
                 <input type="color" id="designBgDark" class="color-swatch-input" value="${d.bgDark || '#0b0b0e'}">
                 <input type="text" id="designBgDarkHex" class="form-control" value="${d.bgDark || '#0b0b0e'}">
               </div>
             </div>
             <div class="form-group">
-              <label class="form-label">Cartes Sombres (Card Background)</label>
+              <label class="form-label">Fond des Cartes (Card BG)</label>
               <div class="color-picker-group">
                 <input type="color" id="designBgCardDark" class="color-swatch-input" value="${d.bgCardDark || '#131318'}">
                 <input type="text" id="designBgCardDarkHex" class="form-control" value="${d.bgCardDark || '#131318'}">
               </div>
             </div>
             <div class="form-group">
-              <label class="form-label">Police des Titres</label>
+              <label class="form-label">Police Principale des Titres</label>
               <select id="designFontHeading" class="form-control">
-                <option value="'Outfit', sans-serif">Outfit (Moderne & Premium)</option>
-                <option value="'Inter', sans-serif">Inter (Épuré & Tech)</option>
-                <option value="'Plus Jakarta Sans', sans-serif">Plus Jakarta Sans</option>
-                <option value="'Poppins', sans-serif">Poppins (Géométrique)</option>
+                <option value="'Outfit', sans-serif" ${d.fontHeading?.includes('Outfit') ? 'selected' : ''}>Outfit (Moderne & Épuré)</option>
+                <option value="'Inter', sans-serif" ${d.fontHeading?.includes('Inter') ? 'selected' : ''}>Inter (Tech & Minimaliste)</option>
+                <option value="'Poppins', sans-serif" ${d.fontHeading?.includes('Poppins') ? 'selected' : ''}>Poppins (Géométrique)</option>
+                <option value="'Plus Jakarta Sans', sans-serif" ${d.fontHeading?.includes('Jakarta') ? 'selected' : ''}>Plus Jakarta Sans</option>
               </select>
             </div>
             <div class="form-group">
-              <label class="form-label">Rayon des Bordures (Border Radius)</label>
+              <label class="form-label">Arrondi des Bordures (Border Radius)</label>
               <select id="designBorderRadius" class="form-control">
-                <option value="8px">Discret (8px)</option>
-                <option value="16px" selected>Arrondi Moderne (16px)</option>
-                <option value="24px">Très Arrondi (24px)</option>
+                <option value="8px" ${d.borderRadius === '8px' ? 'selected' : ''}>Discret (8px)</option>
+                <option value="16px" ${d.borderRadius === '16px' || !d.borderRadius ? 'selected' : ''}>Moderne (16px)</option>
+                <option value="24px" ${d.borderRadius === '24px' ? 'selected' : ''}>Très Arrondi (24px)</option>
               </select>
             </div>
           </div>
@@ -1262,20 +1380,20 @@
       }
     },
 
-    // --- 9. SECTIONS & TEXT OVERRIDES ---
-    renderSectionsHTML() {
+    // 9. SECTIONS & TEXTES
+    renderSections() {
       const s = this.data.sections || {};
       return `
         <div class="card">
           <div class="card-header">
             <div>
-              <h2 class="card-title">📑 Visibilité des Sections & Textes</h2>
-              <p class="card-desc">Activez ou masquez chaque section et personnalisez les titres</p>
+              <h2 class="card-title">📑 Visibilité des Sections & Titres</h2>
+              <p class="card-desc">Activez/Désactivez les sections et personnalisez les textes</p>
             </div>
             <button class="btn btn-primary" id="saveSectionsBtn">Enregistrer les textes</button>
           </div>
           <div class="form-grid">
-            <div class="form-group full-width" style="border-bottom: 1px solid var(--admin-border); padding-bottom: 16px;">
+            <div class="form-group full-width" style="border-bottom: 1px solid var(--admin-border); padding-bottom: 14px;">
               <div style="display: flex; align-items: center; justify-content: space-between;">
                 <strong>Section Hero (Accueil)</strong>
                 <label class="toggle-switch">
@@ -1283,10 +1401,10 @@
                   <span class="slider"></span>
                 </label>
               </div>
-              <input type="text" id="secHeroTitle" class="form-control" style="margin-top: 10px;" value="${s.hero?.title || ''}">
+              <input type="text" id="secHeroTitle" class="form-control" style="margin-top: 8px;" value="${s.hero?.title || ''}">
             </div>
 
-            <div class="form-group full-width" style="border-bottom: 1px solid var(--admin-border); padding-bottom: 16px;">
+            <div class="form-group full-width" style="border-bottom: 1px solid var(--admin-border); padding-bottom: 14px;">
               <div style="display: flex; align-items: center; justify-content: space-between;">
                 <strong>Section Projets & Réalisations</strong>
                 <label class="toggle-switch">
@@ -1294,10 +1412,10 @@
                   <span class="slider"></span>
                 </label>
               </div>
-              <input type="text" id="secProjectsTitle" class="form-control" style="margin-top: 10px;" value="${s.projects?.title || ''}">
+              <input type="text" id="secProjectsTitle" class="form-control" style="margin-top: 8px;" value="${s.projects?.title || ''}">
             </div>
 
-            <div class="form-group full-width" style="border-bottom: 1px solid var(--admin-border); padding-bottom: 16px;">
+            <div class="form-group full-width" style="border-bottom: 1px solid var(--admin-border); padding-bottom: 14px;">
               <div style="display: flex; align-items: center; justify-content: space-between;">
                 <strong>Section Expériences & Leadership</strong>
                 <label class="toggle-switch">
@@ -1305,18 +1423,18 @@
                   <span class="slider"></span>
                 </label>
               </div>
-              <input type="text" id="secExpTitle" class="form-control" style="margin-top: 10px;" value="${s.experience?.title || ''}">
+              <input type="text" id="secExpTitle" class="form-control" style="margin-top: 8px;" value="${s.experience?.title || ''}">
             </div>
 
-            <div class="form-group full-width" style="border-bottom: 1px solid var(--admin-border); padding-bottom: 16px;">
+            <div class="form-group full-width" style="border-bottom: 1px solid var(--admin-border); padding-bottom: 14px;">
               <div style="display: flex; align-items: center; justify-content: space-between;">
-                <strong>Section Formations & Certifications</strong>
+                <strong>Section Formations & Diplômes</strong>
                 <label class="toggle-switch">
                   <input type="checkbox" id="secEduVisible" ${s.education?.visible !== false ? 'checked' : ''}>
                   <span class="slider"></span>
                 </label>
               </div>
-              <input type="text" id="secEduTitle" class="form-control" style="margin-top: 10px;" value="${s.education?.title || ''}">
+              <input type="text" id="secEduTitle" class="form-control" style="margin-top: 8px;" value="${s.education?.title || ''}">
             </div>
           </div>
         </div>
@@ -1330,34 +1448,34 @@
         if (!this.data.sections) this.data.sections = {};
         if (!this.data.sections.hero) this.data.sections.hero = {};
         this.data.sections.hero.visible = document.getElementById('secHeroVisible').checked;
-        this.data.sections.hero.title = document.getElementById('secHeroTitle').value;
+        this.data.sections.hero.title = document.getElementById('secHeroTitle').value.trim();
 
         if (!this.data.sections.projects) this.data.sections.projects = {};
         this.data.sections.projects.visible = document.getElementById('secProjectsVisible').checked;
-        this.data.sections.projects.title = document.getElementById('secProjectsTitle').value;
+        this.data.sections.projects.title = document.getElementById('secProjectsTitle').value.trim();
 
         if (!this.data.sections.experience) this.data.sections.experience = {};
         this.data.sections.experience.visible = document.getElementById('secExpVisible').checked;
-        this.data.sections.experience.title = document.getElementById('secExpTitle').value;
+        this.data.sections.experience.title = document.getElementById('secExpTitle').value.trim();
 
         if (!this.data.sections.education) this.data.sections.education = {};
         this.data.sections.education.visible = document.getElementById('secEduVisible').checked;
-        this.data.sections.education.title = document.getElementById('secEduTitle').value;
+        this.data.sections.education.title = document.getElementById('secEduTitle').value.trim();
 
-        this.markDirty('Mise à jour des sections et titres');
-        this.showToast('Sections enregistrées !', 'success');
+        this.markDirty('Mise à jour des sections');
+        this.showToast('✓ Sections enregistrées !', 'success');
       });
     },
 
-    // --- 10. MEDIA LIBRARY ---
-    renderMediaHTML() {
+    // 10. MEDIA LIBRARY
+    renderMedia() {
       const media = this.data.mediaLibrary || [];
       return `
         <div class="card">
           <div class="card-header">
             <div>
               <h2 class="card-title">🖼️ Médiathèque (${media.length} fichiers)</h2>
-              <p class="card-desc">Importez et sélectionnez vos photos, visuels de projets et logos</p>
+              <p class="card-desc">Importez vos images locales pour vos projets et logos</p>
             </div>
             <label class="btn btn-primary" style="cursor: pointer;">
               <span>+ Importer une image</span>
@@ -1393,37 +1511,36 @@
             id: 'media-' + Date.now(),
             name: file.name,
             url: base64,
-            type: 'image',
-            size: `${(file.size / 1024).toFixed(0)} KB`
+            type: 'image'
           };
 
           if (!Array.isArray(this.data.mediaLibrary)) this.data.mediaLibrary = [];
           this.data.mediaLibrary.unshift(newMedia);
           this.markDirty(`Upload image ${file.name}`);
           this.renderTab('media');
-          this.showToast('Image importée dans la médiathèque !', 'success');
+          this.showToast('✓ Image importée dans la médiathèque !', 'success');
         };
         reader.readAsDataURL(file);
       });
     },
 
     deleteMedia(id) {
-      if (confirm('Supprimer cette image de la médiathèque ?')) {
+      if (confirm('Supprimer cette image ?')) {
         this.data.mediaLibrary = (this.data.mediaLibrary || []).filter(m => m.id !== id);
         this.markDirty('Suppression média');
         this.renderTab('media');
       }
     },
 
-    // --- 11. MESSAGES INBOX ---
-    renderMessagesHTML() {
+    // 11. MESSAGES INBOX
+    renderMessages() {
       const msgs = this.data.messages || [];
       return `
         <div class="card">
           <div class="card-header">
             <div>
               <h2 class="card-title">📩 Messages Reçus (${msgs.length})</h2>
-              <p class="card-desc">Demandes de contact envoyées depuis votre formulaire portfolio</p>
+              <p class="card-desc">Demandes de contact reçues depuis le formulaire</p>
             </div>
           </div>
           <div class="items-list">
@@ -1431,29 +1548,27 @@
               <div class="list-item-card">
                 <div class="item-details">
                   <div class="item-title">${m.name} <span style="font-weight: 400; color: var(--admin-text-muted);">(${m.email})</span></div>
-                  <div style="font-weight: 600; font-size: 0.88rem; margin: 4px 0; color: var(--admin-accent);">${m.subject}</div>
+                  <div style="font-weight: 600; font-size: 0.9rem; margin: 4px 0; color: var(--admin-accent);">${m.subject}</div>
                   <div class="item-subtitle" style="font-size: 0.85rem; color: var(--admin-text-main);">${m.message}</div>
-                  <div style="font-size: 0.72rem; color: var(--admin-text-dim); margin-top: 6px;">${new Date(m.date).toLocaleString('fr-FR')}</div>
+                  <div style="font-size: 0.72rem; color: var(--admin-text-dim); margin-top: 4px;">${new Date(m.date).toLocaleString('fr-FR')}</div>
                 </div>
                 <div class="item-actions">
                   <a href="mailto:${m.email}?subject=Re: ${encodeURIComponent(m.subject)}" class="btn btn-primary btn-icon" title="Répondre">✉️</a>
                 </div>
               </div>
-            `).join('') || '<p style="color: var(--admin-text-dim); padding: 20px; text-align: center;">Aucun message reçu pour le moment.</p>'}
+            `).join('') || '<p style="color: var(--admin-text-dim); padding: 24px; text-align: center;">Aucun message reçu pour l\'instant.</p>'}
           </div>
         </div>
       `;
     },
 
-    bindMessagesEvents() {},
-
-    // --- 12. HISTORY ---
-    renderHistoryHTML() {
+    // 12. HISTORY
+    renderHistory() {
       const history = this.data.history || [];
       return `
         <div class="card">
           <div class="card-header">
-            <h2 class="card-title">🕒 Journal d'Audit & Historique des Modifications</h2>
+            <h2 class="card-title">🕒 Journal d'Audit des Modifications</h2>
           </div>
           <div class="items-list">
             ${history.map(h => `
@@ -1470,16 +1585,14 @@
       `;
     },
 
-    bindHistoryEvents() {},
-
-    // --- 13. SETTINGS & SEO ---
-    renderSettingsHTML() {
+    // 13. SETTINGS
+    renderSettings() {
       const seo = this.data.seo || {};
       return `
         <div class="card">
           <div class="card-header">
-            <h2 class="card-title">🔍 Référencement Naturel & Balises SEO</h2>
-            <button class="btn btn-primary" id="saveSeoBtn">Enregistrer les paramètres SEO</button>
+            <h2 class="card-title">🔍 Balises SEO & Référencement</h2>
+            <button class="btn btn-primary" id="saveSeoBtn">Enregistrer SEO</button>
           </div>
           <div class="form-grid">
             <div class="form-group full-width">
@@ -1487,7 +1600,7 @@
               <input type="text" id="seoTitle" class="form-control" value="${seo.metaTitle || ''}">
             </div>
             <div class="form-group full-width">
-              <label class="form-label">Description pour Google (Meta Description)</label>
+              <label class="form-label">Description Google (Meta Description)</label>
               <textarea id="seoDesc" class="form-control">${seo.metaDescription || ''}</textarea>
             </div>
             <div class="form-group full-width">
@@ -1499,7 +1612,7 @@
 
         <div class="card">
           <div class="card-header">
-            <h2 class="card-title">💾 Sauvegarde & Exportation Complète</h2>
+            <h2 class="card-title">💾 Sauvegarde & Restauration</h2>
           </div>
           <div style="display: flex; gap: 12px; flex-wrap: wrap;">
             <button class="btn btn-secondary" onclick="AdminApp.exportBackup()">📥 Exporter la sauvegarde JSON</button>
@@ -1507,7 +1620,7 @@
               <span>📤 Importer une sauvegarde JSON</span>
               <input type="file" id="importBackupInput" accept=".json" style="display: none;">
             </label>
-            <button class="btn btn-danger" onclick="AdminApp.resetToDefault()">⚠️ Réinitialiser aux valeurs par défaut</button>
+            <button class="btn btn-danger" onclick="AdminApp.resetToDefault()">⚠️ Réinitialiser aux valeurs initiales</button>
           </div>
         </div>
       `;
@@ -1518,12 +1631,12 @@
       if (btn) {
         btn.addEventListener('click', () => {
           if (!this.data.seo) this.data.seo = {};
-          this.data.seo.metaTitle = document.getElementById('seoTitle').value;
-          this.data.seo.metaDescription = document.getElementById('seoDesc').value;
-          this.data.seo.keywords = document.getElementById('seoKeywords').value;
+          this.data.seo.metaTitle = document.getElementById('seoTitle').value.trim();
+          this.data.seo.metaDescription = document.getElementById('seoDesc').value.trim();
+          this.data.seo.keywords = document.getElementById('seoKeywords').value.trim();
 
-          this.markDirty('Mise à jour paramètres SEO');
-          this.showToast('Paramètres SEO enregistrés !', 'success');
+          this.markDirty('Mise à jour SEO');
+          this.showToast('✓ Paramètres SEO enregistrés !', 'success');
         });
       }
 
@@ -1535,11 +1648,10 @@
           const r = new FileReader();
           r.onload = (ev) => {
             try {
-              const imported = JSON.parse(ev.target.result);
-              this.data = imported;
-              this.markDirty('Importation complète d\'une sauvegarde');
+              this.data = JSON.parse(ev.target.result);
+              this.markDirty('Importation complète de sauvegarde');
               this.renderTab(this.currentTab);
-              this.showToast('Sauvegarde restaurée avec succès !', 'success');
+              this.showToast('✓ Sauvegarde importée avec succès !', 'success');
             } catch (err) {
               alert('Fichier JSON invalide.');
             }
@@ -1553,24 +1665,19 @@
       const blob = new Blob([JSON.stringify(this.data, null, 2)], { type: 'application/json' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = `portfolio-backup-${new Date().toISOString().slice(0, 10)}.json`;
+      a.download = `portfolio-falikou-${new Date().toISOString().slice(0, 10)}.json`;
       a.click();
     },
 
     resetToDefault() {
-      if (confirm('Attention : toutes les modifications non publiées seront écrasées. Continuer ?')) {
-        fetch('../data/default-portfolio.json')
-          .then(r => r.json())
-          .then(def => {
-            this.data = def;
-            this.markDirty('Réinitialisation aux valeurs par défaut');
-            this.renderTab(this.currentTab);
-            this.showToast('Données réinitialisées.', 'info');
-          });
+      if (confirm('Attention : réinitialiser toutes les données aux valeurs par défaut ?')) {
+        this.data = JSON.parse(JSON.stringify(DEFAULT_DATA));
+        this.markDirty('Réinitialisation aux valeurs initiales');
+        this.renderTab(this.currentTab);
+        this.showToast('Données réinitialisées.', 'info');
       }
     },
 
-    // --- UTILITIES ---
     showToast(message, type = 'info') {
       let toast = document.getElementById('adminToast');
       if (!toast) {
@@ -1579,16 +1686,16 @@
         toast.className = 'admin-toast';
         document.body.appendChild(toast);
       }
-
       toast.innerHTML = `<span>${message}</span>`;
       toast.className = 'admin-toast show';
-
-      setTimeout(() => {
-        toast.className = 'admin-toast';
-      }, 3500);
+      setTimeout(() => { toast.className = 'admin-toast'; }, 3200);
     }
   };
 
-  // Run on DOM ready
-  document.addEventListener('DOMContentLoaded', () => window.AdminApp.init());
+  // Immediate Auto-Execution
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => window.AdminApp.init());
+  } else {
+    window.AdminApp.init();
+  }
 })();

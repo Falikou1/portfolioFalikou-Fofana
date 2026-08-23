@@ -1,7 +1,9 @@
 /**
- * FALIKOU FOFANA — Dynamic Portfolio Renderer & Hydration Engine
- * Connects the public website with the CMS backend / localStorage cache.
- * Supports Live Split-View Preview with real-time postMessage streaming.
+ * ==========================================================================
+ * FALIKOU FOFANA — PORTFOLIO DYNAMIC RENDERING & HYDRATION ENGINE
+ * Connects the public website with the CMS data store / API / localStorage.
+ * Handles instant rendering, live preview updates, modal data binding & theming.
+ * ==========================================================================
  */
 
 (function () {
@@ -10,7 +12,6 @@
   const STORAGE_KEY = 'falikou_portfolio_data';
   const DRAFT_KEY = 'falikou_portfolio_draft';
 
-  // Check if page is in preview mode (e.g. inside Admin iframe or ?preview=1)
   const urlParams = new URLSearchParams(window.location.search);
   const isPreviewMode = urlParams.get('preview') === '1' || window.self !== window.top;
 
@@ -19,27 +20,28 @@
     isLoaded: false,
 
     async init() {
-      // 1. Try to load cached data first for 0ms initial render
-      const cached = isPreviewMode ? localStorage.getItem(DRAFT_KEY) || localStorage.getItem(STORAGE_KEY) : localStorage.getItem(STORAGE_KEY);
+      // 1. Load cached data for instant 0ms first render
+      const cached = isPreviewMode 
+        ? (localStorage.getItem(DRAFT_KEY) || localStorage.getItem(STORAGE_KEY)) 
+        : localStorage.getItem(STORAGE_KEY);
+
       if (cached) {
         try {
           this.data = JSON.parse(cached);
-          this.render();
+          this.renderAll();
         } catch (e) {
-          console.warn('Invalid local portfolio cache', e);
+          console.warn('PortfolioEngine: Invalid cache', e);
         }
       }
 
-      // 2. Fetch fresh data from backend
-      await this.fetchFreshData();
+      // 2. Fetch fresh data from backend / JSON
+      await this.fetchData();
 
-      // 3. Setup Live Preview listener for Admin CMS iframe
-      if (isPreviewMode) {
-        this.setupLivePreviewListener();
-      }
+      // 3. Setup real-time listener for Admin Live Preview iframe
+      this.setupLiveListener();
     },
 
-    async fetchFreshData() {
+    async fetchData() {
       try {
         const endpoint = window.location.pathname.includes('/portfolio/') 
           ? 'api/index.php?route=portfolio' 
@@ -51,147 +53,338 @@
           if (json.success && json.data) {
             this.data = json.data;
             localStorage.setItem(STORAGE_KEY, JSON.stringify(this.data));
-            this.render();
+            this.renderAll();
             return;
           }
         }
       } catch (err) {
-        console.log('Using static or cached portfolio data fallback');
+        // Fallback below
       }
 
-      // 4. Fallback to default json file if API offline
+      // Fallback to default json file
       if (!this.data) {
         try {
-          const res = await fetch('data/default-portfolio.json');
-          if (res.ok) {
-            this.data = await res.json();
+          const defRes = await fetch('data/default-portfolio.json');
+          if (defRes.ok) {
+            this.data = await defRes.json();
             localStorage.setItem(STORAGE_KEY, JSON.stringify(this.data));
-            this.render();
+            this.renderAll();
           }
         } catch (e) {
-          console.warn('Could not load default-portfolio.json', e);
+          console.warn('PortfolioEngine: Could not load default json', e);
         }
       }
     },
 
-    render() {
+    renderAll() {
       if (!this.data) return;
       const d = this.data;
 
-      // A. APPLY DESIGN TOKENS (CSS VARIABLES)
-      if (d.design) {
-        const root = document.documentElement;
-        if (d.design.accentColor) root.style.setProperty('--accent', d.design.accentColor);
-        if (d.design.accentHover) root.style.setProperty('--accent-hover', d.design.accentHover);
-        if (d.design.bgDark) root.style.setProperty('--bg-dark', d.design.bgDark);
-        if (d.design.bgCardDark) root.style.setProperty('--bg-card', d.design.bgCardDark);
-        if (d.design.borderRadius) root.style.setProperty('--border-radius-base', d.design.borderRadius);
-        if (d.design.fontHeading) root.style.setProperty('--font-sans', d.design.fontHeading);
-      }
-
-      // B. PROFILE & HEADER
-      if (d.profile) {
-        const p = d.profile;
-
-        // Name & Titles
-        document.querySelectorAll('.profile-name, .footer-bigname-text').forEach(el => el.textContent = p.fullName || `${p.firstName} ${p.lastName}`);
-        document.querySelectorAll('.profile-title').forEach(el => el.textContent = p.title);
-        
-        // Brand avatars
-        if (p.photo) {
-          document.querySelectorAll('.brand-avatar, .mobile-drawer-avatar').forEach(img => {
-            img.src = p.photo;
-            img.alt = p.fullName;
-          });
-          const heroAvatar = document.querySelector('.hero-photo-img');
-          if (heroAvatar) heroAvatar.src = p.photo;
-        }
-
-        // Contact info
-        if (p.email) {
-          document.querySelectorAll('.link-email').forEach(a => {
-            a.href = `mailto:${p.email}`;
-            a.textContent = p.email;
-          });
-        }
-        if (p.phone) {
-          document.querySelectorAll('.link-phone').forEach(a => {
-            a.href = `tel:${p.phoneRaw || p.phone.replace(/\s+/g, '')}`;
-            const span = a.querySelector('span');
-            if (span) span.textContent = `Tél : ${p.phone}`;
-          });
-        }
-        if (p.location) {
-          document.querySelectorAll('.badge-location').forEach(el => el.textContent = p.location);
-        }
-        if (p.resumeUrl) {
-          document.querySelectorAll('a[download]').forEach(a => {
-            a.href = p.resumeUrl;
-            a.setAttribute('download', p.resumeUrl.split('/').pop());
-          });
-        }
-      }
-
-      // C. SECTION VISIBILITY
-      if (d.sections) {
-        Object.keys(d.sections).forEach(secKey => {
-          const secConfig = d.sections[secKey];
-          const secEl = document.getElementById(secKey) || document.querySelector(`section#${secKey}`);
-          if (secEl && secConfig.visible !== undefined) {
-            secEl.style.display = secConfig.visible ? '' : 'none';
-          }
-        });
-      }
-
-      // D. HERO CONTENT
-      if (d.sections && d.sections.hero) {
-        const h = d.sections.hero;
-        const heroTitle = document.querySelector('.hero__title');
-        if (heroTitle && h.title) {
-          heroTitle.innerHTML = h.title.replace(/\n/g, '<br>');
-        }
-        const heroBadge = document.querySelector('.status-indicator span:last-child');
-        if (heroBadge && h.badge) heroBadge.textContent = h.badge;
-      }
-
-      // E. METRICS
-      if (d.sections && d.sections.metrics && Array.isArray(d.sections.metrics.items)) {
-        const metricNumbers = document.querySelectorAll('.counter__number');
-        d.sections.metrics.items.forEach((m, idx) => {
-          if (metricNumbers[idx]) {
-            metricNumbers[idx].setAttribute('data-target', m.value);
-            metricNumbers[idx].textContent = m.value;
-          }
-        });
-      }
-
-      // F. SEO SETTINGS
-      if (d.seo) {
-        if (d.seo.metaTitle) document.title = d.seo.metaTitle;
-        const metaDesc = document.querySelector('meta[name="description"]');
-        if (metaDesc && d.seo.metaDescription) metaDesc.setAttribute('content', d.seo.metaDescription);
-      }
+      this.applyDesignTheme(d.design);
+      this.renderProfile(d.profile);
+      this.renderSectionsVisibility(d.sections);
+      this.renderHero(d.profile, d.sections?.hero);
+      this.renderMetrics(d.sections?.metrics);
+      this.renderProjects(d.projects, d.sections?.projects);
+      this.renderSkills(d.skills, d.sections?.skills);
+      this.renderExperiences(d.experiences, d.sections?.experience);
+      this.renderEducations(d.educations, d.sections?.education);
+      this.renderFooter(d.profile);
+      this.renderSEO(d.seo);
 
       this.isLoaded = true;
     },
 
-    setupLivePreviewListener() {
-      window.addEventListener('message', (event) => {
-        if (event.data && event.data.type === 'PORTFOLIO_PREVIEW_UPDATE') {
-          this.data = event.data.payload;
+    // 1. DESIGN THEME & CSS VARIABLES
+    applyDesignTheme(design) {
+      if (!design) return;
+      const root = document.documentElement;
+
+      if (design.accentColor) {
+        root.style.setProperty('--accent', design.accentColor);
+        // Also update any inline SVGs with stroke or fill
+        document.querySelectorAll('.accent-colored').forEach(el => el.style.color = design.accentColor);
+      }
+      if (design.accentHover) root.style.setProperty('--accent-hover', design.accentHover);
+      if (design.bgDark) root.style.setProperty('--bg-dark', design.bgDark);
+      if (design.bgCardDark) root.style.setProperty('--bg-card', design.bgCardDark);
+      if (design.borderRadius) root.style.setProperty('--border-radius-base', design.borderRadius);
+      if (design.fontHeading) {
+        root.style.setProperty('--font-sans', design.fontHeading);
+        document.body.style.fontFamily = design.fontHeading;
+      }
+    },
+
+    // 2. PROFILE & CONTACT INFO
+    renderProfile(profile) {
+      if (!profile) return;
+
+      // Full Name
+      const name = profile.fullName || `${profile.firstName || ''} ${profile.lastName || ''}`.trim();
+      document.querySelectorAll('.profile-name, .footer-bigname-text, .hero-author-name').forEach(el => {
+        if (el) el.textContent = name;
+      });
+
+      // Title & Subtitle
+      document.querySelectorAll('.profile-title, .hero-author-role').forEach(el => {
+        if (el) el.textContent = profile.title || '';
+      });
+
+      // Avatars & Photos
+      if (profile.photo) {
+        document.querySelectorAll('.brand-avatar, .mobile-drawer-avatar, .hero-photo-img, .author-avatar').forEach(img => {
+          if (img) {
+            img.src = profile.photo;
+            img.alt = name;
+          }
+        });
+      }
+
+      // Resume Links
+      if (profile.resumeUrl) {
+        document.querySelectorAll('a[download], .desktop-cv-btn, .mobile-drawer-cv-btn, .cv-download-link').forEach(a => {
+          if (a) {
+            a.href = profile.resumeUrl;
+            a.setAttribute('download', profile.resumeUrl.split('/').pop());
+          }
+        });
+      }
+
+      // Location & University Badges
+      if (profile.location) {
+        document.querySelectorAll('.badge-location, .badge-text-sub').forEach(el => {
+          if (el && el.textContent.includes('Abidjan') || el.classList.contains('badge-location')) {
+            el.textContent = profile.location;
+          }
+        });
+      }
+    },
+
+    // 3. SECTION VISIBILITY
+    renderSectionsVisibility(sections) {
+      if (!sections) return;
+      Object.keys(sections).forEach(secKey => {
+        const secConfig = sections[secKey];
+        const secEl = document.getElementById(secKey) || document.querySelector(`section#${secKey}`) || document.querySelector(`footer#${secKey}`);
+        if (secEl && secConfig.visible !== undefined) {
+          secEl.style.display = secConfig.visible ? '' : 'none';
+        }
+      });
+    },
+
+    // 4. HERO SECTION
+    renderHero(profile, heroConfig) {
+      const heroTitle = document.querySelector('.hero__title');
+      if (heroTitle && heroConfig && heroConfig.title) {
+        heroTitle.innerHTML = heroConfig.title.replace(/\n/g, '<br>');
+      }
+
+      const heroBio = document.querySelector('.hero__desc');
+      if (heroBio && profile && (profile.shortBio || profile.fullBio)) {
+        heroBio.innerHTML = (profile.shortBio || profile.fullBio).replace(/\n/g, '<br>');
+      }
+
+      const statusBadge = document.querySelector('.status-indicator span:last-child');
+      if (statusBadge && (heroConfig?.badge || profile?.statusBadge)) {
+        statusBadge.textContent = heroConfig?.badge || profile?.statusBadge;
+      }
+    },
+
+    // 5. METRICS / FUN-FACT
+    renderMetrics(metricsConfig) {
+      if (!metricsConfig || !Array.isArray(metricsConfig.items)) return;
+      const counterNumbers = document.querySelectorAll('.counter__number');
+      const counterLabels = document.querySelectorAll('.counter__card .counter__title');
+      const counterDescs = document.querySelectorAll('.counter__card .counter__desc');
+
+      metricsConfig.items.forEach((m, idx) => {
+        if (counterNumbers[idx]) {
+          counterNumbers[idx].setAttribute('data-target', m.value);
+          counterNumbers[idx].textContent = m.value;
+        }
+        if (counterLabels[idx] && m.label) counterLabels[idx].textContent = m.label;
+        if (counterDescs[idx] && m.desc) counterDescs[idx].textContent = m.desc;
+      });
+    },
+
+    // 6. PROJECTS SECTION & MODAL RE-BINDING
+    renderProjects(projects, secConfig) {
+      if (!Array.isArray(projects)) return;
+      const projectsSection = document.getElementById('projects');
+      if (!projectsSection) return;
+
+      if (secConfig) {
+        const tagEl = projectsSection.querySelector('.section__title');
+        if (tagEl && secConfig.tag) tagEl.textContent = secConfig.tag;
+        const titleEl = projectsSection.querySelector('.heading-h2, .projects-main-title');
+        if (titleEl && secConfig.title) titleEl.textContent = secConfig.title;
+        const subEl = projectsSection.querySelector('.section__subtitle');
+        if (subEl && secConfig.subtitle) subEl.textContent = secConfig.subtitle;
+      }
+
+      // Update project detail data for modals in main.js
+      if (window.projectDetailsData) {
+        projects.forEach(p => {
+          window.projectDetailsData[p.id] = {
+            category: p.category,
+            title: p.title,
+            year: p.year || '',
+            role: p.role || 'Data Analyst',
+            image: p.image || 'assets/images/project-bi.jpg',
+            desc: p.desc || '',
+            details: p.details || [],
+            tags: p.tags || []
+          };
+        });
+      }
+
+      // Update project cards on the page
+      const cards = projectsSection.querySelectorAll('.project-card');
+      projects.forEach((proj, idx) => {
+        if (cards[idx]) {
+          cards[idx].setAttribute('data-project-id', proj.id);
+          const img = cards[idx].querySelector('.project__image img');
+          if (img && proj.image) {
+            img.src = proj.image;
+            img.alt = proj.title;
+          }
+          const cat = cards[idx].querySelector('.project-category, .project__tag');
+          if (cat && proj.category) cat.textContent = proj.category;
+          const title = cards[idx].querySelector('.project__title, h3');
+          if (title && proj.title) title.textContent = proj.title;
+          const desc = cards[idx].querySelector('.project__desc, p');
+          if (desc && proj.desc) desc.textContent = proj.desc;
+        }
+      });
+    },
+
+    // 7. SKILLS SECTION
+    renderSkills(skills, secConfig) {
+      if (!Array.isArray(skills)) return;
+      const skillsSection = document.getElementById('skills');
+      if (!skillsSection) return;
+
+      if (secConfig) {
+        const tagEl = skillsSection.querySelector('.section__title');
+        if (tagEl && secConfig.tag) tagEl.textContent = secConfig.tag;
+        const subEl = skillsSection.querySelector('.section__subtitle');
+        if (subEl && secConfig.subtitle) subEl.textContent = secConfig.subtitle;
+      }
+    },
+
+    // 8. EXPERIENCES SECTION
+    renderExperiences(experiences, secConfig) {
+      if (!Array.isArray(experiences)) return;
+      const expSection = document.getElementById('experience');
+      if (!expSection) return;
+
+      if (secConfig) {
+        const tagEl = expSection.querySelector('.section__title');
+        if (tagEl && secConfig.tag) tagEl.textContent = secConfig.tag;
+      }
+
+      const timelineItems = expSection.querySelectorAll('.timeline-item, .exp-card');
+      experiences.forEach((exp, idx) => {
+        if (timelineItems[idx]) {
+          const roleEl = timelineItems[idx].querySelector('.exp-role-title');
+          if (roleEl && exp.role) roleEl.textContent = exp.role;
+          const compEl = timelineItems[idx].querySelector('.exp-company-text');
+          if (compEl && exp.company) compEl.textContent = exp.company;
+          const periodEl = timelineItems[idx].querySelector('.exp-period-badge');
+          if (periodEl && exp.period) periodEl.textContent = exp.period;
+          const descEl = timelineItems[idx].querySelector('.exp-desc-text');
+          if (descEl && exp.desc) descEl.textContent = exp.desc;
+          const logoEl = timelineItems[idx].querySelector('.exp-logo-img');
+          if (logoEl && exp.logo) logoEl.src = exp.logo;
+        }
+      });
+    },
+
+    // 9. EDUCATIONS & CERTIFICATIONS SECTION
+    renderEducations(educations, secConfig) {
+      if (!Array.isArray(educations)) return;
+      const eduSection = document.getElementById('education');
+      if (!eduSection) return;
+
+      if (secConfig) {
+        const tagEl = eduSection.querySelector('.section__title');
+        if (tagEl && secConfig.tag) tagEl.textContent = secConfig.tag;
+      }
+
+      const eduCards = eduSection.querySelectorAll('.blog__card');
+      educations.forEach((edu, idx) => {
+        if (eduCards[idx]) {
+          const title = eduCards[idx].querySelector('.blog__title');
+          if (title && edu.degree) title.textContent = edu.degree;
+          const tag = eduCards[idx].querySelector('.blog-tag');
+          if (tag && edu.category) tag.textContent = edu.category;
+          const desc = eduCards[idx].querySelector('.blog-desc');
+          if (desc && edu.desc) desc.innerHTML = edu.desc.replace(/\n/g, '<br>');
+          const img = eduCards[idx].querySelector('.blog__figure img');
+          if (img && edu.logo) {
+            img.src = edu.logo;
+            img.alt = edu.degree;
+          }
+        }
+      });
+    },
+
+    // 10. FOOTER
+    renderFooter(profile) {
+      if (!profile) return;
+      const footer = document.querySelector('footer');
+      if (!footer) return;
+
+      const phoneLink = footer.querySelector('a[href^="tel:"]');
+      if (phoneLink && profile.phone) {
+        phoneLink.href = `tel:${profile.phoneRaw || profile.phone.replace(/\s+/g, '')}`;
+        const span = phoneLink.querySelector('span');
+        if (span) span.textContent = `Tél : ${profile.phone}`;
+      }
+
+      const emailLink = footer.querySelector('a[href^="mailto:"]');
+      if (emailLink && profile.email) {
+        emailLink.href = `mailto:${profile.email}`;
+      }
+
+      const linkedinLink = footer.querySelector('a[title="LinkedIn"]');
+      if (linkedinLink && profile.socials?.linkedin) {
+        linkedinLink.href = profile.socials.linkedin;
+      }
+
+      const whatsappLink = footer.querySelector('a[title="WhatsApp"]');
+      if (whatsappLink && profile.socials?.whatsapp) {
+        whatsappLink.href = profile.socials.whatsapp;
+      }
+    },
+
+    // 11. SEO META TAGS
+    renderSEO(seo) {
+      if (!seo) return;
+      if (seo.metaTitle) document.title = seo.metaTitle;
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc && seo.metaDescription) metaDesc.setAttribute('content', seo.metaDescription);
+      const metaKeywords = document.querySelector('meta[name="keywords"]');
+      if (metaKeywords && seo.keywords) metaKeywords.setAttribute('content', seo.keywords);
+    },
+
+    // 12. REAL-TIME LIVE LISTENER (IFRAME STREAMING)
+    setupLiveListener() {
+      window.addEventListener('message', (e) => {
+        if (e.data && e.data.type === 'PORTFOLIO_PREVIEW_UPDATE' && e.data.payload) {
+          this.data = e.data.payload;
           localStorage.setItem(DRAFT_KEY, JSON.stringify(this.data));
-          this.render();
+          this.renderAll();
         }
       });
 
-      // Signal to parent window that preview iframe is ready
       if (window.parent && window.parent !== window) {
         window.parent.postMessage({ type: 'PREVIEW_READY' }, '*');
       }
     }
   };
 
-  // Initialize engine
+  // Run automatically
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => window.PortfolioEngine.init());
   } else {
