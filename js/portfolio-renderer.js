@@ -54,14 +54,29 @@
     },
 
     async fetchServerData() {
-      const isLocalHost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-      const endpoints = isLocalHost
-        ? ['api/index.php?route=portfolio', 'data/portfolio.json', 'data/default-portfolio.json']
-        : ['/api/portfolio', 'data/portfolio.json', 'data/default-portfolio.json'];
+      const isLocal = window.location.pathname.includes('/portfolio/') || 
+                      window.location.hostname === 'localhost' || 
+                      window.location.hostname === '127.0.0.1' || 
+                      window.location.hostname.startsWith('192.168.') || 
+                      window.location.hostname.startsWith('10.');
 
-      for (const url of endpoints) {
+      const endpoints = isLocal
+        ? [
+            'api/index.php?route=portfolio',
+            'data/portfolio.json',
+            'https://raw.githubusercontent.com/Falikou1/portfolioFalikou-Fofana/main/data/portfolio.json'
+          ]
+        : [
+            '/api/portfolio',
+            'data/portfolio.json',
+            'https://raw.githubusercontent.com/Falikou1/portfolioFalikou-Fofana/main/data/portfolio.json'
+          ];
+
+      for (const base of endpoints) {
         try {
-          const res = await fetch(url, { cache: 'no-cache' });
+          const sep = base.includes('?') ? '&' : '?';
+          const url = `${base}${sep}_t=${Date.now()}`;
+          const res = await fetch(url, { cache: 'no-store' });
           if (res.ok) {
             const json = await res.json();
             const payload = (json && json.data) ? json.data : json;

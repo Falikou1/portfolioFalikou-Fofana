@@ -107,7 +107,11 @@ if ($route === 'portfolio' || empty($route)) {
 
     if ($method === 'POST' || $method === 'PUT') {
         $session = verifyToken($headers);
-        $isLocal = (isset($_SERVER['REMOTE_ADDR']) && in_array($_SERVER['REMOTE_ADDR'], ['127.0.0.1', '::1', 'localhost']));
+        $remoteIp = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '';
+        $isLocal = in_array($remoteIp, ['127.0.0.1', '::1', 'localhost']) || 
+                   strpos($remoteIp, '192.168.') === 0 || 
+                   strpos($remoteIp, '10.') === 0 || 
+                   strpos($remoteIp, '172.') === 0;
         if (!$session && !$isLocal) {
             http_response_code(401);
             echo json_encode(['success' => false, 'message' => 'Accès non autorisé.']);

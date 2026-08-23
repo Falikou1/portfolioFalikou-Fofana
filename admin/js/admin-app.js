@@ -291,7 +291,7 @@
 
     async syncFromAPI() {
       try {
-        const isLocalHost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const isLocalHost = window.location.pathname.includes('/portfolio/') || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname.startsWith('192.168.') || window.location.hostname.startsWith('10.');
         const endpoint = isLocalHost ? '../api/index.php?route=portfolio' : '/api/portfolio';
 
         const res = await fetch(endpoint, { cache: 'no-cache' });
@@ -346,7 +346,7 @@
 
       // 5. Envoi asynchrone à l'API backend
       try {
-        const isLocalHost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const isLocalHost = window.location.pathname.includes('/portfolio/') || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname.startsWith('192.168.') || window.location.hostname.startsWith('10.');
         const endpoint = isLocalHost ? '../api/index.php?route=portfolio' : '/api/portfolio';
 
         const token = (typeof AdminAuth !== 'undefined' && AdminAuth.getToken) ? AdminAuth.getToken() : '';
@@ -397,7 +397,7 @@
         const headers = { 'Content-Type': 'application/json' };
         if (token) headers['Authorization'] = `Bearer ${token}`;
 
-        const isLocalHost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const isLocalHost = window.location.pathname.includes('/portfolio/') || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname.startsWith('192.168.') || window.location.hostname.startsWith('10.');
         const endpoint = isLocalHost ? '../api/index.php?route=portfolio' : '/api/publish';
 
         // 1. Sauvegarde locale / API
