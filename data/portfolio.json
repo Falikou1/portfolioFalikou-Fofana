@@ -2,7 +2,7 @@
   "profile": {
     "firstName": "Falikou",
     "lastName": "FOFANA",
-    "fullName": "Falikou FOFANA",
+    "fullName": "FALIKOU FOFANA",
     "title": "Data Analyst & Concepteur BI",
     "subTitle": "Étudiant en 3e année Génie Informatique (IUA)",
     "statusBadge": "Disponible pour stage / missions",
@@ -477,6 +477,27 @@
   "messages": [],
   "history": [
     {
+      "id": "hist-1787524347889",
+      "timestamp": "2026-08-23T22:32:27.889Z",
+      "action": "Publication",
+      "target": "Portfolio",
+      "details": "Titre & Bio modifiés depuis le Dashboard"
+    },
+    {
+      "id": "h-1787524344566",
+      "timestamp": "2026-08-23T22:32:24.566Z",
+      "action": "Titre & Bio modifiés depuis le Dashboard",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787523550979",
+      "timestamp": "2026-08-23T22:19:10.979Z",
+      "action": "Titre & Bio modifiés depuis le Dashboard",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
       "id": "h-1787521285964",
       "timestamp": "2026-08-23T21:41:25.964Z",
       "action": "Nouveau CV PDF (CV_FalikouFOFANA_Data_Analyst.pdf) importé et appliqué sur tout le site",
@@ -804,27 +825,6 @@
       "action": "Couleur modifiée",
       "target": "Portfolio",
       "details": "Enregistré dans la base de données"
-    },
-    {
-      "id": "h-1787511724549",
-      "timestamp": "2026-08-23T19:02:04.549Z",
-      "action": "Couleur modifiée",
-      "target": "Portfolio",
-      "details": "Enregistré dans la base de données"
-    },
-    {
-      "id": "h-1787511724515",
-      "timestamp": "2026-08-23T19:02:04.515Z",
-      "action": "Couleur modifiée",
-      "target": "Portfolio",
-      "details": "Enregistré dans la base de données"
-    },
-    {
-      "id": "h-1787511724420",
-      "timestamp": "2026-08-23T19:02:04.420Z",
-      "action": "Couleur modifiée",
-      "target": "Portfolio",
-      "details": "Enregistré dans la base de données"
     }
   ],
   "seo": {
@@ -836,7 +836,7 @@
   },
   "settings": {
     "siteName": "Falikou FOFANA — Portfolio",
-    "lastPublished": "2026-08-23T21:41:25.964Z",
+    "lastPublished": "2026-08-23T22:32:27.889Z",
     "version": "1.0.0"
   }
 }
