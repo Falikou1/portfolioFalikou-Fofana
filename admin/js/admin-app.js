@@ -2616,15 +2616,15 @@ ${m.message || '(Aucun contenu)'}
             <div class="form-grid">
               <div class="form-group full-width">
                 <label class="form-label">Mot de passe actuel</label>
-                <input type="password" id="secCurrentPassword" class="form-control" placeholder="••••••••••••">
+                <input type="password" id="secCurrentPassword" class="form-control" placeholder="">
               </div>
               <div class="form-group">
                 <label class="form-label">Nouveau mot de passe fort</label>
-                <input type="password" id="secNewPassword" class="form-control" placeholder="Min. 8 caractères (Maj, Min, Chiffres, Symboles)">
+                <input type="password" id="secNewPassword" class="form-control" placeholder="">
               </div>
               <div class="form-group">
                 <label class="form-label">Confirmer le nouveau mot de passe</label>
-                <input type="password" id="secConfirmPassword" class="form-control" placeholder="Retapez le nouveau mot de passe">
+                <input type="password" id="secConfirmPassword" class="form-control" placeholder="">
               </div>
             </div>
 
