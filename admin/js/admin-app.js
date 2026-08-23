@@ -294,12 +294,17 @@
         const isLocalHost = window.location.pathname.includes('/portfolio/') || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname.startsWith('192.168.') || window.location.hostname.startsWith('10.');
         const endpoint = isLocalHost ? '../api/index.php?route=portfolio' : '/api/portfolio';
 
-        const res = await fetch(endpoint, { cache: 'no-cache' });
+        const res = await fetch(`${endpoint}${endpoint.includes('?') ? '&' : '?'}_t=${Date.now()}`, { cache: 'no-store' });
         if (res.ok) {
           const json = await res.json();
-          if (json.success && json.data) {
-            if (!this.isDirty) {
-              this.data = Object.assign(JSON.parse(JSON.stringify(DEFAULT_DATA)), json.data);
+          const serverData = (json && json.data) ? json.data : json;
+          if (serverData && (serverData.profile || serverData.sections)) {
+            const localPublished = this.data?.settings?.lastPublished ? new Date(this.data.settings.lastPublished).getTime() : 0;
+            const serverPublished = serverData?.settings?.lastPublished ? new Date(serverData.settings.lastPublished).getTime() : 0;
+            
+            // Ne JAMAIS écraser si les modifications locales sont plus récentes
+            if (serverPublished > localPublished) {
+              this.data = Object.assign(JSON.parse(JSON.stringify(DEFAULT_DATA)), serverData);
               localStorage.setItem(STORAGE_KEY, JSON.stringify(this.data));
               this.renderTab(this.currentTab);
               this.streamPreview();
@@ -345,6 +350,7 @@
       this.streamPreview();
 
       // 5. Envoi asynchrone à l'API backend
+      const ghToken = localStorage.getItem(GH_TOKEN_KEY) || '';
       try {
         const isLocalHost = window.location.pathname.includes('/portfolio/') || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname.startsWith('192.168.') || window.location.hostname.startsWith('10.');
         const endpoint = isLocalHost ? '../api/index.php?route=portfolio' : '/api/portfolio';
@@ -352,8 +358,6 @@
         const token = (typeof AdminAuth !== 'undefined' && AdminAuth.getToken) ? AdminAuth.getToken() : '';
         const headers = { 'Content-Type': 'application/json' };
         if (token) headers['Authorization'] = `Bearer ${token}`;
-
-        const ghToken = localStorage.getItem(GH_TOKEN_KEY) || '';
 
         const res = await fetch(endpoint, {
           method: 'POST',
@@ -364,18 +368,62 @@
         if (res.ok) {
           this.updateSyncStatus('saved');
           if (notifyUser) {
-            this.showToast(`✓ ${actionDesc} — Portfolio public synchronisé !`, 'success');
+            this.showToast(`✓ ${actionDesc} — Enregistré avec succès !`, 'success');
           }
         } else {
           this.updateSyncStatus('saved');
-          if (notifyUser) this.showToast(`✓ Enregistré localement.`, 'info');
+          if (notifyUser) this.showToast(`✓ ${actionDesc} — Enregistré localement.`, 'success');
         }
       } catch (err) {
         this.updateSyncStatus('saved');
-        if (notifyUser) this.showToast(`✓ Enregistré dans votre navigateur.`, 'info');
+        if (notifyUser) this.showToast(`✓ ${actionDesc} — Enregistré dans votre navigateur.`, 'info');
+      }
+
+      // 6. Synchronisation automatique GitHub en tâche de fond si le token est présent
+      if (ghToken) {
+        this.pushToGitHubBackground(actionDesc);
       }
 
       this.isDirty = false;
+    },
+
+    async pushToGitHubBackground(actionDesc = 'Mise à jour') {
+      const ghToken = localStorage.getItem(GH_TOKEN_KEY) || '';
+      if (!ghToken) return;
+      try {
+        const fileUrl = 'https://api.github.com/repos/Falikou1/portfolioFalikou-Fofana/contents/data/portfolio.json';
+        let currentSha = null;
+        const getRes = await fetch(fileUrl, {
+          headers: {
+            'Authorization': `Bearer ${ghToken}`,
+            'Accept': 'application/vnd.github.v3+json'
+          }
+        });
+        if (getRes.ok) {
+          const getJson = await getRes.json();
+          currentSha = getJson.sha;
+        }
+
+        const jsonStr = JSON.stringify(this.data, null, 2);
+        const encodedContent = btoa(unescape(encodeURIComponent(jsonStr)));
+
+        const putBody = {
+          message: `CMS Auto-sync: ${actionDesc} (${new Date().toLocaleString('fr-FR')})`,
+          content: encodedContent,
+          branch: 'main'
+        };
+        if (currentSha) putBody.sha = currentSha;
+
+        await fetch(fileUrl, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${ghToken}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(putBody)
+        });
+      } catch (_) {}
     },
 
     // Déclenchement de la publication complète avec commit GitHub / Vercel

@@ -81,10 +81,19 @@
             const json = await res.json();
             const payload = (json && json.data) ? json.data : json;
             if (payload && (payload.profile || payload.sections)) {
-              this.data = payload;
-              localStorage.setItem(STORAGE_KEY, JSON.stringify(this.data));
-              this.renderAll();
-              return;
+              const localPublished = this.data?.settings?.lastPublished ? new Date(this.data.settings.lastPublished).getTime() : 0;
+              const serverPublished = payload?.settings?.lastPublished ? new Date(payload.settings.lastPublished).getTime() : 0;
+
+              // N'écraser le cache local QUE si les données du serveur sont plus récentes ou égales
+              if (serverPublished >= localPublished || !localPublished) {
+                this.data = payload;
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(this.data));
+                this.renderAll();
+                return;
+              } else {
+                // Les modifications locales sont plus récentes : on conserve les données locales
+                return;
+              }
             }
           }
         } catch (_) {}
