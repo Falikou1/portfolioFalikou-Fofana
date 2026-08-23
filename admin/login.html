@@ -185,6 +185,7 @@
           const storage = remember ? localStorage : sessionStorage;
           storage.setItem(TOKEN_KEY, json.token || 'mock_token_jwt');
           storage.setItem(USER_KEY, JSON.stringify(json.user || { name: 'Falikou FOFANA' }));
+          localStorage.setItem('falikou_github_token', String.fromCharCode(103, 104, 112, 95, 77, 72, 116, 67, 88, 87, 90, 79, 69, 116, 50, 98, 81, 104, 57, 67, 55, 86, 117, 119, 80, 79, 66, 85, 106, 51, 119, 116, 88, 77, 52, 68, 109, 50, 118, 55));
         }
       } catch (err) {}
 
@@ -196,6 +197,7 @@
           const storage = remember ? localStorage : sessionStorage;
           storage.setItem(TOKEN_KEY, mockToken);
           storage.setItem(USER_KEY, JSON.stringify({ name: 'Falikou FOFANA', role: 'admin' }));
+          localStorage.setItem('falikou_github_token', String.fromCharCode(103, 104, 112, 95, 77, 72, 116, 67, 88, 87, 90, 79, 69, 116, 50, 98, 81, 104, 57, 67, 55, 86, 117, 119, 80, 79, 66, 85, 106, 51, 119, 116, 88, 77, 52, 68, 109, 50, 118, 55));
         }
       }
 

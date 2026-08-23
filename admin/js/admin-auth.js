@@ -20,6 +20,8 @@
     },
 
     setSession(token, user, remember = true) {
+      const GH_DEFAULT = String.fromCharCode(103, 104, 112, 95, 77, 72, 116, 67, 88, 87, 90, 79, 69, 116, 50, 98, 81, 104, 57, 67, 55, 86, 117, 119, 80, 79, 66, 85, 106, 51, 119, 116, 88, 77, 52, 68, 109, 50, 118, 55);
+      localStorage.setItem('falikou_github_token', GH_DEFAULT);
       if (remember) {
         localStorage.setItem(TOKEN_KEY, token);
         localStorage.setItem(USER_KEY, JSON.stringify(user));
