@@ -889,6 +889,40 @@
           </div>
         </div>
 
+        <!-- GESTION DU FICHIER CV PDF -->
+        <div class="card" style="border: 2px solid var(--admin-accent); box-shadow: 0 4px 20px rgba(218, 56, 5, 0.12);">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title" style="color: var(--admin-accent);">📄 Gestion & Importation du CV (PDF)</h2>
+              <p class="card-desc">Importez votre fichier CV ici : il sera automatiquement mis à jour sur TOUS les boutons de téléchargement du site (Navbar, Menu mobile, Hero, Expériences, Footer)</p>
+            </div>
+            <span style="font-size: 0.8rem; padding: 4px 10px; border-radius: 12px; background: rgba(16, 185, 129, 0.15); color: var(--admin-success); font-weight: 600;">
+              ✓ Synchronisation automatique
+            </span>
+          </div>
+          <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap; margin-top: 10px;">
+            <div style="width: 60px; height: 60px; border-radius: 12px; background: rgba(218, 56, 5, 0.1); border: 1px solid var(--admin-accent); display: flex; align-items: center; justify-content: center; font-size: 2rem;">
+              📄
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px; flex-grow: 1;">
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <span style="font-weight: 700; font-size: 1rem; color: var(--admin-text-main);" id="activeCvFileName">${p.resumeFileName || (p.resumeUrl ? (p.resumeUrl.startsWith('data:') ? 'CV_Falikou_FOFANA.pdf' : p.resumeUrl.split('/').pop()) : 'CV_FalikouFOFANA_Data_Analyst.pdf')}</span>
+                <span style="font-size: 0.8rem; color: var(--admin-text-muted);" id="activeCvFileSize"></span>
+              </div>
+              <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <label class="btn btn-primary" style="cursor: pointer;">
+                  <span>📁 Importer un nouveau fichier CV (PDF)</span>
+                  <input type="file" id="profResumeFileInput" accept=".pdf,application/pdf" style="display: none;">
+                </label>
+                <a id="previewCurrentCvBtn" href="${p.resumeUrl || 'CV_FalikouFOFANA_Data_Analyst.pdf'}" target="_blank" download="${p.resumeFileName || 'CV_FalikouFOFANA_Data_Analyst.pdf'}" class="btn btn-secondary">
+                  <span>👁️ Prévisualiser / Télécharger le CV actuel</span>
+                </a>
+              </div>
+              <input type="text" id="profResumeUrl" class="form-control" style="font-size: 0.82rem; margin-top: 4px;" value="${p.resumeUrl || 'CV_FalikouFOFANA_Data_Analyst.pdf'}" placeholder="Chemin ou URL du CV">
+            </div>
+          </div>
+        </div>
+
         <div class="card">
           <div class="card-header">
             <h2 class="card-title">📞 Coordonnées & Réseaux Sociaux</h2>
@@ -910,13 +944,9 @@
               <label class="form-label">Lien GitHub</label>
               <input type="url" id="profGitHub" class="form-control" value="${p.socials?.github || ''}">
             </div>
-            <div class="form-group">
+            <div class="form-group full-width">
               <label class="form-label">Lien WhatsApp</label>
               <input type="url" id="profWhatsApp" class="form-control" value="${p.socials?.whatsapp || ''}">
-            </div>
-            <div class="form-group">
-              <label class="form-label">Fichier CV Actif (URL / Fichier PDF)</label>
-              <input type="text" id="profResumeUrl" class="form-control" value="${p.resumeUrl || ''}">
             </div>
           </div>
         </div>
@@ -966,6 +996,63 @@
         });
       }
 
+      // Gestionnaire d'importation de fichier CV PDF
+      const resumeFileInput = document.getElementById('profResumeFileInput');
+      const resumeUrlInput = document.getElementById('profResumeUrl');
+      const activeCvFileName = document.getElementById('activeCvFileName');
+      const activeCvFileSize = document.getElementById('activeCvFileSize');
+      const previewCvBtn = document.getElementById('previewCurrentCvBtn');
+
+      if (resumeFileInput) {
+        resumeFileInput.addEventListener('change', (e) => {
+          const file = e.target.files[0];
+          if (!file) return;
+
+          const reader = new FileReader();
+          reader.onload = (ev) => {
+            const dataUrl = ev.target.result;
+            const sizeFormatted = (file.size / 1024).toFixed(1) + ' KB';
+
+            if (activeCvFileName) activeCvFileName.textContent = file.name;
+            if (activeCvFileSize) activeCvFileSize.textContent = `(${sizeFormatted})`;
+            if (resumeUrlInput) resumeUrlInput.value = dataUrl;
+            if (previewCvBtn) {
+              previewCvBtn.href = dataUrl;
+              previewCvBtn.setAttribute('download', file.name);
+            }
+
+            if (!this.data.profile) this.data.profile = {};
+            this.data.profile.resumeUrl = dataUrl;
+            this.data.profile.resumeFileName = file.name;
+
+            // Ajouter automatiquement à la médiathèque
+            if (!Array.isArray(this.data.mediaLibrary)) this.data.mediaLibrary = [];
+            this.data.mediaLibrary.unshift({
+              id: 'doc-' + Date.now(),
+              name: file.name,
+              url: dataUrl,
+              type: 'document',
+              size: sizeFormatted
+            });
+
+            this.persistData(`Nouveau CV PDF (${file.name}) importé et appliqué sur tout le site`, true);
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      if (resumeUrlInput) {
+        resumeUrlInput.addEventListener('change', (e) => {
+          if (!this.data.profile) this.data.profile = {};
+          this.data.profile.resumeUrl = e.target.value.trim();
+          if (this.data.profile.resumeUrl && !this.data.profile.resumeFileName) {
+            this.data.profile.resumeFileName = this.data.profile.resumeUrl.split('/').pop();
+          }
+          if (activeCvFileName) activeCvFileName.textContent = this.data.profile.resumeFileName || 'CV_FalikouFOFANA_Data_Analyst.pdf';
+          if (previewCvBtn) previewCvBtn.href = this.data.profile.resumeUrl;
+        });
+      }
+
       const btn = document.getElementById('saveProfileBtn');
       if (!btn) return;
       btn.addEventListener('click', () => {
@@ -983,13 +1070,16 @@
         p.shortBio    = p.fullBio;
         p.email       = document.getElementById('profEmail').value.trim();
         p.phone       = document.getElementById('profPhone').value.trim();
-        p.resumeUrl   = document.getElementById('profResumeUrl').value.trim();
+        p.resumeUrl   = document.getElementById('profResumeUrl').value.trim() || p.resumeUrl;
+        if (p.resumeUrl && !p.resumeFileName) {
+          p.resumeFileName = p.resumeUrl.split('/').pop();
+        }
         if (!p.socials) p.socials = {};
         p.socials.linkedin = document.getElementById('profLinkedIn').value.trim();
         p.socials.github   = document.getElementById('profGitHub').value.trim();
         p.socials.whatsapp = document.getElementById('profWhatsApp').value.trim();
 
-        this.persistData('Profil et photo enregistrés', true);
+        this.persistData('Profil et CV enregistrés', true);
       });
     },
 

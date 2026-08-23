@@ -214,9 +214,10 @@
 
       // Fichier CV PDF téléchargeable
       if (profile.resumeUrl) {
-        document.querySelectorAll('a[download], .desktop-cv-btn, .mobile-drawer-cv-btn, .primary__button[href$=".pdf"]').forEach(a => {
+        const downloadName = profile.resumeFileName || (profile.resumeUrl.startsWith('data:') ? 'CV_Falikou_FOFANA_Data_Analyst.pdf' : profile.resumeUrl.split('/').pop());
+        document.querySelectorAll('a[download], .desktop-cv-btn, .mobile-drawer-cv-btn, .primary__button[href*=".pdf"], a[href*=".pdf"], a[title*="CV"], a[title*="cv"]').forEach(a => {
           a.href = profile.resumeUrl;
-          a.setAttribute('download', profile.resumeUrl.split('/').pop());
+          a.setAttribute('download', downloadName);
         });
       }
 
