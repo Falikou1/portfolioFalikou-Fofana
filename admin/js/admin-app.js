@@ -510,8 +510,21 @@
 
       const mobileToggle = document.getElementById('mobileSidebarToggle');
       const sidebar = document.querySelector('.admin-sidebar');
+      const backdrop = document.getElementById('sidebarBackdrop');
+
       if (mobileToggle && sidebar) {
-        mobileToggle.addEventListener('click', () => sidebar.classList.toggle('open'));
+        mobileToggle.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const isOpen = sidebar.classList.toggle('open');
+          if (backdrop) backdrop.classList.toggle('active', isOpen);
+        });
+      }
+
+      if (backdrop && sidebar) {
+        backdrop.addEventListener('click', () => {
+          sidebar.classList.remove('open');
+          backdrop.classList.remove('active');
+        });
       }
 
       const logoutBtn = document.getElementById('logoutBtn');
@@ -556,6 +569,8 @@
 
       const sidebar = document.querySelector('.admin-sidebar');
       if (sidebar) sidebar.classList.remove('open');
+      const backdrop = document.getElementById('sidebarBackdrop');
+      if (backdrop) backdrop.classList.remove('active');
     },
 
     // GLOBAL ACTIONS (SAVE, PUBLISH)
