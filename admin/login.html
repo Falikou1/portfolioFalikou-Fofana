@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connexion Administrateur — Falikou FOFANA</title>
+  <link rel="icon" href="../assets/images/falikou_photo.png" type="image/png">
+  <link rel="stylesheet" href="css/admin.css">
+  <style>
+    body {
+      background: radial-gradient(circle at 50% 20%, #1a1012 0%, #09090b 80%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 420px;
+      background: rgba(22, 22, 28, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--admin-border);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .login-avatar {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 16px;
+      border: 3px solid var(--admin-accent);
+      box-shadow: 0 0 20px var(--admin-accent-glow);
+      display: block;
+    }
+
+    .login-title {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .login-subtitle {
+      font-size: 0.82rem;
+      color: var(--admin-text-muted);
+      margin-top: 4px;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .password-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 12px;
+      background: none;
+      border: none;
+      color: var(--admin-text-dim);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 4px;
+    }
+
+    .password-toggle:hover {
+      color: var(--admin-text-main);
+    }
+
+    .login-error {
+      background: var(--admin-danger-bg);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #fca5a5;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.84rem;
+      display: none;
+      text-align: center;
+      animation: shake 0.3s ease;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+
+    .security-badge {
+      margin-top: 24px;
+      padding-top: 18px;
+      border-top: 1px solid var(--admin-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: var(--admin-text-dim);
+      font-size: 0.75rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <div class="login-header">
+      <img src="../assets/images/falikou_photo_clean.png" alt="Falikou FOFANA" class="login-avatar">
+      <h1 class="login-title">Espace Administrateur</h1>
+      <p class="login-subtitle">Falikou FOFANA — CMS Portfolio Privé</p>
+    </div>
+
+    <div class="login-error" id="loginError"></div>
+
+    <form class="login-form" id="loginForm">
+      <div class="form-group">
+        <label class="form-label" for="password">Mot de passe administrateur</label>
+        <div class="password-wrapper">
+          <input type="password" id="password" class="form-control" placeholder="••••••••••••" required autocomplete="current-password" autofocus>
+          <button type="button" class="password-toggle" id="togglePassword" title="Afficher/Masquer">
+            <svg id="eyeIcon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+        <label style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--admin-text-muted); cursor: pointer;">
+          <input type="checkbox" id="rememberMe" checked style="accent-color: var(--admin-accent);">
+          Rester connecté
+        </label>
+      </div>
+
+      <button type="submit" class="btn btn-primary" id="submitBtn" style="width: 100%; padding: 12px; font-size: 0.95rem;">
+        <span>Se connecter au Dashboard</span>
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+        </svg>
+      </button>
+    </form>
+
+    <div class="security-badge">
+      <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+      </svg>
+      <span>Accès privé et chiffré — Session sécurisée</span>
+    </div>
+  </div>
+
+  <script src="js/admin-auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      // If already logged in, redirect straight to dashboard
+      const token = AdminAuth.getToken();
+      if (token) {
+        window.location.href = 'index.html';
+      }
+
+      const form = document.getElementById('loginForm');
+      const pwdInput = document.getElementById('password');
+      const toggleBtn = document.getElementById('togglePassword');
+      const submitBtn = document.getElementById('submitBtn');
+      const errorDiv = document.getElementById('loginError');
+
+      // Password toggle
+      toggleBtn.addEventListener('click', () => {
+        const isPwd = pwdInput.type === 'password';
+        pwdInput.type = isPwd ? 'text' : 'password';
+      });
+
+      // Submit handler
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const pwd = pwdInput.value;
+        const remember = document.getElementById('rememberMe').checked;
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span>Vérification…</span>';
+        errorDiv.style.display = 'none';
+
+        const result = await AdminAuth.login(pwd, remember);
+
+        if (result.success) {
+          submitBtn.innerHTML = '<span>Connexion réussie ! Redirection…</span>';
+          submitBtn.style.background = 'var(--admin-success)';
+          setTimeout(() => {
+            window.location.href = 'index.html';
+          }, 400);
+        } else {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<span>Se connecter au Dashboard</span>';
+          errorDiv.textContent = result.message || 'Mot de passe incorrect.';
+          errorDiv.style.display = 'block';
+          pwdInput.select();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

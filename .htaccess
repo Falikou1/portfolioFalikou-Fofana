@@ -1,0 +1,10 @@
+# Apache Rewrite Rules for Local XAMPP
+RewriteEngine On
+RewriteBase /portfolio/
+
+# Route /admin to /admin/index.html
+RewriteRule ^admin/?$ admin/index.html [L]
+RewriteRule ^admin/login/?$ admin/login.html [L]
+
+# Route /api/* to /api/index.php
+RewriteRule ^api/(.*)$ api/index.php?route=$1 [QSA,L]

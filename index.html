@@ -3534,6 +3534,15 @@
             } else {
               throw new Error(data.message || 'Erreur API');
             }
+            // Également enregistrer le message dans l'administration locale / serverless
+            try {
+              const msgEndpoint = window.location.pathname.includes('/portfolio/') ? 'api/index.php?route=messages' : '/api/messages';
+              fetch(msgEndpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, subject, message })
+              }).catch(() => {});
+            } catch(e) {}
           } catch (err) {
             errorBox.style.display = 'block';
             btn.innerHTML = `<svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg> Envoyer le message`;
@@ -3544,5 +3553,7 @@
       }
     });
   </script>
+  <!-- DYNAMIC CMS PORTFOLIO HYDRATION ENGINE -->
+  <script src="js/portfolio-renderer.js"></script>
 </body>
 </html>
