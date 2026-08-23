@@ -27,7 +27,7 @@
   "design": {
     "accentColor": "#fb876a",
     "accentHover": "#c14b0b",
-    "bgDark": "#80532d",
+    "bgDark": "#ce8e5a",
     "bgCardDark": "#03c5d3",
     "bgLight": "#ffffff",
     "bgCardLight": "#f8fafc",
@@ -477,6 +477,55 @@
   "messages": [],
   "history": [
     {
+      "id": "h-1787526961429",
+      "timestamp": "2026-08-23T23:16:01.429Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526960797",
+      "timestamp": "2026-08-23T23:16:00.797Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526960451",
+      "timestamp": "2026-08-23T23:16:00.451Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526960385",
+      "timestamp": "2026-08-23T23:16:00.385Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526960011",
+      "timestamp": "2026-08-23T23:16:00.011Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526959403",
+      "timestamp": "2026-08-23T23:15:59.403Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526958514",
+      "timestamp": "2026-08-23T23:15:58.514Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
       "id": "h-1787526946095",
       "timestamp": "2026-08-23T23:15:46.095Z",
       "action": "Couleur modifiée",
@@ -776,55 +825,6 @@
       "action": "Couleur modifiée",
       "target": "Portfolio",
       "details": "Enregistré dans la base de données"
-    },
-    {
-      "id": "h-1787511745282",
-      "timestamp": "2026-08-23T19:02:25.282Z",
-      "action": "Couleur modifiée",
-      "target": "Portfolio",
-      "details": "Enregistré dans la base de données"
-    },
-    {
-      "id": "h-1787511744480",
-      "timestamp": "2026-08-23T19:02:24.480Z",
-      "action": "Couleur modifiée",
-      "target": "Portfolio",
-      "details": "Enregistré dans la base de données"
-    },
-    {
-      "id": "h-1787511743672",
-      "timestamp": "2026-08-23T19:02:23.672Z",
-      "action": "Couleur modifiée",
-      "target": "Portfolio",
-      "details": "Enregistré dans la base de données"
-    },
-    {
-      "id": "h-1787511743121",
-      "timestamp": "2026-08-23T19:02:23.121Z",
-      "action": "Couleur modifiée",
-      "target": "Portfolio",
-      "details": "Enregistré dans la base de données"
-    },
-    {
-      "id": "h-1787511742041",
-      "timestamp": "2026-08-23T19:02:22.041Z",
-      "action": "Couleur modifiée",
-      "target": "Portfolio",
-      "details": "Enregistré dans la base de données"
-    },
-    {
-      "id": "h-1787511741145",
-      "timestamp": "2026-08-23T19:02:21.145Z",
-      "action": "Couleur modifiée",
-      "target": "Portfolio",
-      "details": "Enregistré dans la base de données"
-    },
-    {
-      "id": "h-1787511739898",
-      "timestamp": "2026-08-23T19:02:19.898Z",
-      "action": "Couleur modifiée",
-      "target": "Portfolio",
-      "details": "Enregistré dans la base de données"
     }
   ],
   "seo": {
@@ -836,7 +836,7 @@
   },
   "settings": {
     "siteName": "Falikou FOFANA — Portfolio",
-    "lastPublished": "2026-08-23T23:15:46.095Z",
+    "lastPublished": "2026-08-23T23:16:01.429Z",
     "version": "1.0.0"
   }
 }
