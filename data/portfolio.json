@@ -474,24 +474,21 @@
       "size": "834 KB"
     }
   ],
-  "messages": [
-    {
-      "id": "msg-1787525036639",
-      "name": "Richmond Koffi",
-      "email": "richmondthecarter@gmail.com",
-      "subject": "Error while signing in",
-      "message": "dfffffotyy",
-      "read": true,
-      "date": "2026-08-23T22:43:56.639Z"
-    }
-  ],
+  "messages": [],
   "history": [
     {
-      "id": "hist-1787525105216",
-      "timestamp": "2026-08-23T22:45:05.216Z",
+      "id": "hist-1787525108237",
+      "timestamp": "2026-08-23T22:45:08.237Z",
       "action": "Publication",
       "target": "Portfolio",
-      "details": "Message marqué comme lu"
+      "details": "Message supprimé"
+    },
+    {
+      "id": "h-1787525105580",
+      "timestamp": "2026-08-23T22:45:05.580Z",
+      "action": "Message supprimé",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
     },
     {
       "id": "h-1787525102878",
@@ -828,13 +825,6 @@
       "action": "Couleur modifiée",
       "target": "Portfolio",
       "details": "Enregistré dans la base de données"
-    },
-    {
-      "id": "h-1787511730876",
-      "timestamp": "2026-08-23T19:02:10.876Z",
-      "action": "Couleur modifiée",
-      "target": "Portfolio",
-      "details": "Enregistré dans la base de données"
     }
   ],
   "seo": {
@@ -846,7 +836,7 @@
   },
   "settings": {
     "siteName": "Falikou FOFANA — Portfolio",
-    "lastPublished": "2026-08-23T22:45:05.216Z",
+    "lastPublished": "2026-08-23T22:45:08.237Z",
     "version": "1.0.0"
   }
 }
