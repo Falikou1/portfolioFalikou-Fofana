@@ -1,21 +1,21 @@
 /**
  * ==========================================================================
- * FALIKOU FOFANA — PORTFOLIO DYNAMIC HYDRATION & SYNC ENGINE v3.5
- * CONTRÔLE TOTAL ET EN TEMPS RÉEL DU SITE PUBLIC DEPUIS L'ADMIN CMS
+ * FALIKOU FOFANA — PORTFOLIO DYNAMIC HYDRATION & SYNC ENGINE v4.0 (COMPLET)
+ * CONTRÔLE ABSOLU ET 100% FONCTIONNEL DU SITE PUBLIC DEPUIS L'ADMIN CMS
  *
- * Fonctionnalités clés :
- * 1. Synchronisation 0ms locale (localStorage) + Backend API (PHP/JSON/Vercel)
- * 2. Écoute temps réel : BroadcastChannel + StorageEvent + postMessage
- * 3. Contrôle 100% dynamique de TOUS les éléments visibles :
- *    - Textes, Titres H1/H2/H6, Descriptions et Biographies
- *    - Projets (Création/Édition/Suppression dynamique de cartes & Modals)
+ * 1. Synchronisation instantanée 0ms (localStorage) + Cloud API (PHP/JSON/Vercel)
+ * 2. Multi-canaux temps réel : BroadcastChannel + StorageEvent + postMessage
+ * 3. Contrôle total de TOUS les éléments visibles sur le site public :
+ *    - Thème & Couleurs (Accent, Hover, Fond du site, Fond des cartes, Bordures, Textes, Titres, Polices)
+ *    - Photos & Images (Profil, Hero, Couvertures, Projets, Logos écoles, Logos entreprises)
+ *    - Titres H1/H2, Textes, Biographies, Slogans, Boutons d'action, Badges flottants
+ *    - Métriques d'impact & Compteurs animés
+ *    - Projets (Cartes, Tags, Modales popups avec détails complets)
  *    - Expériences, Formations et Certifications
  *    - Soft Skills, Compétences et Niveaux
- *    - Métriques d'impact & Compteurs animés
- *    - Coordonnées, Liens de réseaux sociaux et Téléchargement CV
- *    - Couleurs du thème (--accent, --bg-dark, etc.), Polices et Bordures
- *    - Affichage/Masquage de n'importe quelle section
- *    - Balises SEO (Meta Title, Description, Keywords)
+ *    - Services proposés et Contact
+ *    - Coordonnées (Téléphone, Email, Réseaux sociaux, CV Téléchargement)
+ *    - Visibilité et Balises SEO
  * ==========================================================================
  */
 
@@ -31,13 +31,13 @@
     isLoaded: false,
 
     async init() {
-      // 1. Rendu instantané depuis le cache local (0 milliseconde de latence)
+      // 1. Rendu synchrone immédiat depuis le stockage local (0ms sans aucun scintillement)
       this.loadLocalCache();
 
-      // 2. Établir les canaux de synchronisation temps réel
+      // 2. Établir les écoutes temps réel multi-onglets
       this.setupLiveSync();
 
-      // 3. Récupérer les données fraîches depuis le serveur / API / JSON
+      // 3. Charger les données fraîches depuis le serveur / API
       await this.fetchServerData();
     },
 
@@ -48,7 +48,7 @@
           this.data = JSON.parse(raw);
           this.renderAll();
         } catch (e) {
-          console.warn('PortfolioEngine: Erreur lecture cache local', e);
+          console.warn('PortfolioEngine: lecture cache local', e);
         }
       }
     },
@@ -77,87 +77,126 @@
     },
 
     // =========================================================================
-    // RENDU GLOBAL ET EXHAUSTIF DU PORTFOLIO
+    // RENDU GLOBAL & SYNCHRONISATION EXHAUSTIVE DU DOM
     // =========================================================================
     renderAll() {
       if (!this.data) return;
       const d = this.data;
 
-      // 1. Thème & Styles globaux
+      // 1. Design & Apparence Visuelle (Couleurs, Fond, Bordures, Polices)
       this.applyDesignTheme(d.design);
 
-      // 2. Profil, Identité & Coordonnées
+      // 2. Profil, Photos & Coordonnées
       this.renderProfile(d.profile);
 
-      // 3. Section Hero (Grand Titre, Bio, Badges, CV)
+      // 3. Section Hero (Grand Titre H1, Bio, Boutons, Badges)
       this.renderHero(d.profile, d.sections?.hero);
 
-      // 4. Section Métriques / Faits Marquants
+      // 4. Faits Marquants & Métriques (Compteurs)
       this.renderMetrics(d.sections?.metrics);
 
-      // 5. Section Projets & Réalisations (Cartes & Modals)
+      // 5. Projets & Réalisations (Cartes, Images & Popups Modales)
       this.renderProjects(d.projects, d.sections?.projects);
 
-      // 6. Section Expériences & Leadership
+      // 6. Expériences & Parcours
       this.renderExperiences(d.experiences, d.sections?.experience);
 
-      // 7. Section Formations & Diplômes
+      // 7. Formations & Certifications
       this.renderEducations(d.educations, d.sections?.education);
 
-      // 8. Section Compétences & Soft Skills
+      // 8. Soft Skills & Leadership
       this.renderSkills(d.skills, d.sections?.skills);
 
-      // 9. Section Services
+      // 9. Services Proposés
       this.renderServices(d.services, d.sections?.services);
 
-      // 10. Footer & Liens Sociaux
-      this.renderFooter(d.profile);
+      // 10. Contact & Pied de page (Footer)
+      this.renderFooter(d.profile, d.sections?.contact);
 
       // 11. Balises SEO
       this.renderSEO(d.seo);
 
-      // 12. Visibilité des Sections (Afficher / Masquer)
+      // 12. Visibilité des Sections (Affichage / Masquage)
       this.renderSectionsVisibility(d.sections);
 
       this.isLoaded = true;
     },
 
-    // ── 1. THÈME & DESIGN STUDIO ─────────────────────────────────────────────
+    // ── 1. GESTION DES COULEURS & DU THÈME (DESIGN STUDIO) ───────────────────
     applyDesignTheme(design) {
       if (!design) return;
       const root = document.documentElement;
 
+      // Couleur d'accent principale
       if (design.accentColor) {
         root.style.setProperty('--accent', design.accentColor);
+        root.style.setProperty('--accent-glow', `${design.accentColor}40`);
         document.querySelectorAll('.accent-colored').forEach(el => el.style.color = design.accentColor);
       }
+
+      // Couleur d'accent au survol (Hover)
       if (design.accentHover) {
         root.style.setProperty('--accent-hover', design.accentHover);
       }
+
+      // Fond général du site (Background)
       if (design.bgDark) {
+        root.style.setProperty('--black', design.bgDark);
+        root.style.setProperty('--black-alt', design.bgDark);
         root.style.setProperty('--bg-dark', design.bgDark);
+        document.body.style.backgroundColor = design.bgDark;
       }
+
+      // Fond des cartes
       if (design.bgCardDark) {
+        root.style.setProperty('--card-bg', design.bgCardDark);
         root.style.setProperty('--bg-card', design.bgCardDark);
       }
+
+      // Bordure des cartes
+      if (design.borderColor) {
+        root.style.setProperty('--card-border', design.borderColor);
+        root.style.setProperty('--border-color', design.borderColor);
+      }
+
+      // Couleur du texte principal
+      if (design.textColor) {
+        root.style.setProperty('--light', design.textColor);
+        document.body.style.color = design.textColor;
+      }
+
+      // Couleur des titres
+      if (design.textHeadingColor) {
+        root.style.setProperty('--white', design.textHeadingColor);
+        document.querySelectorAll('h1, h2, h3, h4, h5, h6, .hero-h1, .blog__title, .project__title, .exp__title').forEach(el => {
+          el.style.color = design.textHeadingColor;
+        });
+      }
+
+      // Arrondi des bordures
       if (design.borderRadius) {
+        root.style.setProperty('--radius-lg', design.borderRadius);
+        root.style.setProperty('--radius-md', `calc(${design.borderRadius} * 0.75)`);
         root.style.setProperty('--border-radius-base', design.borderRadius);
       }
+
+      // Typographie
       if (design.fontHeading) {
         root.style.setProperty('--font-sans', design.fontHeading);
+        root.style.setProperty('--font-primary', design.fontHeading);
         document.body.style.fontFamily = design.fontHeading;
       }
     },
 
-    // ── 2. PROFIL & COORDONNÉES GLOBALES ─────────────────────────────────────
+    // ── 2. PROFIL & GESTION DES PHOTOS ───────────────────────────────────────
     renderProfile(profile) {
       if (!profile) return;
 
       const fullName = profile.fullName || `${profile.firstName || ''} ${profile.lastName || ''}`.trim() || 'Falikou FOFANA';
 
       // Noms complets
-      document.querySelectorAll('.hero-photo-name, .profile-name, .footer-bigname-text, .mobile-drawer-title').forEach(el => {
-        if (el && !el.classList.contains('mobile-drawer-title')) el.textContent = fullName;
+      document.querySelectorAll('.hero-photo-name, .profile-name, .footer-bigname-text').forEach(el => {
+        el.textContent = fullName;
       });
 
       // Titres & rôles
@@ -165,7 +204,7 @@
         if (profile.title) el.textContent = profile.title;
       });
 
-      // Photos et Avatars
+      // Photos et Avatars (Hero, Navbar, Drawer mobile)
       if (profile.photo) {
         document.querySelectorAll('.hero-img-container img, .brand-avatar, .mobile-drawer-avatar, .hero-photo-img').forEach(img => {
           img.src = profile.photo;
@@ -173,7 +212,7 @@
         });
       }
 
-      // Liens de téléchargement du CV (PDF)
+      // Fichier CV PDF téléchargeable
       if (profile.resumeUrl) {
         document.querySelectorAll('a[download], .desktop-cv-btn, .mobile-drawer-cv-btn, .primary__button[href$=".pdf"]').forEach(a => {
           a.href = profile.resumeUrl;
@@ -187,7 +226,7 @@
       }
     },
 
-    // ── 3. HERO SECTION (TITRE PRINCIPAL & BIO) ──────────────────────────────
+    // ── 3. HERO SECTION (TITRE PRINCIPAL, BIO, BOUTONS & BADGES) ──────────────
     renderHero(profile, heroConfig) {
       // Grand Titre H1
       const heroH1 = document.querySelector('.hero-h1');
@@ -204,20 +243,40 @@
         }
       }
 
-      // Badges flottants du Hero
-      if (profile) {
-        const academicSub = document.querySelector('.hero-badge-bottom .badge-text-sub');
-        if (academicSub && profile.university) academicSub.textContent = profile.university;
+      // Textes des boutons d'action du Hero
+      if (heroConfig) {
+        const btnCta1 = document.querySelector('.hero-actions .primary__button span, .hero-actions a.primary__button');
+        if (btnCta1 && heroConfig.ctaPrimary) {
+          const span = btnCta1.querySelector('span') || btnCta1;
+          span.textContent = heroConfig.ctaPrimary;
+        }
 
-        const academicTitle = document.querySelector('.hero-badge-bottom .badge-text-title');
-        if (academicTitle && profile.subTitle) academicTitle.textContent = profile.subTitle;
+        const btnCta2 = document.querySelector('.hero-actions .outline__button__light span, .hero-actions a.outline__button__light');
+        if (btnCta2 && heroConfig.ctaSecondary) {
+          const span = btnCta2.querySelector('span') || btnCta2;
+          span.textContent = heroConfig.ctaSecondary;
+        }
 
-        const statusBadge = document.querySelector('.hero-badge-top .badge-text-title');
-        if (statusBadge && profile.statusBadge) statusBadge.textContent = profile.statusBadge;
+        // Badges flottants
+        const badgeTopTitle = document.querySelector('.hero-badge-top .badge-text-title');
+        if (badgeTopTitle && heroConfig.badgeTopTitle) badgeTopTitle.textContent = heroConfig.badgeTopTitle;
+
+        const badgeTopSub = document.querySelector('.hero-badge-top .badge-text-sub');
+        if (badgeTopSub && heroConfig.badgeTopSub) badgeTopSub.textContent = heroConfig.badgeTopSub;
+
+        const badgeBottomTitle = document.querySelector('.hero-badge-bottom .badge-text-title');
+        if (badgeBottomTitle && (heroConfig.badgeBottomTitle || profile?.subTitle)) {
+          badgeBottomTitle.textContent = heroConfig.badgeBottomTitle || profile.subTitle;
+        }
+
+        const badgeBottomSub = document.querySelector('.hero-badge-bottom .badge-text-sub');
+        if (badgeBottomSub && (heroConfig.badgeBottomSub || profile?.university)) {
+          badgeBottomSub.textContent = heroConfig.badgeBottomSub || profile.university;
+        }
       }
     },
 
-    // ── 4. FAITS MARQUANTS & MÉTRIQUES (COMPTEURS) ───────────────────────────
+    // ── 4. FAITS MARQUANTS & MÉTRIQUES (COMPTEURS D'IMPACT) ───────────────────
     renderMetrics(metricsConfig) {
       if (!metricsConfig) return;
 
@@ -247,14 +306,14 @@
       }
     },
 
-    // ── 5. PROJETS & RÉALISATIONS (CARTES ET MODALS) ─────────────────────────
+    // ── 5. PROJETS & RÉALISATIONS (CARTES & POPUPS MODALES) ──────────────────
     renderProjects(projects, secConfig) {
       if (!Array.isArray(projects)) return;
 
       const section = document.getElementById('projects');
       if (!section) return;
 
-      // En-têtes de la section
+      // En-têtes de section
       if (secConfig) {
         const tag = section.querySelector('.section__title');
         if (tag && secConfig.tag) tag.textContent = secConfig.tag;
@@ -264,7 +323,7 @@
         if (desc && secConfig.subtitle) desc.textContent = secConfig.subtitle;
       }
 
-      // Synchroniser la base de données globale des modals de projets
+      // Synchroniser la base de données globale pour les fenêtres modales
       if (!window.projectDetailsData) window.projectDetailsData = {};
       projects.forEach(p => {
         window.projectDetailsData[p.id] = {
@@ -274,12 +333,12 @@
           role: p.role || 'Data Analyst & Concepteur BI',
           image: p.image || 'assets/images/project-bi.jpg',
           desc: p.desc || '',
-          details: p.details || [p.desc || ''],
+          details: Array.isArray(p.details) && p.details.length > 0 ? p.details : [p.desc || ''],
           tags: p.tags || []
         };
       });
 
-      // Cartes de projets dans le DOM
+      // Cartes projets dans le DOM
       const cards = section.querySelectorAll('article.project__card, .project-card');
       projects.forEach((proj, idx) => {
         const card = cards[idx];
@@ -306,9 +365,9 @@
         if (summery && proj.desc) summery.textContent = proj.desc;
 
         // Tags / Badges
-        const tagsContainer = card.querySelector('div:last-child');
-        if (tagsContainer && Array.isArray(proj.tags) && proj.tags.length > 0) {
-          tagsContainer.innerHTML = proj.tags.map(t => `<span class="project-tag-pill">${t}</span>`).join(' ');
+        const tagsBox = card.querySelector('.project__content > div:last-child, div:last-child');
+        if (tagsBox && Array.isArray(proj.tags) && proj.tags.length > 0) {
+          tagsBox.innerHTML = proj.tags.map(t => `<span class="project-tag-pill">${t}</span>`).join(' ');
         }
 
         // Visibilité
@@ -316,7 +375,7 @@
       });
     },
 
-    // ── 6. EXPÉRIENCES & LEADERSHIP ──────────────────────────────────────────
+    // ── 6. EXPÉRIENCES PROFESSIONNELLES ──────────────────────────────────────
     renderExperiences(experiences, secConfig) {
       if (!Array.isArray(experiences)) return;
 
@@ -353,7 +412,7 @@
       });
     },
 
-    // ── 7. FORMATIONS & DIPLÔMES ─────────────────────────────────────────────
+    // ── 7. FORMATIONS & CERTIFICATIONS ───────────────────────────────────────
     renderEducations(educations, secConfig) {
       if (!Array.isArray(educations)) return;
 
@@ -393,7 +452,7 @@
       });
     },
 
-    // ── 8. COMPÉTENCES & SOFT SKILLS ─────────────────────────────────────────
+    // ── 8. SOFT SKILLS & LEADERSHIP ──────────────────────────────────────────
     renderSkills(skills, secConfig) {
       const section = document.getElementById('skills');
       if (!section) return;
@@ -440,8 +499,15 @@
       }
     },
 
-    // ── 10. FOOTER & LIENS SOCIAUX ───────────────────────────────────────────
-    renderFooter(profile) {
+    // ── 10. FOOTER & CONTACT ─────────────────────────────────────────────────
+    renderFooter(profile, contactConfig) {
+      if (contactConfig) {
+        const cTitle = document.querySelector('.footer__title, .contact-title');
+        if (cTitle && contactConfig.title) cTitle.textContent = contactConfig.title;
+        const cSub = document.querySelector('.contact-subtitle');
+        if (cSub && contactConfig.subtitle) cSub.textContent = contactConfig.subtitle;
+      }
+
       if (!profile) return;
       const footer = document.querySelector('footer');
       if (!footer) return;
@@ -467,6 +533,11 @@
       if (whatsapp && profile.socials?.whatsapp) {
         whatsapp.href = profile.socials.whatsapp;
       }
+
+      const copyrightSpan = footer.querySelector('.footer-col-right span');
+      if (copyrightSpan && profile.fullName) {
+        copyrightSpan.textContent = `© 2026 ${profile.fullName}`;
+      }
     },
 
     // ── 11. BALISES SEO ──────────────────────────────────────────────────────
@@ -479,7 +550,7 @@
       if (kw && seo.keywords) kw.setAttribute('content', seo.keywords);
     },
 
-    // ── 12. GESTION DE LA VISIBILITÉ DES SECTIONS ────────────────────────────
+    // ── 12. VISIBILITÉ DES SECTIONS (ON / OFF) ───────────────────────────────
     renderSectionsVisibility(sections) {
       if (!sections) return;
       const map = {
@@ -505,7 +576,7 @@
 
     // ── 13. ÉCOUTE TEMPS RÉEL MULTI-CANAUX ───────────────────────────────────
     setupLiveSync() {
-      // Canal 1 : BroadcastChannel (Synchronisation instantanée entre onglets)
+      // 1. BroadcastChannel (Cross-Tabs instantané)
       try {
         if (typeof BroadcastChannel !== 'undefined') {
           const bc = new BroadcastChannel(CHANNEL_NAME);
@@ -518,7 +589,7 @@
         }
       } catch (_) {}
 
-      // Canal 2 : Événement Storage (Quand localStorage est modifié depuis un autre onglet)
+      // 2. Storage event
       window.addEventListener('storage', (e) => {
         if ((e.key === STORAGE_KEY || e.key === DRAFT_KEY) && e.newValue) {
           try {
@@ -528,7 +599,7 @@
         }
       });
 
-      // Canal 3 : postMessage (Pour l'iframe d'aperçu dans l'administration)
+      // 3. postMessage (Iframe Preview dans l'Admin)
       window.addEventListener('message', (e) => {
         if (e.data && e.data.type === 'PORTFOLIO_PREVIEW_UPDATE' && e.data.payload) {
           this.data = e.data.payload;
@@ -536,7 +607,7 @@
         }
       });
 
-      // Signaler à l'administration que le portfolio est prêt à recevoir des flux
+      // Signaler à l'admin que le renderer est prêt
       if (window.parent && window.parent !== window) {
         window.parent.postMessage({ type: 'PREVIEW_READY' }, '*');
       }

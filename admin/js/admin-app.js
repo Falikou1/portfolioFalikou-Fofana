@@ -1328,10 +1328,25 @@
                 <label class="form-label">Période / Dates</label>
                 <input type="text" id="mExpPeriod" class="form-control" value="${e.period}">
               </div>
-              <div class="form-group">
-                <label class="form-label">Logo / Image (URL)</label>
-                <input type="text" id="mExpLogo" class="form-control" value="${e.logo}">
+
+              <!-- GESTION PHOTO / LOGO DE L'EXPÉRIENCE -->
+              <div class="form-group full-width" style="border: 1px solid var(--admin-border); padding: 12px; border-radius: var(--radius-sm); background: rgba(255,255,255,0.02);">
+                <label class="form-label"><strong>Logo / Image de l'Entreprise</strong></label>
+                <div style="display: flex; gap: 16px; align-items: center; margin-top: 6px;">
+                  <img id="mExpLogoPreview" src="${e.logo || 'assets/images/project-agency.jpg'}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px; border: 1px solid var(--admin-border);">
+                  <div style="display: flex; gap: 8px; flex-grow: 1; flex-wrap: wrap;">
+                    <label class="btn btn-secondary" style="cursor: pointer; font-size: 0.85rem;">
+                      <span>📁 Importer Image</span>
+                      <input type="file" id="mExpFileInput" accept="image/*" style="display: none;">
+                    </label>
+                    <button type="button" class="btn btn-secondary" style="font-size: 0.85rem;" onclick="AdminApp.chooseFromMedia('mExpLogo', 'mExpLogoPreview')">
+                      🖼️ Médiathèque
+                    </button>
+                    <input type="text" id="mExpLogo" class="form-control" value="${e.logo || ''}" placeholder="URL du logo" style="flex-grow: 1;">
+                  </div>
+                </div>
               </div>
+
               <div class="form-group full-width">
                 <label class="form-label">Description des missions (Puces / Texte)</label>
                 <textarea id="mExpDesc" class="form-control" style="min-height: 90px;">${e.desc || ''}</textarea>
@@ -1346,6 +1361,23 @@
       `;
 
       document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+      // Handler d'image locale pour l'expérience
+      const expFile = document.getElementById('mExpFileInput');
+      const expUrl  = document.getElementById('mExpLogo');
+      const expPrev = document.getElementById('mExpLogoPreview');
+      if (expFile) {
+        expFile.addEventListener('change', (ev) => {
+          const file = ev.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = (re) => {
+            if (expPrev) expPrev.src = re.target.result;
+            if (expUrl) expUrl.value = re.target.result;
+          };
+          reader.readAsDataURL(file);
+        });
+      }
 
       document.getElementById('expModalForm').addEventListener('submit', (ev) => {
         ev.preventDefault();
@@ -1454,10 +1486,25 @@
                 <label class="form-label">Période</label>
                 <input type="text" id="mEduPeriod" class="form-control" value="${e.period}">
               </div>
-              <div class="form-group">
-                <label class="form-label">Logo / Image (URL)</label>
-                <input type="text" id="mEduLogo" class="form-control" value="${e.logo}">
+
+              <!-- GESTION PHOTO / LOGO DE LA FORMATION -->
+              <div class="form-group full-width" style="border: 1px solid var(--admin-border); padding: 12px; border-radius: var(--radius-sm); background: rgba(255,255,255,0.02);">
+                <label class="form-label"><strong>Logo / Image de l'Établissement</strong></label>
+                <div style="display: flex; gap: 16px; align-items: center; margin-top: 6px;">
+                  <img id="mEduLogoPreview" src="${e.logo || 'assets/images/logo_iua.png'}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px; border: 1px solid var(--admin-border);">
+                  <div style="display: flex; gap: 8px; flex-grow: 1; flex-wrap: wrap;">
+                    <label class="btn btn-secondary" style="cursor: pointer; font-size: 0.85rem;">
+                      <span>📁 Importer Image</span>
+                      <input type="file" id="mEduFileInput" accept="image/*" style="display: none;">
+                    </label>
+                    <button type="button" class="btn btn-secondary" style="font-size: 0.85rem;" onclick="AdminApp.chooseFromMedia('mEduLogo', 'mEduLogoPreview')">
+                      🖼️ Médiathèque
+                    </button>
+                    <input type="text" id="mEduLogo" class="form-control" value="${e.logo || ''}" placeholder="URL du logo" style="flex-grow: 1;">
+                  </div>
+                </div>
               </div>
+
               <div class="form-group full-width">
                 <label class="form-label">Description / Détails</label>
                 <textarea id="mEduDesc" class="form-control" style="min-height: 80px;">${e.desc || ''}</textarea>
@@ -1472,6 +1519,23 @@
       `;
 
       document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+      // Handler d'image locale pour la formation
+      const eduFile = document.getElementById('mEduFileInput');
+      const eduUrl  = document.getElementById('mEduLogo');
+      const eduPrev = document.getElementById('mEduLogoPreview');
+      if (eduFile) {
+        eduFile.addEventListener('change', (ev) => {
+          const file = ev.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = (re) => {
+            if (eduPrev) eduPrev.src = re.target.result;
+            if (eduUrl) eduUrl.value = re.target.result;
+          };
+          reader.readAsDataURL(file);
+        });
+      }
 
       document.getElementById('eduModalForm').addEventListener('submit', (ev) => {
         ev.preventDefault();
@@ -1605,38 +1669,59 @@
         <div class="card">
           <div class="card-header">
             <div>
-              <h2 class="card-title">🎨 Studio de Design & Thème Visuel</h2>
-              <p class="card-desc">Modifiez les couleurs et le style — changements visibles en direct</p>
+              <h2 class="card-title">🎨 Studio de Design & Apparence du Site</h2>
+              <p class="card-desc">Personnalisez les couleurs, le fond, les bordures et la typographie du portfolio</p>
             </div>
-            <button class="btn btn-primary" id="saveDesignBtn">Enregistrer le Design</button>
+            <button class="btn btn-primary" id="saveDesignBtn">💾 Enregistrer & Appliquer</button>
           </div>
           <div class="form-grid">
             <div class="form-group">
-              <label class="form-label">Couleur d'Accent Principale</label>
+              <label class="form-label">Couleur Principale d'Accent</label>
               <div class="color-picker-group">
                 <input type="color" id="designAccent" class="color-swatch-input" value="${d.accentColor || '#da3805'}">
                 <input type="text" id="designAccentHex" class="form-control" value="${d.accentColor || '#da3805'}">
               </div>
             </div>
             <div class="form-group">
-              <label class="form-label">Couleur d'Accent Survol (Hover)</label>
+              <label class="form-label">Couleur d'Accent au Survol (Hover)</label>
               <div class="color-picker-group">
                 <input type="color" id="designAccentHover" class="color-swatch-input" value="${d.accentHover || '#ff4d15'}">
                 <input type="text" id="designAccentHoverHex" class="form-control" value="${d.accentHover || '#ff4d15'}">
               </div>
             </div>
             <div class="form-group">
-              <label class="form-label">Arrière-plan Sombre (Dark BG)</label>
+              <label class="form-label">Fond Général du Site (Background)</label>
               <div class="color-picker-group">
                 <input type="color" id="designBgDark" class="color-swatch-input" value="${d.bgDark || '#0b0b0e'}">
                 <input type="text" id="designBgDarkHex" class="form-control" value="${d.bgDark || '#0b0b0e'}">
               </div>
             </div>
             <div class="form-group">
-              <label class="form-label">Fond des Cartes (Card BG)</label>
+              <label class="form-label">Fond des Cartes (Card Background)</label>
               <div class="color-picker-group">
                 <input type="color" id="designBgCardDark" class="color-swatch-input" value="${d.bgCardDark || '#131318'}">
                 <input type="text" id="designBgCardDarkHex" class="form-control" value="${d.bgCardDark || '#131318'}">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Couleur des Bordures des Cartes</label>
+              <div class="color-picker-group">
+                <input type="color" id="designBorderColor" class="color-swatch-input" value="${d.borderColor || '#27272a'}">
+                <input type="text" id="designBorderColorHex" class="form-control" value="${d.borderColor || '#27272a'}">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Couleur du Texte Principal</label>
+              <div class="color-picker-group">
+                <input type="color" id="designTextColor" class="color-swatch-input" value="${d.textColor || '#a1a1aa'}">
+                <input type="text" id="designTextColorHex" class="form-control" value="${d.textColor || '#a1a1aa'}">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Couleur des Grands Titres</label>
+              <div class="color-picker-group">
+                <input type="color" id="designTextHeadingColor" class="color-swatch-input" value="${d.textHeadingColor || '#ffffff'}">
+                <input type="text" id="designTextHeadingColorHex" class="form-control" value="${d.textHeadingColor || '#ffffff'}">
               </div>
             </div>
             <div class="form-group">
@@ -1648,7 +1733,7 @@
                 <option value="'Plus Jakarta Sans', sans-serif" ${d.fontHeading?.includes('Jakarta') ? 'selected' : ''}>Plus Jakarta Sans</option>
               </select>
             </div>
-            <div class="form-group">
+            <div class="form-group full-width">
               <label class="form-label">Arrondi des Bordures (Border Radius)</label>
               <select id="designBorderRadius" class="form-control">
                 <option value="8px" ${d.borderRadius === '8px' ? 'selected' : ''}>Discret (8px)</option>
@@ -1686,6 +1771,9 @@
       syncInput('designAccentHover', 'designAccentHoverHex', 'accentHover');
       syncInput('designBgDark', 'designBgDarkHex', 'bgDark');
       syncInput('designBgCardDark', 'designBgCardDarkHex', 'bgCardDark');
+      syncInput('designBorderColor', 'designBorderColorHex', 'borderColor');
+      syncInput('designTextColor', 'designTextColorHex', 'textColor');
+      syncInput('designTextHeadingColor', 'designTextHeadingColorHex', 'textHeadingColor');
 
       const fontEl = document.getElementById('designFontHeading');
       if (fontEl) {
