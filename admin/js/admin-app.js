@@ -256,9 +256,10 @@
       // 1. Charger immédiatement les données locales
       this.loadLocalData();
 
-      // 2. Rendre l'onglet actif
+      // 2. Rendre l'onglet actif et actualiser les compteurs
       this.renderTab(this.currentTab);
       this.updateSyncStatus('saved');
+      this.updateBadges();
 
       // 3. Configurer la navigation et les actions globales
       this.bindNavigation();
@@ -315,6 +316,7 @@
               this.renderTab(this.currentTab);
               this.streamPreview();
             }
+            this.updateBadges();
           }
         }
       } catch (_) {}
@@ -2409,34 +2411,128 @@
       }
     },
 
-    // 11. MESSAGES REÇUS
+    // 11. MESSAGES REÇUS & RÉPONSES
     renderMessages() {
       const msgs = this.data.messages || [];
+      const unreadCount = msgs.filter(m => !m.read).length;
+
       return `
         <div class="card">
-          <div class="card-header">
+          <div class="card-header" style="flex-wrap: wrap; gap: 12px;">
             <div>
-              <h2 class="card-title">📩 Messages Reçus (${msgs.length})</h2>
-              <p class="card-desc">Demandes de contact reçues depuis le formulaire du portfolio</p>
-            </div>
-          </div>
-          <div class="items-list">
-            ${msgs.map(m => `
-              <div class="list-item-card">
-                <div class="item-details">
-                  <div class="item-title">${m.name} <span style="font-weight: 400; color: var(--admin-text-muted);">(${m.email})</span></div>
-                  <div style="font-weight: 600; font-size: 0.9rem; margin: 4px 0; color: var(--admin-accent);">${m.subject}</div>
-                  <div class="item-subtitle" style="font-size: 0.85rem; color: var(--admin-text-main);">${m.message}</div>
-                  <div style="font-size: 0.72rem; color: var(--admin-text-dim); margin-top: 4px;">${new Date(m.date).toLocaleString('fr-FR')}</div>
-                </div>
-                <div class="item-actions">
-                  <a href="mailto:${m.email}?subject=Re: ${encodeURIComponent(m.subject)}" class="btn btn-primary btn-icon" title="Répondre">✉️</a>
-                </div>
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <h2 class="card-title">📩 Messages Reçus (${msgs.length})</h2>
+                ${unreadCount > 0 ? `<span style="background: var(--admin-accent); color: white; font-size: 0.78rem; font-weight: 700; padding: 3px 10px; border-radius: 12px;">${unreadCount} nouveau${unreadCount > 1 ? 'x' : ''}</span>` : '<span style="background: rgba(16,185,129,0.15); color: var(--admin-success); font-size: 0.78rem; font-weight: 700; padding: 3px 10px; border-radius: 12px;">✓ Tous les messages sont lus</span>'}
               </div>
-            `).join('') || '<p style="color: var(--admin-text-dim); padding: 24px; text-align: center;">Aucun message reçu pour l\'instant.</p>'}
+              <p class="card-desc">Messages envoyés par vos recruteurs et clients depuis le formulaire public</p>
+            </div>
+            ${unreadCount > 0 ? `
+              <button class="btn btn-secondary" onclick="AdminApp.markAllMessagesAsRead()">
+                ✓ Tout marquer comme lu
+              </button>
+            ` : ''}
+          </div>
+
+          <div class="items-list" style="margin-top: 16px; display: flex; flex-direction: column; gap: 16px;">
+            ${msgs.map(m => {
+              const dateStr = m.date ? new Date(m.date).toLocaleString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : 'Date inconnue';
+              const replyBody = `Bonjour ${m.name},\n\nMerci pour votre prise de contact via mon portfolio.\n\n--- Votre message d'origine ---\n${m.message}\n\n-------------------------------\n\nBien cordialement,\nFalikou FOFANA\nData Analyst & Consultant\nEmail : fofanafalikou068@gmail.com\nTél : +225 07 05 32 24 98`;
+              const mailtoUrl = `mailto:${encodeURIComponent(m.email)}?subject=${encodeURIComponent('Re: ' + (m.subject || 'Votre message sur mon Portfolio'))}&body=${encodeURIComponent(replyBody)}`;
+
+              return `
+                <div class="list-item-card" style="display: flex; flex-direction: column; gap: 12px; padding: 20px; background: ${m.read ? 'rgba(255,255,255,0.02)' : 'rgba(218, 56, 5, 0.05)'}; border: 1px solid ${m.read ? 'var(--admin-border)' : 'var(--admin-accent)'}; border-radius: var(--radius-md);">
+                  <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                      <div style="width: 42px; height: 42px; border-radius: 50%; background: ${m.read ? 'rgba(255,255,255,0.08)' : 'var(--admin-accent)'}; color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.1rem;">
+                        ${(m.name || 'U').charAt(0).toUpperCase()}
+                      </div>
+                      <div>
+                        <div style="font-weight: 700; font-size: 1.05rem; color: var(--admin-text-main);">
+                          ${m.name} 
+                          <a href="mailto:${m.email}" style="font-weight: 400; font-size: 0.85rem; color: var(--admin-text-muted); margin-left: 6px; text-decoration: underline;">${m.email}</a>
+                        </div>
+                        <div style="font-size: 0.78rem; color: var(--admin-text-dim);">🕒 ${dateStr}</div>
+                      </div>
+                    </div>
+                    <div>
+                      ${!m.read ? `<span style="font-size: 0.72rem; font-weight: 800; padding: 4px 10px; border-radius: 10px; background: var(--admin-accent); color: white;">● NOUVEAU</span>` : `<span style="font-size: 0.72rem; color: var(--admin-text-dim);">✓ Lu</span>`}
+                    </div>
+                  </div>
+
+                  <div style="padding: 6px 0; border-top: 1px solid var(--admin-border); border-bottom: 1px solid var(--admin-border);">
+                    <div style="font-weight: 700; font-size: 0.95rem; color: var(--admin-accent); margin-bottom: 6px;">
+                      📌 ${m.subject || 'Prise de contact'}
+                    </div>
+                    <div style="font-size: 0.92rem; line-height: 1.6; color: var(--admin-text-main); white-space: pre-wrap; background: rgba(0,0,0,0.25); padding: 14px; border-radius: 8px; border-left: 3px solid var(--admin-accent);">
+${m.message || '(Aucun contenu)'}
+                    </div>
+                  </div>
+
+                  <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                      <a href="${mailtoUrl}" target="_blank" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
+                        <span>✉️ Répondre dans ma boîte mail</span>
+                      </a>
+                      <button class="btn btn-secondary" onclick="AdminApp.toggleMessageRead('${m.id}')">
+                        ${m.read ? 'Marquer comme non lu' : '✓ Marquer comme lu'}
+                      </button>
+                    </div>
+                    <button class="btn btn-danger" onclick="AdminApp.deleteMessage('${m.id}')" style="background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3);">
+                      🗑️ Supprimer
+                    </button>
+                  </div>
+                </div>
+              `;
+            }).join('') || `
+              <div style="text-align: center; padding: 48px 20px; color: var(--admin-text-muted);">
+                <div style="font-size: 3rem; margin-bottom: 12px;">📭</div>
+                <h3 style="font-size: 1.1rem; color: var(--admin-text-main);">Aucun message reçu pour l'instant</h3>
+                <p style="font-size: 0.85rem; margin-top: 6px;">Les messages envoyés depuis le formulaire de votre portfolio s'afficheront directement ici.</p>
+              </div>
+            `}
           </div>
         </div>
       `;
+    },
+
+    toggleMessageRead(id) {
+      const msg = (this.data.messages || []).find(m => m.id === id);
+      if (msg) {
+        msg.read = !msg.read;
+        this.persistData(msg.read ? 'Message marqué comme lu' : 'Message marqué comme non lu', false);
+        this.renderTab('messages');
+        this.updateBadges();
+      }
+    },
+
+    markAllMessagesAsRead() {
+      if (!Array.isArray(this.data.messages)) return;
+      this.data.messages.forEach(m => m.read = true);
+      this.persistData('Tous les messages marqués comme lus', false);
+      this.renderTab('messages');
+      this.updateBadges();
+    },
+
+    deleteMessage(id) {
+      if (confirm('Voulez-vous vraiment supprimer ce message ?')) {
+        this.data.messages = (this.data.messages || []).filter(m => m.id !== id);
+        this.persistData('Message supprimé', true);
+        this.renderTab('messages');
+        this.updateBadges();
+      }
+    },
+
+    updateBadges() {
+      const unreadCount = (this.data.messages || []).filter(m => !m.read).length;
+      const navBadge = document.getElementById('navMessagesBadge');
+      if (navBadge) {
+        if (unreadCount > 0) {
+          navBadge.style.display = 'inline-block';
+          navBadge.textContent = unreadCount;
+        } else {
+          navBadge.style.display = 'none';
+        }
+      }
     },
 
     // 12. HISTORIQUE & AUDIT

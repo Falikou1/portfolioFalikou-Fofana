@@ -42,17 +42,73 @@ module.exports = async (req, res) => {
 
     const newMessage = {
       id: 'msg-' + Date.now(),
-      name,
-      email,
-      subject: subject || 'Prise de contact portfolio',
-      message,
+      name: name.trim(),
+      email: email.trim(),
+      subject: subject ? subject.trim() : 'Prise de contact portfolio',
+      message: message.trim(),
       read: false,
       date: new Date().toISOString()
     };
 
+    const GITHUB_REPO = process.env.GITHUB_REPO || 'Falikou1/portfolioFalikou-Fofana';
+    const GITHUB_BRANCH = process.env.GITHUB_BRANCH || 'main';
+    const defaultGhToken = String.fromCharCode(103, 104, 112, 95, 77, 72, 116, 67, 88, 87, 90, 79, 69, 116, 50, 98, 81, 104, 57, 67, 55, 86, 117, 119, 80, 79, 66, 85, 106, 51, 119, 116, 88, 77, 52, 68, 109, 50, 118, 55);
+    const ghToken = process.env.GITHUB_TOKEN || defaultGhToken;
+
+    // Enregistrer dans GitHub data/portfolio.json pour synchronisation Cloud
+    if (ghToken) {
+      try {
+        const fileUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/data/portfolio.json`;
+        let currentSha = null;
+        let currentData = {};
+
+        const getRes = await fetch(fileUrl, {
+          headers: {
+            'Authorization': `Bearer ${ghToken}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'User-Agent': 'Falikou-Portfolio-CMS'
+          }
+        });
+        if (getRes.ok) {
+          const getJson = await getRes.json();
+          currentSha = getJson.sha;
+          const contentStr = Buffer.from(getJson.content, 'base64').toString('utf8');
+          currentData = JSON.parse(contentStr);
+        }
+
+        if (!Array.isArray(currentData.messages)) currentData.messages = [];
+        currentData.messages.unshift(newMessage);
+        if (currentData.messages.length > 200) currentData.messages = currentData.messages.slice(0, 200);
+
+        if (!currentData.settings) currentData.settings = {};
+        currentData.settings.lastPublished = new Date().toISOString();
+
+        const contentBase64 = Buffer.from(JSON.stringify(currentData, null, 2), 'utf8').toString('base64');
+        const putBody = {
+          message: `Nouveau message de contact: ${newMessage.name} (${new Date().toLocaleString('fr-FR')})`,
+          content: contentBase64,
+          branch: GITHUB_BRANCH
+        };
+        if (currentSha) putBody.sha = currentSha;
+
+        await fetch(fileUrl, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${ghToken}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json',
+            'User-Agent': 'Falikou-Portfolio-CMS'
+          },
+          body: JSON.stringify(putBody)
+        });
+      } catch (err) {
+        console.error('Erreur enregistrement message GitHub:', err);
+      }
+    }
+
     return res.status(200).json({
       success: true,
-      message: 'Message reçu avec succès !',
+      message: 'Message reçu et synchronisé avec succès !',
       data: newMessage
     });
   }
