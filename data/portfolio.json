@@ -3,7 +3,7 @@
     "firstName": "Falikou",
     "lastName": "FOFANA",
     "fullName": "FALIKOU FOFANA",
-    "title": "Data Analyst & Concepteur BI",
+    "title": "Data Analyst & Développeur FullStack",
     "subTitle": "Étudiant en 3e année Génie Informatique (IUA)",
     "statusBadge": "Disponible pour stage / missions",
     "shortBio": "Étudiant en troisième année de licence en génie informatique, futur data analyst et développeur web & mobile, passionné par les données, l'intelligence artificielle, la résolution de problèmes et le développement d'outils décisionnels. Motivé à transformer les données en insights pertinents et en tableaux de bord interactifs pour soutenir la prise de décision stratégique",
@@ -477,6 +477,20 @@
   "messages": [],
   "history": [
     {
+      "id": "hist-1787524494150",
+      "timestamp": "2026-08-23T22:34:54.150Z",
+      "action": "Publication",
+      "target": "Portfolio",
+      "details": "Titre & Bio modifiés depuis le Dashboard"
+    },
+    {
+      "id": "h-1787524490760",
+      "timestamp": "2026-08-23T22:34:50.760Z",
+      "action": "Titre & Bio modifiés depuis le Dashboard",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
       "id": "pub-1787524355073",
       "timestamp": "2026-08-23T22:32:35.073Z",
       "action": "Publication Complète",
@@ -811,20 +825,6 @@
       "action": "Couleur modifiée",
       "target": "Portfolio",
       "details": "Enregistré dans la base de données"
-    },
-    {
-      "id": "h-1787511728284",
-      "timestamp": "2026-08-23T19:02:08.284Z",
-      "action": "Couleur modifiée",
-      "target": "Portfolio",
-      "details": "Enregistré dans la base de données"
-    },
-    {
-      "id": "h-1787511727454",
-      "timestamp": "2026-08-23T19:02:07.454Z",
-      "action": "Couleur modifiée",
-      "target": "Portfolio",
-      "details": "Enregistré dans la base de données"
     }
   ],
   "seo": {
@@ -836,7 +836,7 @@
   },
   "settings": {
     "siteName": "Falikou FOFANA — Portfolio",
-    "lastPublished": "2026-08-23T22:32:35.071Z",
+    "lastPublished": "2026-08-23T22:34:54.150Z",
     "version": "1.0.0"
   }
 }
