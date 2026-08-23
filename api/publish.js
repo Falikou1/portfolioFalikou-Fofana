@@ -94,7 +94,7 @@ module.exports = async (req, res) => {
       // Step B: Commit new content
       const contentBase64 = Buffer.from(JSON.stringify(data, null, 2), 'utf8').toString('base64');
       const putBody = {
-        message: `${commitMessage} [skip ci]`,
+        message: `${commitMessage}`,
         content: contentBase64,
         branch: GITHUB_BRANCH
       };

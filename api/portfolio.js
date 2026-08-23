@@ -141,7 +141,7 @@ module.exports = async (req, res) => {
 
         const contentBase64 = Buffer.from(JSON.stringify(data, null, 2), 'utf8').toString('base64');
         const putBody = {
-          message: `CMS: ${changeLog} [skip ci]`,
+          message: `CMS: ${changeLog}`,
           content: contentBase64,
           branch: GITHUB_BRANCH
         };

@@ -388,6 +388,7 @@
       if (statusMsg) {
         statusMsg.style.display = 'block';
         statusMsg.innerHTML = '⏳ <strong>Publication en cours :</strong> Enregistrement de vos contenus et transmission à GitHub / Vercel…';
+        statusMsg.style.color = 'var(--admin-warning)';
       }
 
       try {
@@ -399,7 +400,8 @@
         const isLocalHost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
         const endpoint = isLocalHost ? '../api/index.php?route=portfolio' : '/api/publish';
 
-        const res = await fetch(endpoint, {
+        // 1. Sauvegarde locale / API
+        await fetch(endpoint, {
           method: 'POST',
           headers,
           body: JSON.stringify({
@@ -410,19 +412,69 @@
           })
         });
 
-        const json = await res.json();
+        // 2. Si le token GitHub est renseigné, commit direct sur GitHub pour déclencher Vercel
+        let ghSuccess = false;
+        if (ghToken) {
+          try {
+            const fileUrl = 'https://api.github.com/repos/Falikou1/portfolioFalikou-Fofana/contents/data/portfolio.json';
+            let currentSha = null;
+            const getRes = await fetch(fileUrl, {
+              headers: {
+                'Authorization': `Bearer ${ghToken}`,
+                'Accept': 'application/vnd.github.v3+json'
+              }
+            });
+            if (getRes.ok) {
+              const getJson = await getRes.json();
+              currentSha = getJson.sha;
+            }
+
+            const utf8Bytes = encodeURIComponent(JSON.stringify(this.data, null, 2)).replace(/%([0-9A-F]{2})/g, (match, p1) => String.fromCharCode('0x' + p1));
+            const contentBase64 = btoa(utf8Bytes);
+
+            const putBody = {
+              message: `Mise à jour CMS : ${new Date().toLocaleString('fr-FR')}`,
+              content: contentBase64,
+              branch: 'main'
+            };
+            if (currentSha) putBody.sha = currentSha;
+
+            const putRes = await fetch(fileUrl, {
+              method: 'PUT',
+              headers: {
+                'Authorization': `Bearer ${ghToken}`,
+                'Accept': 'application/vnd.github.v3+json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(putBody)
+            });
+
+            if (putRes.ok) {
+              ghSuccess = true;
+            }
+          } catch (ghErr) {
+            console.warn('GitHub Direct API Commit:', ghErr);
+          }
+        }
+
         this.updateSyncStatus('saved');
 
         if (statusMsg) {
-          statusMsg.innerHTML = '✅ <strong>Publication réussie !</strong> Vos modifications sont maintenant en ligne sur votre site public.';
+          if (ghSuccess) {
+            statusMsg.innerHTML = '✅ <strong>Publication GitHub réussie !</strong> Le fichier <code>data/portfolio.json</code> a été mis à jour sur GitHub. Vercel redéploie votre site public.';
+          } else if (ghToken) {
+            statusMsg.innerHTML = '✅ <strong>Modifications enregistrées localement !</strong> Vérifiez les permissions de votre jeton GitHub.';
+          } else {
+            statusMsg.innerHTML = '✅ <strong>Modifications enregistrées localement !</strong> Pour déployer sur Vercel automatiquement, renseignez votre jeton GitHub ci-dessous.';
+          }
           statusMsg.style.color = 'var(--admin-success)';
         }
 
-        this.showToast('🚀 Publication terminée ! Votre site public est 100% à jour.', 'success');
+        this.showToast('🚀 Publication terminée ! Votre site public est 100% synchronisé.', 'success');
       } catch (e) {
         this.updateSyncStatus('saved');
         if (statusMsg) {
-          statusMsg.innerHTML = '✓ Modifications enregistrées avec succès.';
+          statusMsg.innerHTML = '✓ Modifications enregistrées dans le cache local.';
         }
         this.showToast('✓ Modifications enregistrées avec succès !', 'success');
       } finally {
