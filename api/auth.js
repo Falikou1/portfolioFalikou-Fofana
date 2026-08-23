@@ -62,16 +62,19 @@ module.exports = async (req, res) => {
   const action = req.query.action || (req.body && req.body.action) || 'login';
 
   try {
-    // 1. LOGIN (OWASP A07: Authentication & Rate Limiting protection)
+    // 1. LOGIN (OWASP A07: Authentication with Email + Password & Rate Limiting)
     if (req.method === 'POST' && action === 'login') {
-      const { password } = req.body || {};
-      if (!password) {
-        return res.status(400).json({ success: false, message: 'Mot de passe requis.' });
+      const { email, password } = req.body || {};
+      if (!email || !password) {
+        return res.status(400).json({ success: false, message: 'Email et mot de passe requis.' });
       }
+
+      const authorizedEmails = ['fofanafalikou068@gmail.com', 'admin@falikou.ci', 'falikou', 'falikou.fofana'];
+      const isEmailMatch = authorizedEmails.includes(email.trim().toLowerCase());
 
       // Check stored custom password hash or default master hash
       const inputHash = hashPassword(password);
-      let isMatch = (inputHash === MASTER_HASH) || (password === 'Falikou@2026!');
+      let isPwdMatch = (inputHash === MASTER_HASH) || (password === 'Falikou@2026!');
 
       // Check if custom hash exists in local portfolio.json
       try {
@@ -79,15 +82,15 @@ module.exports = async (req, res) => {
         if (fs.existsSync(dataFilePath)) {
           const raw = JSON.parse(fs.readFileSync(dataFilePath, 'utf8'));
           if (raw?.settings?.adminPasswordHash) {
-            isMatch = (inputHash === raw.settings.adminPasswordHash);
+            isPwdMatch = (inputHash === raw.settings.adminPasswordHash);
           }
         }
       } catch (_) {}
 
-      if (!isMatch) {
+      if (!isEmailMatch || !isPwdMatch) {
         // Anti-timing attack delay (800ms)
         await new Promise(r => setTimeout(r, 800));
-        return res.status(401).json({ success: false, message: 'Mot de passe administrateur incorrect ou non autorisé.' });
+        return res.status(401).json({ success: false, message: 'Email ou mot de passe administrateur incorrect.' });
       }
 
       const token = createSessionToken('Falikou');
@@ -95,7 +98,7 @@ module.exports = async (req, res) => {
         success: true,
         message: 'Connexion sécurisée réussie.',
         token,
-        user: { name: 'Falikou FOFANA', role: 'admin' }
+        user: { name: 'Falikou FOFANA', email: email.trim().toLowerCase(), role: 'admin' }
       });
     }
 

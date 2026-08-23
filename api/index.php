@@ -59,12 +59,15 @@ if ($route === 'auth' || strpos($route, 'auth') !== false) {
     $action = isset($_GET['action']) ? $_GET['action'] : (isset($body['action']) ? $body['action'] : 'login');
 
     if ($method === 'POST' && $action === 'login') {
+        $email = isset($body['email']) ? strtolower(trim($body['email'])) : '';
         $pwd = isset($body['password']) ? $body['password'] : '';
-        if ($pwd === 'Falikou@2026!') {
+        $authorizedEmails = ['fofanafalikou068@gmail.com', 'admin@falikou.ci', 'falikou', 'falikou.fofana'];
+
+        if (in_array($email, $authorizedEmails) && $pwd === 'Falikou@2026!') {
             $payload = [
                 'user' => 'Falikou',
                 'role' => 'admin',
-                'exp' => (time() + 7 * 86400) * 1000,
+                'exp' => (time() + 86400) * 1000,
                 'nonce' => bin2hex(random_bytes(16))
             ];
             $str = rtrim(strtr(base64_encode(json_encode($payload)), '+/', '-_'), '=');
@@ -73,14 +76,14 @@ if ($route === 'auth' || strpos($route, 'auth') !== false) {
 
             echo json_encode([
                 'success' => true,
-                'message' => 'Connexion réussie (XAMPP Local)',
+                'message' => 'Connexion réussie (Session Sécurisée)',
                 'token' => $token,
-                'user' => ['name' => 'Falikou FOFANA', 'role' => 'admin']
+                'user' => ['name' => 'Falikou FOFANA', 'email' => $email, 'role' => 'admin']
             ]);
             exit;
         } else {
             http_response_code(401);
-            echo json_encode(['success' => false, 'message' => 'Mot de passe administrateur incorrect.']);
+            echo json_encode(['success' => false, 'message' => 'Email ou mot de passe administrateur incorrect.']);
             exit;
         }
     }

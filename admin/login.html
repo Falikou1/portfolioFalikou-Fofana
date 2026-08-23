@@ -104,9 +104,14 @@
 
     <form id="loginForm">
       <div class="form-group">
-        <label class="form-label" for="password">Mot de Passe Administrateur</label>
+        <label class="form-label" for="email">Adresse Email Administrateur</label>
+        <input type="email" id="email" class="form-control" placeholder="fofanafalikou068@gmail.com" required autofocus autocomplete="username">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="password">Mot de Passe Administrateur Renforcé</label>
         <div class="password-input-wrapper">
-          <input type="password" id="password" class="form-control" placeholder="••••••••••••" required autofocus>
+          <input type="password" id="password" class="form-control" placeholder="••••••••••••" required autocomplete="current-password">
           <button type="button" class="password-toggle-btn" id="togglePassword" title="Afficher/Masquer">👁️</button>
         </div>
       </div>
@@ -125,7 +130,7 @@
     </form>
 
     <div class="security-badge">
-      <span>🔒 Accès privé et chiffré — Session sécurisée</span>
+      <span>🔒 Accès privé et chiffré — Session sécurisée OWASP</span>
     </div>
   </div>
 
@@ -151,6 +156,7 @@
     }
 
     const form = document.getElementById('loginForm');
+    const emailInput = document.getElementById('email');
     const pwdInput = document.getElementById('password');
     const toggleBtn = document.getElementById('togglePassword');
     const submitBtn = document.getElementById('submitBtn');
@@ -165,6 +171,7 @@
         const mins = Math.floor(remainingSeconds / 60);
         const secs = remainingSeconds % 60;
         submitBtn.disabled = true;
+        emailInput.disabled = true;
         pwdInput.disabled = true;
         errorDiv.innerHTML = `🛡️ <strong>Protection OWASP (A07) activée :</strong> Trop de tentatives échouées.<br>Accès temporairement verrouillé pendant <strong>${mins}m ${secs < 10 ? '0' : ''}${secs}s</strong>.`;
         errorDiv.style.display = 'block';
@@ -172,6 +179,7 @@
         return true;
       } else {
         submitBtn.disabled = false;
+        emailInput.disabled = false;
         pwdInput.disabled = false;
         if (lockoutUntil > 0) {
           localStorage.removeItem(LOCKOUT_KEY);
@@ -192,6 +200,7 @@
       e.preventDefault();
       if (checkLockout()) return;
 
+      const email = emailInput.value.trim().toLowerCase();
       const pwd = pwdInput.value.trim();
       const remember = document.getElementById('rememberMe').checked;
 
@@ -201,7 +210,7 @@
 
       let success = false;
 
-      // 1. Try serverless / local PHP API endpoint
+      // 1. Try serverless / local PHP API endpoint with Email + Password
       try {
         const endpoint = window.location.pathname.includes('/portfolio/')
           ? '../api/index.php?route=auth&action=login'
@@ -210,26 +219,27 @@
         const res = await fetch(endpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'login', password: pwd })
+          body: JSON.stringify({ action: 'login', email, password: pwd })
         });
         const json = await res.json();
         if (res.ok && json.success) {
           success = true;
           const storage = remember ? localStorage : sessionStorage;
           storage.setItem(TOKEN_KEY, json.token || 'mock_token_jwt');
-          storage.setItem(USER_KEY, JSON.stringify(json.user || { name: 'Falikou FOFANA' }));
+          storage.setItem(USER_KEY, JSON.stringify(json.user || { name: 'Falikou FOFANA', email }));
           localStorage.setItem('falikou_github_token', String.fromCharCode(103, 104, 112, 95, 77, 72, 116, 67, 88, 87, 90, 79, 69, 116, 50, 98, 81, 104, 57, 67, 55, 86, 117, 119, 80, 79, 66, 85, 106, 51, 119, 116, 88, 77, 52, 68, 109, 50, 118, 55));
         }
       } catch (err) {}
 
-      // 2. Direct fallback verification ONLY for strong master password "Falikou@2026!"
+      // 2. Direct fallback verification for authorized email AND master password "Falikou@2026!"
       if (!success) {
-        if (pwd === 'Falikou@2026!') {
+        const authorizedEmails = ['fofanafalikou068@gmail.com', 'admin@falikou.ci', 'falikou', 'falikou.fofana'];
+        if (authorizedEmails.includes(email) && pwd === 'Falikou@2026!') {
           success = true;
-          const mockToken = btoa(JSON.stringify({ user: 'Falikou', role: 'admin', exp: Date.now() + 86400000 })) + '.mock_sig';
+          const mockToken = btoa(JSON.stringify({ user: 'Falikou', email, role: 'admin', exp: Date.now() + 86400000 })) + '.mock_sig';
           const storage = remember ? localStorage : sessionStorage;
           storage.setItem(TOKEN_KEY, mockToken);
-          storage.setItem(USER_KEY, JSON.stringify({ name: 'Falikou FOFANA', role: 'admin' }));
+          storage.setItem(USER_KEY, JSON.stringify({ name: 'Falikou FOFANA', email, role: 'admin' }));
           localStorage.setItem('falikou_github_token', String.fromCharCode(103, 104, 112, 95, 77, 72, 116, 67, 88, 87, 90, 79, 69, 116, 50, 98, 81, 104, 57, 67, 55, 86, 117, 119, 80, 79, 66, 85, 106, 51, 119, 116, 88, 77, 52, 68, 109, 50, 118, 55));
         }
       }
@@ -256,7 +266,7 @@
           submitBtn.disabled = false;
           submitBtn.innerHTML = '<span>Se connecter au Dashboard</span>';
           const remaining = MAX_FAILED_ATTEMPTS - attempts;
-          errorDiv.innerHTML = `❌ Mot de passe incorrect.<br><span style="font-size:0.75rem; color:#fca5a5;">(Tentative ${attempts}/${MAX_FAILED_ATTEMPTS} — Compte verrouillé après ${remaining} échec${remaining > 1 ? 's' : ''})</span>`;
+          errorDiv.innerHTML = `❌ Email ou mot de passe incorrect.<br><span style="font-size:0.75rem; color:#fca5a5;">(Tentative ${attempts}/${MAX_FAILED_ATTEMPTS} — Compte verrouillé après ${remaining} échec${remaining > 1 ? 's' : ''})</span>`;
           errorDiv.style.display = 'block';
           pwdInput.select();
         }
