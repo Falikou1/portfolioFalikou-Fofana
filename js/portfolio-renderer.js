@@ -1,56 +1,67 @@
 /**
  * ==========================================================================
- * FALIKOU FOFANA — PORTFOLIO DYNAMIC HYDRATION ENGINE v3.0
- * Connecte le site public avec le CMS Admin en temps réel.
- * Synchronisation instantanée : BroadcastChannel + Storage Event + postMessage + API
- * Rendu 0ms : charge immédiatement les données locales puis synchronise avec le serveur.
+ * FALIKOU FOFANA — PORTFOLIO DYNAMIC HYDRATION & SYNC ENGINE v3.5
+ * CONTRÔLE TOTAL ET EN TEMPS RÉEL DU SITE PUBLIC DEPUIS L'ADMIN CMS
+ *
+ * Fonctionnalités clés :
+ * 1. Synchronisation 0ms locale (localStorage) + Backend API (PHP/JSON/Vercel)
+ * 2. Écoute temps réel : BroadcastChannel + StorageEvent + postMessage
+ * 3. Contrôle 100% dynamique de TOUS les éléments visibles :
+ *    - Textes, Titres H1/H2/H6, Descriptions et Biographies
+ *    - Projets (Création/Édition/Suppression dynamique de cartes & Modals)
+ *    - Expériences, Formations et Certifications
+ *    - Soft Skills, Compétences et Niveaux
+ *    - Métriques d'impact & Compteurs animés
+ *    - Coordonnées, Liens de réseaux sociaux et Téléchargement CV
+ *    - Couleurs du thème (--accent, --bg-dark, etc.), Polices et Bordures
+ *    - Affichage/Masquage de n'importe quelle section
+ *    - Balises SEO (Meta Title, Description, Keywords)
  * ==========================================================================
  */
 
 (function () {
   'use strict';
 
-  const STORAGE_KEY = 'falikou_portfolio_data';
-  const DRAFT_KEY   = 'falikou_portfolio_draft';
+  const STORAGE_KEY  = 'falikou_portfolio_data';
+  const DRAFT_KEY    = 'falikou_portfolio_draft';
   const CHANNEL_NAME = 'falikou_portfolio_channel';
 
   window.PortfolioEngine = {
     data: null,
-    isHydrated: false,
+    isLoaded: false,
 
     async init() {
-      // 1. Charger immédiatement les données locales (Rendu instantané 0ms)
-      this.loadLocalData();
+      // 1. Rendu instantané depuis le cache local (0 milliseconde de latence)
+      this.loadLocalCache();
 
-      // 2. Écouter les canaux de communication temps réel
-      this.setupListeners();
+      // 2. Établir les canaux de synchronisation temps réel
+      this.setupLiveSync();
 
       // 3. Récupérer les données fraîches depuis le serveur / API / JSON
       await this.fetchServerData();
     },
 
-    loadLocalData() {
+    loadLocalCache() {
       const raw = localStorage.getItem(STORAGE_KEY) || localStorage.getItem(DRAFT_KEY);
       if (raw) {
         try {
           this.data = JSON.parse(raw);
           this.renderAll();
         } catch (e) {
-          console.warn('PortfolioEngine: cache local invalide', e);
+          console.warn('PortfolioEngine: Erreur lecture cache local', e);
         }
       }
     },
 
     async fetchServerData() {
-      const endpoints = [
-        window.location.pathname.includes('/portfolio/') ? 'api/index.php?route=portfolio' : '/api/portfolio',
-        'data/portfolio.json',
-        'data/default-portfolio.json'
-      ];
+      const isLocalHost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      const endpoints = isLocalHost
+        ? ['api/index.php?route=portfolio', 'data/portfolio.json', 'data/default-portfolio.json']
+        : ['/api/portfolio', 'data/portfolio.json', 'data/default-portfolio.json'];
 
-      for (const ep of endpoints) {
+      for (const url of endpoints) {
         try {
-          const res = await fetch(ep, { cache: 'no-cache' });
+          const res = await fetch(url, { cache: 'no-cache' });
           if (res.ok) {
             const json = await res.json();
             const payload = (json && json.data) ? json.data : json;
@@ -65,26 +76,53 @@
       }
     },
 
+    // =========================================================================
+    // RENDU GLOBAL ET EXHAUSTIF DU PORTFOLIO
+    // =========================================================================
     renderAll() {
       if (!this.data) return;
       const d = this.data;
 
+      // 1. Thème & Styles globaux
       this.applyDesignTheme(d.design);
-      this.renderProfile(d.profile);
-      this.renderHero(d.profile, d.sections?.hero);
-      this.renderMetrics(d.sections?.metrics);
-      this.renderProjects(d.projects, d.sections?.projects);
-      this.renderExperiences(d.experiences, d.sections?.experience);
-      this.renderEducations(d.educations, d.sections?.education);
-      this.renderSkills(d.skills, d.sections?.skills);
-      this.renderFooter(d.profile);
-      this.renderSEO(d.seo);
-      this.renderVisibility(d.sections);
 
-      this.isHydrated = true;
+      // 2. Profil, Identité & Coordonnées
+      this.renderProfile(d.profile);
+
+      // 3. Section Hero (Grand Titre, Bio, Badges, CV)
+      this.renderHero(d.profile, d.sections?.hero);
+
+      // 4. Section Métriques / Faits Marquants
+      this.renderMetrics(d.sections?.metrics);
+
+      // 5. Section Projets & Réalisations (Cartes & Modals)
+      this.renderProjects(d.projects, d.sections?.projects);
+
+      // 6. Section Expériences & Leadership
+      this.renderExperiences(d.experiences, d.sections?.experience);
+
+      // 7. Section Formations & Diplômes
+      this.renderEducations(d.educations, d.sections?.education);
+
+      // 8. Section Compétences & Soft Skills
+      this.renderSkills(d.skills, d.sections?.skills);
+
+      // 9. Section Services
+      this.renderServices(d.services, d.sections?.services);
+
+      // 10. Footer & Liens Sociaux
+      this.renderFooter(d.profile);
+
+      // 11. Balises SEO
+      this.renderSEO(d.seo);
+
+      // 12. Visibilité des Sections (Afficher / Masquer)
+      this.renderSectionsVisibility(d.sections);
+
+      this.isLoaded = true;
     },
 
-    // ── 1. APPARENCE, COULEURS & DESIGN STUDIO ───────────────────────────────
+    // ── 1. THÈME & DESIGN STUDIO ─────────────────────────────────────────────
     applyDesignTheme(design) {
       if (!design) return;
       const root = document.documentElement;
@@ -117,17 +155,17 @@
 
       const fullName = profile.fullName || `${profile.firstName || ''} ${profile.lastName || ''}`.trim() || 'Falikou FOFANA';
 
-      // Noms et légendes
-      document.querySelectorAll('.hero-photo-name, .profile-name, .footer-bigname-text').forEach(el => {
-        el.textContent = fullName;
+      // Noms complets
+      document.querySelectorAll('.hero-photo-name, .profile-name, .footer-bigname-text, .mobile-drawer-title').forEach(el => {
+        if (el && !el.classList.contains('mobile-drawer-title')) el.textContent = fullName;
       });
 
-      // Titres professionnels
+      // Titres & rôles
       document.querySelectorAll('.hero-photo-sub, .profile-title, .hero-author-role').forEach(el => {
         if (profile.title) el.textContent = profile.title;
       });
 
-      // Avatars & Photos
+      // Photos et Avatars
       if (profile.photo) {
         document.querySelectorAll('.hero-img-container img, .brand-avatar, .mobile-drawer-avatar, .hero-photo-img').forEach(img => {
           img.src = profile.photo;
@@ -135,168 +173,200 @@
         });
       }
 
-      // CV Téléchargement
+      // Liens de téléchargement du CV (PDF)
       if (profile.resumeUrl) {
         document.querySelectorAll('a[download], .desktop-cv-btn, .mobile-drawer-cv-btn, .primary__button[href$=".pdf"]').forEach(a => {
           a.href = profile.resumeUrl;
           a.setAttribute('download', profile.resumeUrl.split('/').pop());
         });
       }
+
+      // Localisation
+      if (profile.location) {
+        document.querySelectorAll('.badge-location').forEach(el => el.textContent = profile.location);
+      }
     },
 
     // ── 3. HERO SECTION (TITRE PRINCIPAL & BIO) ──────────────────────────────
     renderHero(profile, heroConfig) {
-      // 1. Titre H1 Principal du site
+      // Grand Titre H1
       const heroH1 = document.querySelector('.hero-h1');
       if (heroH1 && heroConfig && heroConfig.title) {
         heroH1.innerHTML = heroConfig.title.replace(/\n/g, '<br>');
       }
 
-      // 2. Texte de présentation / Bio sous le grand titre
+      // Présentation / Bio sous le H1
       const heroBio = document.querySelector('.hero-bio');
       if (heroBio && profile) {
-        const bioContent = profile.fullBio || profile.shortBio;
-        if (bioContent) {
-          heroBio.innerHTML = bioContent.replace(/\n/g, '<br>');
+        const bioText = profile.fullBio || profile.shortBio;
+        if (bioText) {
+          heroBio.innerHTML = bioText.replace(/\n/g, '<br>');
         }
       }
 
-      // 3. Sous-titre académique ou badge dans les badges flottants
+      // Badges flottants du Hero
       if (profile) {
         const academicSub = document.querySelector('.hero-badge-bottom .badge-text-sub');
         if (academicSub && profile.university) academicSub.textContent = profile.university;
 
         const academicTitle = document.querySelector('.hero-badge-bottom .badge-text-title');
         if (academicTitle && profile.subTitle) academicTitle.textContent = profile.subTitle;
+
+        const statusBadge = document.querySelector('.hero-badge-top .badge-text-title');
+        if (statusBadge && profile.statusBadge) statusBadge.textContent = profile.statusBadge;
       }
     },
 
     // ── 4. FAITS MARQUANTS & MÉTRIQUES (COMPTEURS) ───────────────────────────
     renderMetrics(metricsConfig) {
-      if (!metricsConfig || !Array.isArray(metricsConfig.items)) return;
+      if (!metricsConfig) return;
 
-      const numbers = document.querySelectorAll('.counter__number');
-      const titles  = document.querySelectorAll('.counter__title');
-      const descs   = document.querySelectorAll('.counter-desc');
+      const sec = document.getElementById('fun-fact');
+      if (sec) {
+        const tag = sec.querySelector('.section__title');
+        if (tag && metricsConfig.tag) tag.textContent = metricsConfig.tag;
+        const h2 = sec.querySelector('h2');
+        if (h2 && metricsConfig.title) h2.textContent = metricsConfig.title;
+        const desc = sec.querySelector('.section__description');
+        if (desc && metricsConfig.description) desc.textContent = metricsConfig.description;
+      }
 
-      metricsConfig.items.forEach((m, idx) => {
-        if (numbers[idx]) {
-          numbers[idx].setAttribute('data-target', m.value);
-          numbers[idx].textContent = m.value;
-        }
-        if (titles[idx] && m.label) titles[idx].textContent = m.label;
-        if (descs[idx]  && m.desc)  descs[idx].textContent  = m.desc;
-      });
+      if (Array.isArray(metricsConfig.items)) {
+        const numbers = document.querySelectorAll('.counter__number');
+        const titles  = document.querySelectorAll('.counter__title');
+        const descs   = document.querySelectorAll('.counter-desc');
+
+        metricsConfig.items.forEach((m, idx) => {
+          if (numbers[idx]) {
+            numbers[idx].setAttribute('data-target', m.value);
+            numbers[idx].textContent = m.value;
+          }
+          if (titles[idx] && m.label) titles[idx].textContent = m.label;
+          if (descs[idx]  && m.desc)  descs[idx].textContent  = m.desc;
+        });
+      }
     },
 
-    // ── 5. PROJETS & RÉALISATIONS (CARTES & MODALS) ──────────────────────────
+    // ── 5. PROJETS & RÉALISATIONS (CARTES ET MODALS) ─────────────────────────
     renderProjects(projects, secConfig) {
-      if (!Array.isArray(projects) || projects.length === 0) return;
+      if (!Array.isArray(projects)) return;
 
       const section = document.getElementById('projects');
       if (!section) return;
 
-      // Titres de la section
+      // En-têtes de la section
       if (secConfig) {
-        const tagEl = section.querySelector('.section__title');
-        if (tagEl && secConfig.tag) tagEl.textContent = secConfig.tag;
-
-        const titleEl = section.querySelector('h2');
-        if (titleEl && secConfig.title) titleEl.textContent = secConfig.title;
-
-        const subEl = section.querySelector('.section__description');
-        if (subEl && secConfig.subtitle) subEl.textContent = secConfig.subtitle;
+        const tag = section.querySelector('.section__title');
+        if (tag && secConfig.tag) tag.textContent = secConfig.tag;
+        const h2 = section.querySelector('h2');
+        if (h2 && secConfig.title) h2.textContent = secConfig.title;
+        const desc = section.querySelector('.section__description');
+        if (desc && secConfig.subtitle) desc.textContent = secConfig.subtitle;
       }
 
-      // Cartes projets dans le DOM
-      const cards = section.querySelectorAll('article.project__card');
+      // Synchroniser la base de données globale des modals de projets
+      if (!window.projectDetailsData) window.projectDetailsData = {};
+      projects.forEach(p => {
+        window.projectDetailsData[p.id] = {
+          category: p.category,
+          title: p.title,
+          year: p.year || '',
+          role: p.role || 'Data Analyst & Concepteur BI',
+          image: p.image || 'assets/images/project-bi.jpg',
+          desc: p.desc || '',
+          details: p.details || [p.desc || ''],
+          tags: p.tags || []
+        };
+      });
+
+      // Cartes de projets dans le DOM
+      const cards = section.querySelectorAll('article.project__card, .project-card');
       projects.forEach((proj, idx) => {
         const card = cards[idx];
         if (!card) return;
 
-        // Image
-        const img = card.querySelector('.project-img-box img');
+        card.setAttribute('data-project-id', proj.id);
+
+        const img = card.querySelector('.project-img-box img, img');
         if (img && proj.image) {
           img.src = proj.image;
           img.alt = proj.title;
         }
 
-        // Année
         const yearTag = card.querySelector('.project-year-tag');
         if (yearTag && proj.year) yearTag.textContent = proj.year;
 
-        // Catégorie
-        const cat = card.querySelector('.project__category');
+        const cat = card.querySelector('.project__category, .project-category');
         if (cat && proj.category) cat.textContent = proj.category;
 
-        // Titre
-        const title = card.querySelector('.project__title');
+        const title = card.querySelector('.project__title, h3');
         if (title && proj.title) title.textContent = proj.title;
 
-        // Description
-        const desc = card.querySelector('.project__summery');
-        if (desc && proj.desc) desc.textContent = proj.desc;
+        const summery = card.querySelector('.project__summery, p');
+        if (summery && proj.desc) summery.textContent = proj.desc;
+
+        // Tags / Badges
+        const tagsContainer = card.querySelector('div:last-child');
+        if (tagsContainer && Array.isArray(proj.tags) && proj.tags.length > 0) {
+          tagsContainer.innerHTML = proj.tags.map(t => `<span class="project-tag-pill">${t}</span>`).join(' ');
+        }
 
         // Visibilité
         card.style.display = (proj.visible === false) ? 'none' : '';
       });
-
-      // Synchroniser l'objet global des détails de modal (utilisé par main.js)
-      if (window.projectDetailsData) {
-        projects.forEach(p => {
-          window.projectDetailsData[p.id] = {
-            category: p.category,
-            title: p.title,
-            year: p.year || '',
-            role: p.role || 'Data Analyst',
-            image: p.image || 'assets/images/project-bi.jpg',
-            desc: p.desc || '',
-            details: p.details || [],
-            tags: p.tags || []
-          };
-        });
-      }
     },
 
-    // ── 6. EXPÉRIENCES & PARCOURS ────────────────────────────────────────────
+    // ── 6. EXPÉRIENCES & LEADERSHIP ──────────────────────────────────────────
     renderExperiences(experiences, secConfig) {
-      if (!Array.isArray(experiences) || experiences.length === 0) return;
+      if (!Array.isArray(experiences)) return;
 
       const section = document.getElementById('experience');
       if (!section) return;
 
       if (secConfig) {
-        const tagEl = section.querySelector('.section__title');
-        if (tagEl && secConfig.tag) tagEl.textContent = secConfig.tag;
-        const titleEl = section.querySelector('h2');
-        if (titleEl && secConfig.title) titleEl.textContent = secConfig.title;
+        const tag = section.querySelector('.section__title');
+        if (tag && secConfig.tag) tag.textContent = secConfig.tag;
+        const h2 = section.querySelector('h2');
+        if (h2 && secConfig.title) h2.textContent = secConfig.title;
+        const desc = section.querySelector('.section__description');
+        if (desc && secConfig.subtitle) desc.textContent = secConfig.subtitle;
       }
 
-      const roles     = section.querySelectorAll('.exp-role-title');
-      const companies = section.querySelectorAll('.exp-company-text');
-      const periods   = section.querySelectorAll('.exp-period-badge');
-      const descs     = section.querySelectorAll('.exp-desc-text');
-      const logos     = section.querySelectorAll('.exp-logo-img');
-
+      const cards = section.querySelectorAll('.experience__card, .exp-timeline-item');
       experiences.forEach((exp, idx) => {
-        if (roles[idx]     && exp.role)    roles[idx].textContent     = exp.role;
-        if (companies[idx] && exp.company) companies[idx].textContent = exp.company;
-        if (periods[idx]   && exp.period)  periods[idx].textContent   = exp.period;
-        if (descs[idx]     && exp.desc)    descs[idx].textContent     = exp.desc;
-        if (logos[idx]     && exp.logo)    logos[idx].src             = exp.logo;
+        const card = cards[idx];
+        if (!card) return;
+
+        const period = card.querySelector('.exp__meta, .exp-period-badge');
+        if (period && exp.period) period.textContent = exp.period;
+
+        const title = card.querySelector('.exp__title, .exp-role-title');
+        if (title && exp.role) title.textContent = exp.role;
+
+        const comp = card.querySelector('.exp-company-text');
+        if (comp && exp.company) comp.textContent = exp.company;
+
+        const summery = card.querySelector('.exp__summery, .exp-desc-text');
+        if (summery && exp.desc) summery.innerHTML = exp.desc.replace(/\n/g, '<br>');
+
+        card.style.display = (exp.visible === false) ? 'none' : '';
       });
     },
 
-    // ── 7. FORMATIONS & CERTIFICATIONS ───────────────────────────────────────
+    // ── 7. FORMATIONS & DIPLÔMES ─────────────────────────────────────────────
     renderEducations(educations, secConfig) {
-      if (!Array.isArray(educations) || educations.length === 0) return;
+      if (!Array.isArray(educations)) return;
 
       const section = document.getElementById('education');
       if (!section) return;
 
       if (secConfig) {
-        const tagEl = section.querySelector('.section__title');
-        if (tagEl && secConfig.tag) tagEl.textContent = secConfig.tag;
+        const tag = section.querySelector('.section__title');
+        if (tag && secConfig.tag) tag.textContent = secConfig.tag;
+        const h2 = section.querySelector('h2');
+        if (h2 && secConfig.title) h2.textContent = secConfig.title;
+        const desc = section.querySelector('.section__description');
+        if (desc && secConfig.subtitle) desc.textContent = secConfig.subtitle;
       }
 
       const cards = section.querySelectorAll('.blog__card');
@@ -323,63 +393,94 @@
       });
     },
 
-    // ── 8. COMPÉTENCES & OUTILS ──────────────────────────────────────────────
+    // ── 8. COMPÉTENCES & SOFT SKILLS ─────────────────────────────────────────
     renderSkills(skills, secConfig) {
-      if (!secConfig) return;
       const section = document.getElementById('skills');
       if (!section) return;
 
-      const tagEl = section.querySelector('.section__title');
-      if (tagEl && secConfig.tag) tagEl.textContent = secConfig.tag;
+      if (secConfig) {
+        const tag = section.querySelector('.section__title');
+        if (tag && secConfig.tag) tag.textContent = secConfig.tag;
+        const h2 = section.querySelector('h2');
+        if (h2 && secConfig.title) h2.textContent = secConfig.title;
+        const desc = section.querySelector('.section__description');
+        if (desc && secConfig.subtitle) desc.textContent = secConfig.subtitle;
+      }
 
-      const titleEl = section.querySelector('h2');
-      if (titleEl && secConfig.title) titleEl.textContent = secConfig.title;
+      if (Array.isArray(skills)) {
+        const cards = section.querySelectorAll('.soft-skill-card, .skill-card');
+        skills.forEach((s, idx) => {
+          const card = cards[idx];
+          if (!card) return;
 
-      const subEl = section.querySelector('.section__subtitle, .section__description');
-      if (subEl && secConfig.subtitle) subEl.textContent = secConfig.subtitle;
+          const title = card.querySelector('.soft-skill-title, h3');
+          if (title && s.name) title.textContent = s.name;
+
+          const desc = card.querySelector('.soft-skill-desc, p');
+          if (desc && s.desc) desc.textContent = s.desc;
+
+          const badge = card.querySelector('.soft-skill-badge');
+          if (badge && s.category) badge.textContent = s.category;
+
+          card.style.display = (s.visible === false) ? 'none' : '';
+        });
+      }
     },
 
-    // ── 9. FOOTER & LIENS SOCIAUX ────────────────────────────────────────────
+    // ── 9. SERVICES PROPOSÉS ─────────────────────────────────────────────────
+    renderServices(services, secConfig) {
+      const section = document.getElementById('services');
+      if (!section) return;
+
+      if (secConfig) {
+        const tag = section.querySelector('.section__title');
+        if (tag && secConfig.tag) tag.textContent = secConfig.tag;
+        const h2 = section.querySelector('h2');
+        if (h2 && secConfig.title) h2.textContent = secConfig.title;
+      }
+    },
+
+    // ── 10. FOOTER & LIENS SOCIAUX ───────────────────────────────────────────
     renderFooter(profile) {
       if (!profile) return;
       const footer = document.querySelector('footer');
       if (!footer) return;
 
-      const phoneLink = footer.querySelector('a[href^="tel:"]');
-      if (phoneLink && profile.phone) {
-        phoneLink.href = `tel:${(profile.phoneRaw || profile.phone).replace(/\s+/g, '')}`;
-        const span = phoneLink.querySelector('span');
-        if (span) span.textContent = `Tél : ${profile.phone}`;
+      const tel = footer.querySelector('a[href^="tel:"]');
+      if (tel && profile.phone) {
+        tel.href = `tel:${(profile.phoneRaw || profile.phone).replace(/\s+/g, '')}`;
+        const span = tel.querySelector('span');
+        if (span) span.textContent = `Tèl : ${profile.phone}`;
       }
 
-      const emailLink = footer.querySelector('a[href^="mailto:"]');
-      if (emailLink && profile.email) {
-        emailLink.href = `mailto:${profile.email}`;
+      const email = footer.querySelector('a[href^="mailto:"]');
+      if (email && profile.email) {
+        email.href = `mailto:${profile.email}`;
       }
 
-      const linkedinLink = footer.querySelector('a[title="LinkedIn"]');
-      if (linkedinLink && profile.socials?.linkedin) {
-        linkedinLink.href = profile.socials.linkedin;
+      const linkedin = footer.querySelector('a[title="LinkedIn"]');
+      if (linkedin && profile.socials?.linkedin) {
+        linkedin.href = profile.socials.linkedin;
       }
 
-      const whatsappLink = footer.querySelector('a[title="WhatsApp"]');
-      if (whatsappLink && profile.socials?.whatsapp) {
-        whatsappLink.href = profile.socials.whatsapp;
+      const whatsapp = footer.querySelector('a[title="WhatsApp"]');
+      if (whatsapp && profile.socials?.whatsapp) {
+        whatsapp.href = profile.socials.whatsapp;
       }
     },
 
-    // ── 10. BALISES SEO ──────────────────────────────────────────────────────
+    // ── 11. BALISES SEO ──────────────────────────────────────────────────────
     renderSEO(seo) {
       if (!seo) return;
       if (seo.metaTitle) document.title = seo.metaTitle;
-      const metaDesc = document.querySelector('meta[name="description"]');
-      if (metaDesc && seo.metaDescription) metaDesc.setAttribute('content', seo.metaDescription);
-      const metaKeywords = document.querySelector('meta[name="keywords"]');
-      if (metaKeywords && seo.keywords) metaKeywords.setAttribute('content', seo.keywords);
+      const desc = document.querySelector('meta[name="description"]');
+      if (desc && seo.metaDescription) desc.setAttribute('content', seo.metaDescription);
+      const kw = document.querySelector('meta[name="keywords"]');
+      if (kw && seo.keywords) kw.setAttribute('content', seo.keywords);
     },
 
-    // ── 11. VISIBILITÉ DES SECTIONS ──────────────────────────────────────────
-    renderVisibility(sections) {
+    // ── 12. GESTION DE LA VISIBILITÉ DES SECTIONS ────────────────────────────
+    renderSectionsVisibility(sections) {
       if (!sections) return;
       const map = {
         hero: '#hero',
@@ -402,9 +503,9 @@
       });
     },
 
-    // ── 12. ÉCOUTE MULTI-CANAUX (BROADCASTCHANNEL + STORAGE + POSTMESSAGE) ──
-    setupListeners() {
-      // 1. BroadcastChannel (Cross-Tabs temps réel instantané)
+    // ── 13. ÉCOUTE TEMPS RÉEL MULTI-CANAUX ───────────────────────────────────
+    setupLiveSync() {
+      // Canal 1 : BroadcastChannel (Synchronisation instantanée entre onglets)
       try {
         if (typeof BroadcastChannel !== 'undefined') {
           const bc = new BroadcastChannel(CHANNEL_NAME);
@@ -417,7 +518,7 @@
         }
       } catch (_) {}
 
-      // 2. Storage event (Quand un autre onglet écrit dans localStorage)
+      // Canal 2 : Événement Storage (Quand localStorage est modifié depuis un autre onglet)
       window.addEventListener('storage', (e) => {
         if ((e.key === STORAGE_KEY || e.key === DRAFT_KEY) && e.newValue) {
           try {
@@ -427,7 +528,7 @@
         }
       });
 
-      // 3. postMessage (Pour iframe preview dans l'admin)
+      // Canal 3 : postMessage (Pour l'iframe d'aperçu dans l'administration)
       window.addEventListener('message', (e) => {
         if (e.data && e.data.type === 'PORTFOLIO_PREVIEW_UPDATE' && e.data.payload) {
           this.data = e.data.payload;
@@ -435,14 +536,14 @@
         }
       });
 
-      // Signaler au parent (si iframe) que le portfolio est prêt
+      // Signaler à l'administration que le portfolio est prêt à recevoir des flux
       if (window.parent && window.parent !== window) {
         window.parent.postMessage({ type: 'PREVIEW_READY' }, '*');
       }
     }
   };
 
-  // Démarrage automatique dès le chargement du DOM
+  // Démarrage automatique au chargement
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => window.PortfolioEngine.init());
   } else {

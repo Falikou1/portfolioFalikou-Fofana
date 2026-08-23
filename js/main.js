@@ -178,44 +178,61 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  const projectCards = document.querySelectorAll('.project-card');
+  // Attach globally for dynamic CMS hydration
+  window.projectDetailsData = projectDetailsData;
 
-  projectCards.forEach(card => {
-    card.addEventListener('click', () => {
-      const projectId = card.getAttribute('data-project-id');
-      const data = projectDetailsData[projectId];
+  // Support both .project-card and .project__card selectors
+  document.addEventListener('click', (e) => {
+    const card = e.target.closest('.project-card, .project__card, [data-project-id]');
+    if (!card) return;
 
-      if (data && modal) {
-        modalCategory.textContent = data.category;
-        modalTitle.textContent = data.title;
-        modalRole.textContent = data.role;
-        modalYear.textContent = data.year;
-        modalDesc.textContent = data.desc;
-        modalImage.src = data.image;
-        modalImage.alt = data.title;
+    // Prevent trigger if clicking an external link inside the card
+    if (e.target.closest('a[href^="http"], button')) return;
 
-        // Populate details
+    const projectId = card.getAttribute('data-project-id') || (
+      card.querySelector('.project__title, h3')?.textContent?.includes('Commercial') ? 'bi-dashboard' :
+      card.querySelector('.project__title, h3')?.textContent?.includes('Tuwshiuah') ? 'agency-tuwshiuah' :
+      card.querySelector('.project__title, h3')?.textContent?.includes('Hackathon') ? 'hackathon-esatic' : null
+    );
+
+    const data = (window.projectDetailsData && projectId) ? window.projectDetailsData[projectId] : null;
+
+    if (data && modal) {
+      if (modalCategory) modalCategory.textContent = data.category || '';
+      if (modalTitle) modalTitle.textContent = data.title || '';
+      if (modalRole) modalRole.textContent = data.role || '';
+      if (modalYear) modalYear.textContent = data.year || '';
+      if (modalDesc) modalDesc.textContent = data.desc || '';
+      if (modalImage) {
+        modalImage.src = data.image || 'assets/images/project-bi.jpg';
+        modalImage.alt = data.title || '';
+      }
+
+      // Populate details
+      if (modalDetails) {
         modalDetails.innerHTML = '';
-        data.details.forEach(detailText => {
+        (data.details || []).forEach(detailText => {
           const li = document.createElement('li');
           li.className = 'modal-details-item';
           li.innerHTML = detailText;
           modalDetails.appendChild(li);
         });
+      }
 
-        // Populate tags
+      // Populate tags
+      if (modalTags) {
         modalTags.innerHTML = '';
-        data.tags.forEach(tagText => {
+        (data.tags || []).forEach(tagText => {
           const span = document.createElement('span');
           span.className = 'badge badge-accent';
           span.textContent = tagText;
           modalTags.appendChild(span);
         });
-
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
       }
-    });
+
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
   });
 
   if (modalClose) {
