@@ -474,7 +474,17 @@
       "size": "834 KB"
     }
   ],
-  "messages": [],
+  "messages": [
+    {
+      "id": "msg-1787525036639",
+      "name": "Richmond Koffi",
+      "email": "richmondthecarter@gmail.com",
+      "subject": "Error while signing in",
+      "message": "dfffffotyy",
+      "read": false,
+      "date": "2026-08-23T22:43:56.639Z"
+    }
+  ],
   "history": [
     {
       "id": "pub-1787524500726",
@@ -836,7 +846,7 @@
   },
   "settings": {
     "siteName": "Falikou FOFANA — Portfolio",
-    "lastPublished": "2026-08-23T22:35:00.724Z",
+    "lastPublished": "2026-08-23T22:43:57.037Z",
     "version": "1.0.0"
   }
 }
