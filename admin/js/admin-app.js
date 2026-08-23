@@ -61,7 +61,7 @@
       fullBio: "Bonjour ! Je suis <strong>Falikou FOFANA</strong>, étudiant en <strong>3<sup>e</sup> année de Licence Génie Informatique (IUA)</strong> à Abidjan. Je conçois des tableaux de bord décisionnels interactifs et des solutions logicielles performantes pour guider la prise de décision.",
       photo: "assets/images/falikou_photo_clean.png",
       coverImage: "assets/images/project-bi.jpg",
-      resumeUrl: "CV_Falikou.FOFANA_DataAnalyst.pdf",
+      resumeUrl: "CV_FalikouFOFANA_Data_Analyst.pdf",
       email: "fofanafalikou068@gmail.com",
       phone: "+225 07 05 32 24 98",
       phoneRaw: "+2250705322498",
