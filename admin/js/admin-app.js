@@ -583,16 +583,27 @@
         });
       }
 
+      const doLogout = (e) => {
+        if (e) e.preventDefault();
+        if (confirm('Voulez-vous vraiment vous déconnecter de votre espace administrateur ?')) {
+          this.logout();
+        }
+      };
+
       const logoutBtn = document.getElementById('logoutBtn');
-      if (logoutBtn) {
-        logoutBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          if (confirm('Voulez-vous vraiment vous déconnecter ?')) {
-            if (typeof AdminAuth !== 'undefined') AdminAuth.logout();
-            else window.location.href = 'login.html';
-          }
-        });
-      }
+      if (logoutBtn) logoutBtn.addEventListener('click', doLogout);
+
+      const headerLogoutBtn = document.getElementById('headerLogoutBtn');
+      if (headerLogoutBtn) headerLogoutBtn.addEventListener('click', doLogout);
+    },
+
+    logout() {
+      localStorage.removeItem('falikou_admin_token');
+      sessionStorage.removeItem('falikou_admin_token');
+      localStorage.removeItem('falikou_admin_user');
+      sessionStorage.removeItem('falikou_admin_user');
+      const loginUrl = window.location.pathname.includes('/portfolio/') ? 'login.html' : '/admin/login.html';
+      window.location.replace(loginUrl);
     },
 
     switchTab(tabName) {
