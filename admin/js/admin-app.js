@@ -36,6 +36,18 @@
     }
   } catch (_) {}
 
+  // Préfixe correct pour les images : depuis /admin/ il faut remonter au dossier parent
+  const IMG_BASE = '../';
+
+  function imgUrl(path) {
+    if (!path) return '';
+    // Déjà une URL absolue ou un data URI → on laisse tel quel
+    if (path.startsWith('http') || path.startsWith('data:') || path.startsWith('/')) return path;
+    // Chemin relatif au portfolio : on remonte depuis /admin/
+    if (path.startsWith('assets/')) return IMG_BASE + path;
+    return path;
+  }
+
   // Structure initiale de secours
   const DEFAULT_DATA = {
     profile: {
@@ -757,7 +769,7 @@
           </div>
           <div style="display: flex; gap: 24px; align-items: center; flex-wrap: wrap; margin-top: 10px;">
             <div style="position: relative; width: 110px; height: 110px; border-radius: 50%; overflow: hidden; border: 3px solid var(--admin-accent); box-shadow: 0 4px 16px rgba(0,0,0,0.5);">
-              <img id="profPhotoPreview" src="${p.photo || 'assets/images/falikou_photo_clean.png'}" alt="Aperçu Photo" style="width: 100%; height: 100%; object-fit: cover;">
+              <img id="profPhotoPreview" src="${imgUrl(p.photo || 'assets/images/falikou_photo_clean.png')}" alt="Aperçu Photo" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
             <div style="display: flex; flex-direction: column; gap: 10px;">
               <div style="display: flex; gap: 10px; flex-wrap: wrap;">
@@ -933,7 +945,7 @@
                   <button class="btn btn-secondary btn-icon" style="height: 22px; width: 22px; font-size: 10px;" onclick="AdminApp.moveProject(${idx}, -1)" title="Monter">▲</button>
                   <button class="btn btn-secondary btn-icon" style="height: 22px; width: 22px; font-size: 10px;" onclick="AdminApp.moveProject(${idx}, 1)" title="Descendre">▼</button>
                 </div>
-                <img src="${proj.image || 'assets/images/project-bi.jpg'}" class="item-thumb" alt="${proj.title}">
+                <img src="${imgUrl(proj.image || 'assets/images/project-bi.jpg')}" class="item-thumb" alt="${proj.title}" onerror="this.style.opacity='0.4'">
                 <div class="item-details">
                   <div class="item-title">${proj.title} ${proj.visible === false ? '<span style="color: var(--admin-danger); font-size: 0.75rem;">(Masqué)</span>' : ''}</div>
                   <div class="item-subtitle">${proj.category} • ${proj.tags?.join(', ') || ''}</div>
@@ -1023,7 +1035,7 @@
               <div class="form-group full-width" style="border: 1px solid var(--admin-border); padding: 12px; border-radius: var(--radius-sm); background: rgba(255,255,255,0.02);">
                 <label class="form-label"><strong>Image du Projet</strong></label>
                 <div style="display: flex; gap: 16px; align-items: center; margin-top: 6px;">
-                  <img id="mProjImgPreview" src="${p.image || 'assets/images/project-bi.jpg'}" style="width: 70px; height: 50px; object-fit: cover; border-radius: 6px; border: 1px solid var(--admin-border);">
+                  <img id="mProjImgPreview" src="${imgUrl(p.image || 'assets/images/project-bi.jpg')}" style="width: 70px; height: 50px; object-fit: cover; border-radius: 6px; border: 1px solid var(--admin-border);">
                   <div style="display: flex; gap: 8px; flex-grow: 1; flex-wrap: wrap;">
                     <label class="btn btn-secondary" style="cursor: pointer; font-size: 0.85rem;">
                       <span>📁 Importer Image</span>
@@ -1260,7 +1272,7 @@
           <div class="items-list">
             ${exps.map(exp => `
               <div class="list-item-card">
-                <img src="${exp.logo || 'assets/images/logo_iua.png'}" class="item-thumb" alt="${exp.company}">
+                <img src="${imgUrl(exp.logo || 'assets/images/project-agency.jpg')}" class="item-thumb" alt="${exp.company}" onerror="this.style.opacity='0.4'">
                 <div class="item-details">
                   <div class="item-title">${exp.role} — <strong style="color: var(--admin-accent);">${exp.company}</strong></div>
                   <div class="item-subtitle">${exp.period} • ${exp.badge || ''}</div>
@@ -1333,7 +1345,7 @@
               <div class="form-group full-width" style="border: 1px solid var(--admin-border); padding: 12px; border-radius: var(--radius-sm); background: rgba(255,255,255,0.02);">
                 <label class="form-label"><strong>Logo / Image de l'Entreprise</strong></label>
                 <div style="display: flex; gap: 16px; align-items: center; margin-top: 6px;">
-                  <img id="mExpLogoPreview" src="${e.logo || 'assets/images/project-agency.jpg'}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px; border: 1px solid var(--admin-border);">
+                  <img id="mExpLogoPreview" src="${imgUrl(e.logo || 'assets/images/project-agency.jpg')}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px; border: 1px solid var(--admin-border);">
                   <div style="display: flex; gap: 8px; flex-grow: 1; flex-wrap: wrap;">
                     <label class="btn btn-secondary" style="cursor: pointer; font-size: 0.85rem;">
                       <span>📁 Importer Image</span>
@@ -1415,7 +1427,7 @@
           <div class="items-list">
             ${edus.map(edu => `
               <div class="list-item-card">
-                <img src="${edu.logo || 'assets/images/logo_iua.png'}" class="item-thumb" alt="${edu.degree}">
+                <img src="${imgUrl(edu.logo || 'assets/images/logo_iua.png')}" class="item-thumb" alt="${edu.degree}" onerror="this.style.opacity='0.4'">
                 <div class="item-details">
                   <div class="item-title">${edu.degree}</div>
                   <div class="item-subtitle">${edu.institution} • ${edu.period}</div>
@@ -1491,7 +1503,7 @@
               <div class="form-group full-width" style="border: 1px solid var(--admin-border); padding: 12px; border-radius: var(--radius-sm); background: rgba(255,255,255,0.02);">
                 <label class="form-label"><strong>Logo / Image de l'Établissement</strong></label>
                 <div style="display: flex; gap: 16px; align-items: center; margin-top: 6px;">
-                  <img id="mEduLogoPreview" src="${e.logo || 'assets/images/logo_iua.png'}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px; border: 1px solid var(--admin-border);">
+                  <img id="mEduLogoPreview" src="${imgUrl(e.logo || 'assets/images/logo_iua.png')}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px; border: 1px solid var(--admin-border);">
                   <div style="display: flex; gap: 8px; flex-grow: 1; flex-wrap: wrap;">
                     <label class="btn btn-secondary" style="cursor: pointer; font-size: 0.85rem;">
                       <span>📁 Importer Image</span>
@@ -2086,7 +2098,7 @@
             ${media.map(m => `
               <div class="media-card" style="background: var(--admin-card-bg); border: 1px solid var(--admin-border); border-radius: var(--radius-md); overflow: hidden; position: relative;">
                 <div style="height: 130px; overflow: hidden; background: #000;">
-                  <img src="${m.url}" alt="${m.name}" style="width: 100%; height: 100%; object-fit: cover;">
+                  <img src="${imgUrl(m.url)}" alt="${m.name}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.opacity='0.3'">
                 </div>
                 <div style="padding: 10px;">
                   <div style="font-size: 0.8rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${m.name}">${m.name}</div>
@@ -2155,8 +2167,8 @@
             </div>
             <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; max-height: 60vh; overflow-y: auto; margin-top: 14px;">
               ${media.map(m => `
-                <div style="border: 2px solid var(--admin-border); border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="AdminApp.selectMediaForField('${m.url}', '${targetInputId}', '${previewImgId}')">
-                  <img src="${m.url}" alt="${m.name}" style="width: 100%; height: 90px; object-fit: cover;">
+                <div style="border: 2px solid var(--admin-border); border-radius: 8px; overflow: hidden; cursor: pointer; transition: border-color 0.2s;" onmouseover="this.style.borderColor='var(--admin-accent)'" onmouseout="this.style.borderColor='var(--admin-border)'" onclick="AdminApp.selectMediaForField('${m.url}', '${targetInputId}', '${previewImgId}')">
+                  <img src="${imgUrl(m.url)}" alt="${m.name}" style="width: 100%; height: 90px; object-fit: cover;" onerror="this.style.opacity='0.3'">
                   <div style="padding: 6px; font-size: 0.72rem; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${m.name}</div>
                 </div>
               `).join('')}
@@ -2172,7 +2184,7 @@
       const targetInput = document.getElementById(targetInputId);
       if (targetInput) targetInput.value = url;
       const previewImg = document.getElementById(previewImgId);
-      if (previewImg) previewImg.src = url;
+      if (previewImg) previewImg.src = imgUrl(url);
 
       const backdrop = document.getElementById('mediaPickerBackdrop');
       if (backdrop) backdrop.remove();
