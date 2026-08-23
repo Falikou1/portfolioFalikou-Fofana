@@ -25,7 +25,7 @@
     "resumeFileName": "CV_FalikouFOFANA_Data_Analyst.pdf"
   },
   "design": {
-    "accentColor": "#5f2111",
+    "accentColor": "#fb876a",
     "accentHover": "#c14b0b",
     "bgDark": "#80532d",
     "bgCardDark": "#03c5d3",
@@ -477,6 +477,48 @@
   "messages": [],
   "history": [
     {
+      "id": "h-1787526946095",
+      "timestamp": "2026-08-23T23:15:46.095Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526945462",
+      "timestamp": "2026-08-23T23:15:45.462Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526942868",
+      "timestamp": "2026-08-23T23:15:42.868Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526942023",
+      "timestamp": "2026-08-23T23:15:42.023Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526940655",
+      "timestamp": "2026-08-23T23:15:40.655Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526940568",
+      "timestamp": "2026-08-23T23:15:40.568Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
       "id": "hist-1787525108237",
       "timestamp": "2026-08-23T22:45:08.237Z",
       "action": "Publication",
@@ -783,48 +825,6 @@
       "action": "Couleur modifiée",
       "target": "Portfolio",
       "details": "Enregistré dans la base de données"
-    },
-    {
-      "id": "h-1787511738083",
-      "timestamp": "2026-08-23T19:02:18.083Z",
-      "action": "Couleur modifiée",
-      "target": "Portfolio",
-      "details": "Enregistré dans la base de données"
-    },
-    {
-      "id": "h-1787511736738",
-      "timestamp": "2026-08-23T19:02:16.738Z",
-      "action": "Couleur modifiée",
-      "target": "Portfolio",
-      "details": "Enregistré dans la base de données"
-    },
-    {
-      "id": "h-1787511736709",
-      "timestamp": "2026-08-23T19:02:16.709Z",
-      "action": "Couleur modifiée",
-      "target": "Portfolio",
-      "details": "Enregistré dans la base de données"
-    },
-    {
-      "id": "h-1787511735565",
-      "timestamp": "2026-08-23T19:02:15.565Z",
-      "action": "Couleur modifiée",
-      "target": "Portfolio",
-      "details": "Enregistré dans la base de données"
-    },
-    {
-      "id": "h-1787511734991",
-      "timestamp": "2026-08-23T19:02:14.991Z",
-      "action": "Couleur modifiée",
-      "target": "Portfolio",
-      "details": "Enregistré dans la base de données"
-    },
-    {
-      "id": "h-1787511734262",
-      "timestamp": "2026-08-23T19:02:14.262Z",
-      "action": "Couleur modifiée",
-      "target": "Portfolio",
-      "details": "Enregistré dans la base de données"
     }
   ],
   "seo": {
@@ -836,7 +836,7 @@
   },
   "settings": {
     "siteName": "Falikou FOFANA — Portfolio",
-    "lastPublished": "2026-08-23T22:45:08.237Z",
+    "lastPublished": "2026-08-23T23:15:46.095Z",
     "version": "1.0.0"
   }
 }
