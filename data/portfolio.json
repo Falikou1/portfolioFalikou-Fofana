@@ -349,12 +349,12 @@
     },
     {
       "id": "edu3",
-      "degree": "Python, Réseaux & Cybersécurité",
-      "category": "Certifications Tech",
-      "institution": "Cisco & OpenClassrooms & CCSC",
+      "degree": "Python & science de données",
+      "category": "Certifications tech",
+      "institution": "OpenClassrooms & Cisco Netacad",
       "period": "2025 - 2026",
       "logo": "assets/images/project-hackathon.jpg",
-      "desc": "• Python pour l'analyse de données : OpenClassrooms.\n• Introduction à la science des données : Cisco Networking Academy.\n• Cybersecurity Career Starter Certification (CCSC) : Sécurité numérique.",
+      "desc": "• Python pour l'analyse de données : OpenClassrooms.\n• Introduction à la science des données : Cisco Networking Academy.",
       "visible": true,
       "order": 3
     }
@@ -439,6 +439,13 @@
   ],
   "messages": [],
   "history": [
+    {
+      "id": "h-1787605134039",
+      "timestamp": "2026-08-24T20:58:54.039Z",
+      "action": "Formation Python & science de données enregistrée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
     {
       "id": "h-1787603695516",
       "timestamp": "2026-08-24T20:34:55.516Z",
@@ -781,13 +788,6 @@
       "action": "Nouveau CV PDF (CV_FalikouFOFANA_Data_Analyst.pdf) importé et appliqué sur tout le site",
       "target": "Portfolio",
       "details": "Enregistré dans la base de données"
-    },
-    {
-      "id": "h-1787521241962",
-      "timestamp": "2026-08-23T21:40:41.962Z",
-      "action": "Nouveau CV PDF (CV DATA_ANALYST FOFANAFALIKOU (2).pdf) importé et appliqué sur tout le site",
-      "target": "Portfolio",
-      "details": "Enregistré dans la base de données"
     }
   ],
   "seo": {
@@ -799,7 +799,7 @@
   },
   "settings": {
     "siteName": "Falikou FOFANA — Portfolio",
-    "lastPublished": "2026-08-24T20:34:55.516Z",
+    "lastPublished": "2026-08-24T20:58:54.039Z",
     "version": "1.0.0"
   }
 }
