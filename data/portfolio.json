@@ -232,26 +232,6 @@
       "order": 6
     },
     {
-      "id": "s7",
-      "name": "Cisco Packet Tracer & Réseaux",
-      "category": "sec",
-      "level": 82,
-      "icon": "🌐",
-      "desc": "Topologies réseau, adressage IPv4/IPv6, VLANs, routage dynamique OSPF et NAT.",
-      "visible": true,
-      "order": 7
-    },
-    {
-      "id": "s8",
-      "name": "Sécurité & VPN IPsec",
-      "category": "sec",
-      "level": 78,
-      "icon": "🛡️",
-      "desc": "Configuration de tunnels chiffrés, pare-feu et bonnes pratiques de cybersécurité.",
-      "visible": true,
-      "order": 8
-    },
-    {
       "id": "s9",
       "name": "Rigueur Analytique & Communication",
       "category": "soft",
@@ -439,6 +419,20 @@
   ],
   "messages": [],
   "history": [
+    {
+      "id": "h-1787605415724",
+      "timestamp": "2026-08-24T21:03:35.724Z",
+      "action": "Compétence supprimée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787605412381",
+      "timestamp": "2026-08-24T21:03:32.381Z",
+      "action": "Compétence supprimée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
     {
       "id": "h-1787605134039",
       "timestamp": "2026-08-24T20:58:54.039Z",
@@ -774,20 +768,6 @@
       "action": "Titre & Bio modifiés depuis le Dashboard",
       "target": "Portfolio",
       "details": "Enregistré dans la base de données"
-    },
-    {
-      "id": "h-1787523550979",
-      "timestamp": "2026-08-23T22:19:10.979Z",
-      "action": "Titre & Bio modifiés depuis le Dashboard",
-      "target": "Portfolio",
-      "details": "Enregistré dans la base de données"
-    },
-    {
-      "id": "h-1787521285964",
-      "timestamp": "2026-08-23T21:41:25.964Z",
-      "action": "Nouveau CV PDF (CV_FalikouFOFANA_Data_Analyst.pdf) importé et appliqué sur tout le site",
-      "target": "Portfolio",
-      "details": "Enregistré dans la base de données"
     }
   ],
   "seo": {
@@ -799,7 +779,7 @@
   },
   "settings": {
     "siteName": "Falikou FOFANA — Portfolio",
-    "lastPublished": "2026-08-24T20:58:54.039Z",
+    "lastPublished": "2026-08-24T21:03:35.724Z",
     "version": "1.0.0"
   }
 }
