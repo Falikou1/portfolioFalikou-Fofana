@@ -213,9 +213,9 @@
     },
     {
       "id": "s2",
-      "name": "Python (Pandas / NumPy / Matplotlib)",
+      "name": "Python (Anaconda)",
       "category": "data",
-      "level": 88,
+      "level": 74,
       "icon": "🐍",
       "desc": "Extraction, nettoyage, analyse statistique et visualisations de jeux de données complexes.",
       "visible": true,
@@ -469,6 +469,13 @@
   ],
   "messages": [],
   "history": [
+    {
+      "id": "h-1787603318813",
+      "timestamp": "2026-08-24T20:28:38.813Z",
+      "action": "Compétence Python (Anaconda) enregistrée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
     {
       "id": "h-1787527263780",
       "timestamp": "2026-08-23T23:21:03.780Z",
@@ -811,13 +818,6 @@
       "action": "Projet Technovore Hackathon 2026 – ESATIC enregistré",
       "target": "Portfolio",
       "details": "Enregistré dans la base de données"
-    },
-    {
-      "id": "h-1787511808725",
-      "timestamp": "2026-08-23T19:03:28.725Z",
-      "action": "Design et couleurs enregistrés",
-      "target": "Portfolio",
-      "details": "Enregistré dans la base de données"
     }
   ],
   "seo": {
@@ -829,7 +829,7 @@
   },
   "settings": {
     "siteName": "Falikou FOFANA — Portfolio",
-    "lastPublished": "2026-08-23T23:21:03.780Z",
+    "lastPublished": "2026-08-24T20:28:38.813Z",
     "version": "1.0.0"
   }
 }
