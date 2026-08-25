@@ -169,6 +169,91 @@
       "featured": true,
       "visible": true,
       "order": 2
+<<<<<<< HEAD
+=======
+    }
+  ],
+  "skills": [
+    {
+      "id": "s1",
+      "name": "Power BI & Excel Avancé",
+      "category": "data",
+      "level": 95,
+      "icon": "📊",
+      "desc": "Tableaux de bord dynamiques, modélisation décisionnelle, formules complexes et Power Query.",
+      "visible": true,
+      "order": 1
+    },
+    {
+      "id": "s2",
+      "name": "Python (Anaconda)",
+      "category": "data",
+      "level": 74,
+      "icon": "🐍",
+      "desc": "Extraction, nettoyage, analyse statistique et visualisations de jeux de données complexes.",
+      "visible": true,
+      "order": 2
+    },
+    {
+      "id": "s3",
+      "name": "SQL & Modélisation Relationnelle",
+      "category": "data",
+      "level": 85,
+      "icon": "🗄️",
+      "desc": "Requêtes complexes, jointures, agrégations, optimisation et conception de schémas de BDD.",
+      "visible": true,
+      "order": 3
+    },
+    {
+      "id": "s4",
+      "name": "Tableau & Google Data Studio",
+      "category": "data",
+      "level": 80,
+      "icon": "📈",
+      "desc": "Création de dashboards interactifs et storytelling orienté impact business.",
+      "visible": true,
+      "order": 4
+    },
+    {
+      "id": "s5",
+      "name": "Développement Web (HTML / CSS / JS)",
+      "category": "dev",
+      "level": 90,
+      "icon": "💻",
+      "desc": "Interfaces web réactives, intégration moderne, animations fluides et intégration d'APIs.",
+      "visible": true,
+      "order": 5
+    },
+    {
+      "id": "s6",
+      "name": "Vibe Coding & IA Générative",
+      "category": "dev",
+      "level": 92,
+      "icon": "🤖",
+      "desc": "Prototypage ultra-rapide d'applications assisté par les modèles LLMs les plus récents.",
+      "visible": true,
+      "order": 6
+    },
+    {
+      "id": "s9",
+      "name": "Rigueur Analytique & Communication",
+      "category": "soft",
+      "level": 95,
+      "icon": "🎯",
+      "desc": "Capacité à vulgariser des insights techniques auprès des décideurs et des clients.",
+      "visible": true,
+      "order": 9
+    },
+    {
+      "id": "s10",
+      "name": "Travail d'équipe & Leadership",
+      "category": "soft",
+      "level": 92,
+      "icon": "🤝",
+      "desc": "Coordination active au sein de REDIS-IUA et pilotage d'initiatives étudiantes.",
+      "visible": true,
+      "order": 10
+>>>>>>> c7df5fce64a4fd9f73d563c311b100d63e890a8c
     }
   ],
   "experiences": [
@@ -434,6 +519,7 @@
       "order": 2
     },
     {
+<<<<<<< HEAD
       "id": "cert-python",
       "title": "Initiez-vous à Python pour l'analyse de données",
       "issuer": "OpenClassrooms",
@@ -441,6 +527,15 @@
       "year": "2025 - 2026",
       "logo": "assets/images/project-bi.jpg",
       "desc": "Programmation Python appliquée au traitement de données, manipulation de structures et analyses statistiques.",
+=======
+      "id": "edu3",
+      "degree": "Python & science de données",
+      "category": "Certifications tech",
+      "institution": "OpenClassrooms & Cisco Netacad",
+      "period": "2025 - 2026",
+      "logo": "assets/images/project-hackathon.jpg",
+      "desc": "• Python pour l'analyse de données : OpenClassrooms.\n• Introduction à la science des données : Cisco Networking Academy.",
+>>>>>>> c7df5fce64a4fd9f73d563c311b100d63e890a8c
       "visible": true,
       "order": 3
     },
@@ -523,11 +618,362 @@
   "messages": [],
   "history": [
     {
+<<<<<<< HEAD
       "id": "hist-init",
       "timestamp": "2026-08-25T15:40:00.000Z",
       "action": "Correction définitive : Structure, Contenu et Navigation",
       "target": "Système",
       "details": "Structure unifiée : ACCUEIL | PROJETS & EXPÉRIENCES | COMPÉTENCES | FORMATION | CONTACT"
+=======
+      "id": "h-1787605415724",
+      "timestamp": "2026-08-24T21:03:35.724Z",
+      "action": "Compétence supprimée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787605412381",
+      "timestamp": "2026-08-24T21:03:32.381Z",
+      "action": "Compétence supprimée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787605134039",
+      "timestamp": "2026-08-24T20:58:54.039Z",
+      "action": "Formation Python & science de données enregistrée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787603695516",
+      "timestamp": "2026-08-24T20:34:55.516Z",
+      "action": "Projet supprimé",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787603318813",
+      "timestamp": "2026-08-24T20:28:38.813Z",
+      "action": "Compétence Python (Anaconda) enregistrée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787527263780",
+      "timestamp": "2026-08-23T23:21:03.780Z",
+      "action": "Image supprimée de la médiathèque",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787527258421",
+      "timestamp": "2026-08-23T23:20:58.421Z",
+      "action": "Nouvelle photo de profil définie",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787527253365",
+      "timestamp": "2026-08-23T23:20:53.365Z",
+      "action": "Nouvelle photo de profil définie",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787527028770",
+      "timestamp": "2026-08-23T23:17:08.770Z",
+      "action": "Design et couleurs enregistrés",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526990271",
+      "timestamp": "2026-08-23T23:16:30.271Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526988868",
+      "timestamp": "2026-08-23T23:16:28.868Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526988265",
+      "timestamp": "2026-08-23T23:16:28.265Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526986739",
+      "timestamp": "2026-08-23T23:16:26.739Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526985450",
+      "timestamp": "2026-08-23T23:16:25.450Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526985388",
+      "timestamp": "2026-08-23T23:16:25.388Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526974042",
+      "timestamp": "2026-08-23T23:16:14.042Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526972815",
+      "timestamp": "2026-08-23T23:16:12.815Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526972109",
+      "timestamp": "2026-08-23T23:16:12.110Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526971563",
+      "timestamp": "2026-08-23T23:16:11.563Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526971107",
+      "timestamp": "2026-08-23T23:16:11.107Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526970643",
+      "timestamp": "2026-08-23T23:16:10.643Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526969870",
+      "timestamp": "2026-08-23T23:16:09.870Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526969312",
+      "timestamp": "2026-08-23T23:16:09.312Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526969197",
+      "timestamp": "2026-08-23T23:16:09.197Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526968490",
+      "timestamp": "2026-08-23T23:16:08.490Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526968427",
+      "timestamp": "2026-08-23T23:16:08.427Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526967961",
+      "timestamp": "2026-08-23T23:16:07.961Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526966459",
+      "timestamp": "2026-08-23T23:16:06.459Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526965259",
+      "timestamp": "2026-08-23T23:16:05.259Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526964075",
+      "timestamp": "2026-08-23T23:16:04.075Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526961429",
+      "timestamp": "2026-08-23T23:16:01.429Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526960797",
+      "timestamp": "2026-08-23T23:16:00.797Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526960451",
+      "timestamp": "2026-08-23T23:16:00.451Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526960385",
+      "timestamp": "2026-08-23T23:16:00.385Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526960011",
+      "timestamp": "2026-08-23T23:16:00.011Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526959403",
+      "timestamp": "2026-08-23T23:15:59.403Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526958514",
+      "timestamp": "2026-08-23T23:15:58.514Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526946095",
+      "timestamp": "2026-08-23T23:15:46.095Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526945462",
+      "timestamp": "2026-08-23T23:15:45.462Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526942868",
+      "timestamp": "2026-08-23T23:15:42.868Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526942023",
+      "timestamp": "2026-08-23T23:15:42.023Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526940655",
+      "timestamp": "2026-08-23T23:15:40.655Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787526940568",
+      "timestamp": "2026-08-23T23:15:40.568Z",
+      "action": "Couleur modifiée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "hist-1787525108237",
+      "timestamp": "2026-08-23T22:45:08.237Z",
+      "action": "Publication",
+      "target": "Portfolio",
+      "details": "Message supprimé"
+    },
+    {
+      "id": "h-1787525105580",
+      "timestamp": "2026-08-23T22:45:05.580Z",
+      "action": "Message supprimé",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787525102878",
+      "timestamp": "2026-08-23T22:45:02.878Z",
+      "action": "Message marqué comme lu",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "pub-1787524500726",
+      "timestamp": "2026-08-23T22:35:00.726Z",
+      "action": "Publication Complète",
+      "target": "Site Public & Vercel",
+      "details": "Mise à jour CMS : 23/08/2026 22:34:56"
+    },
+    {
+      "id": "h-1787524490760",
+      "timestamp": "2026-08-23T22:34:50.760Z",
+      "action": "Titre & Bio modifiés depuis le Dashboard",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "pub-1787524355073",
+      "timestamp": "2026-08-23T22:32:35.073Z",
+      "action": "Publication Complète",
+      "target": "Site Public & Vercel",
+      "details": "Mise à jour CMS : 23/08/2026 22:32:31"
+    },
+    {
+      "id": "h-1787524344566",
+      "timestamp": "2026-08-23T22:32:24.566Z",
+      "action": "Titre & Bio modifiés depuis le Dashboard",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+>>>>>>> c7df5fce64a4fd9f73d563c311b100d63e890a8c
     }
   ],
   "seo": {
@@ -536,7 +982,13 @@
     "keywords": "Falikou FOFANA, Data Analyst, Analyse de données, Business Intelligence, Outils décisionnels, Tableaux de bord interactifs, KPIs, Excel TCD, Power BI, SQL, Python, IUA Abidjan"
   },
   "settings": {
+<<<<<<< HEAD
     "siteName": "Falikou FOFANA — Data Analyst",
     "lastPublished": "2026-08-25T15:40:00.000Z"
+=======
+    "siteName": "Falikou FOFANA — Portfolio",
+    "lastPublished": "2026-08-24T21:03:35.724Z",
+    "version": "1.0.0"
+>>>>>>> c7df5fce64a4fd9f73d563c311b100d63e890a8c
   }
 }
