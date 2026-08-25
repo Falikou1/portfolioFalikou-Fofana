@@ -115,17 +115,17 @@
       // 6. Expériences
       this.renderExperiences(d.experiences, d.sections?.experience);
 
-      // 7. Compétences & Outils (Logiciels techniques du CV)
-      this.renderTechSkills(d.techSkills || d.skills, d.sections?.techSkills || d.sections?.skills);
+      // 7. Compétences & Outils (Savoir-faire : Outils & Capacités)
+      this.renderTechSkills(d.skills || d.techSkills, d.sections?.skills, d.capabilities);
 
-      // 8. Soft Skills & Qualités comportementales
+      // 8. Soft Skills & Qualités comportementales (Savoir-être)
       this.renderSoftSkills(d.softSkills, d.sections?.softSkills, d.languagesAndInterests);
 
       // 9. Formations (Cursus académique)
       this.renderEducations(d.educations, d.sections?.education);
 
-      // 10. Certificats (Certifications officielles)
-      this.renderCertifications(d.certifications, d.sections?.certifications);
+      // 10. Certifications & Compétitions (Certificats officiels + Hackathons)
+      this.renderCertifications(d.certifications, d.sections?.certifications, d.competitions);
 
       // 11. Services Proposés
       this.renderServices(d.services, d.sections?.services);
@@ -387,8 +387,8 @@
       }
     },
 
-    // ── 7. COMPÉTENCES TECHNIQUES & OUTILS (Logiciels du CV) ─────────────────
-    renderTechSkills(skills, secConfig) {
+    // ── 7. COMPÉTENCES TECHNIQUES & SAVOIR-FAIRE (Outils & Capacités) ───────
+    renderTechSkills(skills, secConfig, capabilities) {
       const section = document.getElementById('skills') || document.getElementById('tech-skills');
       if (!section) return;
 
@@ -401,10 +401,11 @@
         if (desc && secConfig.subtitle) desc.textContent = secConfig.subtitle;
       }
 
+      // 1. Outils & Technologies
       if (Array.isArray(skills)) {
         const container = section.querySelector('.tech-skills-grid');
         if (container) {
-          const themes = ['orange', 'emerald', 'blue', 'purple', 'gold', 'cyan'];
+          const themes = ['orange', 'emerald', 'blue', 'purple', 'cyan', 'gold'];
           const visibleSkills = skills.filter(s => s.visible !== false);
 
           container.innerHTML = visibleSkills.map((s, idx) => {
@@ -425,12 +426,38 @@
           }).join('');
         }
       }
+
+      // 2. Ce que je sais faire (Capacités analytiques & opérationnelles)
+      if (Array.isArray(capabilities)) {
+        const capContainer = section.querySelector('.capabilities-grid');
+        if (capContainer) {
+          const themes = ['orange', 'emerald', 'blue', 'purple', 'rose', 'gold'];
+          const visibleCaps = capabilities.filter(c => c.visible !== false);
+
+          capContainer.innerHTML = visibleCaps.map((c, idx) => {
+            const theme = themes[idx % themes.length];
+            const iconSvg = window.PortfolioIcons ? window.PortfolioIcons.get(c.icon || c.id, { size: 24 }) : '';
+            return `
+              <div class="soft-skill-card card-theme-${theme} reveal delay-${(idx % 3) + 1} tilt-card active" data-cap-id="${c.id || idx}">
+                <div class="soft-skill-top">
+                  <div class="soft-skill-icon">
+                    ${iconSvg}
+                  </div>
+                  <span class="soft-skill-badge">${c.category || 'Capacité'}</span>
+                </div>
+                <h3 class="soft-skill-title">${c.title || ''}</h3>
+                <p class="soft-skill-desc">${c.desc || ''}</p>
+              </div>
+            `;
+          }).join('');
+        }
+      }
     },
 
     // ── 8. SAVOIR-ÊTRE PROFESSIONNEL (SOFT SKILLS) ───────────────────────────
     renderSoftSkills(softSkills, secConfig, langInterests) {
-      const container = document.querySelector('#skills .soft-skills-grid') || 
-                        document.querySelector('#soft-skills .soft-skills-grid') || 
+      const container = document.querySelector('#skills .soft-skills-grid:not(.tech-skills-grid):not(.capabilities-grid)') || 
+                        document.querySelector('#skills .soft-skills-grid') || 
                         document.querySelector('.soft-skills-grid');
       if (!container) return;
 
@@ -521,16 +548,18 @@
       }
     },
 
-    // ── 10. CERTIFICATS (Certifications officielles) ────────────────────────
-    renderCertifications(certifications, secConfig) {
+    // ── 10. CERTIFICATIONS & COMPÉTITIONS (Certificats + Hackathons) ─────────
+    renderCertifications(certifications, secConfig, competitions) {
       const container = document.querySelector('#education .certifications-grid') || 
                         document.querySelector('#certifications .certifications-grid') || 
                         document.querySelector('.certifications-grid');
       if (!container) return;
 
+      let html = '';
+
       if (Array.isArray(certifications)) {
         const visibleCerts = certifications.filter(c => c.visible !== false);
-        container.innerHTML = visibleCerts.map((cert, idx) => `
+        html += visibleCerts.map((cert, idx) => `
           <div class="blog__card reveal-scale delay-${(idx % 3) + 1} tilt-card active" data-cert-id="${cert.id || idx}">
             <div class="blog__figure" style="background: #111; display: flex; align-items: center; justify-content: center;">
               <img src="${cert.logo || 'assets/images/project-bi.jpg'}" alt="${cert.title || 'Certification'}" style="object-fit: cover; width: 100%; height: 100%;">
@@ -544,6 +573,25 @@
           </div>
         `).join('');
       }
+
+      if (Array.isArray(competitions)) {
+        const visibleComps = competitions.filter(c => c.visible !== false);
+        html += visibleComps.map((comp, idx) => `
+          <div class="blog__card reveal-scale delay-${(idx % 3) + 2} tilt-card active" data-comp-id="${comp.id || idx}">
+            <div class="blog__figure" style="background: #111; display: flex; align-items: center; justify-content: center;">
+              <img src="${comp.logo || 'assets/images/project-agency.jpg'}" alt="${comp.title || 'Compétition'}" style="object-fit: cover; width: 100%; height: 100%;">
+            </div>
+            <div class="blog__content">
+              <div class="blog-tag" style="background: rgba(218, 56, 5, 0.2); color: #ff6b4a; border: 1px solid rgba(218, 56, 5, 0.4);">${comp.badge || 'Compétition & Distinction'}</div>
+              <h3 class="blog__title">${comp.title || ''}</h3>
+              <div style="font-size: 0.85rem; color: #ff6b4a; margin-bottom: 6px; font-weight: 600;">${comp.organizer || ''} • ${comp.year || ''} • ${comp.role || ''}</div>
+              <p class="blog-desc">${comp.desc || ''}</p>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      container.innerHTML = html;
     },
 
     // ── 11. SERVICES PROPOSÉS ────────────────────────────────────────────────

@@ -95,13 +95,13 @@
       "visible": true,
       "tag": "[ Savoir-faire & Savoir-être ]",
       "title": "Compétences",
-      "subtitle": "Maîtrise des outils techniques de la chaîne décisionnelle et qualités humaines éprouvées."
+      "subtitle": "Compétences techniques et analytiques (Savoir-faire) alliées à des qualités humaines et managériales éprouvées (Savoir-être)."
     },
     "education": {
       "visible": true,
-      "tag": "[ Parcours & Certifications ]",
-      "title": "Formation",
-      "subtitle": "Cursus universitaire en Génie Informatique et certifications spécialisées dans le traitement des données."
+      "tag": "[ Parcours, Certifications & Compétitions ]",
+      "title": "Formation & Certifications",
+      "subtitle": "Cursus universitaire en Génie Informatique, certifications spécialisées Data et participations aux hackathons."
     },
     "services": {
       "visible": true,
@@ -180,7 +180,7 @@
       "typeBadge": "EXPÉRIENCE",
       "logo": "assets/images/project-agency.jpg",
       "badge": "Stage Professionnel",
-      "desc": "• Développement Web & Mobile (Vibe Coding) : Prototypage rapide et conception d'interfaces réactives assisté par IA.\n• Stratégies de Marketing Digital : Élaboration de campagnes en ligne, suivi des métriques d'engagement et optimisation de la visibilité.\n• UI/UX : Intégration soignée de maquettes et parcours utilisateurs optimisés.",
+      "desc": "• Développement Web & Mobile (Vibe Coding) : Prototypage et conception d'interfaces réactives assisté par IA.\n• Stratégies de Marketing Digital : Élaboration de campagnes en ligne, suivi des métriques d'engagement et optimisation de la visibilité.\n• UI/UX : Intégration soignée de maquettes et parcours utilisateurs optimisés.",
       "technologies": [
         "Développement Web & Mobile",
         "Vibe Coding",
@@ -190,26 +190,45 @@
       ],
       "visible": true,
       "order": 1
+    },
+    {
+      "id": "exp-redis-iua",
+      "role": "Délégué de Promotion & Membre Actif",
+      "company": "REDIS-IUA & Bureau de Coordination des Étudiants",
+      "period": "2024 - Présent",
+      "typeBadge": "ENGAGEMENT",
+      "logo": "assets/images/logo_iua.png",
+      "badge": "Leadership & Vie Associative",
+      "desc": "• Représentation & Coordination : Représentation active des étudiants de promotion et transmission des besoins auprès de l'administration universitaire.\n• Organisation & Événementiel : Planification et mobilisation pour des séminaires, conférences et ateliers technologiques.\n• Synergie d'équipe : Animation d'initiatives collaboratives au sein du Réseau des Étudiants en Informatique (REDIS-IUA).",
+      "technologies": [
+        "Leadership",
+        "Gestion d'équipe",
+        "Communication",
+        "Organisation",
+        "Planification"
+      ],
+      "visible": true,
+      "order": 2
     }
   ],
   "skills": [
     {
       "id": "ts-powerbi",
-      "name": "Power BI & Tableaux de bord",
+      "name": "Power BI",
       "category": "Business Intelligence",
       "level": 95,
       "icon": "powerbi",
-      "desc": "Conception de tableaux de bord interactifs, modélisation de données décisionnelles, DAX et Power Query.",
+      "desc": "Conception de tableaux de bord décisionnels, modélisation de données, mesures DAX et Power Query.",
       "visible": true,
       "order": 1
     },
     {
       "id": "ts-excel",
       "name": "Excel & TCD Avancé",
-      "category": "Analyse de données",
+      "category": "Analyse de Données",
       "level": 95,
       "icon": "excel",
-      "desc": "Formules avancées, Tableaux Croisés Dynamiques (TCD), segments multicritères, nettoyage et fiabilisation de données.",
+      "desc": "Formules avancées, Tableaux Croisés Dynamiques (TCD), segments multicritères et fiabilisation de données.",
       "visible": true,
       "order": 2
     },
@@ -219,7 +238,7 @@
       "category": "Bases de Données",
       "level": 85,
       "icon": "sql",
-      "desc": "Requêtage relationnel, jointures complexes, extraction structurée et modélisation de schémas BDD.",
+      "desc": "Requêtes relationnelles complexes, jointures, agrégations et modélisation de schémas BDD.",
       "visible": true,
       "order": 3
     },
@@ -234,66 +253,80 @@
       "order": 4
     },
     {
+      "id": "ts-tableau",
+      "name": "Tableau & Google Data Studio",
+      "category": "Data Visualization",
+      "level": 80,
+      "icon": "tableau",
+      "desc": "Restitution visuelle des indicateurs de performance, création de dashboards et storytelling orienté business.",
+      "visible": true,
+      "order": 5
+    },
+    {
       "id": "ts-vibecoding",
-      "name": "Développement Web & Mobile (Vibe Coding)",
+      "name": "Développement Web & Mobile",
       "category": "Développement & IA",
       "level": 92,
       "icon": "vibecoding",
-      "desc": "Prototypage rapide d'applications web & mobiles assisté par IA, HTML, CSS, JavaScript et intégration UI/UX.",
+      "desc": "Prototypage rapide d'applications web & mobiles assisté par IA, HTML5, CSS3, JavaScript et Vibe Coding.",
       "visible": true,
-      "order": 5
+      "order": 6
     }
   ],
-  "techSkills": [
+  "capabilities": [
     {
-      "id": "ts-powerbi",
-      "name": "Power BI & Tableaux de bord",
-      "category": "Business Intelligence",
-      "level": 95,
-      "icon": "powerbi",
-      "desc": "Conception de tableaux de bord interactifs, modélisation de données décisionnelles, DAX et Power Query.",
+      "id": "cap-analyse",
+      "title": "Analyse & Exploration de Données",
+      "category": "Data Analysis",
+      "icon": "search",
+      "desc": "Exploration approfondie des jeux de données, statistiques descriptives et extraction d'insights exploitables.",
       "visible": true,
       "order": 1
     },
     {
-      "id": "ts-excel",
-      "name": "Excel & TCD Avancé",
-      "category": "Analyse de données",
-      "level": 95,
-      "icon": "excel",
-      "desc": "Formules avancées, Tableaux Croisés Dynamiques (TCD), segments multicritères, nettoyage et fiabilisation de données.",
+      "id": "cap-cleaning",
+      "title": "Nettoyage & Fiabilisation des Données",
+      "category": "Data Quality",
+      "icon": "cleaning",
+      "desc": "Traitement rigoureux des anomalies, suppression des doublons et harmonisation des données de vente.",
       "visible": true,
       "order": 2
     },
     {
-      "id": "ts-sql",
-      "name": "SQL & Bases de Données",
-      "category": "Bases de Données",
-      "level": 85,
-      "icon": "sql",
-      "desc": "Requêtage relationnel, jointures complexes, extraction structurée et modélisation de schémas BDD.",
+      "id": "cap-kpi",
+      "title": "Calcul & Suivi des KPIs Stratégiques",
+      "category": "Performance",
+      "icon": "kpi",
+      "desc": "Définition et calcul automatisé d'indicateurs de performance (CA, marges, taux de croissance, volumes).",
       "visible": true,
       "order": 3
     },
     {
-      "id": "ts-python",
-      "name": "Python & Anaconda",
-      "category": "Data Science",
-      "level": 88,
-      "icon": "python",
-      "desc": "Analyse de données, Pandas, NumPy, statistiques descriptives et scripts d'automatisation sous Anaconda.",
+      "id": "cap-dashboard",
+      "title": "Création de Tableaux de Bord Décisionnels",
+      "category": "Business Intelligence",
+      "icon": "powerbi",
+      "desc": "Modélisation décisionnelle et conception de dashboards interactifs avec filtres et segments multicritères.",
       "visible": true,
       "order": 4
     },
     {
-      "id": "ts-vibecoding",
-      "name": "Développement Web & Mobile (Vibe Coding)",
-      "category": "Développement & IA",
-      "level": 92,
-      "icon": "vibecoding",
-      "desc": "Prototypage rapide d'applications web & mobiles assisté par IA, HTML, CSS, JavaScript et intégration UI/UX.",
+      "id": "cap-dataviz",
+      "title": "Data Visualization & Storytelling",
+      "category": "Visualisation",
+      "icon": "sparkle",
+      "desc": "Restitution visuelle claire et percutante pour faciliter la compréhension et la prise de décision.",
       "visible": true,
       "order": 5
+    },
+    {
+      "id": "cap-dev",
+      "title": "Prototypage & Création d'Applications",
+      "category": "Développement",
+      "icon": "dev",
+      "desc": "Conception et déploiement rapide d'applications web & mobiles réactives assisté par IA (Vibe Coding).",
+      "visible": true,
+      "order": 6
     }
   ],
   "softSkills": [
@@ -302,7 +335,7 @@
       "name": "Leadership & Gestion d'équipe",
       "category": "Management",
       "icon": "leadership",
-      "proof": "Délégué de promotion et pilotage d'équipe au Technovore Hackathon ESATIC 2026.",
+      "proof": "Délégué de promotion et capitaine d'équipe au Technovore Hackathon ESATIC 2026.",
       "desc": "Aptitude à fédérer, coordonner des collaborateurs et mener des projets collectifs avec rigueur.",
       "visible": true,
       "order": 1
@@ -456,6 +489,28 @@
       "order": 4
     }
   ],
+  "competitions": [
+    {
+      "id": "comp-esatic-2026",
+      "title": "Technovore Hackathon ESATIC 2026",
+      "organizer": "École Supérieure Africaine des TIC (ESATIC)",
+      "category": "Hackathon & Challenge Tech",
+      "badge": "Compétition & Distinction",
+      "year": "Mars 2026",
+      "role": "Capitaine d'équipe & Concepteur Réseau",
+      "logo": "assets/images/project-agency.jpg",
+      "desc": "Participation compétitive et soutenance devant le jury : modélisation et simulation d'une infrastructure réseau multi-sites sécurisée sous Cisco Packet Tracer (VLAN, DHCP, NAT, routage dynamique OSPF et VPN IPsec).",
+      "technologies": [
+        "Cisco Packet Tracer",
+        "Architecture Réseau",
+        "VPN IPsec",
+        "OSPF",
+        "Leadership d'équipe"
+      ],
+      "visible": true,
+      "order": 1
+    }
+  ],
   "services": [
     {
       "id": "srv-bi",
@@ -523,20 +578,11 @@
   "messages": [],
   "history": [
     {
-      "id": "hist-init",
-      "timestamp": "2026-08-25T15:40:00.000Z",
-      "action": "Correction définitive : Structure, Contenu et Navigation",
+      "id": "hist-structure-2026",
+      "timestamp": "2026-08-25T20:00:00.000Z",
+      "action": "Restructuration Compétences (Savoir-faire / Savoir-être) et Certifications & Compétitions",
       "target": "Système",
-      "details": "Structure unifiée : ACCUEIL | PROJETS & EXPÉRIENCES | COMPÉTENCES | FORMATION | CONTACT"
+      "details": "Organisation claire : Savoir-faire (Outils + Capacités) / Savoir-être (Soft Skills) / Certifications & Compétitions"
     }
-  ],
-  "seo": {
-    "metaTitle": "Falikou FOFANA | Data Analyst - Stagiaire",
-    "metaDescription": "Portfolio professionnel de Falikou FOFANA — Data Analyst Stagiaire et Développeur Web & Mobile à Abidjan (IUA). Power BI, Excel & TCD, SQL, Python et Tableaux de bord décisionnels.",
-    "keywords": "Falikou FOFANA, Data Analyst, Analyse de données, Business Intelligence, Outils décisionnels, Tableaux de bord interactifs, KPIs, Excel TCD, Power BI, SQL, Python, IUA Abidjan"
-  },
-  "settings": {
-    "siteName": "Falikou FOFANA — Data Analyst",
-    "lastPublished": "2026-08-25T15:40:00.000Z"
-  }
+  ]
 }

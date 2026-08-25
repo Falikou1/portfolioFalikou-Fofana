@@ -58,6 +58,57 @@
       </svg>
     `,
 
+    tableau: (props = {}) => `
+      <svg viewBox="0 0 24 24" width="${props.size || 24}" height="${props.size || 24}" class="${props.className || ''}">
+        <path fill="#E8762D" d="M11.2 2v3.6H7.6V7h3.6v3.6h1.6V7h3.6V5.6H12.8V2h-1.6z"/>
+        <path fill="#2E75B6" d="M5.2 8v2.4H2.8V12h2.4v2.4h1.6V12h2.4v-1.6H6.8V8H5.2z"/>
+        <path fill="#595959" d="M17.2 8v2.4h-2.4V12h2.4v2.4h1.6V12h2.4v-1.6h-2.4V8h-1.6z"/>
+        <path fill="#C00000" d="M11.2 13.6v3.6H7.6V18.8h3.6v3.6h1.6v-3.6h3.6V17.2H12.8v-3.6h-1.6z"/>
+      </svg>
+    `,
+
+    chart: (props = {}) => `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="${props.size || 24}" height="${props.size || 24}" class="${props.className || ''}">
+        <line x1="18" y1="20" x2="18" y2="10"/>
+        <line x1="12" y1="20" x2="12" y2="4"/>
+        <line x1="6" y1="20" x2="6" y2="14"/>
+      </svg>
+    `,
+
+    kpi: (props = {}) => `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="${props.size || 24}" height="${props.size || 24}" class="${props.className || ''}">
+        <path d="M3 3v18h18"/>
+        <path d="m19 9-5 5-4-4-3 3"/>
+      </svg>
+    `,
+
+    trophy: (props = {}) => `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="${props.size || 24}" height="${props.size || 24}" class="${props.className || ''}">
+        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+        <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+        <path d="M4 22h16"/>
+        <path d="M10 14.66V17c0 .55-.45 1-1 1H7v4h10v-4h-2c-.55 0-1-.45-1-1v-2.34"/>
+        <path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/>
+      </svg>
+    `,
+
+    medal: (props = {}) => `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="${props.size || 24}" height="${props.size || 24}" class="${props.className || ''}">
+        <circle cx="12" cy="8" r="7"/>
+        <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
+      </svg>
+    `,
+
+    competition: (props = {}) => `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="${props.size || 24}" height="${props.size || 24}" class="${props.className || ''}">
+        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+        <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+        <path d="M4 22h16"/>
+        <path d="M10 14.66V17c0 .55-.45 1-1 1H7v4h10v-4h-2c-.55 0-1-.45-1-1v-2.34"/>
+        <path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/>
+      </svg>
+    `,
+
     // ── Soft Skills ──────────────────────────────────────────────────────────
     leadership: (props = {}) => `
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="${props.size || 24}" height="${props.size || 24}" class="${props.className || ''}">

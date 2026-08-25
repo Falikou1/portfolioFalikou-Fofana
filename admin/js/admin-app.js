@@ -1442,20 +1442,23 @@
     },
 
     // 4. COMPÉTENCES (TECHNIQUES & SAVOIR-ÊTRE UNIFIÉS)
+    // 4. COMPÉTENCES (SAVOIR-FAIRE & SAVOIR-ÊTRE)
     renderSkills() {
       const skills = this.data.skills || this.data.techSkills || [];
+      const capabilities = this.data.capabilities || [];
       const softSkills = this.data.softSkills || [];
       const langInterests = this.data.languagesAndInterests || { languages: [], interests: [] };
 
       return `
-        <!-- Bloc 1: Compétences Techniques & Outils -->
+        <!-- Bloc 1: Savoir-faire — Outils & Technologies -->
         <div class="card">
           <div class="card-header">
             <div>
-              <h2 class="card-title">Compétences Techniques & Outils (${skills.length})</h2>
-              <p class="card-desc">Power BI, Excel & TCD, SQL, Python & Anaconda, Vibe Coding...</p>
+              <div style="font-size: 0.8rem; font-family: monospace; color: var(--admin-accent); font-weight: 700; text-transform: uppercase;">[ Savoir-faire ]</div>
+              <h2 class="card-title">Outils & Technologies (${skills.length})</h2>
+              <p class="card-desc">Power BI, Excel & TCD, SQL, Python & Anaconda, Tableau, Web & Mobile / Vibe Coding...</p>
             </div>
-            <button class="btn btn-primary" id="addSkillBtn">+ Ajouter une Compétence</button>
+            <button class="btn btn-primary" id="addSkillBtn">+ Ajouter un Outil</button>
           </div>
           <div class="items-list">
             ${skills.map(s => `
@@ -1474,11 +1477,39 @@
           </div>
         </div>
 
-        <!-- Bloc 2: Savoir-être professionnel (Soft Skills) & Langues -->
+        <!-- Bloc 2: Savoir-faire — Ce que je sais faire (Capacités opérationnelles) -->
         <div class="card" style="margin-top: 24px;">
           <div class="card-header">
             <div>
-              <h2 class="card-title">Savoir-être professionnel (Soft Skills) (${softSkills.length})</h2>
+              <div style="font-size: 0.8rem; font-family: monospace; color: var(--admin-accent); font-weight: 700; text-transform: uppercase;">[ Savoir-faire ]</div>
+              <h2 class="card-title">Ce que je sais faire (${capabilities.length})</h2>
+              <p class="card-desc">Analyse & exploration, nettoyage & fiabilisation, calcul KPIs, dashboards, data viz, modélisation...</p>
+            </div>
+            <button class="btn btn-primary" id="addCapBtn">+ Ajouter une Capacité</button>
+          </div>
+          <div class="items-list">
+            ${capabilities.map(c => `
+              <div class="list-item-card">
+                <div style="display:flex; align-items:center; justify-content:center; width:44px; height:44px;">${window.PortfolioIcons ? window.PortfolioIcons.get(c.icon || c.id, { size: 24 }) : ''}</div>
+                <div class="item-details">
+                  <div class="item-title">${c.title} <span style="color: var(--admin-accent); font-size: 0.8rem; font-weight: 600;">[${c.category || 'Capacité'}]</span></div>
+                  <div class="item-subtitle">${c.desc || ''}</div>
+                </div>
+                <div class="item-actions">
+                  <button class="btn btn-secondary btn-icon" onclick="AdminApp.editCap('${c.id}')" title="Modifier"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button>
+                  <button class="btn btn-danger btn-icon" onclick="AdminApp.deleteCap('${c.id}')" title="Supprimer"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- Bloc 3: Savoir-être — Soft Skills (Qualités professionnelles) -->
+        <div class="card" style="margin-top: 24px;">
+          <div class="card-header">
+            <div>
+              <div style="font-size: 0.8rem; font-family: monospace; color: var(--admin-accent); font-weight: 700; text-transform: uppercase;">[ Savoir-être ]</div>
+              <h2 class="card-title">Qualités Professionnelles / Soft Skills (${softSkills.length})</h2>
               <p class="card-desc">Leadership, esprit d'équipe, organisation, communication, sens des responsabilités</p>
             </div>
             <button class="btn btn-primary" id="addSoftSkillBtn">+ Ajouter une Soft Skill</button>
@@ -1505,7 +1536,7 @@
             <h3 style="font-size: 1.1rem; color: #fff; margin-bottom: 12px;">Langues, Mobilité & Centres d'Intérêt</h3>
             <div class="form-grid">
               <div class="form-group full-width">
-                <label class="form-label">Langues maîtrisées (Format : Nom - Niveau, séparées par des virgules)</label>
+                <label class="form-label">Langues maîtrisées (Format : Nom (Niveau), séparées par des virgules)</label>
                 <input type="text" id="adminLanguagesInput" class="form-control" value="${(langInterests.languages || []).map(l => `${l.name} (${l.level})`).join(', ')}">
               </div>
               <div class="form-group full-width">
@@ -1524,6 +1555,10 @@
     bindSkillsEvents() {
       const btn = document.getElementById('addSkillBtn');
       if (btn) btn.addEventListener('click', () => this.openSkillModal());
+
+      const capBtn = document.getElementById('addCapBtn');
+      if (capBtn) capBtn.addEventListener('click', () => this.openCapModal());
+
       this.bindSoftSkillsEvents();
     },
 
@@ -1533,7 +1568,7 @@
     },
 
     deleteSkill(id) {
-      if (confirm('Supprimer cette compétence ?')) {
+      if (confirm('Supprimer cette compétence technique ?')) {
         this.data.skills = (this.data.skills || []).filter(x => x.id !== id);
         this.persistData('Compétence supprimée', true);
         this.renderTab('skills');
@@ -1543,9 +1578,9 @@
     openSkillModal(skill = null) {
       const isEdit = !!skill;
       const s = skill || {
-        id: 'skill-' + Date.now(),
+        id: 'ts-' + Date.now(),
         name: '',
-        category: 'Data & BI',
+        category: 'Business Intelligence',
         level: 85,
         icon: 'powerbi',
         desc: '',
@@ -1556,28 +1591,28 @@
         <div class="admin-modal-backdrop" id="skillModalBackdrop">
           <div class="admin-modal">
             <div class="card-header">
-              <h2 class="card-title">${isEdit ? 'Modifier la compétence' : 'Ajouter une compétence'}</h2>
+              <h2 class="card-title">${isEdit ? 'Modifier l\'outil' : 'Ajouter un outil'}</h2>
               <button class="btn btn-secondary btn-icon" onclick="document.getElementById('skillModalBackdrop').remove()"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button>
             </div>
             <form id="skillModalForm" class="form-grid" style="margin-top: 16px;">
               <div class="form-group">
-                <label class="form-label">Nom de la compétence</label>
-                <input type="text" id="mSkillName" class="form-control" value="${s.name}" required>
+                <label class="form-label">Nom de l'outil / logiciel</label>
+                <input type="text" id="mSkillName" class="form-control" value="${s.name}" required placeholder="Ex : Power BI, Excel, SQL, Python...">
               </div>
               <div class="form-group">
-                <label class="form-label">Icône / Emoji</label>
-                <input type="text" id="mSkillIcon" class="form-control" value="${s.icon || 'vibecoding'}">
+                <label class="form-label">Identifiant Icône</label>
+                <input type="text" id="mSkillIcon" class="form-control" value="${s.icon || 'powerbi'}">
               </div>
               <div class="form-group">
                 <label class="form-label">Catégorie</label>
-                <input type="text" id="mSkillCat" class="form-control" value="${s.category || 'Data & BI'}">
+                <input type="text" id="mSkillCat" class="form-control" value="${s.category || 'Business Intelligence'}">
               </div>
               <div class="form-group">
                 <label class="form-label">Niveau (%): <strong id="levelVal">${s.level}</strong>%</label>
                 <input type="range" id="mSkillLevel" min="50" max="100" class="form-control" value="${s.level}" oninput="document.getElementById('levelVal').textContent = this.value">
               </div>
               <div class="form-group full-width">
-                <label class="form-label">Description / Détails</label>
+                <label class="form-label">Description / Précisions</label>
                 <textarea id="mSkillDesc" class="form-control">${s.desc || ''}</textarea>
               </div>
               <div class="form-group full-width" style="display: flex; gap: 10px; justify-content: flex-end;">
@@ -1606,61 +1641,95 @@
           if (idx !== -1) this.data.skills[idx] = s;
         }
 
-        this.persistData(`Compétence ${s.name} enregistrée`, true);
+        this.persistData(`Outil ${s.name} enregistré`, true);
         document.getElementById('skillModalBackdrop').remove();
         this.renderTab('skills');
       });
     },
 
-    // 4b. SOFT SKILLS & COMPÉTENCES COMPORTEMENTALES (DU CV)
-    renderSoftSkills() {
-      const softSkills = this.data.softSkills || [];
-      const langInterests = this.data.languagesAndInterests || { languages: [], interests: [] };
-      return `
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <h2 class="card-title">Soft Skills & Compétences Comportementales (${softSkills.length})</h2>
-              <p class="card-desc">Gérez vos qualités humaines, leadership et preuves pratiques</p>
-            </div>
-            <button class="btn btn-primary" id="addSoftSkillBtn">+ Ajouter une Soft Skill</button>
-          </div>
-          <div class="items-list">
-            ${softSkills.map(s => `
-              <div class="list-item-card">
-                <div style="display:flex; align-items:center; justify-content:center; width:44px; height:44px;">${window.PortfolioIcons ? window.PortfolioIcons.get(s.icon || s.id, { size: 24 }) : ''}</div>
-                <div class="item-details">
-                  <div class="item-title">${s.name} <span style="color: var(--admin-accent); font-size: 0.8rem; font-weight: 600;">[${s.category || 'Soft Skill'}]</span></div>
-                  <div class="item-subtitle"><strong>Preuve / Contexte :</strong> ${s.proof || ''}</div>
-                  <div class="item-subtitle">${s.desc || ''}</div>
-                </div>
-                <div class="item-actions">
-                  <button class="btn btn-secondary btn-icon" onclick="AdminApp.editSoftSkill('${s.id}')" title="Modifier"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button>
-                  <button class="btn btn-danger btn-icon" onclick="AdminApp.deleteSoftSkill('${s.id}')" title="Supprimer"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></button>
-                </div>
-              </div>
-            `).join('')}
-          </div>
+    // 4b. CE QUE JE SAIS FAIRE (CAPACITÉS OPÉRATIONNELLES)
+    editCap(id) {
+      const c = (this.data.capabilities || []).find(x => x.id === id);
+      if (c) this.openCapModal(c);
+    },
 
-          <!-- Section Langues & Intérêts -->
-          <div style="margin-top: 24px; border-top: 1px solid var(--admin-border); padding-top: 18px;">
-            <h3 style="font-size: 1.1rem; color: #fff; margin-bottom: 12px;">Langues, Mobilité & Centres d'Intérêt</h3>
-            <div class="form-grid">
-              <div class="form-group full-width">
-                <label class="form-label">Langues maîtrisées (Format : Nom - Niveau, séparées par des virgules)</label>
-                <input type="text" id="adminLanguagesInput" class="form-control" value="${(langInterests.languages || []).map(l => `${l.name} (${l.level})`).join(', ')}">
-              </div>
-              <div class="form-group full-width">
-                <label class="form-label">Centres d'intérêt (séparés par des virgules)</label>
-                <input type="text" id="adminInterestsInput" class="form-control" value="${(langInterests.interests || []).map(i => i.name).join(', ')}">
-              </div>
-              <div class="form-group full-width" style="display:flex; justify-content:flex-end;">
-                <button type="button" class="btn btn-primary" id="saveLangInterestsBtn">Enregistrer Langues & Intérêts</button>
-              </div>
+    deleteCap(id) {
+      if (confirm('Supprimer cette capacité opérationnelle ?')) {
+        this.data.capabilities = (this.data.capabilities || []).filter(x => x.id !== id);
+        this.persistData('Capacité supprimée', true);
+        this.renderTab('skills');
+      }
+    },
+
+    openCapModal(cap = null) {
+      const isEdit = !!cap;
+      const c = cap || {
+        id: 'cap-' + Date.now(),
+        title: '',
+        category: 'Data Analysis',
+        icon: 'search',
+        desc: '',
+        visible: true
+      };
+
+      const modalHtml = `
+        <div class="admin-modal-backdrop" id="capModalBackdrop">
+          <div class="admin-modal">
+            <div class="card-header">
+              <h2 class="card-title">${isEdit ? 'Modifier la capacité' : 'Ajouter une capacité opérationnelle'}</h2>
+              <button class="btn btn-secondary btn-icon" onclick="document.getElementById('capModalBackdrop').remove()"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button>
             </div>
+            <form id="capModalForm" class="form-grid" style="margin-top: 16px;">
+              <div class="form-group full-width">
+                <label class="form-label">Titre de la capacité (Ce que je sais faire)</label>
+                <input type="text" id="mCapTitle" class="form-control" value="${c.title}" required placeholder="Ex : Nettoyage & Fiabilisation des Données">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Identifiant Icône</label>
+                <input type="text" id="mCapIcon" class="form-control" value="${c.icon || 'search'}">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Catégorie</label>
+                <input type="text" id="mCapCat" class="form-control" value="${c.category || 'Data Analysis'}">
+              </div>
+              <div class="form-group full-width">
+                <label class="form-label">Description / Détails</label>
+                <textarea id="mCapDesc" class="form-control">${c.desc || ''}</textarea>
+              </div>
+              <div class="form-group full-width" style="display: flex; gap: 10px; justify-content: flex-end;">
+                <button type="button" class="btn btn-secondary" onclick="document.getElementById('capModalBackdrop').remove()">Annuler</button>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+              </div>
+            </form>
           </div>
         </div>
       `;
+
+      document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+      document.getElementById('capModalForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        c.title    = document.getElementById('mCapTitle').value.trim();
+        c.icon     = document.getElementById('mCapIcon').value.trim();
+        c.category = document.getElementById('mCapCat').value.trim();
+        c.desc     = document.getElementById('mCapDesc').value.trim();
+
+        if (!Array.isArray(this.data.capabilities)) this.data.capabilities = [];
+        if (!isEdit) this.data.capabilities.push(c);
+        else {
+          const idx = this.data.capabilities.findIndex(x => x.id === c.id);
+          if (idx !== -1) this.data.capabilities[idx] = c;
+        }
+
+        this.persistData(`Capacité ${c.title} enregistrée`, true);
+        document.getElementById('capModalBackdrop').remove();
+        this.renderTab('skills');
+      });
+    },
+
+    // 4c. SOFT SKILLS & COMPÉTENCES COMPORTEMENTALES (DU CV)
+    renderSoftSkills() {
+      return this.renderSkills();
     },
 
     bindSoftSkillsEvents() {
@@ -1702,7 +1771,7 @@
       if (confirm('Supprimer cette soft skill ?')) {
         this.data.softSkills = (this.data.softSkills || []).filter(x => x.id !== id);
         this.persistData('Soft skill supprimée', true);
-        this.renderTab('soft-skills');
+        this.renderTab('skills');
       }
     },
 
@@ -1727,11 +1796,11 @@
             </div>
             <form id="softSkillModalForm" class="form-grid" style="margin-top: 16px;">
               <div class="form-group">
-                <label class="form-label">Nom de la compétence comportementale</label>
+                <label class="form-label">Nom de la qualité professionnelle</label>
                 <input type="text" id="mSoftName" class="form-control" value="${s.name}" required placeholder="Ex : Leadership & Gestion d'équipe">
               </div>
               <div class="form-group">
-                <label class="form-label">Icône / Emoji</label>
+                <label class="form-label">Identifiant Icône</label>
                 <input type="text" id="mSoftIcon" class="form-control" value="${s.icon || 'leadership'}">
               </div>
               <div class="form-group full-width">
@@ -1769,7 +1838,7 @@
 
         this.persistData(`Soft skill ${s.name} enregistrée`, true);
         document.getElementById('softSkillModalBackdrop').remove();
-        this.renderTab('soft-skills');
+        this.renderTab('skills');
       });
     },
 
@@ -2117,10 +2186,13 @@
       });
     },
 
-    // 6b. CERTIFICATS (CERTIFICATIONS OFFICIELLES DU CV)
+    // 6b. CERTIFICATIONS & COMPÉTITIONS
     renderCertifications() {
       const certs = this.data.certifications || [];
+      const comps = this.data.competitions || [];
+
       return `
+        <!-- Bloc 1: Certificats & Certifications Officielles -->
         <div class="card">
           <div class="card-header">
             <div>
@@ -2145,12 +2217,42 @@
             `).join('')}
           </div>
         </div>
+
+        <!-- Bloc 2: Compétitions & Hackathons -->
+        <div class="card" style="margin-top: 24px;">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Compétitions, Hackathons & Distinctions (${comps.length})</h2>
+              <p class="card-desc">Participations compétitives, hackathons et distinctions (ESATIC, etc.)</p>
+            </div>
+            <button class="btn btn-primary" id="addCompBtn">+ Ajouter une Compétition / Hackathon</button>
+          </div>
+          <div class="items-list">
+            ${comps.map(comp => `
+              <div class="list-item-card">
+                <img src="${imgUrl(comp.logo || 'assets/images/project-agency.jpg')}" class="item-thumb" alt="${comp.title}" onerror="this.style.opacity='0.4'">
+                <div class="item-details">
+                  <div class="item-title">${comp.title} <span style="color: var(--admin-accent); font-size: 0.8rem; font-weight: 600;">[${comp.badge || 'Distinction'}]</span></div>
+                  <div class="item-subtitle">${comp.organizer || ''} • ${comp.year || ''} • <strong>${comp.role || ''}</strong></div>
+                  <div class="item-subtitle">${comp.desc || ''}</div>
+                </div>
+                <div class="item-actions">
+                  <button class="btn btn-secondary btn-icon" onclick="AdminApp.editComp('${comp.id}')" title="Modifier"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button>
+                  <button class="btn btn-danger btn-icon" onclick="AdminApp.deleteComp('${comp.id}')" title="Supprimer"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
       `;
     },
 
     bindCertificationsEvents() {
       const btn = document.getElementById('addCertBtn');
       if (btn) btn.addEventListener('click', () => this.openCertModal());
+
+      const compBtn = document.getElementById('addCompBtn');
+      if (compBtn) compBtn.addEventListener('click', () => this.openCompModal());
     },
 
     editCert(id) {
@@ -2162,7 +2264,7 @@
       if (confirm('Supprimer ce certificat ?')) {
         this.data.certifications = (this.data.certifications || []).filter(c => c.id !== id);
         this.persistData('Certificat supprimé', true);
-        this.renderTab('certifications');
+        this.renderTab('education');
       }
     },
 
@@ -2271,7 +2373,144 @@
 
         this.persistData(`Certificat ${c.title} enregistré`, true);
         document.getElementById('certModalBackdrop').remove();
-        this.renderTab('certifications');
+        this.renderTab('education');
+      });
+    },
+
+    // 6c. COMPÉTITIONS & HACKATHONS
+    editComp(id) {
+      const comp = (this.data.competitions || []).find(c => c.id === id);
+      if (comp) this.openCompModal(comp);
+    },
+
+    deleteComp(id) {
+      if (confirm('Supprimer cette compétition / hackathon ?')) {
+        this.data.competitions = (this.data.competitions || []).filter(c => c.id !== id);
+        this.persistData('Compétition supprimée', true);
+        this.renderTab('education');
+      }
+    },
+
+    openCompModal(comp = null) {
+      const isEdit = !!comp;
+      const c = comp || {
+        id: 'comp-' + Date.now(),
+        title: '',
+        organizer: 'ESATIC',
+        category: 'Hackathon & Challenge Tech',
+        badge: 'Compétition & Distinction',
+        year: '2026',
+        role: 'Capitaine d\'équipe',
+        logo: 'assets/images/project-agency.jpg',
+        desc: '',
+        technologies: ['Cisco Packet Tracer', 'Architecture Réseau'],
+        visible: true
+      };
+
+      const modalHtml = `
+        <div class="admin-modal-backdrop" id="compModalBackdrop">
+          <div class="admin-modal">
+            <div class="card-header">
+              <h2 class="card-title">${isEdit ? 'Modifier la compétition / hackathon' : 'Ajouter une compétition / hackathon'}</h2>
+              <button class="btn btn-secondary btn-icon" onclick="document.getElementById('compModalBackdrop').remove()"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button>
+            </div>
+            <form id="compModalForm" class="form-grid" style="margin-top: 16px;">
+              <div class="form-group full-width">
+                <label class="form-label">Titre de la compétition / Hackathon</label>
+                <input type="text" id="mCompTitle" class="form-control" value="${c.title}" required placeholder="Ex : Technovore Hackathon ESATIC 2026">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Organisateur / Institution</label>
+                <input type="text" id="mCompOrg" class="form-control" value="${c.organizer || ''}" required placeholder="Ex : ESATIC">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Badge / Distinction</label>
+                <input type="text" id="mCompBadge" class="form-control" value="${c.badge || 'Compétition & Distinction'}">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Rôle occupé</label>
+                <input type="text" id="mCompRole" class="form-control" value="${c.role || ''}" placeholder="Ex : Capitaine d'équipe & Concepteur Réseau">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Période / Date</label>
+                <input type="text" id="mCompYear" class="form-control" value="${c.year || ''}">
+              </div>
+
+              <!-- GESTION PHOTO / LOGO DE LA COMPÉTITION -->
+              <div class="form-group full-width" style="border: 1px solid var(--admin-border); padding: 12px; border-radius: var(--radius-sm); background: rgba(255,255,255,0.02);">
+                <label class="form-label"><strong>Image / Logo de l'événement</strong></label>
+                <div style="display: flex; gap: 16px; align-items: center; margin-top: 6px;">
+                  <img id="mCompLogoPreview" src="${imgUrl(c.logo || 'assets/images/project-agency.jpg')}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px; border: 1px solid var(--admin-border);">
+                  <div style="display: flex; gap: 8px; flex-grow: 1; flex-wrap: wrap;">
+                    <label class="btn btn-secondary" style="cursor: pointer; font-size: 0.85rem;">
+                      <span style="display:inline-flex; align-items:center; gap:6px;"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg> <span>Importer Image</span></span>
+                      <input type="file" id="mCompFileInput" accept="image/*" style="display: none;">
+                    </label>
+                    <button type="button" class="btn btn-secondary" style="font-size: 0.85rem;" onclick="AdminApp.chooseFromMedia('mCompLogo', 'mCompLogoPreview')">
+                      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg> <span>Médiathèque</span>
+                    </button>
+                    <input type="text" id="mCompLogo" class="form-control" value="${c.logo || ''}" placeholder="URL de l'image" style="flex-grow: 1;">
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group full-width">
+                <label class="form-label">Technologies / Outils utilisés (séparés par des virgules)</label>
+                <input type="text" id="mCompTech" class="form-control" value="${(c.technologies || []).join(', ')}">
+              </div>
+
+              <div class="form-group full-width">
+                <label class="form-label">Description du projet / Résultat</label>
+                <textarea id="mCompDesc" class="form-control" style="min-height: 80px;">${c.desc || ''}</textarea>
+              </div>
+              <div class="form-group full-width" style="display: flex; gap: 10px; justify-content: flex-end;">
+                <button type="button" class="btn btn-secondary" onclick="document.getElementById('compModalBackdrop').remove()">Annuler</button>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      `;
+
+      document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+      const compFile = document.getElementById('mCompFileInput');
+      const compUrl  = document.getElementById('mCompLogo');
+      const compPrev = document.getElementById('mCompLogoPreview');
+      if (compFile) {
+        compFile.addEventListener('change', (ev) => {
+          const file = ev.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = (re) => {
+            if (compPrev) compPrev.src = re.target.result;
+            if (compUrl) compUrl.value = re.target.result;
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      document.getElementById('compModalForm').addEventListener('submit', (ev) => {
+        ev.preventDefault();
+        c.title        = document.getElementById('mCompTitle').value.trim();
+        c.organizer    = document.getElementById('mCompOrg').value.trim();
+        c.badge        = document.getElementById('mCompBadge').value.trim();
+        c.role         = document.getElementById('mCompRole').value.trim();
+        c.year         = document.getElementById('mCompYear').value.trim();
+        c.logo         = document.getElementById('mCompLogo').value.trim();
+        c.desc         = document.getElementById('mCompDesc').value.trim();
+        c.technologies = document.getElementById('mCompTech').value.split(',').map(t => t.trim()).filter(Boolean);
+
+        if (!Array.isArray(this.data.competitions)) this.data.competitions = [];
+        if (!isEdit) this.data.competitions.push(c);
+        else {
+          const idx = this.data.competitions.findIndex(x => x.id === c.id);
+          if (idx !== -1) this.data.competitions[idx] = c;
+        }
+
+        this.persistData(`Compétition ${c.title} enregistrée`, true);
+        document.getElementById('compModalBackdrop').remove();
+        this.renderTab('education');
       });
     },
 

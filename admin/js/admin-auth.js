@@ -98,6 +98,7 @@
         } else {
           return { success: false, message: data.message || 'Mot de passe incorrect.' };
         }
+      } catch (err) {
         // Fallback only for strong master password
         if (password === 'Falikou@2026!') {
           const mockToken = btoa(JSON.stringify({ user: 'Falikou', role: 'admin', exp: Date.now() + 86400000 })) + '.mock_sig';
