@@ -48,6 +48,10 @@
       font-size: 16px;
     }
 
+    section[id], header[id] {
+      scroll-margin-top: 88px;
+    }
+
     body {
       background-color: var(--black-alt);
       color: var(--light);
@@ -2584,10 +2588,9 @@
         <!-- Desktop Navigation Menu (Hidden on Mobile) -->
         <nav class="navbar__menu" aria-label="Navigation principale">
           <a href="#hero" class="nav__link">Accueil</a>
-          <a href="#projects" class="nav__link">Projets</a>
-          <a href="#experience" class="nav__link">Expériences</a>
-          <a href="#skills" class="nav__link">Soft Skills</a>
-          <a href="#education" class="nav__link">Formations</a>
+          <a href="#projects-experiences" class="nav__link">Projets & Expériences</a>
+          <a href="#skills" class="nav__link">Compétences</a>
+          <a href="#education" class="nav__link">Formation</a>
           <a href="#contact" class="nav__link">Contact</a>
         </nav>
 
@@ -2629,21 +2632,17 @@
       <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
       <span>Accueil</span>
     </a>
-    <a href="#projects" class="mobile-drawer-link" onclick="closeMobileMenu()">
+    <a href="#projects-experiences" class="mobile-drawer-link" onclick="closeMobileMenu()">
       <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-      <span>Projets</span>
-    </a>
-    <a href="#experience" class="mobile-drawer-link" onclick="closeMobileMenu()">
-      <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-      <span>Expériences</span>
+      <span>Projets & Expériences</span>
     </a>
     <a href="#skills" class="mobile-drawer-link" onclick="closeMobileMenu()">
-      <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
-      <span>Soft Skills</span>
+      <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+      <span>Compétences</span>
     </a>
     <a href="#education" class="mobile-drawer-link" onclick="closeMobileMenu()">
       <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 14l9-5-9-5-9 5 9 5z"/><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5"/></svg>
-      <span>Formations</span>
+      <span>Formation</span>
     </a>
     <a href="#contact" class="mobile-drawer-link" onclick="closeMobileMenu()">
       <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
@@ -2779,8 +2778,9 @@
               <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
               <span>Télécharger mon CV (PDF)</span>
             </a>
-            <a href="#projects" class="outline__button__light">
-              <span>Voir mes réalisations ↓</span>
+            <a href="#projects" class="outline__button__light" style="display:inline-flex; align-items:center; gap:8px;">
+              <span>Voir mes réalisations</span>
+              <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
             </a>
           </div>
         </div>
@@ -2804,17 +2804,12 @@
           <!-- Main Portrait Card -->
           <div class="hero-photo-card tilt-card">
             <div class="hero-img-container">
-              <img src="assets/images/falikou_photo_clean.png" alt="Falikou FOFANA - Data Analyst & Développeur" loading="eager">
+              <img src="assets/images/falikou_photo_clean.png" alt="Falikou FOFANA - Data Analyst" loading="eager">
               <div class="hero-img-overlay"></div>
             </div>
             <div class="hero-photo-caption">
-              <div class="hero-photo-name-row">
-                <div class="hero-photo-name">Falikou FOFANA</div>
-                <span style="display:inline-flex; align-items:center; flex-shrink:0;" title="Côte d'Ivoire">
-                  <svg width="22" height="15" viewBox="0 0 3 2" style="border-radius:2px; box-shadow:0 1px 3px rgba(0,0,0,0.5);"><rect width="1" height="2" fill="#F77F00"/><rect width="1" height="2" x="1" fill="#FFFFFF"/><rect width="1" height="2" x="2" fill="#009A44"/></svg>
-                </span>
-              </div>
-              <div class="hero-photo-sub">Data Analyst • Dev Web & Mobile</div>
+              <div class="hero-photo-name">Falikou FOFANA</div>
+              <div class="hero-photo-sub">Data Analyst - Stagiaire</div>
             </div>
           </div>
 
@@ -2846,7 +2841,7 @@
           <h2 style="font-size: clamp(1.85rem, 3.5vw + 0.5rem, 2.75rem); margin-top: 8px;">L'impact par les données</h2>
         </div>
         <div class="section__description">
-          Au fil de mon parcours universitaire et professionnel, je développe une rigueur analytique et une expertise pointue pour transformer les jeux de données complexes en indicateurs de performance clés (KPIs) et en solutions décisionnelles concrètes.
+          Une rigueur analytique appliquée à chaque étape du cycle de la donnée : de la fiabilisation des jeux de données à la restitution visuelle d'indicateurs clés de performance (KPIs) exploitables.
         </div>
       </div>
 
@@ -2858,7 +2853,7 @@
             <span class="counter-suffix">%</span>
           </div>
           <div class="counter__title">Données Fiabilisées</div>
-          <p class="counter-desc">Nettoyage approfondi, dédoublonnage, correction d'anomalies et harmonisation des données de vente.</p>
+          <p class="counter-desc">Nettoyage approfondi, suppression des doublons, traitement des anomalies et harmonisation des données de vente.</p>
         </div>
 
         <!-- Metric 2 -->
@@ -2868,185 +2863,123 @@
             <span class="counter-suffix">+</span>
           </div>
           <div class="counter__title">Dashboards & Outils</div>
-          <p class="counter-desc">Modélisation de tableaux de bord interactifs sur Excel Avancé, Power BI, Python et SQL.</p>
+          <p class="counter-desc">Conception de tableaux de bord interactifs avec Excel Avancé, Power BI, SQL et Python.</p>
         </div>
 
         <!-- Metric 3 -->
         <div class="counter__box reveal-scale delay-3 tilt-card">
           <div class="counter__header">
             <span class="counter__number" data-target="5">0</span>
-            <span class="counter-suffix">Certifs</span>
+            <span class="counter-suffix"> Certifs</span>
           </div>
-          <div class="counter__title">Certifications Validées</div>
-          <p class="counter-desc">Certifications internationales obtenues auprès de Google, Cisco, OpenClassrooms et CCSC.</p>
+          <div class="counter__title">Certificats Obtenus</div>
+          <p class="counter-desc">Certifications validées auprès de Google, Cisco Networking Academy, OpenClassrooms et CCSC.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- =========================================================================
-       SECTION 3: PROJETS RÉCENTS (DARK SECTION, 2x2 GRID)
+       SECTION 3: PROJETS & EXPÉRIENCES (UNIFIED SECTION)
        ========================================================================= -->
-  <section id="projects" class="section-padding black__bg">
+  <section id="projects-experiences" class="section-padding black__bg">
     <div class="container">
       <div class="section__title__wrap reveal">
         <div>
-          <h6 class="section__title">[ Projets & Réalisations ]</h6>
-          <h2 style="font-size: clamp(1.85rem, 3.5vw + 0.5rem, 2.75rem); margin-top: 8px;">Réalisations concrètes</h2>
+          <h6 class="section__title">[ Réalisations & Pratique ]</h6>
+          <h2 style="font-size: clamp(1.85rem, 3.5vw + 0.5rem, 2.75rem); margin-top: 8px;">Projets & Expériences</h2>
         </div>
         <div class="section__description">
-          Une sélection de mes réalisations concrètes : analyse décisionnelle des ventes, immersion en agence digitale et compétition d'architecture réseau sécurisée.
+          Découvrez mes réalisations techniques en analyse décisionnelle des données ainsi que mon expérience concrète en entreprise.
         </div>
+      </div>
+
+      <!-- Sous-partie 1 : PROJETS DATA & RÉALISATIONS -->
+      <div style="margin-top: 32px; margin-bottom: 20px;" class="reveal">
+        <h3 style="font-size: 1.35rem; color: var(--white); font-weight: 700; display: flex; align-items: center; gap: 10px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          <span>Projets Data & Réalisations</span>
+        </h3>
       </div>
 
       <div class="project__items">
         
         <!-- Project 1: BI Dashboard -->
-        <article class="project__card reveal delay-1 tilt-card">
+        <article class="project__card reveal delay-1 tilt-card" data-project-id="bi-dashboard" style="cursor: pointer;" title="Cliquer pour voir les détails">
           <div class="project-img-box">
             <img src="assets/images/project-bi.jpg" alt="Dashboard Commercial des Ventes">
-            <span class="project-year-tag">2026</span>
+            <span class="project-year-tag">PROJET • 2026</span>
           </div>
           <div class="project__content">
-            <span class="project__category">Business Intelligence & Analyse Excel</span>
+            <span class="project__category">Business Intelligence & Analyse de Données</span>
             <h3 class="project__title">Dashboard Commercial des Ventes</h3>
             <p class="project__summery">
-              Projet personnel d'analyse Excel avancé : traitement et fiabilisation d'un jeu de données de vente, calcul automatisé des KPIs (CA global, Marge commerciale, Taux de marge, volume de commandes) et modélisation d'un dashboard interactif avec segments de filtrage multi-critères (Régions, Catégories, Périodes).
+              Analyse, nettoyage et fiabilisation des données commerciales, calcul des KPIs et conception d'un tableau de bord interactif avec TCD croisés et filtres multicritères.
             </p>
-            <div>
-              <span class="project-tag-pill">Excel Avancé</span>
-              <span class="project-tag-pill">TCD Croisés</span>
-              <span class="project-tag-pill">KPIs Commerciaux</span>
+            <div style="margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px;">
+              <span class="project-tag-pill">Excel & TCD</span>
+              <span class="project-tag-pill">KPIs</span>
+              <span class="project-tag-pill">Power BI</span>
+              <span class="project-tag-pill">Business Intelligence</span>
               <span class="project-tag-pill">Data Cleaning</span>
             </div>
           </div>
         </article>
 
-        <!-- Project 2: Tuwshiuah Digital Agency -->
-        <article class="project__card reveal delay-2 tilt-card">
+        <!-- Project 2: Excel Advanced Personal Project -->
+        <article class="project__card reveal delay-2 tilt-card" data-project-id="excel-advanced" style="cursor: pointer;" title="Cliquer pour voir les détails">
           <div class="project-img-box">
-            <img src="assets/images/project-agency.jpg" alt="Tuwshiuah AI & Digital Agency">
-            <span class="project-year-tag">Juillet 2026</span>
+            <img src="assets/images/project-bi.jpg" alt="Projet Personnel d'Analyse de Données Excel Avancé">
+            <span class="project-year-tag">PROJET • 2026</span>
           </div>
           <div class="project__content">
-            <span class="project__category">Stage en Entreprise</span>
-            <h3 class="project__title">Tuwshiuah / AI & Digital Agency</h3>
+            <span class="project__category">Analyse de Données & Modélisation</span>
+            <h3 class="project__title">Projet Personnel d'Analyse de Données Excel Avancé</h3>
             <p class="project__summery">
-              Stage de vacances au sein d'une agence digitale axée sur l'IA : développement web & mobile moderne via les méthodes de <em>vibe coding</em> et déploiement de stratégies de marketing digital et d'analyse d'engagement.
+              Conception d'un outil décisionnel sous Excel : nettoyage et fiabilisation d'un jeu de données de vente, calculs automatisés de marges et de CA, et restitution visuelle par TCD dynamiques.
             </p>
-            <div>
-              <span class="project-tag-pill">Vibe Coding</span>
-              <span class="project-tag-pill">Web & Mobile</span>
-              <span class="project-tag-pill">Marketing Digital</span>
-              <span class="project-tag-pill">IA Générative</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- Project 3: Technovore Hackathon ESATIC -->
-        <article class="project__card reveal delay-3 tilt-card">
-          <div class="project-img-box">
-            <img src="assets/images/project-hackathon.jpg" alt="Technovore Hackathon 2026 ESATIC">
-            <span class="project-year-tag">Mars 2026</span>
-          </div>
-          <div class="project__content">
-            <span class="project__category">Compétition Réseau & Cybersécurité</span>
-            <h3 class="project__title">Technovore Hackathon 2026 (ESATIC)</h3>
-            <p class="project__summery">
-              Conception d'une architecture réseau sécurisée multi-sites à l'École Supérieure Africaine des TIC : plan d'adressage IP, segmentation VLAN et simulation complète sur Cisco Packet Tracer (DHCP, NAT, OSPF, VPN IPsec).
-            </p>
-            <div>
-              <span class="project-tag-pill">Cisco Packet Tracer</span>
-              <span class="project-tag-pill">VPN IPsec</span>
-              <span class="project-tag-pill">Routage OSPF</span>
-              <span class="project-tag-pill">VLAN & NAT</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- Project 4: Outils & Technologies Data -->
-        <article class="project__card reveal delay-4 tilt-card">
-          <div class="project-img-box">
-            <img src="assets/images/project-bi.jpg" alt="Power BI, SQL & Python">
-            <span class="project-year-tag">Écosystème</span>
-          </div>
-          <div class="project__content">
-            <span class="project__category">Compétences Techniques & Outils</span>
-            <h3 class="project__title">Power BI, SQL, Python & Tableaux de bord</h3>
-            <p class="project__summery">
-              Maîtrise de la chaîne complète de valeur de la donnée : extraction et requêtage SQL, traitement et automatisation sous Python/Anaconda, et conception d'interfaces décisionnelles interactives sous Power BI.
-            </p>
-            <div>
-              <span class="project-tag-pill">Power BI</span>
-              <span class="project-tag-pill">SQL</span>
-              <span class="project-tag-pill">Python Data</span>
-              <span class="project-tag-pill">Anaconda</span>
+            <div style="margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px;">
+              <span class="project-tag-pill">Excel Avancé</span>
+              <span class="project-tag-pill">TCD Croisés</span>
+              <span class="project-tag-pill">Analyse de Données</span>
+              <span class="project-tag-pill">KPIs</span>
+              <span class="project-tag-pill">Modélisation</span>
             </div>
           </div>
         </article>
 
       </div>
-    </div>
-  </section>
 
-  <!-- =========================================================================
-       SECTION 4: EXPÉRIENCES PROFESSIONNELLES (STICKY SIDEBAR)
-       ========================================================================= -->
-  <section id="experience" class="section-padding white__bg">
-    <div class="container">
-      
-      <div class="experience__columns">
+      <!-- Sous-partie 2 : EXPÉRIENCES PROFESSIONNELLES -->
+      <div style="margin-top: 56px; margin-bottom: 24px;" class="reveal">
+        <h3 style="font-size: 1.35rem; color: var(--white); font-weight: 700; display: flex; align-items: center; gap: 10px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          <span>Expérience Professionnelle en Entreprise</span>
+        </h3>
+      </div>
+
+      <div class="exp-timeline">
         
-        <!-- Sticky Left Column -->
-        <div class="side__sticky__content reveal-left">
-          <h6 class="section__title">[ Expériences Professionnelles ]</h6>
-          <h2 style="font-size: clamp(1.85rem, 3.5vw + 0.5rem, 2.5rem); margin: 8px 0 16px;">Mon cheminement pratique</h2>
-          <p class="section__description" style="margin-bottom: 24px;">
-            Un aperçu de mon parcours professionnel et de mes réalisations en analyse de données décisionnelle, développement applicatif et gestion de projets techniques.
-          </p>
-          <a href="CV_FalikouFOFANA_Data_Analyst.pdf" download="CV_FalikouFOFANA_Data_Analyst.pdf" class="primary__button" title="Télécharger mon CV au format PDF">
-            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-            <span>Télécharger mon CV (PDF)</span>
-          </a>
-        </div>
-
-        <!-- Right Stacked Experience Cards -->
-        <div class="exp-timeline">
-          
-          <!-- Exp 1 -->
-          <div class="experience__card reveal delay-1 tilt-card">
-            <span class="exp__meta">2026</span>
-            <h3 class="exp__title">Projet BI & Analyse : Dashboard Commercial</h3>
-            <div class="exp-company-text">Projet Personnel d'Analyse de Données Excel Avancé</div>
-            <div class="exp__summery">
-              <p style="margin-bottom: 8px;">• <strong>Nettoyage & fiabilisation :</strong> Traitement d'un jeu de données de vente (dédoublonnage, correction d'anomalies, harmonisation des régions et catégories).</p>
-              <p style="margin-bottom: 8px;">• <strong>Indicateurs clés (KPIs) :</strong> Calcul du Chiffre d'Affaires global, de la Marge commerciale, du Taux de marge et du volume de commandes via formules avancées.</p>
-              <p>• <strong>Tableau de bord dynamique :</strong> Modélisation de TCD croisés et conception d'un dashboard interactif avec segments de filtrage multi-critères (Régions, Catégories, Périodes).</p>
-            </div>
+        <!-- Experience 1: Tuwshiuah -->
+        <div class="experience__card reveal delay-1 tilt-card card-dark" data-exp-id="exp-tuwshiuah-2026" style="background: #13141a; border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 28px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+            <span class="exp__meta" style="margin-bottom: 0;">EXPÉRIENCE • Juillet 2026</span>
+            <span style="font-size: 0.8rem; padding: 4px 12px; border-radius: 99px; background: rgba(16, 185, 129, 0.15); color: #10b981; font-weight: 600;">Stage Professionnel</span>
           </div>
-
-          <!-- Exp 2 -->
-          <div class="experience__card reveal delay-2 tilt-card">
-            <span class="exp__meta">Juillet 2026</span>
-            <h3 class="exp__title">Stage de vacances – Développeur Web & Mobile</h3>
-            <div class="exp-company-text">Tuwshiuah / AI & Digital Agency</div>
-            <div class="exp__summery">
-              <p style="margin-bottom: 8px;">• <strong>Développement applicatif :</strong> Conception et intégration web & mobile moderne via les méthodes de <em>vibe coding</em> assisté par IA.</p>
-              <p>• <strong>Stratégie digitale :</strong> Déploiement et suivi d'actions de marketing digital ciblées et optimisation de conversion.</p>
-            </div>
+          <h3 class="exp__title" style="color: #f8fafc; font-size: 1.35rem; margin-bottom: 4px;">Stage de vacances – Développeur Web & Mobile</h3>
+          <div class="exp-company-text" style="color: var(--accent); font-weight: 600; margin-bottom: 16px;">Tuwshiuah / AI & Digital Agency</div>
+          <div class="exp__summery" style="color: #94a3b8; font-size: 0.95rem; line-height: 1.7;">
+            <p style="margin-bottom: 8px;">• <strong style="color: #f1f5f9;">Développement Web & Mobile (Vibe Coding) :</strong> Prototypage rapide et conception d'interfaces réactives assisté par IA.</p>
+            <p style="margin-bottom: 8px;">• <strong style="color: #f1f5f9;">Stratégies de Marketing Digital :</strong> Élaboration de campagnes en ligne, suivi des métriques d'engagement et optimisation de la visibilité.</p>
+            <p>• <strong style="color: #f1f5f9;">UI/UX :</strong> Intégration soignée de maquettes et parcours utilisateurs optimisés.</p>
           </div>
-
-          <!-- Exp 3 -->
-          <div class="experience__card reveal delay-3 tilt-card">
-            <span class="exp__meta">Mars 2026</span>
-            <h3 class="exp__title">Technovore Hackathon 2026</h3>
-            <div class="exp-company-text">École Supérieure Africaine des TIC (ESATIC)</div>
-            <div class="exp__summery">
-              <p style="margin-bottom: 8px;">• <strong>Architecture réseau sécurisée :</strong> Conception d'un plan d'adressage IP optimisé, segmentation VLAN et interconnexion multi-sites.</p>
-              <p>• <strong>Simulation Cisco Packet Tracer :</strong> Déploiement et configuration avancée (DHCP, NAT, VLAN, routage dynamique OSPF, VPN IPsec).</p>
-            </div>
+          <div style="margin-top: 16px; display: flex; flex-wrap: wrap; gap: 6px;">
+            <span class="project-tag-pill">Développement Web & Mobile</span>
+            <span class="project-tag-pill">Vibe Coding</span>
+            <span class="project-tag-pill">Intelligence Artificielle</span>
+            <span class="project-tag-pill">Marketing Digital</span>
+            <span class="project-tag-pill">UI/UX</span>
           </div>
-
         </div>
 
       </div>
@@ -3055,92 +2988,178 @@
   </section>
 
   <!-- =========================================================================
-       SECTION 5: SOFT SKILLS & LEADERSHIP (VIBRANT MODERN CARDS)
+       SECTION 5: COMPÉTENCES (TECHNIQUES & SAVOIR-ÊTRE UNIFIÉS)
        ========================================================================= -->
-  <section id="skills" class="section-padding skills-section-colorful">
+  <section id="skills" class="section-padding black__bg">
     <div class="container">
       <div class="section__title__wrap reveal">
         <div>
-          <h6 class="section__title">[ Soft Skills & Leadership ]</h6>
-          <h2 style="font-size: clamp(1.85rem, 3.5vw + 0.5rem, 2.75rem); margin-top: 8px;">Qualités humaines & Esprit d'équipe</h2>
+          <h6 class="section__title">[ Compétences & Savoir-être ]</h6>
+          <h2 style="font-size: clamp(1.85rem, 3.5vw + 0.5rem, 2.75rem); margin-top: 8px;">Compétences</h2>
         </div>
         <div class="section__description">
-          Les compétences relationnelles, organisationnelles et managériales démontrées au cours de mon engagement académique et associatif.
+          Maîtrise des logiciels et outils décisionnels, complétée par un savoir-être managérial et collaboratif éprouvé.
         </div>
+      </div>
+
+      <!-- Sous-bloc 1 : Compétences Techniques & Outils -->
+      <div class="soft-skills-grid tech-skills-grid">
+        
+        <!-- Tool 1: Power BI -->
+        <div class="soft-skill-card card-theme-orange reveal delay-1 tilt-card" data-skill-id="ts-powerbi">
+          <div class="soft-skill-top">
+            <div class="soft-skill-icon">
+              <svg viewBox="0 0 32 32" fill="none" width="24" height="24"><rect x="4" y="14" width="6" height="14" rx="2" fill="#F2C811"/><rect x="13" y="8" width="6" height="20" rx="2" fill="#E6AD10"/><rect x="22" y="2" width="6" height="26" rx="2" fill="#CC8A00"/></svg>
+            </div>
+            <span class="soft-skill-badge">Business Intelligence</span>
+          </div>
+          <h3 class="soft-skill-title">Power BI & Tableaux de bord</h3>
+          <p class="soft-skill-desc">Conception de tableaux de bord interactifs, modélisation de données décisionnelles, DAX et Power Query.</p>
+        </div>
+
+        <!-- Tool 2: Excel & TCD -->
+        <div class="soft-skill-card card-theme-emerald reveal delay-2 tilt-card" data-skill-id="ts-excel">
+          <div class="soft-skill-top">
+            <div class="soft-skill-icon">
+              <svg viewBox="0 0 32 32" fill="none" width="24" height="24"><path d="M20 4H8a3 3 0 00-3 3v18a3 3 0 003 3h16a3 3 0 003-3V11l-7-7z" fill="#107C41"/><path d="M20 4v7h7l-7-7z" fill="#33C481"/><path d="M11 14l3 4.5-3 4.5h2.2l1.9-3 1.9 3h2.2l-3-4.5 3-4.5H17l-1.9 3-1.9-3H11z" fill="#FFFFFF"/></svg>
+            </div>
+            <span class="soft-skill-badge">Analyse de données</span>
+          </div>
+          <h3 class="soft-skill-title">Excel & TCD Avancé</h3>
+          <p class="soft-skill-desc">Formules avancées, Tableaux Croisés Dynamiques (TCD), segments multicritères, nettoyage et fiabilisation de données.</p>
+        </div>
+
+        <!-- Tool 3: SQL -->
+        <div class="soft-skill-card card-theme-blue reveal delay-3 tilt-card" data-skill-id="ts-sql">
+          <div class="soft-skill-top">
+            <div class="soft-skill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#4B90E2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><ellipse cx="12" cy="5" rx="9" ry="3" fill="rgba(75,144,226,0.2)"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+            </div>
+            <span class="soft-skill-badge">Bases de Données</span>
+          </div>
+          <h3 class="soft-skill-title">SQL & Bases de Données</h3>
+          <p class="soft-skill-desc">Requêtage relationnel, jointures complexes, extraction structurée et modélisation de schémas BDD.</p>
+        </div>
+
+        <!-- Tool 4: Python & Anaconda -->
+        <div class="soft-skill-card card-theme-purple reveal delay-1 tilt-card" data-skill-id="ts-python">
+          <div class="soft-skill-top">
+            <div class="soft-skill-icon">
+              <svg viewBox="0 0 24 24" width="24" height="24"><path fill="#3776AB" d="M11.9 2c-5.4 0-5.1 2.3-5.1 2.3l.01 2.4h5.2v.7H4.4S2 7.1 2 12.5s2.1 5.3 2.1 5.3h1.2v-1.7s-.1-2.1 2.1-2.1h5.1s2 0 2-2V4.3S15 2 11.9 2zm-1.4 1.4c.4 0 .7.3.7.7s-.3.7-.7.7-.7-.3-.7-.7.3-.7.7-.7z"/><path fill="#FFD43B" d="M12.1 22c5.4 0 5.1-2.3 5.1-2.3l-.01-2.4h-5.2v-.7h7.6s2.4.3 2.4-5.1-2.1-5.3-2.1-5.3h-1.2v1.7s.1 2.1-2.1 2.1H11.5s-2 0-2 2v9.7s-.5 2.3 2.6 2.3zm1.4-1.4c-.4 0-.7-.3-.7-.7s.3-.7.7-.7.7.3.7.7-.3.7-.7.7z"/></svg>
+            </div>
+            <span class="soft-skill-badge">Data Science</span>
+          </div>
+          <h3 class="soft-skill-title">Python & Anaconda</h3>
+          <p class="soft-skill-desc">Analyse de données, Pandas, NumPy, statistiques descriptives et scripts d'automatisation sous Anaconda.</p>
+        </div>
+
+        <!-- Tool 5: Vibe Coding & Web/Mobile -->
+        <div class="soft-skill-card card-theme-gold reveal delay-2 tilt-card" data-skill-id="ts-vibecoding">
+          <div class="soft-skill-top">
+            <div class="soft-skill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <span class="soft-skill-badge">Développement</span>
+          </div>
+          <h3 class="soft-skill-title">Vibe Coding & Web/Mobile</h3>
+          <p class="soft-skill-desc">Prototypage rapide d'applications web & mobiles assisté par IA, HTML, CSS, JavaScript et intégration UI/UX.</p>
+        </div>
+
+      </div>
+
+      <!-- Sous-bloc 2 : Savoir-être professionnel (Soft Skills) -->
+      <div style="margin-top: 48px; margin-bottom: 20px;" class="reveal">
+        <h3 style="font-size: 1.35rem; color: var(--white); font-weight: 700; display: flex; align-items: center; gap: 10px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span>Savoir-être professionnel</span>
+        </h3>
       </div>
 
       <div class="soft-skills-grid">
         
-        <!-- Skill 1: Leadership (Orange / Amber) -->
-        <div class="soft-skill-card card-theme-orange reveal delay-1 tilt-card">
+        <!-- Skill 1: Leadership -->
+        <div class="soft-skill-card card-theme-orange reveal delay-1 tilt-card" data-soft-id="ss-leadership">
           <div class="soft-skill-top">
             <div class="soft-skill-icon">
-              <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             </div>
             <span class="soft-skill-badge">Management</span>
           </div>
-          <h3 class="soft-skill-title">Leadership & Pilotage</h3>
-          <p class="soft-skill-desc">Délégué de promotion et pilotage d'équipe au Technovore Hackathon ESATIC 2026. Capacité démontrée à fédérer, coordonner et mener les projets à terme.</p>
+          <h3 class="soft-skill-title">Leadership & Gestion d'équipe</h3>
+          <div style="font-size: 0.85rem; color: #ff6b4a; font-weight: 600; margin-bottom: 6px;">Délégué de promotion et capitaine de projets collaboratifs.</div>
+          <p class="soft-skill-desc">Aptitude à fédérer, coordonner des collaborateurs et mener des projets collectifs avec rigueur.</p>
         </div>
 
-        <!-- Skill 2: Esprit d'équipe (Cyan / Blue) -->
-        <div class="soft-skill-card card-theme-blue reveal delay-2 tilt-card">
+        <!-- Skill 2: Esprit d'équipe -->
+        <div class="soft-skill-card card-theme-blue reveal delay-2 tilt-card" data-soft-id="ss-teamwork">
           <div class="soft-skill-top">
             <div class="soft-skill-icon">
-              <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             </div>
-            <span class="soft-skill-badge">REDIS–IUA</span>
+            <span class="soft-skill-badge">Collaboration</span>
           </div>
           <h3 class="soft-skill-title">Esprit d'équipe & Collaboration</h3>
-          <p class="soft-skill-desc">Travail actif et continu au sein de REDIS–IUA et du Bureau de Coordination. Sens élevé du partage et de l'écoute active.</p>
+          <div style="font-size: 0.85rem; color: #ff6b4a; font-weight: 600; margin-bottom: 6px;">Travail continu et actif au sein de REDIS–IUA et du Bureau de Coordination des Étudiants.</div>
+          <p class="soft-skill-desc">Écoute active, partage constructif des connaissances et recherche constante de synergie de groupe.</p>
         </div>
 
-        <!-- Skill 3: Organisation (Emerald / Green) -->
-        <div class="soft-skill-card card-theme-emerald reveal delay-3 tilt-card">
+        <!-- Skill 3: Organisation -->
+        <div class="soft-skill-card card-theme-emerald reveal delay-3 tilt-card" data-soft-id="ss-organization">
           <div class="soft-skill-top">
             <div class="soft-skill-icon">
-              <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="m9 16 2 2 4-4"/></svg>
             </div>
-            <span class="soft-skill-badge">IUA Abidjan</span>
+            <span class="soft-skill-badge">Planification</span>
           </div>
           <h3 class="soft-skill-title">Organisation & Événementiel</h3>
-          <p class="soft-skill-desc">Planification et pilotage d'initiatives estudiantines et de projets jeunesse à l'Institut Universitaire d'Abidjan.</p>
+          <div style="font-size: 0.85rem; color: #ff6b4a; font-weight: 600; margin-bottom: 6px;">Planification et suivi d'initiatives estudiantines et de projets collectifs à l'IUA.</div>
+          <p class="soft-skill-desc">Gestion méthodique des tâches, structuration des priorités et anticipation logistique.</p>
         </div>
 
-        <!-- Skill 4: Communication (Purple / Violet) -->
-        <div class="soft-skill-card card-theme-purple reveal delay-1 tilt-card">
+        <!-- Skill 4: Communication -->
+        <div class="soft-skill-card card-theme-purple reveal delay-1 tilt-card" data-soft-id="ss-communication">
           <div class="soft-skill-top">
             <div class="soft-skill-icon">
-              <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
             </div>
-            <span class="soft-skill-badge">Événements</span>
+            <span class="soft-skill-badge">Relationnel</span>
           </div>
           <h3 class="soft-skill-title">Communication & Mobilisation</h3>
-          <p class="soft-skill-desc">Transmission claire des informations et mobilisation des étudiants pour des conférences et séminaires technologiques.</p>
+          <div style="font-size: 0.85rem; color: #ff6b4a; font-weight: 600; margin-bottom: 6px;">Mobilisation des étudiants pour des conférences, séminaires et ateliers technologiques.</div>
+          <p class="soft-skill-desc">Aisance relationnelle, clarté pédagogique dans la transmission d'informations complexes.</p>
         </div>
 
-        <!-- Skill 5: Responsabilité (Rose / Coral) -->
-        <div class="soft-skill-card card-theme-rose reveal delay-2 tilt-card">
+        <!-- Skill 5: Responsabilité -->
+        <div class="soft-skill-card card-theme-rose reveal delay-2 tilt-card" data-soft-id="ss-responsibility">
           <div class="soft-skill-top">
             <div class="soft-skill-icon">
-              <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
             </div>
             <span class="soft-skill-badge">Rigueur</span>
           </div>
           <h3 class="soft-skill-title">Sens des Responsabilités</h3>
-          <p class="soft-skill-desc">Suivi et gestion proactive des communications étudiantes, rigueur dans le respect des délais et des engagements pris.</p>
+          <div style="font-size: 0.85rem; color: #ff6b4a; font-weight: 600; margin-bottom: 6px;">Gestion proactive des échanges étudiants et respect rigoureux des engagements pris.</div>
+          <p class="soft-skill-desc">Autonomie, fiabilité, exigence dans la qualité des livrables et respect strict des délais.</p>
         </div>
 
-        <!-- Skill 6: Langues & Mobilité (Gold / Yellow) -->
-        <div class="soft-skill-card card-theme-gold reveal delay-3 tilt-card">
+        <!-- Skill 6: Langues & Centres d'Intérêt -->
+        <div class="soft-skill-card card-theme-gold reveal delay-3 tilt-card full-width-sm" style="grid-column: 1 / -1; margin-top: 8px;">
           <div class="soft-skill-top">
             <div class="soft-skill-icon">
-              <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
             </div>
-            <span class="soft-skill-badge">Permis B</span>
+            <span class="soft-skill-badge">Langues & Mobilité</span>
           </div>
-          <h3 class="soft-skill-title">Langues & Mobilité</h3>
-          <p class="soft-skill-desc">Français (opérationnel), Anglais (intermédiaire avancé), Espagnol (scolaire). Permis B de conduire valide.</p>
+          <h3 class="soft-skill-title">Langues, Mobilité & Centres d'Intérêt</h3>
+          <p class="soft-skill-desc" style="margin-bottom: 8px;"><strong>Langues :</strong> <strong>Français</strong> (Opérationnel) • <strong>Anglais</strong> (Intermédiaire avancé) • <strong>Espagnol</strong> (Niveau scolaire) • <strong>Permis B</strong> valide.</p>
+          <div class="soft-skill-desc" style="display:flex; align-items:center; flex-wrap:wrap; gap:10px;">
+            <strong>Centres d'intérêt :</strong>
+            <span style="display:inline-flex; align-items:center; gap:5px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><circle cx="12" cy="12" r="10"/><path d="m12 7 3.5 2.5-1.5 4.5h-4L8.5 9.5 12 7z"/><path d="M12 2v5M21.5 9.5l-4.5.5M18 20.5l-4-3.5M6 20.5l4-3.5M2.5 9.5l4.5.5"/></svg> <span>Football</span></span>
+            <span style="display:inline-flex; align-items:center; gap:5px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="m6.5 6.5 11 11"/><path d="m21 21-1-1a3.5 3.5 0 0 0-5 0l-.5.5-4-4 .5-.5a3.5 3.5 0 0 0 0-5l-1-1a3.5 3.5 0 0 0 0 5l1 1a3.5 3.5 0 0 0 5 0l.5-.5 4 4-.5.5a3.5 3.5 0 0 0 0 5l1 1a3.5 3.5 0 0 0 5 0l2-2a3.5 3.5 0 0 0 0-5z"/></svg> <span>Gymnastique / Musculation</span></span>
+            <span style="display:inline-flex; align-items:center; gap:5px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> <span>Lecture</span></span>
+            <span style="display:inline-flex; align-items:center; gap:5px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg> <span>Natation</span></span>
+            <span style="display:inline-flex; align-items:center; gap:5px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.5 2.8C2.1 10.7 2 11 2 11.3V16c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg> <span>Conduite</span></span>
+          </div>
         </div>
 
       </div>
@@ -3148,65 +3167,114 @@
   </section>
 
   <!-- =========================================================================
-       SECTION 6: FORMATIONS & CERTIFICATIONS (WHITE SECTION)
+       SECTION 6: FORMATION (PARCOURS ACADÉMIQUE & CERTIFICATIONS UNIFIÉS)
        ========================================================================= -->
   <section id="education" class="section-padding white__bg">
     <div class="container">
       <div class="section__title__wrap reveal">
         <div>
-          <h6 class="section__title">[ Formations & Certifications ]</h6>
-          <h2 style="font-size: clamp(1.85rem, 3.5vw + 0.5rem, 2.75rem); margin-top: 8px;">Excellence académique & Diplômes</h2>
+          <h6 class="section__title">[ Formation & Certifications ]</h6>
+          <h2 style="font-size: clamp(1.85rem, 3.5vw + 0.5rem, 2.75rem); margin-top: 8px;">Formation</h2>
         </div>
         <div class="section__description">
-          Cursus universitaire en Génie Informatique et certifications internationales attestant d'une expertise technique continue en analyse de données et sécurité.
+          Cursus universitaire en Génie Informatique et certifications spécialisées en analyse de données.
         </div>
       </div>
 
-      <div class="blog_slider__items">
+      <!-- Sous-bloc 1 : Parcours académique -->
+      <div class="blog_slider__items education-items">
         
-        <!-- Card 1: University -->
-        <div class="blog__card reveal-scale delay-1 tilt-card">
+        <!-- Formation 1: Licence Génie Info -->
+        <div class="blog__card reveal-scale delay-1 tilt-card" data-edu-id="edu-iua">
           <div class="blog__figure" style="background: #ffffff; display: flex; align-items: center; justify-content: center;">
             <img src="assets/images/logo_iua.png" alt="Institut Universitaire d'Abidjan - IUA" style="object-fit: contain; padding: 0.75rem; width: 100%; height: 100%;">
           </div>
           <div class="blog__content">
-            <div class="blog-tag">Cursus Universitaire</div>
-            <h3 class="blog__title">Licence Génie Informatique (IUA) & Bac D</h3>
+            <div class="blog-tag">Diplôme Universitaire</div>
+            <h3 class="blog__title">Licence en Génie Informatique</h3>
+            <div style="font-size: 0.85rem; color: #a1a1aa; margin-bottom: 6px;">Institut Universitaire d'Abidjan (IUA) • 2024 - en cours (3e année)</div>
             <p class="blog-desc">
-              • <strong>Licence Génie Informatique :</strong> Institut Universitaire d'Abidjan (IUA) | 2024 - en cours (3<sup>e</sup> année).<br>
-              • <strong>Baccalauréat Série D :</strong> Cours Secondaire Méthodiste de Cocody | 2023 - 2024.
+              Étudiant en 3<sup>e</sup> année de Licence Génie Informatique à l'Institut Universitaire d'Abidjan (IUA). Spécialisation progressive en analyse de données, outils décisionnels et développement logiciel.
             </p>
           </div>
         </div>
 
-        <!-- Card 2: Google & OpenClassrooms -->
-        <div class="blog__card reveal-scale delay-2 tilt-card">
-          <div class="blog__figure">
-            <img src="assets/images/project-bi.jpg" alt="Google Data Analytics & Excel">
+        <!-- Formation 2: Baccalauréat Série D -->
+        <div class="blog__card reveal-scale delay-2 tilt-card" data-edu-id="edu-bac">
+          <div class="blog__figure" style="background: #ffffff; display: flex; align-items: center; justify-content: center;">
+            <img src="assets/images/logo_iua.png" alt="Cours Secondaire Méthodiste de Cocody" style="object-fit: contain; padding: 0.75rem; width: 100%; height: 100%;">
           </div>
           <div class="blog__content">
-            <div class="blog-tag">Certifications Data</div>
-            <h3 class="blog__title">Google Data Analytics & Excel Avancé</h3>
+            <div class="blog-tag">Enseignement Secondaire</div>
+            <h3 class="blog__title">Baccalauréat Série D (Scientifique)</h3>
+            <div style="font-size: 0.85rem; color: #a1a1aa; margin-bottom: 6px;">Cours Secondaire Méthodiste de Cocody (Abidjan) • 2023 - 2024</div>
             <p class="blog-desc">
-              • <strong>Process Data from Dirty to Clean :</strong> Google (Coursera) — Nettoyage, intégrité et fiabilisation des données.<br>
-              • <strong>Perfectionnez-vous sur Excel :</strong> OpenClassrooms — Fonctions avancées et modélisation de données.
+              Obtention du Baccalauréat Scientifique Série D avec solide socle en mathématiques, sciences et méthodologie analytique.
             </p>
           </div>
         </div>
 
-        <!-- Card 3: Cisco & Python -->
-        <div class="blog__card reveal-scale delay-3 tilt-card">
-          <div class="blog__figure">
-            <img src="assets/images/project-hackathon.jpg" alt="Cisco & Python Data">
+      </div>
+
+      <!-- Sous-bloc 2 : Certifications officielles -->
+      <div style="margin-top: 48px; margin-bottom: 20px;" class="reveal">
+        <h3 style="font-size: 1.35rem; color: var(--white); font-weight: 700; display: flex; align-items: center; gap: 10px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+          <span>Certifications & Spécialisations Data</span>
+        </h3>
+      </div>
+
+      <div class="blog_slider__items certifications-grid">
+        
+        <!-- Cert 1: Google Coursera -->
+        <div class="blog__card reveal-scale delay-1 tilt-card" data-cert-id="cert-google">
+          <div class="blog__figure" style="background: #111; display: flex; align-items: center; justify-content: center;">
+            <img src="assets/images/project-bi.jpg" alt="Process Data from Dirty to Clean - Google" style="object-fit: cover; width: 100%; height: 100%;">
           </div>
           <div class="blog__content">
-            <div class="blog-tag">Certifications Tech</div>
-            <h3 class="blog__title">Python Data, Science des Données & CCSC</h3>
-            <p class="blog-desc">
-              • <strong>Python pour l'analyse de données :</strong> OpenClassrooms.<br>
-              • <strong>Introduction à la science des données :</strong> Cisco Networking Academy.<br>
-              • <strong>Cybersecurity Career Starter Certification (CCSC) :</strong> Sécurité numérique.
-            </p>
+            <div class="blog-tag">Data Analytics</div>
+            <h3 class="blog__title">Process Data from Dirty to Clean</h3>
+            <div style="font-size: 0.85rem; color: #ff6b4a; margin-bottom: 6px; font-weight: 600;">Google (Coursera) • 2025 - 2026</div>
+            <p class="blog-desc">Méthodologies professionnelles de nettoyage, validation et fiabilisation des jeux de données complexes pour l'analyse.</p>
+          </div>
+        </div>
+
+        <!-- Cert 2: OpenClassrooms Excel -->
+        <div class="blog__card reveal-scale delay-2 tilt-card" data-cert-id="cert-excel">
+          <div class="blog__figure" style="background: #111; display: flex; align-items: center; justify-content: center;">
+            <img src="assets/images/project-bi.jpg" alt="Perfectionnez-vous sur Excel - OpenClassrooms" style="object-fit: cover; width: 100%; height: 100%;">
+          </div>
+          <div class="blog__content">
+            <div class="blog-tag">Excel Avancé</div>
+            <h3 class="blog__title">Perfectionnez-vous sur Excel</h3>
+            <div style="font-size: 0.85rem; color: #ff6b4a; margin-bottom: 6px; font-weight: 600;">OpenClassrooms • 2025 - 2026</div>
+            <p class="blog-desc">Maîtrise des fonctions avancées, modélisation de Tableaux Croisés Dynamiques (TCD) et automatisation de calculs analytiques.</p>
+          </div>
+        </div>
+
+        <!-- Cert 3: OpenClassrooms Python -->
+        <div class="blog__card reveal-scale delay-3 tilt-card" data-cert-id="cert-python">
+          <div class="blog__figure" style="background: #111; display: flex; align-items: center; justify-content: center;">
+            <img src="assets/images/project-bi.jpg" alt="Python pour l'analyse de données" style="object-fit: cover; width: 100%; height: 100%;">
+          </div>
+          <div class="blog__content">
+            <div class="blog-tag">Python Data</div>
+            <h3 class="blog__title">Initiez-vous à Python pour l'analyse de données</h3>
+            <div style="font-size: 0.85rem; color: #ff6b4a; margin-bottom: 6px; font-weight: 600;">OpenClassrooms • 2025 - 2026</div>
+            <p class="blog-desc">Programmation Python appliquée au traitement de données, manipulation de structures et analyses statistiques.</p>
+          </div>
+        </div>
+
+        <!-- Cert 4: Cisco Data Science -->
+        <div class="blog__card reveal-scale delay-1 tilt-card" data-cert-id="cert-cisco-ds">
+          <div class="blog__figure" style="background: #111; display: flex; align-items: center; justify-content: center;">
+            <img src="assets/images/project-bi.jpg" alt="Cisco Data Science" style="object-fit: cover; width: 100%; height: 100%;">
+          </div>
+          <div class="blog__content">
+            <div class="blog-tag">Science des Données</div>
+            <h3 class="blog__title">Introduction à la science des données</h3>
+            <div style="font-size: 0.85rem; color: #ff6b4a; margin-bottom: 6px; font-weight: 600;">Cisco Networking Academy • 2025 - 2026</div>
+            <p class="blog-desc">Fondements de la science des données, pipelines de traitement, exploration et visualisation analytique.</p>
           </div>
         </div>
 
@@ -3222,7 +3290,7 @@
     <!-- Infinite Marquee Text Banner -->
     <div class="marquee-container" aria-hidden="true">
       <div class="marquee-text">
-        <span style="color: var(--accent);">✦</span> FALIKOU FOFANA • DATA ANALYST • POWER BI • EXCEL AVANCÉ • PYTHON & SQL • CISCO PACKET TRACER • DISPONIBLE POUR STAGE • <span style="color: var(--accent);">✦</span> FALIKOU FOFANA • DATA ANALYST • POWER BI • EXCEL AVANCÉ • PYTHON & SQL • CISCO PACKET TRACER • DISPONIBLE POUR STAGE •
+        <span style="color: var(--accent);">•</span> FALIKOU FOFANA • DATA ANALYST • POWER BI • EXCEL AVANCÉ • PYTHON & SQL • BUSINESS INTELLIGENCE • DISPONIBLE POUR STAGE • <span style="color: var(--accent);">•</span> FALIKOU FOFANA • DATA ANALYST • POWER BI • EXCEL AVANCÉ • PYTHON & SQL • BUSINESS INTELLIGENCE • DISPONIBLE POUR STAGE •
       </div>
     </div>
 
@@ -3609,6 +3677,8 @@
       }
     });
   </script>
+  <!-- VECTOR SVG ICON REGISTRY -->
+  <script src="js/icons.js"></script>
   <!-- DYNAMIC CMS PORTFOLIO HYDRATION ENGINE -->
   <script src="js/portfolio-renderer.js"></script>
 </body>

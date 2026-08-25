@@ -335,8 +335,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const message = document.getElementById('message').value;
 
       if (formStatus) {
-        formStatus.innerHTML = `<div style="padding: 12px; border-radius: 8px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); color: #34d399; font-size: 0.9rem; font-family: var(--font-mono);">
-          ✓ Merci ${name} ! Votre message a été préparé. Redirection vers votre messagerie en cours...
+        formStatus.innerHTML = `<div style="display: flex; align-items: center; gap: 8px; padding: 12px; border-radius: 8px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); color: #34d399; font-size: 0.9rem; font-family: var(--font-mono);">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Merci ${name} ! Votre message a été préparé. Redirection vers votre messagerie en cours...</span>
         </div>`;
       }
 

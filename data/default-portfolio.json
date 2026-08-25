@@ -3,19 +3,20 @@
     "firstName": "Falikou",
     "lastName": "FOFANA",
     "fullName": "Falikou FOFANA",
-    "title": "Data Analyst & Concepteur BI",
-    "subTitle": "Étudiant en 3e année Génie Informatique (IUA)",
+    "title": "Data Analyst - Stagiaire",
+    "subTitle": "Étudiant en 3e année Licence Génie Informatique (IUA)",
     "statusBadge": "Disponible pour stage / missions",
-    "shortBio": "Passionné par la Business Intelligence et l'optimisation des flux décisionnels, je transforme les données brutes en indicateurs stratégiques clairs et percutants.",
-    "fullBio": "Bonjour ! Je suis Falikou FOFANA, étudiant en 3e année de Licence Génie Informatique à l'IUA. Passionné par l'analyse de données, la Business Intelligence et la modélisation décisionnelle, je conçois des tableaux de bord interactifs et des solutions logicielles performantes pour guider la prise de décision.",
+    "shortBio": "Étudiant en troisième année de licence en génie informatique, je me spécialise dans l'analyse de données, la Business Intelligence et le développement web & mobile. Passionné par les données et la résolution de problèmes, je conçois des outils décisionnels et des tableaux de bord interactifs pour transformer les données en informations utiles à la prise de décision.",
+    "fullBio": "Étudiant en <strong>troisième année de licence en génie informatique (IUA)</strong>, je me spécialise dans l'<strong>analyse de données</strong>, la <strong>Business Intelligence</strong> et le <strong>développement web & mobile</strong>. Passionné par les données et la résolution de problèmes, je conçois des outils décisionnels et des tableaux de bord interactifs pour transformer les données en informations stratégiques exploitables.",
     "photo": "assets/images/falikou_photo_clean.png",
     "coverImage": "assets/images/project-bi.jpg",
     "resumeUrl": "CV_FalikouFOFANA_Data_Analyst.pdf",
+    "resumeFileName": "CV_FalikouFOFANA_Data_Analyst.pdf",
     "email": "fofanafalikou068@gmail.com",
     "phone": "+225 07 05 32 24 98",
     "phoneRaw": "+2250705322498",
-    "location": "Abidjan, Côte d'Ivoire",
-    "university": "IUA Abidjan",
+    "location": "Abidjan, Cocody",
+    "university": "Institut Universitaire d'Abidjan (IUA)",
     "socials": {
       "linkedin": "https://www.linkedin.com/in/falikou-fofana",
       "github": "https://github.com/Falikou1",
@@ -26,13 +27,13 @@
   "design": {
     "accentColor": "#da3805",
     "accentHover": "#ff4d15",
-    "bgDark": "#0b0b0e",
-    "bgCardDark": "#131318",
+    "bgDark": "#080808",
+    "bgCardDark": "#18181b",
     "bgLight": "#ffffff",
     "bgCardLight": "#f8fafc",
-    "textPrimary": "#0f172a",
-    "textSecondary": "#64748b",
-    "fontHeading": "'Outfit', -apple-system, BlinkMacSystemFont, sans-serif",
+    "textPrimary": "#f8fafc",
+    "textSecondary": "#9f9f9f",
+    "fontHeading": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
     "fontBody": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
     "borderRadius": "16px",
     "buttonStyle": "rounded"
@@ -41,51 +42,76 @@
     "hero": {
       "visible": true,
       "badge": "Disponible pour stage / missions",
-      "title": "Transformer les données en décisions stratégiques et concrètes.",
+      "title": "Transformer les données en <span style=\"color: var(--accent);\">décisions stratégiques</span> et concrètes.",
       "ctaPrimary": "Télécharger mon CV (PDF)",
-      "ctaSecondary": "Voir mes réalisations"
+      "ctaSecondary": "Voir mes réalisations",
+      "badgeTopTitle": "10+ Tableaux de Bord",
+      "badgeTopSub": "Power BI, Excel & SQL",
+      "badgeBottomTitle": "Licence 3 Génie Info",
+      "badgeBottomSub": "IUA Abidjan"
     },
     "metrics": {
       "visible": true,
+      "tag": "[ Faits Marquants & Impact ]",
+      "title": "L'impact par les données",
+      "description": "Une rigueur analytique appliquée à chaque étape du cycle de la donnée : de la fiabilisation des jeux de données à la restitution visuelle d'indicateurs clés de performance (KPIs) exploitables.",
       "items": [
-        { "id": "m1", "value": 100, "suffix": "%", "label": "Données Fiabilisées", "desc": "Nettoyage approfondi, dédoublonnage, correction d'anomalies et harmonisation des données de vente." },
-        { "id": "m2", "value": 10, "suffix": "+", "label": "Dashboards & Outils", "desc": "Modélisation de tableaux de bord interactifs sur Excel Avancé, Power BI, Python et SQL." },
-        { "id": "m3", "value": 5, "suffix": " Certifs", "label": "Certifications Validées", "desc": "Certifications internationales obtenues auprès de Google, Cisco, OpenClassrooms et CCSC." }
+        {
+          "id": "m1",
+          "value": 100,
+          "suffix": "%",
+          "label": "Données Fiabilisées",
+          "desc": "Nettoyage approfondi, suppression des doublons, traitement des anomalies et harmonisation des données de vente."
+        },
+        {
+          "id": "m2",
+          "value": 10,
+          "suffix": "+",
+          "label": "Dashboards & Outils",
+          "desc": "Conception de tableaux de bord interactifs avec Excel Avancé, Power BI, SQL et Python."
+        },
+        {
+          "id": "m3",
+          "value": 4,
+          "suffix": " Certifs",
+          "label": "Certifications Data",
+          "desc": "Certifications validées auprès de Google, OpenClassrooms et Cisco Networking Academy."
+        }
       ]
     },
     "projects": {
       "visible": true,
-      "tag": "[ PROJETS & RÉALISATIONS ]",
-      "title": "Réalisations concrètes",
-      "subtitle": "Une sélection de mes réalisations concrètes : analyse décisionnelle des ventes, immersion en agence digitale et compétition d'architecture réseau sécurisée."
+      "tag": "[ Réalisations & Pratique ]",
+      "title": "Projets & Expériences",
+      "subtitle": "Découvrez mes réalisations en analyse décisionnelle des données ainsi que mon expérience concrète en entreprise."
     },
     "experience": {
       "visible": true,
-      "tag": "[ EXPÉRIENCE & LEADERSHIP ]",
-      "title": "Expérience professionnelle & associative",
-      "subtitle": "Une immersion active combinant projets technologiques, responsabilités associatives et travail collaboratif."
+      "tag": "[ Réalisations & Pratique ]",
+      "title": "Projets & Expériences",
+      "subtitle": "Découvrez mes réalisations en analyse décisionnelle des données ainsi que mon expérience concrète en entreprise."
     },
     "skills": {
       "visible": true,
-      "tag": "[ COMPÉTENCES & OUTILS ]",
-      "title": "Stack Technique & Savoir-faire",
-      "subtitle": "Un éventail d'outils analytiques, de langages de programmation et de compétences humaines au service de la performance."
+      "tag": "[ Savoir-faire & Savoir-être ]",
+      "title": "Compétences",
+      "subtitle": "Maîtrise des outils techniques de la chaîne décisionnelle et qualités humaines éprouvées."
     },
     "education": {
       "visible": true,
-      "tag": "[ FORMATIONS & CERTIFICATIONS ]",
-      "title": "Formations & Certifications",
-      "subtitle": "Cursus universitaire en Génie Informatique et certifications internationales attestant d'une expertise technique continue en analyse de données et sécurité."
+      "tag": "[ Parcours & Certifications ]",
+      "title": "Formation",
+      "subtitle": "Cursus universitaire en Génie Informatique et certifications spécialisées dans le traitement des données."
     },
     "services": {
       "visible": true,
-      "tag": "[ SERVICES & PRESTATIONS ]",
-      "title": "Ce que je peux apporter à votre équipe",
-      "subtitle": "Des prestations ciblées pour valoriser vos données, automatiser vos processus et accélérer vos projets digitaux."
+      "tag": "[ Services & Prestations ]",
+      "title": "Services",
+      "subtitle": "Compétences opérationnelles pour valoriser vos données, automatiser vos tableaux de bord et soutenir vos projets digitaux."
     },
     "contact": {
       "visible": true,
-      "title": "Envoyez-moi un message",
+      "title": "Contact",
       "subtitle": "Le message arrive directement dans ma boîte mail — je vous réponds sous 24h."
     }
   },
@@ -94,17 +120,23 @@
       "id": "bi-dashboard",
       "title": "Dashboard Commercial des Ventes",
       "category": "Business Intelligence & Analyse de Données",
+      "typeBadge": "PROJET",
       "year": "2026",
       "role": "Data Analyst & Concepteur BI",
       "image": "assets/images/project-bi.jpg",
-      "gallery": ["assets/images/project-bi.jpg"],
-      "desc": "Projet complet d'analyse et d'optimisation de données de vente massives. Structuration, modélisation décisionnelle et conception d'un tableau de bord interactif pour le pilotage de la performance commerciale.",
+      "desc": "Analyse, nettoyage et fiabilisation des données commerciales, calcul des KPIs et conception d'un tableau de bord interactif avec TCD croisés et filtres multicritères.",
       "details": [
-        "Nettoyage & Fiabilisation : Dédoublonnage approfondi, traitement des valeurs manquantes, détection des anomalies et harmonisation des données régionales et produits.",
-        "Modélisation des KPIs : Calcul automatisé du Chiffre d'Affaires global, de la Marge commerciale brute, du Taux de marge (%) et de la vélocité des commandes.",
-        "Tableau de bord dynamique : Conception de tableaux croisés dynamiques (TCD) avancés interconnectés avec segments de filtrage multi-critères (Régions, Périodes, Catégories)."
+        "Nettoyage & Fiabilisation : Traitement approfondi d'un jeu de données de vente (suppression des doublons, correction des valeurs aberrantes, harmonisation géographique et catégorielle).",
+        "Calcul des KPIs Stratégiques : Chiffre d'affaires global, marge commerciale, taux de marge et volume de commandes via formules avancées.",
+        "Dashboard Interactif : Modélisation de TCD croisés et intégration de segments de filtrage multicritères (régions, catégories de produits, périodes)."
       ],
-      "tags": ["Excel Avancé", "TCD Croisés", "KPIs Commerciaux", "Power BI", "Data Cleaning", "Data Viz"],
+      "tags": [
+        "Excel & TCD",
+        "KPIs",
+        "Power BI",
+        "Business Intelligence",
+        "Data Cleaning"
+      ],
       "demoUrl": "",
       "githubUrl": "https://github.com/Falikou1",
       "featured": true,
@@ -112,194 +144,399 @@
       "order": 1
     },
     {
-      "id": "agency-tuwshiuah",
-      "title": "Tuwshiuah / AI & Digital Agency",
-      "category": "Développement Web & Mobile",
-      "year": "Juillet 2026",
-      "role": "Développeur Web & Mobile (Stage)",
-      "image": "assets/images/project-agency.jpg",
-      "gallery": ["assets/images/project-agency.jpg"],
-      "desc": "Immersion professionnelle au sein d'une agence innovante alliant Intelligence Artificielle, développement d'interfaces applicatives et stratégies de marketing numérique.",
+      "id": "excel-advanced",
+      "title": "Projet Personnel d'Analyse de Données Excel Avancé",
+      "category": "Analyse de Données & Modélisation",
+      "typeBadge": "PROJET",
+      "year": "2026",
+      "role": "Data Analyst",
+      "image": "assets/images/project-bi.jpg",
+      "desc": "Conception d'un outil décisionnel sous Excel : nettoyage et fiabilisation d'un jeu de données de vente, calculs automatisés de marges et de CA, et restitution visuelle par TCD dynamiques.",
       "details": [
-        "Vibe Coding & Prototypage : Développement rapide et itératif d'applications web et mobiles modernes assisté par des outils d'IA générative.",
-        "Stratégie Digitale : Élaboration et déploiement de campagnes marketing ciblées, optimisation de l'engagement utilisateur et analyse de conversion web.",
-        "Collaboration Agile : Travail en équipe pluridisciplinaire sur des livrables clients à haute valeur ajoutée."
+        "Structuration & Fiabilisation : Organisation tabulaire, nettoyage des données et fiabilisation des calculs de vente.",
+        "Calculs & Indicateurs : Formules avancées pour le chiffre d'affaires, la marge commerciale et le taux de marge.",
+        "Restitution Visuelle : Modélisation de Tableaux Croisés Dynamiques (TCD) avec segments multicritères (régions, catégories, périodes)."
       ],
-      "tags": ["Vibe Coding", "Web & Mobile", "Intelligence Artificielle", "Marketing Digital", "UI/UX"],
+      "tags": [
+        "Excel Avancé",
+        "TCD Croisés",
+        "Analyse de Données",
+        "KPIs",
+        "Modélisation"
+      ],
       "demoUrl": "",
       "githubUrl": "https://github.com/Falikou1",
       "featured": true,
       "visible": true,
       "order": 2
-    },
-    {
-      "id": "hackathon-esatic",
-      "title": "Technovore Hackathon 2026 – ESATIC",
-      "category": "Architecture Réseau & Sécurité",
-      "year": "Mars 2026",
-      "role": "Team Lead & Concepteur Réseau",
-      "image": "assets/images/project-hackathon.jpg",
-      "gallery": ["assets/images/project-hackathon.jpg"],
-      "desc": "Compétition technologique majeure à l'École Supérieure Africaine des TIC. Conception complète et sécurisation d'une infrastructure réseau d'entreprise multi-sites.",
-      "details": [
-        "Architecture & Topologie : Élaboration d'un plan d'adressage IP optimisé, segmentation sécurisée en VLANs et interconnexion multi-sites.",
-        "Simulation Cisco Packet Tracer : Déploiement et tests des protocoles DHCP, NAT, OSPF dynamique et tunnels chiffrés VPN IPsec.",
-        "Leadership d'Équipe : Coordination technique du groupe de projet et présentation des résultats devant le jury de l'ESATIC."
-      ],
-      "tags": ["Cisco Packet Tracer", "VPN IPsec", "OSPF", "VLAN & NAT", "Cybersécurité", "Leadership"],
-      "demoUrl": "",
-      "githubUrl": "https://github.com/Falikou1",
-      "featured": true,
-      "visible": true,
-      "order": 3
     }
-  ],
-  "skills": [
-    { "id": "s1", "name": "Power BI & Excel Avancé", "category": "data", "level": 95, "icon": "📊", "desc": "Tableaux de bord dynamiques, modélisation décisionnelle, formules complexes et Power Query.", "visible": true, "order": 1 },
-    { "id": "s2", "name": "Python (Pandas / NumPy / Matplotlib)", "category": "data", "level": 88, "icon": "🐍", "desc": "Extraction, nettoyage, analyse statistique et visualisations de jeux de données complexes.", "visible": true, "order": 2 },
-    { "id": "s3", "name": "SQL & Modélisation Relationnelle", "category": "data", "level": 85, "icon": "🗄️", "desc": "Requêtes complexes, jointures, agrégations, optimisation et conception de schémas de BDD.", "visible": true, "order": 3 },
-    { "id": "s4", "name": "Tableau & Google Data Studio", "category": "data", "level": 80, "icon": "📈", "desc": "Création de dashboards interactifs et storytelling orienté impact business.", "visible": true, "order": 4 },
-    { "id": "s5", "name": "Développement Web (HTML / CSS / JS)", "category": "dev", "level": 90, "icon": "💻", "desc": "Interfaces web réactives, intégration moderne, animations fluides et intégration d'APIs.", "visible": true, "order": 5 },
-    { "id": "s6", "name": "Vibe Coding & IA Générative", "category": "dev", "level": 92, "icon": "🤖", "desc": "Prototypage ultra-rapide d'applications assisté par les modèles LLMs les plus récents.", "visible": true, "order": 6 },
-    { "id": "s7", "name": "Cisco Packet Tracer & Réseaux", "category": "sec", "level": 82, "icon": "🌐", "desc": "Topologies réseau, adressage IPv4/IPv6, VLANs, routage dynamique OSPF et NAT.", "visible": true, "order": 7 },
-    { "id": "s8", "name": "Sécurité & VPN IPsec", "category": "sec", "level": 78, "icon": "🛡️", "desc": "Configuration de tunnels chiffrés, pare-feu et bonnes pratiques de cybersécurité.", "visible": true, "order": 8 },
-    { "id": "s9", "name": "Rigueur Analytique & Communication", "category": "soft", "level": 95, "icon": "🎯", "desc": "Capacité à vulgariser des insights techniques auprès des décideurs et des clients.", "visible": true, "order": 9 },
-    { "id": "s10", "name": "Travail d'équipe & Leadership", "category": "soft", "level": 92, "icon": "🤝", "desc": "Coordination active au sein de REDIS-IUA et pilotage d'initiatives étudiantes.", "visible": true, "order": 10 }
   ],
   "experiences": [
     {
-      "id": "exp1",
-      "role": "Développeur Web & Mobile (Stage)",
+      "id": "exp-tuwshiuah-2026",
+      "role": "Stage de vacances – Développeur Web & Mobile",
       "company": "Tuwshiuah / AI & Digital Agency",
       "period": "Juillet 2026",
+      "typeBadge": "EXPÉRIENCE",
       "logo": "assets/images/project-agency.jpg",
-      "badge": "Professionnel",
-      "desc": "Immersion professionnelle complète en développement agile d'applications modernes combinant outils d'intelligence artificielle et stratégie numérique.",
-      "technologies": ["Vibe Coding", "Web & Mobile", "Intelligence Artificielle", "Marketing Digital"],
+      "badge": "Stage Professionnel",
+      "desc": "• Développement Web & Mobile (Vibe Coding) : Prototypage rapide et conception d'interfaces réactives assisté par IA.\n• Stratégies de Marketing Digital : Élaboration de campagnes en ligne, suivi des métriques d'engagement et optimisation de la visibilité.\n• UI/UX : Intégration soignée de maquettes et parcours utilisateurs optimisés.",
+      "technologies": [
+        "Développement Web & Mobile",
+        "Vibe Coding",
+        "Intelligence Artificielle",
+        "Marketing Digital",
+        "UI/UX"
+      ],
+      "visible": true,
+      "order": 1
+    }
+  ],
+  "skills": [
+    {
+      "id": "ts-powerbi",
+      "name": "Power BI & Tableaux de bord",
+      "category": "Business Intelligence",
+      "level": 95,
+      "icon": "powerbi",
+      "desc": "Conception de tableaux de bord interactifs, modélisation de données décisionnelles, DAX et Power Query.",
       "visible": true,
       "order": 1
     },
     {
-      "id": "exp2",
-      "role": "Membre Actif & Responsable Projets",
-      "company": "REDIS-IUA (Réseau des Étudiants Développeurs et Informaticiens)",
-      "period": "2024 - Présent",
-      "logo": "assets/images/logo_iua.png",
-      "badge": "Associatif",
-      "desc": "Participation active aux ateliers techniques, organisation de hackathons et partage de connaissances en développement et data.",
-      "technologies": ["Leadership", "Organisation d'évènements", "Mentoring", "Gestion de projet"],
+      "id": "ts-excel",
+      "name": "Excel & TCD Avancé",
+      "category": "Analyse de données",
+      "level": 95,
+      "icon": "excel",
+      "desc": "Formules avancées, Tableaux Croisés Dynamiques (TCD), segments multicritères, nettoyage et fiabilisation de données.",
       "visible": true,
       "order": 2
     },
     {
-      "id": "exp3",
-      "role": "Délégué & Membre de la Coordination",
-      "company": "Bureau de Coordination des Étudiants — IUA",
-      "period": "2024 - Présent",
-      "logo": "assets/images/logo_iua.png",
-      "badge": "Leadership",
-      "desc": "Représentation des étudiants, transmission des informations académiques et médiation entre l'administration et les promotions.",
-      "technologies": ["Communication institutionnelle", "Médiation", "Gestion d'équipe"],
+      "id": "ts-sql",
+      "name": "SQL & Bases de Données",
+      "category": "Bases de Données",
+      "level": 85,
+      "icon": "sql",
+      "desc": "Requêtage relationnel, jointures complexes, extraction structurée et modélisation de schémas BDD.",
       "visible": true,
       "order": 3
+    },
+    {
+      "id": "ts-python",
+      "name": "Python & Anaconda",
+      "category": "Data Science",
+      "level": 88,
+      "icon": "python",
+      "desc": "Analyse de données, Pandas, NumPy, statistiques descriptives et scripts d'automatisation sous Anaconda.",
+      "visible": true,
+      "order": 4
+    },
+    {
+      "id": "ts-vibecoding",
+      "name": "Développement Web & Mobile (Vibe Coding)",
+      "category": "Développement & IA",
+      "level": 92,
+      "icon": "vibecoding",
+      "desc": "Prototypage rapide d'applications web & mobiles assisté par IA, HTML, CSS, JavaScript et intégration UI/UX.",
+      "visible": true,
+      "order": 5
     }
   ],
+  "techSkills": [
+    {
+      "id": "ts-powerbi",
+      "name": "Power BI & Tableaux de bord",
+      "category": "Business Intelligence",
+      "level": 95,
+      "icon": "powerbi",
+      "desc": "Conception de tableaux de bord interactifs, modélisation de données décisionnelles, DAX et Power Query.",
+      "visible": true,
+      "order": 1
+    },
+    {
+      "id": "ts-excel",
+      "name": "Excel & TCD Avancé",
+      "category": "Analyse de données",
+      "level": 95,
+      "icon": "excel",
+      "desc": "Formules avancées, Tableaux Croisés Dynamiques (TCD), segments multicritères, nettoyage et fiabilisation de données.",
+      "visible": true,
+      "order": 2
+    },
+    {
+      "id": "ts-sql",
+      "name": "SQL & Bases de Données",
+      "category": "Bases de Données",
+      "level": 85,
+      "icon": "sql",
+      "desc": "Requêtage relationnel, jointures complexes, extraction structurée et modélisation de schémas BDD.",
+      "visible": true,
+      "order": 3
+    },
+    {
+      "id": "ts-python",
+      "name": "Python & Anaconda",
+      "category": "Data Science",
+      "level": 88,
+      "icon": "python",
+      "desc": "Analyse de données, Pandas, NumPy, statistiques descriptives et scripts d'automatisation sous Anaconda.",
+      "visible": true,
+      "order": 4
+    },
+    {
+      "id": "ts-vibecoding",
+      "name": "Développement Web & Mobile (Vibe Coding)",
+      "category": "Développement & IA",
+      "level": 92,
+      "icon": "vibecoding",
+      "desc": "Prototypage rapide d'applications web & mobiles assisté par IA, HTML, CSS, JavaScript et intégration UI/UX.",
+      "visible": true,
+      "order": 5
+    }
+  ],
+  "softSkills": [
+    {
+      "id": "ss-leadership",
+      "name": "Leadership & Gestion d'équipe",
+      "category": "Management",
+      "icon": "leadership",
+      "proof": "Délégué de promotion et pilotage d'équipe au Technovore Hackathon ESATIC 2026.",
+      "desc": "Aptitude à fédérer, coordonner des collaborateurs et mener des projets collectifs avec rigueur.",
+      "visible": true,
+      "order": 1
+    },
+    {
+      "id": "ss-teamwork",
+      "name": "Esprit d'équipe & Collaboration",
+      "category": "Collaboration",
+      "icon": "teamwork",
+      "proof": "Travail continu et actif au sein du Bureau de Coordination des Étudiants et du REDIS–IUA.",
+      "desc": "Écoute active, partage constructif des connaissances et recherche constante de synergie de groupe.",
+      "visible": true,
+      "order": 2
+    },
+    {
+      "id": "ss-organization",
+      "name": "Organisation & Événementiel",
+      "category": "Planification",
+      "icon": "organization",
+      "proof": "Planification méthodique d'initiatives étudiantes et de projets collectifs à l'IUA.",
+      "desc": "Gestion méthodique des tâches, structuration des priorités et anticipation logistique.",
+      "visible": true,
+      "order": 3
+    },
+    {
+      "id": "ss-communication",
+      "name": "Communication & Mobilisation",
+      "category": "Relationnel",
+      "icon": "communication",
+      "proof": "Mobilisation des étudiants pour des conférences, séminaires et ateliers technologiques.",
+      "desc": "Aisance relationnelle, clarté pédagogique dans la transmission d'informations complexes.",
+      "visible": true,
+      "order": 4
+    },
+    {
+      "id": "ss-responsibility",
+      "name": "Sens des Responsabilités",
+      "category": "Rigueur",
+      "icon": "responsibility",
+      "proof": "Gestion proactive des échanges étudiants et respect rigoureux des engagements pris.",
+      "desc": "Autonomie, fiabilité, exigence dans la qualité des livrables et respect strict des délais.",
+      "visible": true,
+      "order": 5
+    }
+  ],
+  "languagesAndInterests": {
+    "languages": [
+      {
+        "name": "Français",
+        "level": "Opérationnel (Langue maternelle / d'étude)"
+      },
+      {
+        "name": "Anglais",
+        "level": "Intermédiaire avancé"
+      },
+      {
+        "name": "Espagnol",
+        "level": "Niveau scolaire"
+      }
+    ],
+    "interests": [
+      {
+        "name": "Football",
+        "icon": "football"
+      },
+      {
+        "name": "Gymnastique / Musculation",
+        "icon": "fitness"
+      },
+      {
+        "name": "Lecture",
+        "icon": "reading"
+      },
+      {
+        "name": "Natation",
+        "icon": "swimming"
+      },
+      {
+        "name": "Conduite (Titulaire Permis B)",
+        "icon": "driving"
+      }
+    ]
+  },
   "educations": [
     {
-      "id": "edu1",
-      "degree": "Licence Génie Informatique (IUA) & Bac D",
-      "category": "Cursus Universitaire",
+      "id": "edu-iua",
+      "degree": "Licence en Génie Informatique",
+      "category": "Diplôme Universitaire",
       "institution": "Institut Universitaire d'Abidjan (IUA)",
       "period": "2024 - en cours (3e année)",
       "logo": "assets/images/logo_iua.png",
-      "desc": "• Licence Génie Informatique : Institut Universitaire d'Abidjan (IUA) | 2024 - en cours (3e année).\n• Baccalauréat Série D : Cours Secondaire Méthodiste de Cocody | 2023 - 2024.",
+      "desc": "Étudiant en 3<sup>e</sup> année de Licence Génie Informatique à l'Institut Universitaire d'Abidjan (IUA). Spécialisation progressive en analyse de données, outils décisionnels et développement logiciel.",
       "visible": true,
       "order": 1
     },
     {
-      "id": "edu2",
-      "degree": "Google Data Analytics & Excel Avancé",
-      "category": "Certifications Data",
-      "institution": "Google & OpenClassrooms",
-      "period": "2025 - 2026",
+      "id": "edu-bac",
+      "degree": "Baccalauréat Série D (Scientifique)",
+      "category": "Enseignement Secondaire",
+      "institution": "Cours Secondaire Méthodiste de Cocody (Abidjan)",
+      "period": "2023 - 2024",
+      "logo": "assets/images/logo_iua.png",
+      "desc": "Obtention du Baccalauréat Scientifique Série D avec solide socle en mathématiques, sciences et méthodologie analytique.",
+      "visible": true,
+      "order": 2
+    }
+  ],
+  "certifications": [
+    {
+      "id": "cert-google",
+      "title": "Process Data from Dirty to Clean",
+      "issuer": "Google (Coursera)",
+      "category": "Data Analytics",
+      "year": "2025 - 2026",
       "logo": "assets/images/project-bi.jpg",
-      "desc": "• Process Data from Dirty to Clean : Google (Coursera) — Nettoyage, intégrité et fiabilisation des données.\n• Maîtrisez les fondamentaux d'Excel : OpenClassrooms — Tableaux croisés dynamiques avancés et automatisation.",
+      "desc": "Méthodologies professionnelles de nettoyage, validation et fiabilisation des jeux de données complexes pour l'analyse décisionnelle.",
+      "visible": true,
+      "order": 1
+    },
+    {
+      "id": "cert-excel",
+      "title": "Perfectionnez-vous sur Excel",
+      "issuer": "OpenClassrooms",
+      "category": "Excel Avancé",
+      "year": "2025 - 2026",
+      "logo": "assets/images/project-bi.jpg",
+      "desc": "Maîtrise des fonctions avancées, modélisation de Tableaux Croisés Dynamiques (TCD) et automatisation de calculs analytiques.",
       "visible": true,
       "order": 2
     },
     {
-      "id": "edu3",
-      "degree": "Python, Réseaux & Cybersécurité",
-      "category": "Certifications Tech",
-      "institution": "Cisco & OpenClassrooms & CCSC",
-      "period": "2025 - 2026",
-      "logo": "assets/images/project-hackathon.jpg",
-      "desc": "• Python pour l'analyse de données : OpenClassrooms.\n• Introduction à la science des données : Cisco Networking Academy.\n• Cybersecurity Career Starter Certification (CCSC) : Sécurité numérique.",
+      "id": "cert-python",
+      "title": "Initiez-vous à Python pour l'analyse de données",
+      "issuer": "OpenClassrooms",
+      "category": "Python Data",
+      "year": "2025 - 2026",
+      "logo": "assets/images/project-bi.jpg",
+      "desc": "Programmation Python appliquée au traitement de données, manipulation de structures et analyses statistiques.",
       "visible": true,
       "order": 3
+    },
+    {
+      "id": "cert-cisco-ds",
+      "title": "Introduction à la science des données",
+      "issuer": "Cisco Networking Academy",
+      "category": "Science des Données",
+      "year": "2025 - 2026",
+      "logo": "assets/images/project-bi.jpg",
+      "desc": "Fondements de la science des données, pipelines de traitement, exploration et visualisation analytique.",
+      "visible": true,
+      "order": 4
     }
   ],
   "services": [
     {
-      "id": "srv1",
+      "id": "srv-bi",
       "title": "Business Intelligence & Tableaux de Bord",
-      "description": "Conception de dashboards interactifs sur Power BI et Excel avec indicateurs clés (KPIs) sur mesure pour piloter vos performances commerciales et financières.",
-      "icon": "📊",
+      "description": "Conception de tableaux de bord interactifs sur Power BI et Excel & TCD avec indicateurs clés (KPIs) pour soutenir la prise de décision.",
+      "icon": "bi",
       "visible": true,
       "order": 1
     },
     {
-      "id": "srv2",
-      "title": "Nettoyage & Fiabilisation des Données (Data Cleaning)",
-      "description": "Dédoublonnage, correction d'anomalies, structuration et pipelines de préparation de données fiables pour vos prises de décision.",
-      "icon": "🧹",
+      "id": "srv-cleaning",
+      "title": "Nettoyage & Fiabilisation des Données",
+      "description": "Suppression des doublons, correction des anomalies et harmonisation des données pour garantir des analyses fiables.",
+      "icon": "cleaning",
       "visible": true,
       "order": 2
     },
     {
-      "id": "srv3",
-      "title": "Développement Web & Intégration d'Outils Métiers",
-      "description": "Création d'applications web réactives, intégration d'outils analytiques et interfaces adaptées à vos processus opérationnels.",
-      "icon": "⚡",
+      "id": "srv-dev",
+      "title": "Développement Web & Mobile (Vibe Coding)",
+      "description": "Conception et prototypage rapide d'applications web & mobiles réactives avec assistance par intelligence artificielle.",
+      "icon": "dev",
       "visible": true,
       "order": 3
     },
     {
-      "id": "srv4",
-      "title": "Modélisation de Bases de Données & Requêtage SQL",
-      "description": "Conception de schémas relationnels, optimisation de requêtes SQL et extraction de rapports automatisés.",
-      "icon": "🗄️",
+      "id": "srv-sql",
+      "title": "Bases de Données & Requêtage SQL",
+      "description": "Modélisation relationnelle, requêtes d'extraction structurées et automatisation de rapports analytiques.",
+      "icon": "sql",
       "visible": true,
       "order": 4
     }
   ],
   "mediaLibrary": [
-    { "id": "m-1", "name": "Photo de profil", "url": "assets/images/falikou_photo_clean.png", "type": "image", "size": "49 KB" },
-    { "id": "m-2", "name": "Logo IUA Abidjan", "url": "assets/images/logo_iua.png", "type": "image", "size": "146 KB" },
-    { "id": "m-3", "name": "Projet Dashboard BI", "url": "assets/images/project-bi.jpg", "type": "image", "size": "574 KB" },
-    { "id": "m-4", "name": "Projet Tuwshiuah Agency", "url": "assets/images/project-agency.jpg", "type": "image", "size": "547 KB" },
-    { "id": "m-5", "name": "Projet ESATIC Hackathon", "url": "assets/images/project-hackathon.jpg", "type": "image", "size": "834 KB" }
+    {
+      "id": "m-1",
+      "name": "Photo de profil (Falikou)",
+      "url": "assets/images/falikou_photo_clean.png",
+      "type": "image",
+      "size": "49 KB"
+    },
+    {
+      "id": "m-2",
+      "name": "Logo IUA Abidjan",
+      "url": "assets/images/logo_iua.png",
+      "type": "image",
+      "size": "22 KB"
+    },
+    {
+      "id": "m-3",
+      "name": "Projet Dashboard BI",
+      "url": "assets/images/project-bi.jpg",
+      "type": "image",
+      "size": "574 KB"
+    },
+    {
+      "id": "m-4",
+      "name": "Projet Tuwshiuah Agency",
+      "url": "assets/images/project-agency.jpg",
+      "type": "image",
+      "size": "547 KB"
+    }
   ],
   "messages": [],
   "history": [
     {
       "id": "hist-init",
-      "timestamp": "2026-08-23T14:00:00.000Z",
-      "action": "Initialisation du CMS Portfolio",
+      "timestamp": "2026-08-25T15:40:00.000Z",
+      "action": "Correction définitive : Structure, Contenu et Navigation",
       "target": "Système",
-      "details": "Schéma de données initialisé avec les informations du portfolio de Falikou FOFANA"
+      "details": "Structure unifiée : ACCUEIL | PROJETS & EXPÉRIENCES | COMPÉTENCES | FORMATION | CONTACT"
     }
   ],
   "seo": {
-    "metaTitle": "Falikou FOFANA | Data Analyst & Développeur",
-    "metaDescription": "Portfolio professionnel de Falikou FOFANA, Data Analyst & Développeur à Abidjan (IUA). Découvrez mes réalisations en Business Intelligence, Power BI, Python, SQL et développement d'applications.",
-    "keywords": "Falikou FOFANA, Data Analyst Abidjan, Power BI Côte d'Ivoire, Excel Avancé, Python Data, IUA Abidjan, Développeur Web",
-    "ogImage": "assets/images/project-bi.jpg",
-    "favicon": "assets/images/falikou_photo.png"
+    "metaTitle": "Falikou FOFANA | Data Analyst - Stagiaire",
+    "metaDescription": "Portfolio professionnel de Falikou FOFANA — Data Analyst Stagiaire et Développeur Web & Mobile à Abidjan (IUA). Power BI, Excel & TCD, SQL, Python et Tableaux de bord décisionnels.",
+    "keywords": "Falikou FOFANA, Data Analyst, Analyse de données, Business Intelligence, Outils décisionnels, Tableaux de bord interactifs, KPIs, Excel TCD, Power BI, SQL, Python, IUA Abidjan"
   },
   "settings": {
-    "siteName": "Falikou FOFANA — Portfolio",
-    "lastPublished": "2026-08-23T14:00:00.000Z",
-    "version": "1.0.0"
+    "siteName": "Falikou FOFANA — Data Analyst",
+    "lastPublished": "2026-08-25T15:40:00.000Z"
   }
 }

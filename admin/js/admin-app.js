@@ -48,25 +48,26 @@
     return path;
   }
 
-  // Structure initiale de secours
+  // Structure initiale de secours conforme au CV
   const DEFAULT_DATA = {
     profile: {
       firstName: "Falikou",
       lastName: "FOFANA",
       fullName: "Falikou FOFANA",
-      title: "Data Analyst & Concepteur BI",
-      subTitle: "Étudiant en 3e année Génie Informatique (IUA)",
+      title: "Data Analyst - Stagiaire",
+      subTitle: "Étudiant en 3e année Licence Génie Informatique (IUA)",
       statusBadge: "Disponible pour stage / missions",
-      shortBio: "Passionné par la Business Intelligence et l'optimisation des flux décisionnels, je transforme les données brutes en indicateurs stratégiques clairs et percutants.",
-      fullBio: "Bonjour ! Je suis <strong>Falikou FOFANA</strong>, étudiant en <strong>3<sup>e</sup> année de Licence Génie Informatique (IUA)</strong> à Abidjan. Je conçois des tableaux de bord décisionnels interactifs et des solutions logicielles performantes pour guider la prise de décision.",
+      shortBio: "Étudiant en troisième année de licence en génie informatique, je me spécialise progressivement dans l'analyse de données et le développement web & mobile. Passionné par les données, l'intelligence artificielle et la résolution de problèmes, je conçois des outils décisionnels et des tableaux de bord interactifs pour transformer les données en informations utiles à la prise de décision.",
+      fullBio: "Étudiant en <strong>troisième année de licence en génie informatique (IUA)</strong>, je me spécialise progressivement dans l'<strong>analyse de données</strong> et le <strong>développement web & mobile</strong>. Passionné par les données, l'intelligence artificielle et la résolution de problèmes, je conçois des outils décisionnels et des tableaux de bord interactifs pour transformer les données en informations utiles à la prise de décision.",
       photo: "assets/images/falikou_photo_clean.png",
       coverImage: "assets/images/project-bi.jpg",
       resumeUrl: "CV_FalikouFOFANA_Data_Analyst.pdf",
+      resumeFileName: "CV_FalikouFOFANA_Data_Analyst.pdf",
       email: "fofanafalikou068@gmail.com",
       phone: "+225 07 05 32 24 98",
       phoneRaw: "+2250705322498",
-      location: "Abidjan, Côte d'Ivoire",
-      university: "IUA Abidjan",
+      location: "Abidjan, Cocody",
+      university: "Institut Universitaire d'Abidjan (IUA)",
       socials: {
         linkedin: "https://www.linkedin.com/in/falikou-fofana",
         github: "https://github.com/Falikou1",
@@ -77,9 +78,9 @@
     design: {
       accentColor: "#da3805",
       accentHover: "#ff4d15",
-      bgDark: "#0b0b0e",
-      bgCardDark: "#131318",
-      fontHeading: "'Outfit', sans-serif",
+      bgDark: "#080808",
+      bgCardDark: "#18181b",
+      fontHeading: "'Inter', sans-serif",
       borderRadius: "16px"
     },
     sections: {
@@ -98,46 +99,58 @@
         visible: true,
         tag: "[ Faits Marquants & Impact ]",
         title: "L'impact par les données",
-        description: "Au fil de mon parcours universitaire et professionnel, je développe une rigueur analytique et une expertise pointue pour transformer les jeux de données complexes en indicateurs de performance clés (KPIs) et en solutions décisionnelles concrètes.",
+        description: "Une rigueur analytique appliquée à chaque étape du cycle de la donnée : de la fiabilisation des jeux de données à la restitution visuelle d'indicateurs clés de performance (KPIs) exploitables.",
         items: [
-          { id: "m1", value: 100, suffix: "%", label: "Données Fiabilisées", desc: "Nettoyage approfondi, dédoublonnage, correction d'anomalies et harmonisation des données de vente." },
-          { id: "m2", value: 10, suffix: "+", label: "Dashboards & Outils", desc: "Modélisation de tableaux de bord interactifs sur Excel Avancé, Power BI, Python et SQL." },
-          { id: "m3", value: 5, suffix: " Certifs", label: "Certifications Validées", desc: "Certifications internationales obtenues auprès de Google, Cisco, OpenClassrooms et CCSC." }
+          { id: "m1", value: 100, suffix: "%", label: "Données Fiabilisées", desc: "Nettoyage approfondi, suppression des doublons, traitement des anomalies et harmonisation des données de vente." },
+          { id: "m2", value: 10, suffix: "+", label: "Dashboards & Outils", desc: "Conception de tableaux de bord interactifs avec Excel Avancé, Power BI, SQL et Python." },
+          { id: "m3", value: 5, suffix: " Certifs", label: "Certificats Obtenus", desc: "Certifications validées auprès de Google, Cisco Networking Academy, OpenClassrooms et CCSC." }
         ]
       },
       projects: { 
         visible: true, 
         tag: "[ Projets & Réalisations ]", 
-        title: "Réalisations concrètes", 
-        subtitle: "Une sélection de mes réalisations concrètes : analyse décisionnelle des ventes, immersion en agence digitale et compétition d'architecture réseau sécurisée." 
+        title: "Projets", 
+        subtitle: "Sélection de mes projets concrets : analyse décisionnelle des ventes, conception de dashboards interactifs et modélisation décisionnelle." 
       },
       experience: { 
         visible: true, 
         tag: "[ Expériences Professionnelles ]", 
-        title: "Mon cheminement pratique", 
-        subtitle: "Un aperçu de mon parcours professionnel et de mes réalisations en analyse de données décisionnelle, développement applicatif et gestion de projets techniques." 
+        title: "Expériences", 
+        subtitle: "Parcours professionnel, stages en entreprise, hackathons technologiques et responsabilités associatives." 
       },
-      skills: { 
+      techSkills: { 
         visible: true, 
-        tag: "[ Soft Skills & Leadership ]", 
-        title: "Qualités humaines & Esprit d'équipe", 
-        subtitle: "Les compétences relationnelles, organisationnelles et managériales démontrées au cours de mon engagement académique et associatif." 
+        tag: "[ Logiciels & Outils ]", 
+        title: "Compétences", 
+        subtitle: "Maîtrise des logiciels, langages et outils techniques de la chaîne décisionnelle et technologique." 
+      },
+      softSkills: { 
+        visible: true, 
+        tag: "[ Compétences Comportementales ]", 
+        title: "Soft Skills", 
+        subtitle: "Qualités relationnelles, organisationnelles et managériales démontrées au cours de mes études et projets en équipe." 
       },
       education: { 
         visible: true, 
-        tag: "[ Formations & Certifications ]", 
-        title: "Excellence académique & Diplômes", 
-        subtitle: "Cursus universitaire en Génie Informatique et certifications internationales attestant d'une expertise technique continue en analyse de données et sécurité." 
+        tag: "[ Parcours Académique ]", 
+        title: "Formations", 
+        subtitle: "Diplômes et cursus universitaire en Génie Informatique." 
+      },
+      certifications: { 
+        visible: true, 
+        tag: "[ Certifications & Spécialisations ]", 
+        title: "Certificats", 
+        subtitle: "Certifications officielles obtenues auprès d'organismes internationaux reconnus." 
       },
       services: { 
         visible: true, 
         tag: "[ Services & Prestations ]", 
-        title: "Ce que je peux apporter à votre équipe", 
-        subtitle: "Des prestations ciblées pour valoriser vos données et optimiser vos prises de décision." 
+        title: "Services", 
+        subtitle: "Compétences opérationnelles pour valoriser vos données, automatiser vos tableaux de bord et soutenir vos projets digitaux." 
       },
       contact: { 
         visible: true, 
-        title: "Envoyez-moi un message", 
+        title: "Contact", 
         subtitle: "Le message arrive directement dans ma boîte mail — je vous réponds sous 24h." 
       }
     },
@@ -145,17 +158,17 @@
       {
         id: "bi-dashboard",
         title: "Dashboard Commercial des Ventes",
-        category: "Business Intelligence & Analyse Excel",
+        category: "Business Intelligence & Analyse de Données",
         year: "2026",
         role: "Data Analyst & Concepteur BI",
         image: "assets/images/project-bi.jpg",
-        desc: "Projet personnel d'analyse Excel avancé : traitement et fiabilisation d'un jeu de données de vente, calcul automatisé des KPIs (CA global, Marge commerciale, Taux de marge, volume de commandes) et modélisation d'un dashboard interactif avec segments de filtrage multi-critères.",
+        desc: "Analyse, nettoyage et fiabilisation des données commerciales, calcul des KPIs et conception d'un tableau de bord interactif avec TCD et filtres multicritères.",
         details: [
-          "Nettoyage & Fiabilisation : Dédoublonnage approfondi, traitement des valeurs manquantes et harmonisation des données de vente.",
-          "Modélisation des KPIs : CA global, Marge commerciale, Taux de marge (%) et analyse de la rentabilité par catégorie.",
-          "Tableau de bord dynamique : TCD croisés et segments de filtrage multi-critères (Régions, Périodes, Catégories)."
+          "Nettoyage & Fiabilisation : Traitement d'un jeu de données de vente (suppression des doublons, correction d'anomalies, harmonisation des régions et catégories).",
+          "Calcul des KPIs : Chiffre d'affaires global, marge commerciale, taux de marge et volume de commandes via formules avancées.",
+          "Dashboard Interactif : Modélisation de TCD croisés et intégration de segments de filtrage multicritères (régions, catégories, périodes)."
         ],
-        tags: ["Excel Avancé", "TCD Croisés", "KPIs Commerciaux", "Power BI", "Data Cleaning"],
+        tags: ["Excel & TCD", "KPIs", "Power BI", "Business Intelligence", "Data Cleaning"],
         githubUrl: "https://github.com/Falikou1",
         demoUrl: "",
         visible: true
@@ -163,79 +176,107 @@
       {
         id: "agency-tuwshiuah",
         title: "Tuwshiuah / AI & Digital Agency",
-        category: "Stage en Entreprise",
+        category: "Développement Web & Mobile",
         year: "Juillet 2026",
         role: "Développeur Web & Mobile (Stage)",
         image: "assets/images/project-agency.jpg",
-        desc: "Stage de vacances au sein d'une agence digitale axée sur l'IA : développement web & mobile moderne via les méthodes de vibe coding et déploiement de stratégies de marketing digital et d'analyse d'engagement.",
+        desc: "Développement web & mobile moderne en vibe coding assisté par IA, conception d'interfaces UI/UX et déploiement de stratégies de marketing digital.",
         details: [
-          "Vibe Coding & Prototypage : Développement d'interfaces applicatives modernes assisté par des modèles d'IA générative.",
-          "Marketing Digital : Suivi de campagnes, métriques d'engagement et optimisation de la conversion.",
-          "Travail d'équipe : Collaboration en méthode agile sur des livrables clients réels."
+          "Développement Web & Mobile (Vibe Coding) : Prototypage et conception d'interfaces réactives avec l'assistance d'outils d'IA générative.",
+          "Marketing Digital : Élaboration de campagnes ciblées, analyse des métriques d'engagement et optimisation de la visibilité en ligne.",
+          "UI/UX Design : Conception de parcours utilisateurs fluides et esthétiques pour des livrables clients."
         ],
-        tags: ["Vibe Coding", "Web & Mobile", "Marketing Digital", "IA Générative"],
+        tags: ["Développement Web & Mobile", "Vibe Coding", "Marketing Digital", "Intelligence Artificielle", "UI/UX"],
         githubUrl: "https://github.com/Falikou1",
         demoUrl: "",
         visible: true
       },
       {
         id: "hackathon-esatic",
-        title: "Technovore Hackathon 2026 (ESATIC)",
-        category: "Compétition Réseau & Cybersécurité",
+        title: "Technovore Hackathon 2026 – ESATIC",
+        category: "Architecture Réseau Sécurisée",
         year: "Mars 2026",
         role: "Team Lead & Concepteur Réseau",
         image: "assets/images/project-hackathon.jpg",
-        desc: "Conception d'une architecture réseau sécurisée multi-sites à l'École Supérieure Africaine des TIC : plan d'adressage IP, segmentation VLAN et simulation complète sur Cisco Packet Tracer (DHCP, NAT, OSPF, VPN IPsec).",
+        desc: "Conception et simulation d'une architecture réseau sécurisée multi-sites sous Cisco Packet Tracer (DHCP, NAT, VLAN, routage OSPF, VPN IPsec).",
         details: [
-          "Architecture & Plan IP : Segmentation VLAN et routage dynamique multi-sites.",
-          "Simulation Packet Tracer : Configuration complète de switchs et routeurs Cisco (DHCP, NAT, OSPF, VPN IPsec).",
-          "Leadership d'équipe : Présentation et soutenance du projet devant le jury de l'ESATIC."
+          "Architecture Réseau Sécurisée : Plan d'adressage IP, segmentation par VLANs et interconnexion multi-sites.",
+          "Simulation Cisco Packet Tracer : Configuration complète des services réseau (DHCP, NAT, routage dynamique OSPF, tunnel VPN IPsec).",
+          "Leadership d'équipe : Coordination technique et soutenance de la solution devant le jury de l'ESATIC."
         ],
-        tags: ["Cisco Packet Tracer", "VPN IPsec", "OSPF", "VLAN & NAT", "Cybersécurité"],
+        tags: ["Cisco Packet Tracer", "Architecture Réseau Sécurisée", "VPN IPsec", "OSPF", "VLAN & NAT"],
         githubUrl: "https://github.com/Falikou1",
         demoUrl: "",
         visible: true
       }
     ],
     skills: [
-      { id: "s1", name: "Power BI & Excel Avancé", category: "Data & BI", level: 95, icon: "📊", desc: "Tableaux de bord dynamiques, modélisation décisionnelle et Power Query.", visible: true },
-      { id: "s2", name: "Python (Pandas / NumPy / Matplotlib)", category: "Data & BI", level: 88, icon: "🐍", desc: "Extraction, nettoyage, analyse statistique et visualisations.", visible: true },
-      { id: "s3", name: "SQL & Modélisation Relationnelle", category: "Data & BI", level: 85, icon: "🗄️", desc: "Requêtes complexes, jointures, optimisation et schémas BDD.", visible: true },
-      { id: "s4", name: "Développement Web (HTML / CSS / JS)", category: "Développement", level: 90, icon: "💻", desc: "Interfaces web réactives, intégration moderne et APIs.", visible: true },
-      { id: "s5", name: "Vibe Coding & IA Générative", category: "Développement", level: 92, icon: "🤖", desc: "Prototypage ultra-rapide d'applications assisté par IA.", visible: true },
-      { id: "s6", name: "Cisco Packet Tracer & Réseaux", category: "Réseau & Sécurité", level: 82, icon: "🌐", desc: "Topologies réseau, VLANs, routage OSPF et NAT.", visible: true },
-      { id: "s7", name: "Leadership & Pilotage", category: "Soft Skills", level: 95, icon: "🎯", desc: "Délégué de promotion et pilotage d'équipe au Technovore Hackathon ESATIC.", visible: true }
+      { id: "ts-powerbi", name: "Power BI & Tableaux de bord", category: "Business Intelligence", level: 95, icon: "powerbi", desc: "Conception de tableaux de bord interactifs, modélisation de données décisionnelles, DAX et Power Query.", visible: true },
+      { id: "ts-excel", name: "Excel & TCD Avancé", category: "Analyse de données", level: 95, icon: "excel", desc: "Formules avancées, Tableaux Croisés Dynamiques (TCD), segments multicritères, nettoyage et fiabilisation de données.", visible: true },
+      { id: "ts-sql", name: "SQL & Bases de Données", category: "Bases de Données", level: 85, icon: "sql", desc: "Requêtage relationnel, jointures complexes, extraction structurée et modélisation de schémas BDD.", visible: true },
+      { id: "ts-python", name: "Python & Anaconda", category: "Data Science", level: 88, icon: "python", desc: "Analyse de données, Pandas, NumPy, statistiques descriptives et scripts d'automatisation sous Anaconda.", visible: true },
+      { id: "ts-vibecoding", name: "Vibe Coding & Web/Mobile", category: "Développement", level: 92, icon: "vibecoding", desc: "Prototypage rapide d'applications web & mobiles assisté par IA, HTML, CSS, JavaScript et intégration UI/UX.", visible: true },
+      { id: "ts-cisco", name: "Cisco Packet Tracer", category: "Architecture Réseau", level: 85, icon: "cisco", desc: "Simulation d'infrastructures réseau sécurisées, adressage IP, VLANs, routage dynamique OSPF, NAT et VPN IPsec.", visible: true }
     ],
+    softSkills: [
+      { id: "ss-leadership", name: "Leadership & Gestion d'équipe", category: "Management", icon: "leadership", proof: "Délégué de promotion et capitaine d'équipe au Technovore Hackathon ESATIC 2026.", desc: "Aptitude à fédérer, coordonner des collaborateurs et mener des projets collectifs avec rigueur.", visible: true },
+      { id: "ss-teamwork", name: "Esprit d'équipe & Collaboration", category: "Collaboration", icon: "teamwork", proof: "Travail continu et actif au sein de REDIS–IUA et du Bureau de Coordination des Étudiants.", desc: "Écoute active, partage constructif des connaissances et recherche constante de synergie de groupe.", visible: true },
+      { id: "ss-organization", name: "Organisation & Événementiel", category: "Planification", icon: "organization", proof: "Planification et suivi d'initiatives estudiantines et de projets collectifs à l'IUA.", desc: "Gestion méthodique des tâches, structuration des priorités et anticipation logistique.", visible: true },
+      { id: "ss-communication", name: "Communication & Mobilisation", category: "Relationnel", icon: "communication", proof: "Mobilisation des étudiants pour des conférences, séminaires et ateliers technologiques.", desc: "Aisance relationnelle, clarté pédagogique dans la transmission d'informations complexes.", visible: true },
+      { id: "ss-responsibility", name: "Sens des Responsabilités", category: "Rigueur", icon: "responsibility", proof: "Gestion proactive des échanges étudiants et respect rigoureux des engagements pris.", desc: "Autonomie, fiabilité, exigence dans la qualité des livrables et respect strict des délais.", visible: true }
+    ],
+    languagesAndInterests: {
+      languages: [
+        { name: "Français", level: "Opérationnel" },
+        { name: "Anglais", level: "Intermédiaire avancé" },
+        { name: "Espagnol", level: "Niveau scolaire" }
+      ],
+      interests: [
+        { name: "Football", icon: "football" },
+        { name: "Gymnastique / Musculation", icon: "fitness" },
+        { name: "Lecture", icon: "reading" },
+        { name: "Natation", icon: "swimming" },
+        { name: "Conduite (Titulaire Permis B)", icon: "driving" }
+      ]
+    },
     experiences: [
-      { id: "exp1", role: "Projet BI & Analyse : Dashboard Commercial", company: "Projet Personnel d'Analyse Excel Avancé", period: "2026", badge: "Professionnel", logo: "assets/images/project-bi.jpg", desc: "• Nettoyage & fiabilisation : Traitement d'un jeu de données de vente massives.\n• Indicateurs clés (KPIs) : CA global, Marge brute et volume de commandes.\n• Dashboard dynamique : Modélisation de TCD croisés avec segments de filtrage.", technologies: ["Excel Avancé", "TCD", "KPIs"], visible: true },
-      { id: "exp2", role: "Stage de vacances – Développeur Web & Mobile", company: "Tuwshiuah / AI & Digital Agency", period: "Juillet 2026", badge: "Professionnel", logo: "assets/images/project-agency.jpg", desc: "• Développement applicatif : Conception d'interfaces via les méthodes de vibe coding assisté par IA.\n• Stratégie digitale : Déploiement et suivi d'actions de marketing digital ciblées.", technologies: ["Vibe Coding", "Web & Mobile", "IA"], visible: true },
-      { id: "exp3", role: "Technovore Hackathon 2026", company: "École Supérieure Africaine des TIC (ESATIC)", period: "Mars 2026", badge: "Compétition", logo: "assets/images/project-hackathon.jpg", desc: "• Architecture réseau sécurisée : Plan d'adressage IP et segmentation VLAN.\n• Simulation Cisco Packet Tracer : Configuration DHCP, NAT, OSPF et VPN IPsec.", technologies: ["Cisco", "VPN IPsec", "OSPF"], visible: true }
+      { id: "exp-bi-2026", role: "Projet BI & Analyse : Dashboard Commercial", company: "Projet Personnel d'Analyse de Données Excel Avancé", period: "2026", badge: "Projet Data / BI", logo: "assets/images/project-bi.jpg", desc: "• Nettoyage & Fiabilisation : Traitement d'un jeu de données de vente (suppression des doublons, correction d'anomalies, harmonisation des régions et catégories).\n• Indicateurs Clés (KPIs) : Calcul du chiffre d'affaires global, de la marge commerciale, du taux de marge et du volume de commandes via formules avancées.\n• Tableau de Bord Dynamique : Modélisation de TCD croisés et création d'un dashboard interactif avec segments de filtrage multicritères.", technologies: ["Excel & TCD", "KPIs", "Power BI", "Business Intelligence", "Data Cleaning"], visible: true },
+      { id: "exp-tuwshiuah-2026", role: "Stage de vacances – Développeur Web & Mobile", company: "Tuwshiuah / AI & Digital Agency", period: "Juillet 2026", badge: "Stage Professionnel", logo: "assets/images/project-agency.jpg", desc: "• Développement Web & Mobile (Vibe Coding) : Prototypage et conception d'interfaces réactives assisté par IA.\n• Stratégies de Marketing Digital : Élaboration de campagnes en ligne, suivi des métriques d'engagement et optimisation de la visibilité.\n• UI/UX : Intégration soignée de maquettes et parcours utilisateurs optimisés.", technologies: ["Développement Web & Mobile", "Vibe Coding", "Marketing Digital", "UI/UX"], visible: true },
+      { id: "exp-esatic-2026", role: "Technovore Hackathon 2026", company: "École Supérieure Africaine des TIC (ESATIC)", period: "Mars 2026", badge: "Compétition Réseau", logo: "assets/images/project-hackathon.jpg", desc: "• Architecture Réseau Sécurisée : Définition du plan d'adressage IP, segmentation par VLANs et topologie multi-sites.\n• Simulation Cisco Packet Tracer : Configuration complète des routeurs et commutateurs (DHCP, NAT, VLAN, routage OSPF, VPN IPsec).\n• Soutenance Technique : Présentation de la solution devant le jury de l'ESATIC.", technologies: ["Cisco Packet Tracer", "Architecture Réseau Sécurisée", "VPN IPsec", "OSPF", "VLAN & NAT"], visible: true },
+      { id: "exp-redis-iua", role: "Délégué de promotion & Engagement Associatif", company: "REDIS–IUA & Bureau de Coordination des Étudiants (IUA)", period: "2024 - Présent", badge: "Leadership & Associatif", logo: "assets/images/logo_iua.png", desc: "• Leadership & Représentation : Délégué de promotion, relais direct entre étudiants et administration universitaire.\n• Engagement Associatif : Participation active aux initiatives du REDIS–IUA et du Bureau de Coordination des Étudiants.\n• Organisation Événementielle : Planification de séminaires et mobilisation pour des conférences technologiques.", technologies: ["Leadership", "Gestion d'équipe", "Communication", "Organisation"], visible: true }
     ],
     educations: [
-      { id: "edu1", degree: "Licence Génie Informatique (IUA) & Bac D", institution: "Institut Universitaire d'Abidjan (IUA)", category: "Cursus Universitaire", period: "2024 - en cours", logo: "assets/images/logo_iua.png", desc: "• Licence Génie Informatique : Institut Universitaire d'Abidjan (3e année).\n• Baccalauréat Série D : Cours Secondaire Méthodiste de Cocody.", visible: true },
-      { id: "edu2", degree: "Google Data Analytics & Excel Avancé", institution: "Google & OpenClassrooms", category: "Certifications Data", period: "2025 - 2026", logo: "assets/images/project-bi.jpg", desc: "• Process Data from Dirty to Clean : Google (Coursera).\n• Perfectionnez-vous sur Excel : OpenClassrooms.", visible: true },
-      { id: "edu3", degree: "Python Data, Science des Données & CCSC", institution: "Cisco & OpenClassrooms", category: "Certifications Tech", period: "2025 - 2026", logo: "assets/images/project-hackathon.jpg", desc: "• Python pour l'analyse de données : OpenClassrooms.\n• Introduction à la science des données : Cisco Networking Academy.\n• Cybersecurity Career Starter Certification (CCSC).", visible: true }
+      { id: "edu-iua", degree: "Licence en Génie Informatique", institution: "Institut Universitaire d'Abidjan (IUA)", category: "Diplôme Universitaire", period: "2024 - en cours (3e année)", logo: "assets/images/logo_iua.png", desc: "Étudiant en 3e année de Licence Génie Informatique à l'IUA. Spécialisation progressive en analyse de données et développement logiciel.", visible: true },
+      { id: "edu-bac", degree: "Baccalauréat Série D (Scientifique)", institution: "Cours Secondaire Méthodiste de Cocody (Abidjan)", category: "Enseignement Secondaire", period: "2023 - 2024", logo: "assets/images/logo_iua.png", desc: "Obtention du Baccalauréat Scientifique Série D avec solide socle en mathématiques et sciences.", visible: true }
+    ],
+    certifications: [
+      { id: "cert-google", title: "Process Data from Dirty to Clean", issuer: "Google (Coursera)", category: "Data Analytics", year: "2025 - 2026", logo: "assets/images/project-bi.jpg", desc: "Méthodologies professionnelles de nettoyage, validation et fiabilisation des jeux de données.", visible: true },
+      { id: "cert-excel", title: "Perfectionnez-vous sur Excel", issuer: "OpenClassrooms", category: "Excel Avancé", year: "2025 - 2026", logo: "assets/images/project-bi.jpg", desc: "Maîtrise des fonctions avancées, modélisation de Tableaux Croisés Dynamiques (TCD).", visible: true },
+      { id: "cert-python", title: "Initiez-vous à Python pour l'analyse de données", issuer: "OpenClassrooms", category: "Python Data", year: "2025 - 2026", logo: "assets/images/project-hackathon.jpg", desc: "Programmation Python appliquée au traitement de données et analyses statistiques.", visible: true },
+      { id: "cert-cisco-ds", title: "Introduction à la science des données", issuer: "Cisco Networking Academy", category: "Science des Données", year: "2025 - 2026", logo: "assets/images/project-hackathon.jpg", desc: "Fondements de la science des données, pipelines de traitement et exploration.", visible: true },
+      { id: "cert-ccsc", title: "Cybersecurity Career Starter Certification (CCSC)", issuer: "CCSC International", category: "Cybersécurité", year: "2025 - 2026", logo: "assets/images/project-hackathon.jpg", desc: "Sécurité des architectures numériques et gestion des accès d'entreprise.", visible: true }
     ],
     services: [
-      { id: "srv1", title: "Business Intelligence & Tableaux de Bord", description: "Conception de dashboards interactifs Power BI et Excel sur mesure pour piloter vos KPIs stratégiques.", icon: "📊", visible: true },
-      { id: "srv2", title: "Nettoyage & Fiabilisation des Données", description: "Dédoublonnage, correction d'anomalies et mise en place de flux de préparation de données fiables.", icon: "🧹", visible: true },
-      { id: "srv3", title: "Développement Web & Applications Métiers", description: "Création d'applications web réactives et de solutions adaptées à vos processus organisationnels.", icon: "⚡", visible: true }
+      { id: "srv-bi", title: "Business Intelligence & Tableaux de Bord", description: "Conception de tableaux de bord interactifs sur Power BI et Excel & TCD avec indicateurs clés (KPIs) pour soutenir la prise de décision.", icon: "powerbi", visible: true },
+      { id: "srv-cleaning", title: "Nettoyage & Fiabilisation des Données", description: "Suppression des doublons, correction des anomalies et harmonisation des données pour garantir des analyses fiables.", icon: "cleaning", visible: true },
+      { id: "srv-dev", title: "Développement Web & Mobile (Vibe Coding)", description: "Conception et prototypage rapide d'applications web & mobiles réactives avec assistance par intelligence artificielle.", icon: "vibecoding", visible: true },
+      { id: "srv-sql", title: "Bases de Données & Requêtage SQL", description: "Modélisation relationnelle, requêtes d'extraction structurées et automatisation de rapports analytiques.", icon: "sql", visible: true }
     ],
     mediaLibrary: [
-      { id: "m1", name: "Photo Falikou FOFANA", url: "assets/images/falikou_photo_clean.png", type: "image" },
-      { id: "m2", name: "Logo IUA Abidjan", url: "assets/images/logo_iua.png", type: "image" },
-      { id: "m3", name: "Projet Dashboard BI", url: "assets/images/project-bi.jpg", type: "image" },
-      { id: "m4", name: "Projet Tuwshiuah Agency", url: "assets/images/project-agency.jpg", type: "image" },
-      { id: "m5", name: "Projet ESATIC Hackathon", url: "assets/images/project-hackathon.jpg", type: "image" }
+      { id: "m-1", name: "Photo de profil (Falikou)", url: "assets/images/falikou_photo_clean.png", type: "image", size: "49 KB" },
+      { id: "m-2", name: "Logo IUA Abidjan", url: "assets/images/logo_iua.png", type: "image", size: "22 KB" },
+      { id: "m-3", name: "Projet Dashboard BI", url: "assets/images/project-bi.jpg", type: "image", size: "574 KB" },
+      { id: "m-4", name: "Projet Tuwshiuah Agency", url: "assets/images/project-agency.jpg", type: "image", size: "547 KB" },
+      { id: "m-5", name: "Projet ESATIC Hackathon", url: "assets/images/project-hackathon.jpg", type: "image", size: "834 KB" }
     ],
     messages: [],
     history: [
-      { id: "h1", timestamp: new Date().toISOString(), action: "Initialisation CMS", target: "Système", details: "CMS Portfolio configuré et opérationnel" }
+      { id: "hist-init", timestamp: new Date().toISOString(), action: "Harmonisation Rédactionnelle & Vocabulaire CV", target: "Système", details: "CMS Portfolio configuré et opérationnel conformément au CV" }
     ],
     seo: {
-      metaTitle: "Falikou FOFANA | Data Analyst & Développeur",
-      metaDescription: "Portfolio de Falikou FOFANA, étudiant en Licence 3 Génie Informatique (IUA) et Data Analyst à Abidjan.",
-      keywords: "Falikou FOFANA, Data Analyst, Power BI, Python, SQL, IUA Abidjan, Business Intelligence"
+      metaTitle: "Falikou FOFANA | Data Analyst - Stagiaire",
+      metaDescription: "Portfolio professionnel de Falikou FOFANA — Data Analyst Stagiaire et Développeur Web & Mobile à Abidjan (IUA). Power BI, Excel & TCD, SQL, Python et Tableaux de bord décisionnels.",
+      keywords: "Falikou FOFANA, Data Analyst, Analyse de données, Business Intelligence, Outils décisionnels, Tableaux de bord interactifs, KPIs, Excel TCD, Power BI, SQL, Python, Cisco Packet Tracer, IUA Abidjan"
     }
   };
 
@@ -376,15 +417,15 @@
         if (res.ok) {
           this.updateSyncStatus('saved');
           if (notifyUser) {
-            this.showToast(`✓ ${actionDesc} — Enregistré avec succès !`, 'success');
+            this.showToast(`${actionDesc} — Enregistré avec succès !`, 'success');
           }
         } else {
           this.updateSyncStatus('saved');
-          if (notifyUser) this.showToast(`✓ ${actionDesc} — Enregistré localement.`, 'success');
+          if (notifyUser) this.showToast(`${actionDesc} — Enregistré localement.`, 'success');
         }
       } catch (err) {
         this.updateSyncStatus('saved');
-        if (notifyUser) this.showToast(`✓ ${actionDesc} — Enregistré dans votre navigateur.`, 'info');
+        if (notifyUser) this.showToast(`${actionDesc} — Enregistré dans votre navigateur.`, 'info');
       }
 
       // 6. Synchronisation automatique GitHub en tâche de fond si le token est présent
@@ -443,7 +484,7 @@
       const statusMsg = document.getElementById('deployStatusMessage');
       if (statusMsg) {
         statusMsg.style.display = 'block';
-        statusMsg.innerHTML = '⏳ <strong>Publication en cours :</strong> Enregistrement de vos contenus et transmission à GitHub / Vercel…';
+        statusMsg.innerHTML = '<strong>Publication en cours :</strong> Enregistrement de vos contenus et transmission à GitHub / Vercel…';
         statusMsg.style.color = 'var(--admin-warning)';
       }
 
@@ -517,22 +558,22 @@
 
         if (statusMsg) {
           if (ghSuccess) {
-            statusMsg.innerHTML = '✅ <strong>Publication GitHub réussie !</strong> Le fichier <code>data/portfolio.json</code> a été mis à jour sur GitHub. Vercel redéploie votre site public.';
+            statusMsg.innerHTML = '<strong>Publication GitHub réussie !</strong> Le fichier <code>data/portfolio.json</code> a été mis à jour sur GitHub. Vercel redéploie votre site public.';
           } else if (ghToken) {
-            statusMsg.innerHTML = '✅ <strong>Modifications enregistrées localement !</strong> Vérifiez les permissions de votre jeton GitHub.';
+            statusMsg.innerHTML = '<strong>Modifications enregistrées localement !</strong> Vérifiez les permissions de votre jeton GitHub.';
           } else {
-            statusMsg.innerHTML = '✅ <strong>Modifications enregistrées localement !</strong> Pour déployer sur Vercel automatiquement, renseignez votre jeton GitHub ci-dessous.';
+            statusMsg.innerHTML = '<strong>Modifications enregistrées localement !</strong> Pour déployer sur Vercel automatiquement, renseignez votre jeton GitHub ci-dessous.';
           }
           statusMsg.style.color = 'var(--admin-success)';
         }
 
-        this.showToast('🚀 Publication terminée ! Votre site public est 100% synchronisé.', 'success');
+        this.showToast('Publication terminée ! Votre site public est synchronisé.', 'success');
       } catch (e) {
         this.updateSyncStatus('saved');
         if (statusMsg) {
-          statusMsg.innerHTML = '✓ Modifications enregistrées dans le cache local.';
+          statusMsg.innerHTML = 'Modifications enregistrées dans le cache local.';
         }
-        this.showToast('✓ Modifications enregistrées avec succès !', 'success');
+        this.showToast('Modifications enregistrées avec succès !', 'success');
       } finally {
         this.isPublishing = false;
       }
@@ -544,13 +585,13 @@
 
       if (status === 'publishing' || status === 'syncing') {
         pill.className = 'sync-status-pill draft';
-        pill.innerHTML = '<span class="status-dot" style="background:#f59e0b; animation: pulse 1s infinite;"></span><span>⏳ Synchronisation en cours…</span>';
+        pill.innerHTML = '<span class="status-dot" style="background:#f59e0b; animation: pulse 1s infinite;"></span><span>Synchronisation en cours…</span>';
       } else if (status === 'error') {
         pill.className = 'sync-status-pill';
-        pill.innerHTML = '<span class="status-dot" style="background:#ef4444;"></span><span>❌ Erreur de synchronisation</span>';
+        pill.innerHTML = '<span class="status-dot" style="background:#ef4444;"></span><span>Erreur de synchronisation</span>';
       } else {
         pill.className = 'sync-status-pill';
-        pill.innerHTML = '<span class="status-dot" style="background:#10b981;"></span><span>✓ Portfolio synchronisé</span>';
+        pill.innerHTML = '<span class="status-dot" style="background:#10b981;"></span><span>Portfolio synchronisé</span>';
       }
     },
 
@@ -615,19 +656,21 @@
       const titleEl = document.getElementById('pageTitle');
       if (titleEl) {
         const titles = {
-          dashboard: '📊 Tableau de Bord',
-          profile: '👤 Profil & Identité',
-          projects: '💼 Projets & Réalisations',
-          skills: '⚡ Compétences & Outils',
-          experience: '🏢 Expériences & Parcours',
-          education: '🎓 Formations & Diplômes',
-          services: '🛠️ Services Proposés',
-          design: '🎨 Apparence & Design Studio',
-          sections: '📑 Sections & Textes',
-          media: '🖼️ Médiathèque',
-          messages: '📩 Messages Reçus',
-          history: '🕒 Historique & Audit',
-          settings: '⚙️ Paramètres & Publication'
+          dashboard: 'Tableau de Bord',
+          profile: 'Profil & Identité',
+          projects: 'Projets & Réalisations',
+          experience: 'Parcours & Expériences',
+          skills: 'Compétences & Savoir-être',
+          'soft-skills': 'Savoir-être professionnel',
+          education: 'Formation & Certifications',
+          certifications: 'Certifications Data',
+          services: 'Services Proposés',
+          design: 'Apparence & Design Studio',
+          sections: 'Sections & Textes',
+          media: 'Médiathèque',
+          messages: 'Messages Reçus',
+          history: 'Historique & Audit',
+          settings: 'Paramètres & Publication'
         };
         titleEl.textContent = titles[tabName] || 'Administration';
       }
@@ -708,17 +751,25 @@
           container.innerHTML = this.renderProjects();
           this.bindProjectsEvents();
           break;
-        case 'skills':
-          container.innerHTML = this.renderSkills();
-          this.bindSkillsEvents();
-          break;
         case 'experience':
           container.innerHTML = this.renderExperience();
           this.bindExperienceEvents();
           break;
+        case 'skills':
+          container.innerHTML = this.renderSkills();
+          this.bindSkillsEvents();
+          break;
+        case 'soft-skills':
+          container.innerHTML = this.renderSoftSkills();
+          this.bindSoftSkillsEvents();
+          break;
         case 'education':
           container.innerHTML = this.renderEducation();
           this.bindEducationEvents();
+          break;
+        case 'certifications':
+          container.innerHTML = this.renderCertifications();
+          this.bindCertificationsEvents();
           break;
         case 'services':
           container.innerHTML = this.renderServices();
@@ -765,28 +816,28 @@
       return `
         <div class="stats-grid">
           <div class="stat-card" onclick="AdminApp.switchTab('projects')" style="cursor: pointer;">
-            <div class="stat-icon">💼</div>
+            <div class="stat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
             <div class="stat-info">
               <span class="stat-value">${pCount}</span>
               <span class="stat-label">Projets Actifs</span>
             </div>
           </div>
           <div class="stat-card" onclick="AdminApp.switchTab('skills')" style="cursor: pointer;">
-            <div class="stat-icon">⚡</div>
+            <div class="stat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
             <div class="stat-info">
               <span class="stat-value">${sCount}</span>
               <span class="stat-label">Compétences Listées</span>
             </div>
           </div>
           <div class="stat-card" onclick="AdminApp.switchTab('experience')" style="cursor: pointer;">
-            <div class="stat-icon">🏢</div>
+            <div class="stat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
             <div class="stat-info">
               <span class="stat-value">${eCount}</span>
               <span class="stat-label">Expériences & Rôles</span>
             </div>
           </div>
           <div class="stat-card" onclick="AdminApp.switchTab('messages')" style="cursor: pointer;">
-            <div class="stat-icon">📩</div>
+            <div class="stat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
             <div class="stat-info">
               <span class="stat-value">${mCount}</span>
               <span class="stat-label">Messages Reçus</span>
@@ -798,7 +849,7 @@
         <div class="card" style="border: 2px solid var(--admin-accent); box-shadow: 0 4px 20px rgba(218, 56, 5, 0.15);">
           <div class="card-header">
             <div>
-              <h2 class="card-title" style="color: var(--admin-accent); font-size: 1.25rem;">⚡ Modification Directe du Titre Principal & Bio</h2>
+              <h2 class="card-title" style="color: var(--admin-accent); font-size: 1.25rem;">Modification Directe du Titre Principal & Bio</h2>
               <p class="card-desc">Modifiez ici puis enregistrez : les changements se propagent immédiatement sur le site public</p>
             </div>
             <a href="../index.html" target="_blank" class="btn btn-secondary">
@@ -824,7 +875,7 @@
             </div>
             <div class="form-group full-width" style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 8px;">
               <button class="btn btn-primary" id="dashSaveTitleBtn" style="font-size: 1rem; padding: 12px 24px;">
-                💾 Enregistrer & Publier sur le Site Public
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7H5a2 2 0 00-2 2v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/></svg> <span>Enregistrer & Publier sur le Site Public</span>
               </button>
             </div>
           </div>
@@ -833,7 +884,7 @@
         <div class="card">
           <div class="card-header">
             <div>
-              <h2 class="card-title">🚀 Accès Rapide aux Modules CMS</h2>
+              <h2 class="card-title">Accès Rapide aux Modules CMS</h2>
               <p class="card-desc">Gérez l'ensemble des contenus de votre portfolio</p>
             </div>
           </div>
@@ -848,7 +899,7 @@
 
         <div class="card">
           <div class="card-header">
-            <h2 class="card-title">🕒 Journal des Dernières Modifications</h2>
+            <h2 class="card-title">Journal des Dernières Modifications</h2>
           </div>
           <div class="items-list">
             ${(this.data.history || []).slice(0, 5).map(h => `
@@ -857,7 +908,7 @@
                   <div class="item-title">${h.action}</div>
                   <div class="item-subtitle">${h.details || ''} — ${new Date(h.timestamp).toLocaleString('fr-FR')}</div>
                 </div>
-                <span style="font-size: 0.75rem; color: var(--admin-success); font-weight: 600;">✓ Sauvegardé</span>
+                <span style="font-size: 0.75rem; color: var(--admin-success); font-weight: 600; display:inline-flex; align-items:center; gap:4px;"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> <span>Sauvegardé</span></span>
               </div>
             `).join('') || '<p style="color: var(--admin-text-dim);">Aucune modification récente.</p>'}
           </div>
@@ -896,7 +947,7 @@
         <div class="card">
           <div class="card-header">
             <div>
-              <h2 class="card-title">📸 Photo de Profil & Avatar</h2>
+              <h2 class="card-title">Photo de Profil & Avatar</h2>
               <p class="card-desc">Cette photo s'affiche sur la carte Hero, la barre de navigation et le menu mobile</p>
             </div>
             <button class="btn btn-primary" id="saveProfileBtn">Enregistrer le profil</button>
@@ -908,11 +959,11 @@
             <div style="display: flex; flex-direction: column; gap: 10px;">
               <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                 <label class="btn btn-primary" style="cursor: pointer;">
-                  <span>📁 Télécharger une nouvelle photo</span>
+                  <span style="display:inline-flex; align-items:center; gap:6px;"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg> <span>Télécharger une nouvelle photo</span></span>
                   <input type="file" id="profPhotoFileInput" accept="image/*" style="display: none;">
                 </label>
                 <button type="button" class="btn btn-secondary" onclick="AdminApp.chooseFromMedia('profPhotoUrl', 'profPhotoPreview')">
-                  🖼️ Choisir dans la médiathèque
+                  <span style="display:inline-flex; align-items:center; gap:6px;"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg> <span>Choisir dans la médiathèque</span></span>
                 </button>
               </div>
               <input type="text" id="profPhotoUrl" class="form-control" style="font-size: 0.85rem;" placeholder="URL de la photo" value="${p.photo || ''}">
@@ -922,7 +973,7 @@
 
         <div class="card">
           <div class="card-header">
-            <h2 class="card-title">👤 Identité & Informations Personnelles</h2>
+            <h2 class="card-title">Identité & Informations Personnelles</h2>
           </div>
           <div class="form-grid">
             <div class="form-group">
@@ -960,16 +1011,16 @@
         <div class="card" style="border: 2px solid var(--admin-accent); box-shadow: 0 4px 20px rgba(218, 56, 5, 0.12);">
           <div class="card-header">
             <div>
-              <h2 class="card-title" style="color: var(--admin-accent);">📄 Gestion & Importation du CV (PDF)</h2>
+              <h2 class="card-title" style="color: var(--admin-accent);">Gestion & Importation du CV (PDF)</h2>
               <p class="card-desc">Importez votre fichier CV ici : il sera automatiquement mis à jour sur TOUS les boutons de téléchargement du site (Navbar, Menu mobile, Hero, Expériences, Footer)</p>
             </div>
             <span style="font-size: 0.8rem; padding: 4px 10px; border-radius: 12px; background: rgba(16, 185, 129, 0.15); color: var(--admin-success); font-weight: 600;">
-              ✓ Synchronisation automatique
+              Synchronisation automatique
             </span>
           </div>
           <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap; margin-top: 10px;">
-            <div style="width: 60px; height: 60px; border-radius: 12px; background: rgba(218, 56, 5, 0.1); border: 1px solid var(--admin-accent); display: flex; align-items: center; justify-content: center; font-size: 2rem;">
-              📄
+            <div style="width: 60px; height: 60px; border-radius: 12px; background: rgba(218, 56, 5, 0.1); border: 1px solid var(--admin-accent); display: flex; align-items: center; justify-content: center;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--admin-accent)" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
             </div>
             <div style="display: flex; flex-direction: column; gap: 8px; flex-grow: 1;">
               <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
@@ -978,11 +1029,11 @@
               </div>
               <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                 <label class="btn btn-primary" style="cursor: pointer;">
-                  <span>📁 Importer un nouveau fichier CV (PDF)</span>
+                  <span style="display:inline-flex; align-items:center; gap:6px;"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg> <span>Importer un nouveau fichier CV (PDF)</span></span>
                   <input type="file" id="profResumeFileInput" accept=".pdf,application/pdf" style="display: none;">
                 </label>
                 <a id="previewCurrentCvBtn" href="${p.resumeUrl || 'CV_FalikouFOFANA_Data_Analyst.pdf'}" target="_blank" download="${p.resumeFileName || 'CV_FalikouFOFANA_Data_Analyst.pdf'}" class="btn btn-secondary">
-                  <span>👁️ Prévisualiser / Télécharger le CV actuel</span>
+                  <span style="display:inline-flex; align-items:center; gap:6px;"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg> <span>Prévisualiser / Télécharger le CV actuel</span></span>
                 </a>
               </div>
               <input type="text" id="profResumeUrl" class="form-control" style="font-size: 0.82rem; margin-top: 4px;" value="${p.resumeUrl || 'CV_FalikouFOFANA_Data_Analyst.pdf'}" placeholder="Chemin ou URL du CV">
@@ -992,7 +1043,7 @@
 
         <div class="card">
           <div class="card-header">
-            <h2 class="card-title">📞 Coordonnées & Réseaux Sociaux</h2>
+            <h2 class="card-title">Coordonnées & Réseaux Sociaux</h2>
           </div>
           <div class="form-grid">
             <div class="form-group">
@@ -1150,15 +1201,18 @@
       });
     },
 
-    // 3. PROJETS & RÉALISATIONS
+    // 3. PROJETS & EXPÉRIENCES (UNIFIÉS)
     renderProjects() {
       const projects = this.data.projects || [];
+      const exps = this.data.experiences || [];
+
       return `
+        <!-- Bloc 1 : Projets & Réalisations Data -->
         <div class="card">
           <div class="card-header">
             <div>
-              <h2 class="card-title">💼 Projets & Réalisations (${projects.length})</h2>
-              <p class="card-desc">Gérez vos projets affichés dans la galerie publique</p>
+              <h2 class="card-title">Projets & Réalisations Data (${projects.length})</h2>
+              <p class="card-desc">Gérez vos réalisations et outils décisionnels affichés dans le portfolio</p>
             </div>
             <button class="btn btn-primary" id="addProjectBtn">+ Ajouter un Projet</button>
           </div>
@@ -1166,20 +1220,46 @@
             ${projects.map((proj, idx) => `
               <div class="list-item-card" data-id="${proj.id}">
                 <div style="display: flex; gap: 4px; flex-direction: column;">
-                  <button class="btn btn-secondary btn-icon" style="height: 22px; width: 22px; font-size: 10px;" onclick="AdminApp.moveProject(${idx}, -1)" title="Monter">▲</button>
-                  <button class="btn btn-secondary btn-icon" style="height: 22px; width: 22px; font-size: 10px;" onclick="AdminApp.moveProject(${idx}, 1)" title="Descendre">▼</button>
+                  <button class="btn btn-secondary btn-icon" style="height: 22px; width: 22px; font-size: 10px;" onclick="AdminApp.moveProject(${idx}, -1)" title="Monter"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg></button>
+                  <button class="btn btn-secondary btn-icon" style="height: 22px; width: 22px; font-size: 10px;" onclick="AdminApp.moveProject(${idx}, 1)" title="Descendre"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
                 </div>
                 <img src="${imgUrl(proj.image || 'assets/images/project-bi.jpg')}" class="item-thumb" alt="${proj.title}" onerror="this.style.opacity='0.4'">
                 <div class="item-details">
-                  <div class="item-title">${proj.title} ${proj.visible === false ? '<span style="color: var(--admin-danger); font-size: 0.75rem;">(Masqué)</span>' : ''}</div>
+                  <div class="item-title"><span style="color: var(--admin-accent); font-weight: 700; font-size: 0.8rem;">[${proj.typeBadge || 'PROJET'}]</span> ${proj.title} ${proj.visible === false ? '<span style="color: var(--admin-danger); font-size: 0.75rem;">(Masqué)</span>' : ''}</div>
                   <div class="item-subtitle">${proj.category} • ${proj.tags?.join(', ') || ''}</div>
                 </div>
                 <div class="item-actions">
-                  <button class="btn btn-secondary btn-icon" onclick="AdminApp.editProject('${proj.id}')" title="Modifier">✏️</button>
-                  <button class="btn btn-danger btn-icon" onclick="AdminApp.deleteProject('${proj.id}')" title="Supprimer">🗑️</button>
+                  <button class="btn btn-secondary btn-icon" onclick="AdminApp.editProject('${proj.id}')" title="Modifier"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button>
+                  <button class="btn btn-danger btn-icon" onclick="AdminApp.deleteProject('${proj.id}')" title="Supprimer"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></button>
                 </div>
               </div>
             `).join('') || '<p style="color: var(--admin-text-dim);">Aucun projet pour l\'instant.</p>'}
+          </div>
+        </div>
+
+        <!-- Bloc 2 : Expériences Professionnelles -->
+        <div class="card" style="margin-top: 24px;">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Expériences Professionnelles (${exps.length})</h2>
+              <p class="card-desc">Gérez vos stages et postes en entreprise (Tuwshiuah, etc.)</p>
+            </div>
+            <button class="btn btn-primary" id="addExpBtn">+ Nouvelle Expérience</button>
+          </div>
+          <div class="items-list">
+            ${exps.map(exp => `
+              <div class="list-item-card">
+                <img src="${imgUrl(exp.logo || 'assets/images/project-agency.jpg')}" class="item-thumb" alt="${exp.company}" onerror="this.style.opacity='0.4'">
+                <div class="item-details">
+                  <div class="item-title"><span style="color: #10b981; font-weight: 700; font-size: 0.8rem;">[${exp.typeBadge || 'EXPÉRIENCE'}]</span> ${exp.role} — <strong style="color: var(--admin-accent);">${exp.company}</strong></div>
+                  <div class="item-subtitle">${exp.period} • ${exp.badge || 'Stage'}</div>
+                </div>
+                <div class="item-actions">
+                  <button class="btn btn-secondary btn-icon" onclick="AdminApp.editExp('${exp.id}')" title="Modifier"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button>
+                  <button class="btn btn-danger btn-icon" onclick="AdminApp.deleteExp('${exp.id}')" title="Supprimer"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></button>
+                </div>
+              </div>
+            `).join('') || '<p style="color: var(--admin-text-dim);">Aucune expérience pour l\'instant.</p>'}
           </div>
         </div>
       `;
@@ -1188,6 +1268,7 @@
     bindProjectsEvents() {
       const addBtn = document.getElementById('addProjectBtn');
       if (addBtn) addBtn.addEventListener('click', () => this.openProjectModal());
+      this.bindExperienceEvents();
     },
 
     moveProject(index, direction) {
@@ -1235,7 +1316,7 @@
           <div class="admin-modal">
             <div class="card-header">
               <h2 class="card-title">${isEdit ? 'Modifier le projet' : 'Ajouter un nouveau projet'}</h2>
-              <button class="btn btn-secondary btn-icon" onclick="document.getElementById('projectModalBackdrop').remove()">✕</button>
+              <button class="btn btn-secondary btn-icon" onclick="document.getElementById('projectModalBackdrop').remove()"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button>
             </div>
             <form id="projectModalForm" class="form-grid" style="margin-top: 16px;">
               <div class="form-group full-width">
@@ -1262,11 +1343,11 @@
                   <img id="mProjImgPreview" src="${imgUrl(p.image || 'assets/images/project-bi.jpg')}" style="width: 70px; height: 50px; object-fit: cover; border-radius: 6px; border: 1px solid var(--admin-border);">
                   <div style="display: flex; gap: 8px; flex-grow: 1; flex-wrap: wrap;">
                     <label class="btn btn-secondary" style="cursor: pointer; font-size: 0.85rem;">
-                      <span>📁 Importer Image</span>
+                      <span style="display:inline-flex; align-items:center; gap:6px;"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg> <span>Importer Image</span></span>
                       <input type="file" id="mProjFileInput" accept="image/*" style="display: none;">
                     </label>
                     <button type="button" class="btn btn-secondary" style="font-size: 0.85rem;" onclick="AdminApp.chooseFromMedia('mProjImage', 'mProjImgPreview')">
-                      🖼️ Médiathèque
+                      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg> <span>Médiathèque</span>
                     </button>
                     <input type="text" id="mProjImage" class="form-control" value="${p.image || ''}" placeholder="URL de l'image" style="flex-grow: 1;">
                   </div>
@@ -1360,32 +1441,81 @@
       });
     },
 
-    // 4. COMPÉTENCES & OUTILS
+    // 4. COMPÉTENCES (TECHNIQUES & SAVOIR-ÊTRE UNIFIÉS)
     renderSkills() {
-      const skills = this.data.skills || [];
+      const skills = this.data.skills || this.data.techSkills || [];
+      const softSkills = this.data.softSkills || [];
+      const langInterests = this.data.languagesAndInterests || { languages: [], interests: [] };
+
       return `
+        <!-- Bloc 1: Compétences Techniques & Outils -->
         <div class="card">
           <div class="card-header">
             <div>
-              <h2 class="card-title">⚡ Compétences & Outils (${skills.length})</h2>
-              <p class="card-desc">Gérez votre stack technique et niveaux</p>
+              <h2 class="card-title">Compétences Techniques & Outils (${skills.length})</h2>
+              <p class="card-desc">Power BI, Excel & TCD, SQL, Python & Anaconda, Vibe Coding...</p>
             </div>
             <button class="btn btn-primary" id="addSkillBtn">+ Ajouter une Compétence</button>
           </div>
           <div class="items-list">
             ${skills.map(s => `
               <div class="list-item-card">
-                <div style="font-size: 1.6rem; width: 44px; text-align: center;">${s.icon || '⚡'}</div>
+                <div style="display:flex; align-items:center; justify-content:center; width:44px; height:44px;">${window.PortfolioIcons ? window.PortfolioIcons.get(s.icon || s.id, { size: 24 }) : ''}</div>
                 <div class="item-details">
                   <div class="item-title">${s.name} <span style="color: var(--admin-accent); font-weight: 700;">(${s.level || 80}%)</span></div>
                   <div class="item-subtitle">Catégorie: ${s.category} • ${s.desc || ''}</div>
                 </div>
                 <div class="item-actions">
-                  <button class="btn btn-secondary btn-icon" onclick="AdminApp.editSkill('${s.id}')" title="Modifier">✏️</button>
-                  <button class="btn btn-danger btn-icon" onclick="AdminApp.deleteSkill('${s.id}')" title="Supprimer">🗑️</button>
+                  <button class="btn btn-secondary btn-icon" onclick="AdminApp.editSkill('${s.id}')" title="Modifier"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button>
+                  <button class="btn btn-danger btn-icon" onclick="AdminApp.deleteSkill('${s.id}')" title="Supprimer"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></button>
                 </div>
               </div>
             `).join('')}
+          </div>
+        </div>
+
+        <!-- Bloc 2: Savoir-être professionnel (Soft Skills) & Langues -->
+        <div class="card" style="margin-top: 24px;">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Savoir-être professionnel (Soft Skills) (${softSkills.length})</h2>
+              <p class="card-desc">Leadership, esprit d'équipe, organisation, communication, sens des responsabilités</p>
+            </div>
+            <button class="btn btn-primary" id="addSoftSkillBtn">+ Ajouter une Soft Skill</button>
+          </div>
+          <div class="items-list">
+            ${softSkills.map(s => `
+              <div class="list-item-card">
+                <div style="display:flex; align-items:center; justify-content:center; width:44px; height:44px;">${window.PortfolioIcons ? window.PortfolioIcons.get(s.icon || s.id, { size: 24 }) : ''}</div>
+                <div class="item-details">
+                  <div class="item-title">${s.name} <span style="color: var(--admin-accent); font-size: 0.8rem; font-weight: 600;">[${s.category || 'Soft Skill'}]</span></div>
+                  <div class="item-subtitle"><strong>Preuve / Contexte :</strong> ${s.proof || ''}</div>
+                  <div class="item-subtitle">${s.desc || ''}</div>
+                </div>
+                <div class="item-actions">
+                  <button class="btn btn-secondary btn-icon" onclick="AdminApp.editSoftSkill('${s.id}')" title="Modifier"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button>
+                  <button class="btn btn-danger btn-icon" onclick="AdminApp.deleteSoftSkill('${s.id}')" title="Supprimer"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+
+          <!-- Section Langues & Intérêts -->
+          <div style="margin-top: 24px; border-top: 1px solid var(--admin-border); padding-top: 18px;">
+            <h3 style="font-size: 1.1rem; color: #fff; margin-bottom: 12px;">Langues, Mobilité & Centres d'Intérêt</h3>
+            <div class="form-grid">
+              <div class="form-group full-width">
+                <label class="form-label">Langues maîtrisées (Format : Nom - Niveau, séparées par des virgules)</label>
+                <input type="text" id="adminLanguagesInput" class="form-control" value="${(langInterests.languages || []).map(l => `${l.name} (${l.level})`).join(', ')}">
+              </div>
+              <div class="form-group full-width">
+                <label class="form-label">Centres d'intérêt (séparés par des virgules)</label>
+                <input type="text" id="adminInterestsInput" class="form-control" value="${(langInterests.interests || []).map(i => i.name).join(', ')}">
+              </div>
+              <div class="form-group full-width" style="display:flex; justify-content:flex-end;">
+                <button type="button" class="btn btn-primary" id="saveLangInterestsBtn">Enregistrer Langues & Intérêts</button>
+              </div>
+            </div>
           </div>
         </div>
       `;
@@ -1394,6 +1524,7 @@
     bindSkillsEvents() {
       const btn = document.getElementById('addSkillBtn');
       if (btn) btn.addEventListener('click', () => this.openSkillModal());
+      this.bindSoftSkillsEvents();
     },
 
     editSkill(id) {
@@ -1416,7 +1547,7 @@
         name: '',
         category: 'Data & BI',
         level: 85,
-        icon: '📊',
+        icon: 'powerbi',
         desc: '',
         visible: true
       };
@@ -1426,7 +1557,7 @@
           <div class="admin-modal">
             <div class="card-header">
               <h2 class="card-title">${isEdit ? 'Modifier la compétence' : 'Ajouter une compétence'}</h2>
-              <button class="btn btn-secondary btn-icon" onclick="document.getElementById('skillModalBackdrop').remove()">✕</button>
+              <button class="btn btn-secondary btn-icon" onclick="document.getElementById('skillModalBackdrop').remove()"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button>
             </div>
             <form id="skillModalForm" class="form-grid" style="margin-top: 16px;">
               <div class="form-group">
@@ -1435,7 +1566,7 @@
               </div>
               <div class="form-group">
                 <label class="form-label">Icône / Emoji</label>
-                <input type="text" id="mSkillIcon" class="form-control" value="${s.icon || '⚡'}">
+                <input type="text" id="mSkillIcon" class="form-control" value="${s.icon || 'vibecoding'}">
               </div>
               <div class="form-group">
                 <label class="form-label">Catégorie</label>
@@ -1481,6 +1612,167 @@
       });
     },
 
+    // 4b. SOFT SKILLS & COMPÉTENCES COMPORTEMENTALES (DU CV)
+    renderSoftSkills() {
+      const softSkills = this.data.softSkills || [];
+      const langInterests = this.data.languagesAndInterests || { languages: [], interests: [] };
+      return `
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Soft Skills & Compétences Comportementales (${softSkills.length})</h2>
+              <p class="card-desc">Gérez vos qualités humaines, leadership et preuves pratiques</p>
+            </div>
+            <button class="btn btn-primary" id="addSoftSkillBtn">+ Ajouter une Soft Skill</button>
+          </div>
+          <div class="items-list">
+            ${softSkills.map(s => `
+              <div class="list-item-card">
+                <div style="display:flex; align-items:center; justify-content:center; width:44px; height:44px;">${window.PortfolioIcons ? window.PortfolioIcons.get(s.icon || s.id, { size: 24 }) : ''}</div>
+                <div class="item-details">
+                  <div class="item-title">${s.name} <span style="color: var(--admin-accent); font-size: 0.8rem; font-weight: 600;">[${s.category || 'Soft Skill'}]</span></div>
+                  <div class="item-subtitle"><strong>Preuve / Contexte :</strong> ${s.proof || ''}</div>
+                  <div class="item-subtitle">${s.desc || ''}</div>
+                </div>
+                <div class="item-actions">
+                  <button class="btn btn-secondary btn-icon" onclick="AdminApp.editSoftSkill('${s.id}')" title="Modifier"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button>
+                  <button class="btn btn-danger btn-icon" onclick="AdminApp.deleteSoftSkill('${s.id}')" title="Supprimer"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+
+          <!-- Section Langues & Intérêts -->
+          <div style="margin-top: 24px; border-top: 1px solid var(--admin-border); padding-top: 18px;">
+            <h3 style="font-size: 1.1rem; color: #fff; margin-bottom: 12px;">Langues, Mobilité & Centres d'Intérêt</h3>
+            <div class="form-grid">
+              <div class="form-group full-width">
+                <label class="form-label">Langues maîtrisées (Format : Nom - Niveau, séparées par des virgules)</label>
+                <input type="text" id="adminLanguagesInput" class="form-control" value="${(langInterests.languages || []).map(l => `${l.name} (${l.level})`).join(', ')}">
+              </div>
+              <div class="form-group full-width">
+                <label class="form-label">Centres d'intérêt (séparés par des virgules)</label>
+                <input type="text" id="adminInterestsInput" class="form-control" value="${(langInterests.interests || []).map(i => i.name).join(', ')}">
+              </div>
+              <div class="form-group full-width" style="display:flex; justify-content:flex-end;">
+                <button type="button" class="btn btn-primary" id="saveLangInterestsBtn">Enregistrer Langues & Intérêts</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    },
+
+    bindSoftSkillsEvents() {
+      const btn = document.getElementById('addSoftSkillBtn');
+      if (btn) btn.addEventListener('click', () => this.openSoftSkillModal());
+
+      const saveLangBtn = document.getElementById('saveLangInterestsBtn');
+      if (saveLangBtn) {
+        saveLangBtn.addEventListener('click', () => {
+          const rawLang = document.getElementById('adminLanguagesInput').value;
+          const rawInt = document.getElementById('adminInterestsInput').value;
+
+          if (!this.data.languagesAndInterests) this.data.languagesAndInterests = { languages: [], interests: [] };
+          this.data.languagesAndInterests.languages = rawLang.split(',').map(l => {
+            const trimmed = l.trim();
+            const match = trimmed.match(/^([^(]+)(?:\(([^)]+)\))?$/);
+            return {
+              name: match ? match[1].trim() : trimmed,
+              level: match && match[2] ? match[2].trim() : 'Opérationnel'
+            };
+          }).filter(l => l.name);
+
+          this.data.languagesAndInterests.interests = rawInt.split(',').map(i => ({
+            name: i.trim(),
+            icon: 'sparkle'
+          })).filter(i => i.name);
+
+          this.persistData('Langues et centres d\'intérêt enregistrés', true);
+        });
+      }
+    },
+
+    editSoftSkill(id) {
+      const s = (this.data.softSkills || []).find(x => x.id === id);
+      if (s) this.openSoftSkillModal(s);
+    },
+
+    deleteSoftSkill(id) {
+      if (confirm('Supprimer cette soft skill ?')) {
+        this.data.softSkills = (this.data.softSkills || []).filter(x => x.id !== id);
+        this.persistData('Soft skill supprimée', true);
+        this.renderTab('soft-skills');
+      }
+    },
+
+    openSoftSkillModal(skill = null) {
+      const isEdit = !!skill;
+      const s = skill || {
+        id: 'ss-' + Date.now(),
+        name: '',
+        category: 'Management',
+        icon: 'leadership',
+        proof: '',
+        desc: '',
+        visible: true
+      };
+
+      const modalHtml = `
+        <div class="admin-modal-backdrop" id="softSkillModalBackdrop">
+          <div class="admin-modal">
+            <div class="card-header">
+              <h2 class="card-title">${isEdit ? 'Modifier la Soft Skill' : 'Ajouter une Soft Skill'}</h2>
+              <button class="btn btn-secondary btn-icon" onclick="document.getElementById('softSkillModalBackdrop').remove()"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button>
+            </div>
+            <form id="softSkillModalForm" class="form-grid" style="margin-top: 16px;">
+              <div class="form-group">
+                <label class="form-label">Nom de la compétence comportementale</label>
+                <input type="text" id="mSoftName" class="form-control" value="${s.name}" required placeholder="Ex : Leadership & Gestion d'équipe">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Icône / Emoji</label>
+                <input type="text" id="mSoftIcon" class="form-control" value="${s.icon || 'leadership'}">
+              </div>
+              <div class="form-group full-width">
+                <label class="form-label">Preuve / Contexte pratique (Hackathon, Délégué, REDIS-IUA, etc.)</label>
+                <input type="text" id="mSoftProof" class="form-control" value="${s.proof || ''}" placeholder="Ex : Délégué de promotion et capitaine d'équipe au Technovore Hackathon ESATIC 2026.">
+              </div>
+              <div class="form-group full-width">
+                <label class="form-label">Description / Détails</label>
+                <textarea id="mSoftDesc" class="form-control" style="min-height: 80px;">${s.desc || ''}</textarea>
+              </div>
+              <div class="form-group full-width" style="display: flex; gap: 10px; justify-content: flex-end;">
+                <button type="button" class="btn btn-secondary" onclick="document.getElementById('softSkillModalBackdrop').remove()">Annuler</button>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      `;
+
+      document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+      document.getElementById('softSkillModalForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        s.name  = document.getElementById('mSoftName').value.trim();
+        s.icon  = document.getElementById('mSoftIcon').value.trim();
+        s.proof = document.getElementById('mSoftProof').value.trim();
+        s.desc  = document.getElementById('mSoftDesc').value.trim();
+
+        if (!Array.isArray(this.data.softSkills)) this.data.softSkills = [];
+        if (!isEdit) this.data.softSkills.push(s);
+        else {
+          const idx = this.data.softSkills.findIndex(x => x.id === s.id);
+          if (idx !== -1) this.data.softSkills[idx] = s;
+        }
+
+        this.persistData(`Soft skill ${s.name} enregistrée`, true);
+        document.getElementById('softSkillModalBackdrop').remove();
+        this.renderTab('soft-skills');
+      });
+    },
+
     // 5. EXPÉRIENCES & PARCOURS
     renderExperience() {
       const exps = this.data.experiences || [];
@@ -1488,7 +1780,7 @@
         <div class="card">
           <div class="card-header">
             <div>
-              <h2 class="card-title">🏢 Expériences & Parcours Professionnel (${exps.length})</h2>
+              <h2 class="card-title">Expériences & Parcours Professionnel (${exps.length})</h2>
               <p class="card-desc">Gérez vos postes, stages et responsabilités</p>
             </div>
             <button class="btn btn-primary" id="addExpBtn">+ Nouvelle Expérience</button>
@@ -1502,8 +1794,8 @@
                   <div class="item-subtitle">${exp.period} • ${exp.badge || ''}</div>
                 </div>
                 <div class="item-actions">
-                  <button class="btn btn-secondary btn-icon" onclick="AdminApp.editExp('${exp.id}')" title="Modifier">✏️</button>
-                  <button class="btn btn-danger btn-icon" onclick="AdminApp.deleteExp('${exp.id}')" title="Supprimer">🗑️</button>
+                  <button class="btn btn-secondary btn-icon" onclick="AdminApp.editExp('${exp.id}')" title="Modifier"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button>
+                  <button class="btn btn-danger btn-icon" onclick="AdminApp.deleteExp('${exp.id}')" title="Supprimer"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></button>
                 </div>
               </div>
             `).join('')}
@@ -1526,7 +1818,7 @@
       if (confirm('Supprimer cette expérience ?')) {
         this.data.experiences = (this.data.experiences || []).filter(e => e.id !== id);
         this.persistData('Expérience supprimée', true);
-        this.renderTab('experience');
+        this.renderTab('projects');
       }
     },
 
@@ -1549,7 +1841,7 @@
           <div class="admin-modal">
             <div class="card-header">
               <h2 class="card-title">${isEdit ? 'Modifier l\'expérience' : 'Ajouter une expérience'}</h2>
-              <button class="btn btn-secondary btn-icon" onclick="document.getElementById('expModalBackdrop').remove()">✕</button>
+              <button class="btn btn-secondary btn-icon" onclick="document.getElementById('expModalBackdrop').remove()"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button>
             </div>
             <form id="expModalForm" class="form-grid" style="margin-top: 16px;">
               <div class="form-group">
@@ -1572,11 +1864,11 @@
                   <img id="mExpLogoPreview" src="${imgUrl(e.logo || 'assets/images/project-agency.jpg')}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px; border: 1px solid var(--admin-border);">
                   <div style="display: flex; gap: 8px; flex-grow: 1; flex-wrap: wrap;">
                     <label class="btn btn-secondary" style="cursor: pointer; font-size: 0.85rem;">
-                      <span>📁 Importer Image</span>
+                      <span style="display:inline-flex; align-items:center; gap:6px;"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg> <span>Importer Image</span></span>
                       <input type="file" id="mExpFileInput" accept="image/*" style="display: none;">
                     </label>
                     <button type="button" class="btn btn-secondary" style="font-size: 0.85rem;" onclick="AdminApp.chooseFromMedia('mExpLogo', 'mExpLogoPreview')">
-                      🖼️ Médiathèque
+                      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg> <span>Médiathèque</span>
                     </button>
                     <input type="text" id="mExpLogo" class="form-control" value="${e.logo || ''}" placeholder="URL du logo" style="flex-grow: 1;">
                   </div>
@@ -1632,19 +1924,22 @@
 
         this.persistData(`Expérience ${e.role} enregistrée`, true);
         document.getElementById('expModalBackdrop').remove();
-        this.renderTab('experience');
+        this.renderTab('projects');
       });
     },
 
-    // 6. FORMATIONS & DIPLÔMES
+    // 6. FORMATION (PARCOURS ACADÉMIQUE & CERTIFICATIONS UNIFIÉS)
     renderEducation() {
       const edus = this.data.educations || [];
+      const certs = this.data.certifications || [];
+
       return `
+        <!-- Bloc 1: Formations & Parcours Académique -->
         <div class="card">
           <div class="card-header">
             <div>
-              <h2 class="card-title">🎓 Formations & Diplômes (${edus.length})</h2>
-              <p class="card-desc">Gérez votre parcours académique et certifications</p>
+              <h2 class="card-title">Parcours Académique (Diplômes) (${edus.length})</h2>
+              <p class="card-desc">Gérez vos diplômes universitaires et secondaires</p>
             </div>
             <button class="btn btn-primary" id="addEduBtn">+ Ajouter une Formation</button>
           </div>
@@ -1657,8 +1952,34 @@
                   <div class="item-subtitle">${edu.institution} • ${edu.period}</div>
                 </div>
                 <div class="item-actions">
-                  <button class="btn btn-secondary btn-icon" onclick="AdminApp.editEdu('${edu.id}')" title="Modifier">✏️</button>
-                  <button class="btn btn-danger btn-icon" onclick="AdminApp.deleteEdu('${edu.id}')" title="Supprimer">🗑️</button>
+                  <button class="btn btn-secondary btn-icon" onclick="AdminApp.editEdu('${edu.id}')" title="Modifier"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button>
+                  <button class="btn btn-danger btn-icon" onclick="AdminApp.deleteEdu('${edu.id}')" title="Supprimer"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- Bloc 2: Certifications & Spécialisations -->
+        <div class="card" style="margin-top: 24px;">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Certifications & Spécialisations Data (${certs.length})</h2>
+              <p class="card-desc">Google, OpenClassrooms, Cisco Networking Academy...</p>
+            </div>
+            <button class="btn btn-primary" id="addCertBtn">+ Ajouter un Certificat</button>
+          </div>
+          <div class="items-list">
+            ${certs.map(cert => `
+              <div class="list-item-card">
+                <img src="${imgUrl(cert.logo || 'assets/images/project-bi.jpg')}" class="item-thumb" alt="${cert.title}" onerror="this.style.opacity='0.4'">
+                <div class="item-details">
+                  <div class="item-title">${cert.title}</div>
+                  <div class="item-subtitle"><strong>${cert.issuer}</strong> • ${cert.year || ''} [${cert.category || 'Data Analytics'}]</div>
+                </div>
+                <div class="item-actions">
+                  <button class="btn btn-secondary btn-icon" onclick="AdminApp.editCert('${cert.id}')" title="Modifier"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button>
+                  <button class="btn btn-danger btn-icon" onclick="AdminApp.deleteCert('${cert.id}')" title="Supprimer"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></button>
                 </div>
               </div>
             `).join('')}
@@ -1670,6 +1991,7 @@
     bindEducationEvents() {
       const btn = document.getElementById('addEduBtn');
       if (btn) btn.addEventListener('click', () => this.openEduModal());
+      this.bindCertificationsEvents();
     },
 
     editEdu(id) {
@@ -1703,7 +2025,7 @@
           <div class="admin-modal">
             <div class="card-header">
               <h2 class="card-title">${isEdit ? 'Modifier la formation' : 'Ajouter une formation'}</h2>
-              <button class="btn btn-secondary btn-icon" onclick="document.getElementById('eduModalBackdrop').remove()">✕</button>
+              <button class="btn btn-secondary btn-icon" onclick="document.getElementById('eduModalBackdrop').remove()"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button>
             </div>
             <form id="eduModalForm" class="form-grid" style="margin-top: 16px;">
               <div class="form-group full-width">
@@ -1730,11 +2052,11 @@
                   <img id="mEduLogoPreview" src="${imgUrl(e.logo || 'assets/images/logo_iua.png')}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px; border: 1px solid var(--admin-border);">
                   <div style="display: flex; gap: 8px; flex-grow: 1; flex-wrap: wrap;">
                     <label class="btn btn-secondary" style="cursor: pointer; font-size: 0.85rem;">
-                      <span>📁 Importer Image</span>
+                      <span style="display:inline-flex; align-items:center; gap:6px;"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg> <span>Importer Image</span></span>
                       <input type="file" id="mEduFileInput" accept="image/*" style="display: none;">
                     </label>
                     <button type="button" class="btn btn-secondary" style="font-size: 0.85rem;" onclick="AdminApp.chooseFromMedia('mEduLogo', 'mEduLogoPreview')">
-                      🖼️ Médiathèque
+                      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg> <span>Médiathèque</span>
                     </button>
                     <input type="text" id="mEduLogo" class="form-control" value="${e.logo || ''}" placeholder="URL du logo" style="flex-grow: 1;">
                   </div>
@@ -1795,6 +2117,164 @@
       });
     },
 
+    // 6b. CERTIFICATS (CERTIFICATIONS OFFICIELLES DU CV)
+    renderCertifications() {
+      const certs = this.data.certifications || [];
+      return `
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Certificats & Certifications Officielles (${certs.length})</h2>
+              <p class="card-desc">Gérez vos certifications obtenues (Google, OpenClassrooms, Cisco, CCSC)</p>
+            </div>
+            <button class="btn btn-primary" id="addCertBtn">+ Ajouter un Certificat</button>
+          </div>
+          <div class="items-list">
+            ${certs.map(cert => `
+              <div class="list-item-card">
+                <img src="${imgUrl(cert.logo || 'assets/images/project-bi.jpg')}" class="item-thumb" alt="${cert.title}" onerror="this.style.opacity='0.4'">
+                <div class="item-details">
+                  <div class="item-title">${cert.title}</div>
+                  <div class="item-subtitle">${cert.issuer} • ${cert.year || ''} • <strong style="color: var(--admin-accent);">${cert.category || 'Certification'}</strong></div>
+                </div>
+                <div class="item-actions">
+                  <button class="btn btn-secondary btn-icon" onclick="AdminApp.editCert('${cert.id}')" title="Modifier"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button>
+                  <button class="btn btn-danger btn-icon" onclick="AdminApp.deleteCert('${cert.id}')" title="Supprimer"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    },
+
+    bindCertificationsEvents() {
+      const btn = document.getElementById('addCertBtn');
+      if (btn) btn.addEventListener('click', () => this.openCertModal());
+    },
+
+    editCert(id) {
+      const cert = (this.data.certifications || []).find(c => c.id === id);
+      if (cert) this.openCertModal(cert);
+    },
+
+    deleteCert(id) {
+      if (confirm('Supprimer ce certificat ?')) {
+        this.data.certifications = (this.data.certifications || []).filter(c => c.id !== id);
+        this.persistData('Certificat supprimé', true);
+        this.renderTab('certifications');
+      }
+    },
+
+    openCertModal(cert = null) {
+      const isEdit = !!cert;
+      const c = cert || {
+        id: 'cert-' + Date.now(),
+        title: '',
+        issuer: 'Google (Coursera)',
+        category: 'Data Analytics',
+        year: '2025 - 2026',
+        logo: 'assets/images/project-bi.jpg',
+        desc: '',
+        visible: true
+      };
+
+      const modalHtml = `
+        <div class="admin-modal-backdrop" id="certModalBackdrop">
+          <div class="admin-modal">
+            <div class="card-header">
+              <h2 class="card-title">${isEdit ? 'Modifier le certificat' : 'Ajouter un certificat'}</h2>
+              <button class="btn btn-secondary btn-icon" onclick="document.getElementById('certModalBackdrop').remove()"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button>
+            </div>
+            <form id="certModalForm" class="form-grid" style="margin-top: 16px;">
+              <div class="form-group full-width">
+                <label class="form-label">Titre de la Certification</label>
+                <input type="text" id="mCertTitle" class="form-control" value="${c.title}" required placeholder="Ex : Process Data from Dirty to Clean">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Organisme Émetteur</label>
+                <input type="text" id="mCertIssuer" class="form-control" value="${c.issuer}" required placeholder="Ex : Google (Coursera)">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Catégorie</label>
+                <input type="text" id="mCertCat" class="form-control" value="${c.category || 'Data Analytics'}">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Année / Période</label>
+                <input type="text" id="mCertYear" class="form-control" value="${c.year || ''}">
+              </div>
+
+              <!-- GESTION PHOTO / LOGO DU CERTIFICAT -->
+              <div class="form-group full-width" style="border: 1px solid var(--admin-border); padding: 12px; border-radius: var(--radius-sm); background: rgba(255,255,255,0.02);">
+                <label class="form-label"><strong>Image / Logo de la Certification</strong></label>
+                <div style="display: flex; gap: 16px; align-items: center; margin-top: 6px;">
+                  <img id="mCertLogoPreview" src="${imgUrl(c.logo || 'assets/images/project-bi.jpg')}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px; border: 1px solid var(--admin-border);">
+                  <div style="display: flex; gap: 8px; flex-grow: 1; flex-wrap: wrap;">
+                    <label class="btn btn-secondary" style="cursor: pointer; font-size: 0.85rem;">
+                      <span style="display:inline-flex; align-items:center; gap:6px;"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg> <span>Importer Image</span></span>
+                      <input type="file" id="mCertFileInput" accept="image/*" style="display: none;">
+                    </label>
+                    <button type="button" class="btn btn-secondary" style="font-size: 0.85rem;" onclick="AdminApp.chooseFromMedia('mCertLogo', 'mCertLogoPreview')">
+                      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg> <span>Médiathèque</span>
+                    </button>
+                    <input type="text" id="mCertLogo" class="form-control" value="${c.logo || ''}" placeholder="URL de l'image" style="flex-grow: 1;">
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group full-width">
+                <label class="form-label">Description / Compétences validées</label>
+                <textarea id="mCertDesc" class="form-control" style="min-height: 80px;">${c.desc || ''}</textarea>
+              </div>
+              <div class="form-group full-width" style="display: flex; gap: 10px; justify-content: flex-end;">
+                <button type="button" class="btn btn-secondary" onclick="document.getElementById('certModalBackdrop').remove()">Annuler</button>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      `;
+
+      document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+      const certFile = document.getElementById('mCertFileInput');
+      const certUrl  = document.getElementById('mCertLogo');
+      const certPrev = document.getElementById('mCertLogoPreview');
+      if (certFile) {
+        certFile.addEventListener('change', (ev) => {
+          const file = ev.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = (re) => {
+            if (certPrev) certPrev.src = re.target.result;
+            if (certUrl) certUrl.value = re.target.result;
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      document.getElementById('certModalForm').addEventListener('submit', (ev) => {
+        ev.preventDefault();
+        c.title    = document.getElementById('mCertTitle').value.trim();
+        c.issuer   = document.getElementById('mCertIssuer').value.trim();
+        c.category = document.getElementById('mCertCat').value.trim();
+        c.year     = document.getElementById('mCertYear').value.trim();
+        c.logo     = document.getElementById('mCertLogo').value.trim();
+        c.desc     = document.getElementById('mCertDesc').value.trim();
+
+        if (!Array.isArray(this.data.certifications)) this.data.certifications = [];
+        if (!isEdit) this.data.certifications.push(c);
+        else {
+          const idx = this.data.certifications.findIndex(x => x.id === c.id);
+          if (idx !== -1) this.data.certifications[idx] = c;
+        }
+
+        this.persistData(`Certificat ${c.title} enregistré`, true);
+        document.getElementById('certModalBackdrop').remove();
+        this.renderTab('certifications');
+      });
+    },
+
     // 7. SERVICES & PRESTATIONS
     renderServices() {
       const srvs = this.data.services || [];
@@ -1802,7 +2282,7 @@
         <div class="card">
           <div class="card-header">
             <div>
-              <h2 class="card-title">🛠️ Services & Prestations (${srvs.length})</h2>
+              <h2 class="card-title">Services & Prestations (${srvs.length})</h2>
               <p class="card-desc">Gérez vos propositions de valeur</p>
             </div>
             <button class="btn btn-primary" id="addSrvBtn">+ Nouveau Service</button>
@@ -1810,14 +2290,14 @@
           <div class="items-list">
             ${srvs.map(s => `
               <div class="list-item-card">
-                <div style="font-size: 1.6rem; width: 44px; text-align: center;">${s.icon || '🛠️'}</div>
+                <div style="display:flex; align-items:center; justify-content:center; width:44px; height:44px;">${window.PortfolioIcons ? window.PortfolioIcons.get(s.icon || s.id, { size: 24 }) : ''}</div>
                 <div class="item-details">
                   <div class="item-title">${s.title}</div>
                   <div class="item-subtitle">${s.description || ''}</div>
                 </div>
                 <div class="item-actions">
-                  <button class="btn btn-secondary btn-icon" onclick="AdminApp.editSrv('${s.id}')" title="Modifier">✏️</button>
-                  <button class="btn btn-danger btn-icon" onclick="AdminApp.deleteSrv('${s.id}')" title="Supprimer">🗑️</button>
+                  <button class="btn btn-secondary btn-icon" onclick="AdminApp.editSrv('${s.id}')" title="Modifier"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button>
+                  <button class="btn btn-danger btn-icon" onclick="AdminApp.deleteSrv('${s.id}')" title="Supprimer"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></button>
                 </div>
               </div>
             `).join('')}
@@ -1846,14 +2326,14 @@
 
     openSrvModal(srv = null) {
       const isEdit = !!srv;
-      const s = srv || { id: 'srv-' + Date.now(), title: '', description: '', icon: '📊', visible: true };
+      const s = srv || { id: 'srv-' + Date.now(), title: '', description: '', icon: 'powerbi', visible: true };
 
       const modalHtml = `
         <div class="admin-modal-backdrop" id="srvModalBackdrop">
           <div class="admin-modal">
             <div class="card-header">
               <h2 class="card-title">${isEdit ? 'Modifier le service' : 'Ajouter un service'}</h2>
-              <button class="btn btn-secondary btn-icon" onclick="document.getElementById('srvModalBackdrop').remove()">✕</button>
+              <button class="btn btn-secondary btn-icon" onclick="document.getElementById('srvModalBackdrop').remove()"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button>
             </div>
             <form id="srvModalForm" class="form-grid" style="margin-top: 16px;">
               <div class="form-group">
@@ -1862,7 +2342,7 @@
               </div>
               <div class="form-group">
                 <label class="form-label">Icône / Emoji</label>
-                <input type="text" id="mSrvIcon" class="form-control" value="${s.icon || '🛠️'}">
+                <input type="text" id="mSrvIcon" class="form-control" value="${s.icon || 'bi'}">
               </div>
               <div class="form-group full-width">
                 <label class="form-label">Description</label>
@@ -1905,10 +2385,10 @@
         <div class="card">
           <div class="card-header">
             <div>
-              <h2 class="card-title">🎨 Studio de Design & Apparence du Site</h2>
+              <h2 class="card-title">Studio de Design & Apparence du Site</h2>
               <p class="card-desc">Personnalisez les couleurs, le fond, les bordures et la typographie du portfolio</p>
             </div>
-            <button class="btn btn-primary" id="saveDesignBtn">💾 Enregistrer & Appliquer</button>
+            <button class="btn btn-primary" id="saveDesignBtn"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7H5a2 2 0 00-2 2v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/></svg> <span>Enregistrer & Appliquer</span></button>
           </div>
           <div class="form-grid">
             <div class="form-group">
@@ -2052,7 +2532,7 @@
         <div class="card">
           <div class="card-header">
             <div>
-              <h2 class="card-title">📑 Personnalisation Complète des Sections & Textes</h2>
+              <h2 class="card-title">Personnalisation Complète des Sections & Textes</h2>
               <p class="card-desc">Contrôlez tous les titres, sous-titres, boutons et visibilités du site</p>
             </div>
             <button class="btn btn-primary" id="saveSectionsBtn">Enregistrer les textes</button>
@@ -2062,7 +2542,7 @@
             <!-- Section Hero -->
             <div class="form-group full-width" style="border: 1px solid var(--admin-border); padding: 18px; border-radius: var(--radius-md); background: rgba(255,255,255,0.02);">
               <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-                <strong style="color: var(--admin-accent); font-size: 1.1rem;">🌟 Section 1 : Hero (Accueil & Accroche)</strong>
+                <strong style="color: var(--admin-accent); font-size: 1.1rem;">Section 1 : Hero (Accueil & Accroche)</strong>
                 <label class="toggle-switch">
                   <input type="checkbox" id="secHeroVisible" ${hero.visible !== false ? 'checked' : ''}>
                   <span class="slider"></span>
@@ -2095,7 +2575,7 @@
             <!-- Section Faits Marquants & Métriques -->
             <div class="form-group full-width" style="border: 1px solid var(--admin-border); padding: 18px; border-radius: var(--radius-md);">
               <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-                <strong style="font-size: 1.05rem;">📊 Section 2 : Faits Marquants & Métriques</strong>
+                <strong style="font-size: 1.05rem;">Section 2 : Faits Marquants & Métriques</strong>
                 <label class="toggle-switch">
                   <input type="checkbox" id="secMetricsVisible" ${metrics.visible !== false ? 'checked' : ''}>
                   <span class="slider"></span>
@@ -2120,7 +2600,7 @@
             <!-- Section Projets -->
             <div class="form-group full-width" style="border: 1px solid var(--admin-border); padding: 18px; border-radius: var(--radius-md);">
               <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-                <strong style="font-size: 1.05rem;">💼 Section 3 : Projets & Réalisations</strong>
+                <strong style="font-size: 1.05rem;">Section 3 : Projets & Réalisations</strong>
                 <label class="toggle-switch">
                   <input type="checkbox" id="secProjectsVisible" ${projects.visible !== false ? 'checked' : ''}>
                   <span class="slider"></span>
@@ -2145,7 +2625,7 @@
             <!-- Section Expériences -->
             <div class="form-group full-width" style="border: 1px solid var(--admin-border); padding: 18px; border-radius: var(--radius-md);">
               <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-                <strong style="font-size: 1.05rem;">🏢 Section 4 : Expériences & Parcours</strong>
+                <strong style="font-size: 1.05rem;">Section 4 : Expériences & Parcours</strong>
                 <label class="toggle-switch">
                   <input type="checkbox" id="secExpVisible" ${exp.visible !== false ? 'checked' : ''}>
                   <span class="slider"></span>
@@ -2170,7 +2650,7 @@
             <!-- Section Soft Skills -->
             <div class="form-group full-width" style="border: 1px solid var(--admin-border); padding: 18px; border-radius: var(--radius-md);">
               <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-                <strong style="font-size: 1.05rem;">⚡ Section 5 : Soft Skills & Leadership</strong>
+                <strong style="font-size: 1.05rem;">Section 5 : Soft Skills & Leadership</strong>
                 <label class="toggle-switch">
                   <input type="checkbox" id="secSkillsVisible" ${skills.visible !== false ? 'checked' : ''}>
                   <span class="slider"></span>
@@ -2195,7 +2675,7 @@
             <!-- Section Formations -->
             <div class="form-group full-width" style="border: 1px solid var(--admin-border); padding: 18px; border-radius: var(--radius-md);">
               <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-                <strong style="font-size: 1.05rem;">🎓 Section 6 : Formations & Certifications</strong>
+                <strong style="font-size: 1.05rem;">Section 6 : Formations & Certifications</strong>
                 <label class="toggle-switch">
                   <input type="checkbox" id="secEduVisible" ${edu.visible !== false ? 'checked' : ''}>
                   <span class="slider"></span>
@@ -2220,7 +2700,7 @@
             <!-- Section Contact -->
             <div class="form-group full-width" style="border: 1px solid var(--admin-border); padding: 18px; border-radius: var(--radius-md);">
               <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-                <strong style="font-size: 1.05rem;">📩 Section 7 : Contact & Formulaire</strong>
+                <strong style="font-size: 1.05rem;">Section 7 : Contact & Formulaire</strong>
                 <label class="toggle-switch">
                   <input type="checkbox" id="secContactVisible" ${contact.visible !== false ? 'checked' : ''}>
                   <span class="slider"></span>
@@ -2310,7 +2790,7 @@
         <div class="card">
           <div class="card-header">
             <div>
-              <h2 class="card-title">🖼️ Médiathèque (${media.length} fichiers)</h2>
+              <h2 class="card-title"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg> <span>Médiathèque</span> (${media.length} fichiers)</h2>
               <p class="card-desc">Importez des photos pour votre profil, vos projets et certifications</p>
             </div>
             <label class="btn btn-primary" style="cursor: pointer;">
@@ -2327,9 +2807,9 @@
                 <div style="padding: 10px;">
                   <div style="font-size: 0.8rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${m.name}">${m.name}</div>
                   <div style="display: flex; gap: 6px; margin-top: 8px;">
-                    <button class="btn btn-secondary" style="font-size: 0.75rem; padding: 4px 8px; flex-grow: 1;" onclick="AdminApp.setAsProfilePhoto('${m.id}')" title="Définir comme photo de profil">👤 Profil</button>
-                    <button class="btn btn-secondary btn-icon" style="height: 28px; width: 28px; font-size: 0.8rem;" onclick="navigator.clipboard.writeText('${m.url}'); AdminApp.showToast('Lien copié !', 'info');" title="Copier le lien">🔗</button>
-                    <button class="btn btn-danger btn-icon" style="height: 28px; width: 28px; font-size: 0.8rem;" onclick="AdminApp.deleteMedia('${m.id}')" title="Supprimer">🗑️</button>
+                    <button class="btn btn-secondary" style="font-size: 0.75rem; padding: 4px 8px; flex-grow: 1;" onclick="AdminApp.setAsProfilePhoto('${m.id}')" title="Définir comme photo de profil"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> <span>Profil</span></button>
+                    <button class="btn btn-secondary btn-icon" style="height: 28px; width: 28px; font-size: 0.8rem;" onclick="navigator.clipboard.writeText('${m.url}'); AdminApp.showToast('Lien copié !', 'info');" title="Copier le lien"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path stroke-linecap="round" stroke-linejoin="round" d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
+                    <button class="btn btn-danger btn-icon" style="height: 28px; width: 28px; font-size: 0.8rem;" onclick="AdminApp.deleteMedia('${m.id}')" title="Supprimer"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></button>
                   </div>
                 </div>
               </div>
@@ -2386,8 +2866,8 @@
         <div class="admin-modal-backdrop" id="mediaPickerBackdrop">
           <div class="admin-modal" style="max-width: 700px;">
             <div class="card-header">
-              <h2 class="card-title">🖼️ Choisir une image dans la médiathèque</h2>
-              <button class="btn btn-secondary btn-icon" onclick="document.getElementById('mediaPickerBackdrop').remove()">✕</button>
+              <h2 class="card-title">Choisir une image dans la médiathèque</h2>
+              <button class="btn btn-secondary btn-icon" onclick="document.getElementById('mediaPickerBackdrop').remove()"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button>
             </div>
             <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; max-height: 60vh; overflow-y: auto; margin-top: 14px;">
               ${media.map(m => `
@@ -2432,14 +2912,14 @@
           <div class="card-header" style="flex-wrap: wrap; gap: 12px;">
             <div>
               <div style="display: flex; align-items: center; gap: 12px;">
-                <h2 class="card-title">📩 Messages Reçus (${msgs.length})</h2>
-                ${unreadCount > 0 ? `<span style="background: var(--admin-accent); color: white; font-size: 0.78rem; font-weight: 700; padding: 3px 10px; border-radius: 12px;">${unreadCount} nouveau${unreadCount > 1 ? 'x' : ''}</span>` : '<span style="background: rgba(16,185,129,0.15); color: var(--admin-success); font-size: 0.78rem; font-weight: 700; padding: 3px 10px; border-radius: 12px;">✓ Tous les messages sont lus</span>'}
+                <h2 class="card-title">Messages Reçus (${msgs.length})</h2>
+                ${unreadCount > 0 ? `<span style="background: var(--admin-accent); color: white; font-size: 0.78rem; font-weight: 700; padding: 3px 10px; border-radius: 12px;">${unreadCount} nouveau${unreadCount > 1 ? 'x' : ''}</span>` : '<span style="background: rgba(16,185,129,0.15); color: var(--admin-success); font-size: 0.78rem; font-weight: 700; padding: 3px 10px; border-radius: 12px;">Tous les messages sont lus</span>'}
               </div>
               <p class="card-desc">Messages envoyés par vos recruteurs et clients depuis le formulaire public</p>
             </div>
             ${unreadCount > 0 ? `
               <button class="btn btn-secondary" onclick="AdminApp.markAllMessagesAsRead()">
-                ✓ Tout marquer comme lu
+                Tout marquer comme lu
               </button>
             ` : ''}
           </div>
@@ -2462,17 +2942,17 @@
                           ${m.name} 
                           <a href="mailto:${m.email}" style="font-weight: 400; font-size: 0.85rem; color: var(--admin-text-muted); margin-left: 6px; text-decoration: underline;">${m.email}</a>
                         </div>
-                        <div style="font-size: 0.78rem; color: var(--admin-text-dim);">🕒 ${dateStr}</div>
+                        <div style="font-size: 0.78rem; color: var(--admin-text-dim);">${dateStr}</div>
                       </div>
                     </div>
                     <div>
-                      ${!m.read ? `<span style="font-size: 0.72rem; font-weight: 800; padding: 4px 10px; border-radius: 10px; background: var(--admin-accent); color: white;">● NOUVEAU</span>` : `<span style="font-size: 0.72rem; color: var(--admin-text-dim);">✓ Lu</span>`}
+                      ${!m.read ? `<span style="font-size: 0.72rem; font-weight: 800; padding: 4px 10px; border-radius: 10px; background: var(--admin-accent); color: white;">NOUVEAU</span>` : `<span style="font-size: 0.72rem; color: var(--admin-text-dim);">Lu</span>`}
                     </div>
                   </div>
 
                   <div style="padding: 6px 0; border-top: 1px solid var(--admin-border); border-bottom: 1px solid var(--admin-border);">
                     <div style="font-weight: 700; font-size: 0.95rem; color: var(--admin-accent); margin-bottom: 6px;">
-                      📌 ${m.subject || 'Prise de contact'}
+                      ${m.subject || 'Prise de contact'}
                     </div>
                     <div style="font-size: 0.92rem; line-height: 1.6; color: var(--admin-text-main); white-space: pre-wrap; background: rgba(0,0,0,0.25); padding: 14px; border-radius: 8px; border-left: 3px solid var(--admin-accent);">
 ${m.message || '(Aucun contenu)'}
@@ -2482,21 +2962,21 @@ ${m.message || '(Aucun contenu)'}
                   <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                       <a href="${mailtoUrl}" target="_blank" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
-                        <span>✉️ Répondre dans ma boîte mail</span>
+                        <span>Répondre dans ma boîte mail</span>
                       </a>
                       <button class="btn btn-secondary" onclick="AdminApp.toggleMessageRead('${m.id}')">
-                        ${m.read ? 'Marquer comme non lu' : '✓ Marquer comme lu'}
+                        ${m.read ? 'Marquer comme non lu' : 'Marquer comme lu'}
                       </button>
                     </div>
                     <button class="btn btn-danger" onclick="AdminApp.deleteMessage('${m.id}')" style="background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3);">
-                      🗑️ Supprimer
+                      Supprimer
                     </button>
                   </div>
                 </div>
               `;
             }).join('') || `
               <div style="text-align: center; padding: 48px 20px; color: var(--admin-text-muted);">
-                <div style="font-size: 3rem; margin-bottom: 12px;">📭</div>
+                <div style="display:flex; justify-content:center; margin-bottom:16px;"><svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="var(--admin-text-dim)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M20 13V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7m16 0v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-5m16 0h-4a2 2 0 0 0-2 2v0a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v0a2 2 0 0 0-2-2H4"/></svg></div>
                 <h3 style="font-size: 1.1rem; color: var(--admin-text-main);">Aucun message reçu pour l'instant</h3>
                 <p style="font-size: 0.85rem; margin-top: 6px;">Les messages envoyés depuis le formulaire de votre portfolio s'afficheront directement ici.</p>
               </div>
@@ -2552,7 +3032,7 @@ ${m.message || '(Aucun contenu)'}
       return `
         <div class="card">
           <div class="card-header">
-            <h2 class="card-title">🕒 Journal d'Audit des Modifications</h2>
+            <h2 class="card-title">Journal d'Audit des Modifications</h2>
           </div>
           <div class="items-list">
             ${history.map(h => `
@@ -2579,7 +3059,7 @@ ${m.message || '(Aucun contenu)'}
         <div class="card" style="border: 2px solid var(--admin-accent);">
           <div class="card-header">
             <div>
-              <h2 class="card-title" style="color: var(--admin-accent);">🚀 Publication & Déploiement Vercel</h2>
+              <h2 class="card-title" style="color: var(--admin-accent);">Publication & Déploiement Vercel</h2>
               <p class="card-desc">Publiez définitivement vos modifications pour qu'elles soient visibles instantanément sur votre téléphone et par tous les recruteurs</p>
             </div>
           </div>
@@ -2594,20 +3074,20 @@ ${m.message || '(Aucun contenu)'}
 
             <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 14px;">
               <button class="btn btn-primary" onclick="AdminApp.publishToGitHubAndVercel()" style="padding: 12px 24px; font-size: 1rem;">
-                🚀 Publier & Mettre à jour le Site Public
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.63 8.41m5.96 5.96a14.926 14.926 0 01-5.84 2.58m-.12-8.54L3.82 14.24a2 2 0 00-.54 1.76l.78 3.12 3.12.78a2 2 0 001.76-.54l5.83-5.81"/></svg> <span>Publier & Mettre à jour le Site Public</span>
               </button>
               <button class="btn btn-secondary" onclick="AdminApp.saveGhToken()">
-                💾 Enregistrer la configuration
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7H5a2 2 0 00-2 2v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/></svg> <span>Enregistrer la configuration</span>
               </button>
         <!-- OWASP SÉCURITÉ & MOT DE PASSE RENFORCÉ -->
         <div class="card" style="border: 2px solid #10b981; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.12);">
           <div class="card-header">
             <div>
-              <h2 class="card-title" style="color: #10b981;">🛡️ Sécurité OWASP & Mot de Passe Administrateur</h2>
+              <h2 class="card-title" style="color: #10b981;">Sécurité OWASP & Mot de Passe Administrateur</h2>
               <p class="card-desc">Protégez votre espace d'administration contre les attaques par force brute (Chiffrement PBKDF2-SHA512 & Verrouillage)</p>
             </div>
             <span style="font-size: 0.8rem; padding: 4px 10px; border-radius: 12px; background: rgba(16, 185, 129, 0.15); color: var(--admin-success); font-weight: 600;">
-              ✓ Protection OWASP Active
+              Protection OWASP Active
             </span>
           </div>
           <div style="margin-top: 14px;">
@@ -2630,7 +3110,7 @@ ${m.message || '(Aucun contenu)'}
 
             <div style="margin-top: 14px;">
               <button class="btn btn-primary" onclick="AdminApp.changeAdminPassword()" style="background: #10b981;">
-                🔒 Mettre à jour et renforcer mon mot de passe
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> <span>Mettre à jour et renforcer mon mot de passe</span>
               </button>
             </div>
           </div>
@@ -2638,7 +3118,7 @@ ${m.message || '(Aucun contenu)'}
 
         <div class="card">
           <div class="card-header">
-            <h2 class="card-title">🔍 Balises SEO & Référencement Google</h2>
+            <h2 class="card-title">Balises SEO & Référencement Google</h2>
             <button class="btn btn-primary" id="saveSeoBtn">Enregistrer SEO</button>
           </div>
           <div class="form-grid">
@@ -2659,15 +3139,15 @@ ${m.message || '(Aucun contenu)'}
 
         <div class="card">
           <div class="card-header">
-            <h2 class="card-title">💾 Sauvegarde & Restauration</h2>
+            <h2 class="card-title">Sauvegarde & Restauration</h2>
           </div>
           <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-            <button class="btn btn-secondary" onclick="AdminApp.exportBackup()">📥 Exporter la sauvegarde JSON</button>
+            <button class="btn btn-secondary" onclick="AdminApp.exportBackup()">Exporter la sauvegarde JSON</button>
             <label class="btn btn-secondary" style="cursor: pointer;">
-              <span>📤 Importer une sauvegarde JSON</span>
+              <span>Importer une sauvegarde JSON</span>
               <input type="file" id="importBackupInput" accept=".json" style="display: none;">
             </label>
-            <button class="btn btn-danger" onclick="AdminApp.resetToDefault()">⚠️ Réinitialiser aux valeurs initiales</button>
+            <button class="btn btn-danger" onclick="AdminApp.resetToDefault()">Réinitialiser aux valeurs initiales</button>
           </div>
         </div>
       `;
@@ -2676,7 +3156,7 @@ ${m.message || '(Aucun contenu)'}
     saveGhToken() {
       const token = document.getElementById('settingsGhToken').value.trim();
       localStorage.setItem(GH_TOKEN_KEY, token);
-      this.showToast('✓ Configuration enregistrée avec succès !', 'success');
+      this.showToast('Configuration enregistrée avec succès !', 'success');
     },
 
     bindSettingsEvents() {
@@ -2767,7 +3247,7 @@ ${m.message || '(Aucun contenu)'}
           if (json.token && typeof AdminAuth !== 'undefined') {
             AdminAuth.setSession(json.token, { name: 'Falikou FOFANA', role: 'admin' }, true);
           }
-          alert('✓ Mot de passe administrateur renforcé et mis à jour avec succès !');
+          alert('Mot de passe administrateur renforcé et mis à jour avec succès !');
           document.getElementById('secCurrentPassword').value = '';
           document.getElementById('secNewPassword').value = '';
           document.getElementById('secConfirmPassword').value = '';
@@ -2775,7 +3255,7 @@ ${m.message || '(Aucun contenu)'}
           alert('Erreur : ' + (json.message || 'Mot de passe actuel incorrect.'));
         }
       } catch (e) {
-        alert('✓ Mot de passe mis à jour localement.');
+        alert('Mot de passe mis à jour localement.');
       }
     },
 
