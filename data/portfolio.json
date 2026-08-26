@@ -348,16 +348,6 @@
       "logo": "assets/images/logo_iua.png",
       "desc": "• Licence Génie Informatique (3e année)\n• Baccalauréat Série D (CSMC Cocody)",
       "visible": true
-    },
-    {
-      "id": "edu2",
-      "degree": "Google Data Analytics & Excel Avancé",
-      "institution": "Google & OpenClassrooms",
-      "category": "Certifications Data",
-      "period": "2025 - 2026",
-      "logo": "assets/images/project-bi.jpg",
-      "desc": "Nettoyage, intégrité et fiabilisation des données avec Google & Coursera.",
-      "visible": true
     }
   ],
   "certifications": [
@@ -459,6 +449,13 @@
   ],
   "messages": [],
   "history": [
+    {
+      "id": "h-1787759602994",
+      "timestamp": "2026-08-26T15:53:22.994Z",
+      "action": "Formation académique supprimée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
     {
       "id": "h-1787759600191",
       "timestamp": "2026-08-26T15:53:20.191Z",
@@ -578,6 +575,6 @@
     "keywords": "Falikou FOFANA, Data Analyst, Power BI, Python, SQL, IUA Abidjan"
   },
   "settings": {
-    "lastPublished": "2026-08-26T15:53:20.191Z"
+    "lastPublished": "2026-08-26T15:53:22.994Z"
   }
 }
