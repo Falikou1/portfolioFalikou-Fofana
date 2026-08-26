@@ -3,10 +3,10 @@
     "firstName": "Falikou",
     "lastName": "FOFANA",
     "fullName": "Falikou FOFANA",
-    "title": "Data Analyst & Developpeur BI",
+    "title": "Data Analyst & Developpeur full-stack",
     "subTitle": "Étudiant en 3e année Génie Informatique (IUA)",
     "statusBadge": "Disponible pour stage / missions",
-    "shortBio": "Passionné par la Business Intelligence et l'optimisation des flux décisionnels, je transforme les données brutes en indicateurs stratégiques clairs et percutants.",
+    "shortBio": "Bonjour ! Je suis Falikou FOFANA, étudiant en 3e année de Licence Génie Informatique à l'IUA. Passionné par l'analyse de données, la Business Intelligence et la modélisation décisionnelle, je conçois des tableaux de bord interactifs et des solutions logicielles performantes pour guider la prise de décision.",
     "fullBio": "Bonjour ! Je suis Falikou FOFANA, étudiant en 3e année de Licence Génie Informatique à l'IUA. Passionné par l'analyse de données, la Business Intelligence et la modélisation décisionnelle, je conçois des tableaux de bord interactifs et des solutions logicielles performantes pour guider la prise de décision.",
     "photo": "assets/images/falikou_photo_clean.png",
     "coverImage": "assets/images/project-bi.jpg",
@@ -380,8 +380,8 @@
     },
     {
       "id": "edu3",
-      "degree": "Python, Réseaux & Cybersécurité",
-      "institution": "Cisco & OpenClassrooms",
+      "degree": "Python",
+      "institution": "OpenClassrooms",
       "category": "Certifications Tech",
       "period": "2025 - 2026",
       "logo": "assets/images/project-hackathon.jpg",
@@ -428,16 +428,6 @@
       "year": "2025 - 2026",
       "logo": "assets/images/project-hackathon.jpg",
       "desc": "Fondements de la science des données, pipelines de traitement et exploration.",
-      "visible": true
-    },
-    {
-      "id": "cert-ccsc",
-      "title": "Cybersecurity Career Starter Certification (CCSC)",
-      "issuer": "CCSC International",
-      "category": "Cybersécurité",
-      "year": "2025 - 2026",
-      "logo": "assets/images/project-hackathon.jpg",
-      "desc": "Sécurité des architectures numériques et gestion des accès d'entreprise.",
       "visible": true
     }
   ],
@@ -499,9 +489,23 @@
   "messages": [],
   "history": [
     {
-      "id": "h-1787698061362",
-      "timestamp": "2026-08-25T22:47:41.362Z",
-      "action": "Titres et textes enregistrés",
+      "id": "h-1787740750620",
+      "timestamp": "2026-08-26T10:39:10.620Z",
+      "action": "Formation Python enregistrée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787740732186",
+      "timestamp": "2026-08-26T10:38:52.186Z",
+      "action": "Certificat supprimé",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787740704002",
+      "timestamp": "2026-08-26T10:38:24.002Z",
+      "action": "Titre & Bio modifiés depuis le Dashboard",
       "target": "Portfolio",
       "details": "Enregistré dans la base de données"
     },
@@ -540,6 +544,6 @@
     "keywords": "Falikou FOFANA, Data Analyst, Power BI, Python, SQL, IUA Abidjan"
   },
   "settings": {
-    "lastPublished": "2026-08-25T22:47:41.362Z"
+    "lastPublished": "2026-08-26T10:39:10.620Z"
   }
 }
