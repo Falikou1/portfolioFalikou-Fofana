@@ -88,7 +88,7 @@
     "education": {
       "visible": true,
       "tag": "[ FORMATIONS & CERTIFICATIONS ]",
-      "title": "Formations & Certifications",
+      "title": "",
       "subtitle": "Cursus universitaire et certifications attestant d'une expertise technique continue."
     },
     "services": {
@@ -470,6 +470,13 @@
   "messages": [],
   "history": [
     {
+      "id": "h-1787758861077",
+      "timestamp": "2026-08-26T15:41:01.077Z",
+      "action": "Titres et textes enregistrés",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
       "id": "h-1787747912146",
       "timestamp": "2026-08-26T12:38:32.146Z",
       "action": "Titres et textes enregistrés",
@@ -574,6 +581,6 @@
     "keywords": "Falikou FOFANA, Data Analyst, Power BI, Python, SQL, IUA Abidjan"
   },
   "settings": {
-    "lastPublished": "2026-08-26T12:38:32.147Z"
+    "lastPublished": "2026-08-26T15:41:01.077Z"
   }
 }
