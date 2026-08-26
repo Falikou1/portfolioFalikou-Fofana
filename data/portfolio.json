@@ -140,25 +140,6 @@
       "githubUrl": "https://github.com/Falikou1",
       "demoUrl": "",
       "visible": true
-    },
-    {
-      "id": "hackathon-esatic",
-      "title": "Technovore Hackathon 2026 – ESATIC",
-      "category": "Architecture Réseau & Sécurité",
-      "year": "Mars 2026",
-      "role": "Team Lead & Concepteur Réseau",
-      "image": "assets/images/project-hackathon.jpg",
-      "desc": "Compétition technologique majeure à l'ESATIC. Conception complète et sécurisation d'une infrastructure réseau d'entreprise multi-sites.",
-      "tags": [
-        "Cisco Packet Tracer",
-        "VPN IPsec",
-        "OSPF",
-        "VLAN & NAT",
-        "Cybersécurité"
-      ],
-      "githubUrl": "https://github.com/Falikou1",
-      "demoUrl": "",
-      "visible": true
     }
   ],
   "skills": [
@@ -489,6 +470,13 @@
   "messages": [],
   "history": [
     {
+      "id": "h-1787740876719",
+      "timestamp": "2026-08-26T10:41:16.719Z",
+      "action": "Projet supprimé",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
       "id": "h-1787740750620",
       "timestamp": "2026-08-26T10:39:10.620Z",
       "action": "Formation Python enregistrée",
@@ -544,6 +532,6 @@
     "keywords": "Falikou FOFANA, Data Analyst, Power BI, Python, SQL, IUA Abidjan"
   },
   "settings": {
-    "lastPublished": "2026-08-26T10:39:10.620Z"
+    "lastPublished": "2026-08-26T10:41:16.719Z"
   }
 }
