@@ -37,12 +37,12 @@
       "badge": "Disponible pour stage / missions",
       "title": "Transformer les données en décisions stratégiques et concrètes.",
       "ctaPrimary": "Télécharger mon CV (PDF)",
-      "ctaSecondary": "Voir mes réalisations ↓",
+      "ctaSecondary": "Voir mes réalisations",
       "badgeTopTitle": "10+ Tableaux de Bord",
       "badgeBottomTitle": "Licence 3 Génie Info"
     },
     "metrics": {
-      "visible": true,
+      "visible": false,
       "items": [
         {
           "id": "m1",
@@ -560,6 +560,6 @@
     "keywords": "Falikou FOFANA, Data Analyst, Power BI, Python, SQL, IUA Abidjan"
   },
   "settings": {
-    "lastPublished": "2026-08-26T10:58:36.414Z"
+    "lastPublished": "2026-08-26T12:58:36+02:00"
   }
 }
