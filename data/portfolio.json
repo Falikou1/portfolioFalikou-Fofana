@@ -345,7 +345,7 @@
       "institution": "Institut Universitaire d'Abidjan (IUA)",
       "category": "Cursus Universitaire",
       "period": "2024 - en cours",
-      "logo": "assets/images/logo_iua.png",
+      "logo": "",
       "desc": "• Licence Génie Informatique (3e année)\n• Baccalauréat Série D (CSMC Cocody)",
       "visible": true
     }
@@ -449,6 +449,13 @@
   ],
   "messages": [],
   "history": [
+    {
+      "id": "h-1787759643017",
+      "timestamp": "2026-08-26T15:54:03.017Z",
+      "action": "Formation académique \"Licence Génie Informatique (IUA) & Bac D\" enregistrée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
     {
       "id": "h-1787759602994",
       "timestamp": "2026-08-26T15:53:22.994Z",
@@ -575,6 +582,6 @@
     "keywords": "Falikou FOFANA, Data Analyst, Power BI, Python, SQL, IUA Abidjan"
   },
   "settings": {
-    "lastPublished": "2026-08-26T15:53:22.994Z"
+    "lastPublished": "2026-08-26T15:54:03.017Z"
   }
 }
