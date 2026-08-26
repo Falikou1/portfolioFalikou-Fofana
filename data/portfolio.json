@@ -3,7 +3,7 @@
     "firstName": "Falikou",
     "lastName": "FOFANA",
     "fullName": "Falikou FOFANA",
-    "title": "Data Analyst & Developpeur full-stack",
+    "title": "Data Analyst & Dev web-mobile",
     "subTitle": "Étudiant en 3e année Génie Informatique (IUA)",
     "statusBadge": "Disponible pour stage / missions",
     "shortBio": "Bonjour ! Je suis Falikou FOFANA, étudiant en 3e année de Licence Génie Informatique à l'IUA. Passionné par l'analyse de données, la Business Intelligence et la modélisation décisionnelle, je conçois des tableaux de bord interactifs et des solutions logicielles performantes pour guider la prise de décision.",
@@ -470,6 +470,20 @@
   "messages": [],
   "history": [
     {
+      "id": "h-1787741167828",
+      "timestamp": "2026-08-26T10:46:07.828Z",
+      "action": "Titre & Bio modifiés depuis le Dashboard",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
+      "id": "h-1787741144610",
+      "timestamp": "2026-08-26T10:45:44.610Z",
+      "action": "Titre & Bio modifiés depuis le Dashboard",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
       "id": "h-1787740876719",
       "timestamp": "2026-08-26T10:41:16.719Z",
       "action": "Projet supprimé",
@@ -532,6 +546,6 @@
     "keywords": "Falikou FOFANA, Data Analyst, Power BI, Python, SQL, IUA Abidjan"
   },
   "settings": {
-    "lastPublished": "2026-08-26T10:41:16.719Z"
+    "lastPublished": "2026-08-26T10:46:07.828Z"
   }
 }
