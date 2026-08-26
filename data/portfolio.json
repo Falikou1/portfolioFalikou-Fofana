@@ -358,16 +358,6 @@
       "logo": "assets/images/project-bi.jpg",
       "desc": "Nettoyage, intégrité et fiabilisation des données avec Google & Coursera.",
       "visible": true
-    },
-    {
-      "id": "edu3",
-      "degree": "Python",
-      "institution": "OpenClassrooms",
-      "category": "Certifications Tech",
-      "period": "2025 - 2026",
-      "logo": "assets/images/project-hackathon.jpg",
-      "desc": "Certifications Cisco Networking Academy et cybersécurité.",
-      "visible": true
     }
   ],
   "certifications": [
@@ -469,6 +459,13 @@
   ],
   "messages": [],
   "history": [
+    {
+      "id": "h-1787759600191",
+      "timestamp": "2026-08-26T15:53:20.191Z",
+      "action": "Formation académique supprimée",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
     {
       "id": "h-1787758861077",
       "timestamp": "2026-08-26T15:41:01.077Z",
@@ -581,6 +578,6 @@
     "keywords": "Falikou FOFANA, Data Analyst, Power BI, Python, SQL, IUA Abidjan"
   },
   "settings": {
-    "lastPublished": "2026-08-26T17:41:10+02:00"
+    "lastPublished": "2026-08-26T15:53:20.191Z"
   }
 }
