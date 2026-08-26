@@ -42,7 +42,7 @@
       "badgeBottomTitle": "Licence 3 Génie Info"
     },
     "metrics": {
-      "visible": true,
+      "visible": false,
       "items": [
         {
           "id": "m1",
@@ -470,6 +470,13 @@
   "messages": [],
   "history": [
     {
+      "id": "h-1787747912146",
+      "timestamp": "2026-08-26T12:38:32.146Z",
+      "action": "Titres et textes enregistrés",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
       "id": "h-1787747193234",
       "timestamp": "2026-08-26T12:26:33.234Z",
       "action": "Titres et textes enregistrés",
@@ -567,6 +574,6 @@
     "keywords": "Falikou FOFANA, Data Analyst, Power BI, Python, SQL, IUA Abidjan"
   },
   "settings": {
-    "lastPublished": "2026-08-26T12:26:33.264Z"
+    "lastPublished": "2026-08-26T12:38:32.147Z"
   }
 }
