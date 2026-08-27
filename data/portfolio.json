@@ -483,6 +483,13 @@
   "messages": [],
   "history": [
     {
+      "id": "h-1787829968040",
+      "timestamp": "2026-08-27T11:26:08.040Z",
+      "action": "Titres et textes enregistrés",
+      "target": "Portfolio",
+      "details": "Enregistré dans la base de données"
+    },
+    {
       "id": "hist-1",
       "action": "Épurage définitif du Portfolio (Data Analyst & Développeur Web & Mobile)",
       "date": "2026-08-27T10:55:00Z",
@@ -496,6 +503,6 @@
     "keywords": "Falikou FOFANA, Data Analyst, Développeur Web Mobile, Power BI, Excel TCD, SQL, Python, IUA Abidjan"
   },
   "settings": {
-    "lastPublished": "2026-08-27T12:55:00+02:00"
+    "lastPublished": "2026-08-27T11:26:08.040Z"
   }
 }
